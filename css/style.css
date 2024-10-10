@@ -34,11 +34,9 @@ table th {
     color: white;
 }
 
-.check {
-    height: 20px;
-    width: 8px;
-    border-bottom: 5px solid #333;
-    border-right: 5px solid #333;
-    transform: rotate(45deg);
-    margin: 5px;
+.checkhidden {
+    content: ' \00D8';
+}
+.checkvisible {
+    content: ' \2714';
 }
