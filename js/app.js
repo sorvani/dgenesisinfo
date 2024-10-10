@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Replace nulls with empty strings
                     const firstName = explorer.first_name || '';
                     const lastName = explorer.last_name || '';
-                    const moniker = explorer.moniker || '';  // Moniker will now be an empty string if null
+                    const moniker = explorer.moniker || '';
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';

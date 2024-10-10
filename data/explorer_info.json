@@ -10,22 +10,16 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 1,
-                "explorer_id": 1,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 99726438,
                 "known_above_rank": null
             },
             {
-                "id": 2,
-                "explorer_id": 1,
                 "book": 1,
                 "chapter": 1,
-                "date_noted": 1538006400000,
-                "date_sequence": 1,
+                "date_noted": 1538006400001,
                 "rank": 1,
                 "known_above_rank": null
             }
@@ -42,12 +36,9 @@
         "date_first_known": 1538092800000,
         "rankings": [
             {
-                "id": 10,
-                "explorer_id": 2,
                 "book": 5,
                 "chapter": 6,
                 "date_noted": 1538092800000,
-                "date_sequence": 0,
                 "rank": 814,
                 "known_above_rank": null
             }
@@ -64,12 +55,9 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "id": 8,
-                "explorer_id": 3,
                 "book": 3,
                 "chapter": 4,
                 "date_noted": 1538265600000,
-                "date_sequence": 0,
                 "rank": 681,
                 "known_above_rank": null
             }
@@ -86,12 +74,9 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "id": 9,
-                "explorer_id": 4,
                 "book": 5,
                 "chapter": 6,
                 "date_noted": 1538265600000,
-                "date_sequence": 0,
                 "rank": 368,
                 "known_above_rank": null
             }
@@ -108,12 +93,9 @@
         "date_first_known": 1538697600000,
         "rankings": [
             {
-                "id": 11,
-                "explorer_id": 5,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1537833600000,
-                "date_sequence": 0,
                 "rank": 0,
                 "known_above_rank": 99726438.0
             }
@@ -130,12 +112,9 @@
         "date_first_known": 1546732800000,
         "rankings": [
             {
-                "id": 12,
-                "explorer_id": 6,
                 "book": 5,
                 "chapter": 6,
                 "date_noted": 1546473600000,
-                "date_sequence": 0,
                 "rank": 48,
                 "known_above_rank": null
             }
@@ -152,12 +131,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 4,
-                "explorer_id": 7,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 3,
                 "known_above_rank": null
             }
@@ -174,12 +150,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 5,
-                "explorer_id": 8,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 7,
                 "known_above_rank": null
             }
@@ -196,12 +169,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 6,
-                "explorer_id": 9,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 5,
                 "known_above_rank": null
             }
@@ -218,12 +188,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 7,
-                "explorer_id": 10,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 8,
                 "known_above_rank": null
             }
@@ -250,12 +217,9 @@
         "date_first_known": 1542326400000,
         "rankings": [
             {
-                "id": 3,
-                "explorer_id": 12,
                 "book": 1,
                 "chapter": 2,
                 "date_noted": 1542326400000,
-                "date_sequence": 0,
                 "rank": 99728765,
                 "known_above_rank": null
             }
@@ -272,12 +236,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 13,
-                "explorer_id": 13,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 2,
                 "known_above_rank": null
             }
@@ -294,12 +255,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 14,
-                "explorer_id": 14,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 4,
                 "known_above_rank": null
             }
@@ -316,12 +274,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 15,
-                "explorer_id": 15,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 6,
                 "known_above_rank": null
             }
@@ -338,12 +293,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 16,
-                "explorer_id": 16,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 9,
                 "known_above_rank": null
             }
@@ -360,12 +312,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 17,
-                "explorer_id": 17,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 10,
                 "known_above_rank": null
             }
@@ -382,12 +331,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 18,
-                "explorer_id": 18,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 11,
                 "known_above_rank": null
             }
@@ -404,12 +350,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 19,
-                "explorer_id": 19,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 12,
                 "known_above_rank": null
             }
@@ -426,12 +369,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 20,
-                "explorer_id": 20,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 13,
                 "known_above_rank": null
             }
@@ -448,12 +388,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 21,
-                "explorer_id": 21,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 14,
                 "known_above_rank": null
             }
@@ -470,12 +407,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 22,
-                "explorer_id": 22,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 15,
                 "known_above_rank": null
             }
@@ -492,12 +426,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 23,
-                "explorer_id": 23,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 16,
                 "known_above_rank": null
             }
@@ -514,12 +445,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 24,
-                "explorer_id": 24,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 17,
                 "known_above_rank": null
             }
@@ -536,12 +464,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 25,
-                "explorer_id": 25,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 18,
                 "known_above_rank": null
             }
@@ -558,12 +483,9 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "id": 26,
-                "explorer_id": 26,
                 "book": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
-                "date_sequence": 0,
                 "rank": 19,
                 "known_above_rank": null
             }
@@ -590,12 +512,9 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "id": 27,
-                "explorer_id": 28,
                 "book": 2,
                 "chapter": 3,
                 "date_noted": 1542844800000,
-                "date_sequence": 0,
                 "rank": 0,
                 "known_above_rank": 99726438.0
             }
@@ -612,12 +531,9 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "id": 28,
-                "explorer_id": 29,
                 "book": 2,
                 "chapter": 3,
                 "date_noted": 1542844800000,
-                "date_sequence": 0,
                 "rank": 0,
                 "known_above_rank": 99726438.0
             }
