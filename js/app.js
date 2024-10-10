@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Extract the latest rank from the rankings array and sort by rank
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
-                        const latestRanking = explorer.rankings.sort((a, b) => b.date_sequence - a.date_sequence)[0];
+                        const latestRanking = explorer.rankings.sort((a, b) => b.date_noted - a.date_noted)[0];
                         if (latestRanking.rank == 0 ) {
                             explorer.latest_rank = null;  // If no rank available
                         } else {
