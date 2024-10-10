@@ -18,7 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
                         const latestRanking = explorer.rankings.sort((a, b) => b.date_sequence - a.date_sequence)[0];
-                        explorer.latest_rank = latestRanking.rank;
+                        if (latestRanking.rank == 0 ) {
+                            explorer.latest_rank = null;  // If no rank available
+                        } else {
+                            explorer.latest_rank = latestRanking.rank;
+                        }
                     } else {
                         explorer.latest_rank = null;  // If no rank available
                     }
@@ -44,11 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
+                    const nameKnown = explorer.public;
 
                     // Populate the row, placing the Latest Rank as the first column and removing ID
                     row.innerHTML = `<td>${latestRank}</td>
-                                     <td>${firstName}</td>
-                                     <td>${lastName}</td>
+                                     <td>${firstName} ${lastName}</td>
+                                     <td>${nameKnown}</td>
                                      <td>${moniker}</td>
                                      <td>${nationality}</td>
                                      <td>${dateFirstKnown}</td>`;
