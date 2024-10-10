@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
-                    const nameKnown = explorer.public == "0" ? "checkhidden" : "checkvisible";
+                    const nameKnown = explorer.public == "0" ? '' : '&#10004;';
 
                     // Populate the row, placing the Latest Rank as the first column and removing ID
                     row.innerHTML = `<td>${latestRank}</td>
                                      <td>${firstName} ${lastName}</td>
-                                     <td><div class="${nameKnown}"></div></td>
+                                     <td>${nameKnown}</td>
                                      <td>${moniker}</td>
                                      <td>${nationality}</td>
                                      <td>${dateFirstKnown}</td>`;

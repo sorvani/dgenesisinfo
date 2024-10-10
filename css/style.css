@@ -33,10 +33,3 @@ table th {
     background-color: #333;
     color: white;
 }
-
-.checkhidden {
-    content: ' \00D8';
-}
-.checkvisible {
-    content: ' \2714';
-}
