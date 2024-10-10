@@ -35,6 +35,8 @@ table th {
 }
 
 .check {
+    height: 25px;
+    width: 9px;
     border-bottom: 10px solid #333;
     border-right: 10px solid #333;
     transform: rotate(45deg);
