@@ -12,14 +12,14 @@
             {
                 "book": 1,
                 "chapter": 1,
-                "date_noted": 1538006400000,
+                "date_noted": 1538006400001,
                 "rank": 99726438,
                 "known_above_rank": null
             },
             {
                 "book": 1,
                 "chapter": 1,
-                "date_noted": 1538006400001,
+                "date_noted": 1538006400000,
                 "rank": 1,
                 "known_above_rank": null
             }
@@ -86,8 +86,8 @@
         "id": 5,
         "first_name": "Miharu",
         "last_name": "Naruse",
-        "moniker": "The Interpreter",
-        "public": 1,
+        "moniker": "The Interpreter / Miss Mei",
+        "public": 0,
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": 1538697600000,
@@ -441,7 +441,7 @@
         "moniker": "Witch of Campbell",
         "public": 1,
         "d-card_region": 11,
-        "nationality": null,
+        "nationality": "AU",
         "date_first_known": 1538006400000,
         "rankings": [
             {

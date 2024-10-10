@@ -33,3 +33,10 @@ table th {
     background-color: #333;
     color: white;
 }
+
+.check {
+    border-bottom: 10px solid #333;
+    border-right: 10px solid #333;
+    transform: rotate(45deg);
+    margin: 20px;
+}
