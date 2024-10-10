@@ -12,14 +12,14 @@
             {
                 "book": 1,
                 "chapter": 1,
-                "date_noted": 1538006400001,
+                "date_noted": 1538006400000,
                 "rank": 99726438,
                 "known_above_rank": null
             },
             {
                 "book": 1,
                 "chapter": 1,
-                "date_noted": 1538006400000,
+                "date_noted": 1538006400001,
                 "rank": 1,
                 "known_above_rank": null
             }

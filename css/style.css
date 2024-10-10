@@ -35,10 +35,10 @@ table th {
 }
 
 .check {
-    height: 25px;
-    width: 9px;
-    border-bottom: 10px solid #333;
-    border-right: 10px solid #333;
+    height: 20px;
+    width: 8px;
+    border-bottom: 5px solid #333;
+    border-right: 5px solid #333;
     transform: rotate(45deg);
-    margin: 20px;
+    margin: 10px;
 }
