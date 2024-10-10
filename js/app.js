@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const id = explorer.id || '';
                     const firstName = explorer.first_name || '';
                     const lastName = explorer.last_name || '';
-                    const moniker = explorer.moniker || 'N/A'; // Optional default 'N/A'
+                    const moniker = explorer.moniker || '';
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known); // Format date
 
