@@ -18,11 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
                         const latestRanking = explorer.rankings.sort((a, b) => b.date_noted - a.date_noted)[0];
-                        if (latestRanking.rank == 0 ) {
-                            explorer.latest_rank = null;  // If no rank available
-                        } else {
-                            explorer.latest_rank = latestRanking.rank;
-                        }
+                        explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
                     } else {
                         explorer.latest_rank = null;  // If no rank available
                     }
@@ -48,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
-                    const nameKnown = explorer.public == "0" ? '' : '&#10004;';
+                    const nameKnown = explorer.public === 1 ? '&#10004;' : '';  // Check as number, not string
 
                     // Populate the row, placing the Latest Rank as the first column and removing ID
                     row.innerHTML = `<td>${latestRank}</td>
@@ -76,7 +72,7 @@ function submitCorrection() {
     // Construct the issue title and body
     const issueTitle = `Update${explorerName ? ` for ${encodeURIComponent(explorerName)}` : ''}`;
     const issueBody = `Update Details:\n${correctionDetails}`;
- 
+    
     const githubUsername = 'sorvani'; 
     const githubRepo = 'dgenesisinfo';
     const labels = encodeURIComponent(correctionType);  // Use the correction type as a label
@@ -91,7 +87,7 @@ function submitCorrection() {
     const formSection = document.getElementById('correction-form');
     formSection.style.display = 'none';
 
-    // reset the form fields after submission
+    // Reset the form fields after submission
     document.getElementById('github-issue-form').reset();
 }
 
