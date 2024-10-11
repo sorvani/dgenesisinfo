@@ -8,16 +8,31 @@
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": 1538006400000,
+        "orbs_used": [
+            {
+                "id": 1,
+                "name": "Making",
+                "date_acquired": 1538006400000,
+                "date_is_exact": true,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ]
+            }
+        ],
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 99726438,
                 "known_above_rank": null
             },
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400001,
                 "rank": 1,
@@ -36,7 +51,7 @@
         "date_first_known": 1538092800000,
         "rankings": [
             {
-                "book": 5,
+                "volume": 5,
                 "chapter": 6,
                 "date_noted": 1538092800000,
                 "rank": 814,
@@ -55,7 +70,7 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "book": 3,
+                "volume": 3,
                 "chapter": 4,
                 "date_noted": 1538265600000,
                 "rank": 681,
@@ -74,7 +89,7 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "book": 5,
+                "volume": 5,
                 "chapter": 6,
                 "date_noted": 1538265600000,
                 "rank": 368,
@@ -93,7 +108,7 @@
         "date_first_known": 1538697600000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1537833600000,
                 "rank": 0,
@@ -112,7 +127,7 @@
         "date_first_known": 1546732800000,
         "rankings": [
             {
-                "book": 5,
+                "volume": 5,
                 "chapter": 6,
                 "date_noted": 1546473600000,
                 "rank": 48,
@@ -131,7 +146,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 3,
@@ -150,7 +165,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 7,
@@ -169,7 +184,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 5,
@@ -188,7 +203,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 8,
@@ -217,7 +232,7 @@
         "date_first_known": 1542326400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 2,
                 "date_noted": 1542326400000,
                 "rank": 99728765,
@@ -236,7 +251,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 2,
@@ -255,7 +270,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 4,
@@ -274,7 +289,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 6,
@@ -293,7 +308,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 9,
@@ -312,7 +327,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 10,
@@ -331,7 +346,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 11,
@@ -350,7 +365,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 12,
@@ -369,7 +384,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 13,
@@ -388,7 +403,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 14,
@@ -407,7 +422,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 15,
@@ -426,7 +441,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 16,
@@ -445,7 +460,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 17,
@@ -464,7 +479,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 18,
@@ -483,7 +498,7 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "book": 1,
+                "volume": 1,
                 "chapter": 1,
                 "date_noted": 1538006400000,
                 "rank": 19,
@@ -512,7 +527,7 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "book": 2,
+                "volume": 2,
                 "chapter": 3,
                 "date_noted": 1542844800000,
                 "rank": 0,
@@ -531,7 +546,7 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "book": 2,
+                "volume": 2,
                 "chapter": 3,
                 "date_noted": 1542844800000,
                 "rank": 0,

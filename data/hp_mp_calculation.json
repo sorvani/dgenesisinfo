@@ -1,1 +1,32 @@
-[{"stat":"str","hp_coefficient":1.0,"mp_coefficient":0.0},{"stat":"vit","hp_coefficient":1.4,"mp_coefficient":0.0},{"stat":"int","hp_coefficient":0.0,"mp_coefficient":1.6},{"stat":"agi","hp_coefficient":0.1,"mp_coefficient":0.1},{"stat":"dex","hp_coefficient":0.0,"mp_coefficient":0.2},{"stat":"luc","hp_coefficient":0.0,"mp_coefficient":0.0}]
+[
+    {
+        "stat": "str",
+        "hp_coefficient": 1.0,
+        "mp_coefficient": 0.0
+    },
+    {
+        "stat": "vit",
+        "hp_coefficient": 1.4,
+        "mp_coefficient": 0.0
+    },
+    {
+        "stat": "int",
+        "hp_coefficient": 0.0,
+        "mp_coefficient": 1.6
+    },
+    {
+        "stat": "agi",
+        "hp_coefficient": 0.1,
+        "mp_coefficient": 0.1
+    },
+    {
+        "stat": "dex",
+        "hp_coefficient": 0.0,
+        "mp_coefficient": 0.2
+    },
+    {
+        "stat": "luc",
+        "hp_coefficient": 0.0,
+        "mp_coefficient": 0.0
+    }
+]
