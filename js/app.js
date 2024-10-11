@@ -134,8 +134,8 @@ function toggleStatsTable(explorer, row) {
                     <td data-label="Reading Date">${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
                     <td data-label="Scan Type">${stat.scan_type}</td>
                     <td data-label="SP">${stat.sp !== null ? stat.sp : ''}</td>
-                    <td data-label="HP">${stat.hp}</td>
-                    <td data-label="MP">${stat.mp}</td>
+                    <td data-label="HP">${stat.hp.toFixed(2)}</td>
+                    <td data-label="MP">${stat.mp.toFixed(2)}</td>
                     <td data-label="STR">${stat.str}</td>
                     <td data-label="VIT">${stat.vit}</td>
                     <td data-label="INT">${stat.int}</td>
