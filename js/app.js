@@ -114,21 +114,39 @@ function toggleStatsTable(explorer, row) {
             let statsTable = `<table class="stats-table"><thead>
                 <tr>
                     <th>Reading Date</th>
+                    <th>Scan Type</th>
                     <th>Sequence</th>
                     <th>SP</th>
                     <th>HP</th>
                     <th>MP</th>
+                    <th>STR</th>
+                    <th>VIT</th>
+                    <th>INT</th>
+                    <th>AGI</th>
+                    <th>DEX</th>
+                    <th>LUC</th>
                     <th>Stat Total</th>
+                    <th>Deviation</th>
+                    <th>Citation></th>
                 </tr></thead><tbody>`;
             
             sortedStats.forEach(stat => {
                 statsTable += `<tr>
                     <td data-label="Reading Date">${formatDate(stat.date_noted)}</td>
+                    <td data-label="Scan Type">${stat.scan_type}</td>
                     <td data-label="Sequence">${stat.date_sequence}</td>
-                    <td data-label="SP">${stat.sp !== null ? stat.sp : 'N/A'}</td>
+                    <td data-label="SP">${stat.sp !== null ? stat.sp : ''}</td>
                     <td data-label="HP">${stat.hp}</td>
                     <td data-label="MP">${stat.mp}</td>
+                    <td data-label="STR">${stat.str}</td>
+                    <td data-label="VIT">${stat.vit}</td>
+                    <td data-label="INT">${stat.int}</td>
+                    <td data-label="AGI">${stat.agi}</td>
+                    <td data-label="DEX">${stat.dex}</td>
+                    <td data-label="LUC">${stat.luc}</td>
                     <td data-label="Stat Total">${stat.stat_total}</td>
+                    <td data-label="Deviation">${stat.points_from_average}</td>
+                    <td data-label="Citation">Volume ${stat.citation[0]} Chapter ${stat.citation[0]}</td>
                 </tr>`;
             });
 

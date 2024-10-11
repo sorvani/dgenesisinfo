@@ -25,15 +25,25 @@
         ],
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 99726438,
                 "known_above_rank": null
             },
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400001,
                 "rank": 1,
                 "known_above_rank": null
@@ -41,12 +51,17 @@
         ],
         "stats": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538092800000,
                 "date_sequence": 1,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1200.03,
                 "hp": 23.8,
                 "mp": 23.8,
@@ -60,12 +75,17 @@
                 "points_from_average": 0
             },
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538092800000,
                 "date_sequence": 2,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1199.03,
                 "hp": 24.8,
                 "mp": 23.8,
@@ -79,12 +99,17 @@
                 "points_from_average": 1
             },
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538092800000,
                 "date_sequence": 3,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1173.03,
                 "hp": 36.0,
                 "mp": 33.0,
@@ -98,12 +123,17 @@
                 "points_from_average": 27
             },
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538611200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1173.03,
                 "hp": 36.0,
                 "mp": 33.0,
@@ -117,12 +147,17 @@
                 "points_from_average": 27
             },
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538611200000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1173.05,
                 "hp": 36.0,
                 "mp": 33.0,
@@ -136,12 +171,17 @@
                 "points_from_average": 27
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1541548800000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1178.307,
                 "hp": 36.0,
                 "mp": 33.0,
@@ -155,12 +195,17 @@
                 "points_from_average": 27
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1541548800000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1178.307,
                 "hp": 36.0,
                 "mp": 33.0,
@@ -174,12 +219,17 @@
                 "points_from_average": 27
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1541548800000,
                 "date_sequence": 3,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1176.307,
                 "hp": 38.0,
                 "mp": 33.0,
@@ -193,12 +243,17 @@
                 "points_from_average": 29
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1118.856,
                 "hp": 61.0,
                 "mp": 52.0,
@@ -212,12 +267,17 @@
                 "points_from_average": 87
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 1085.856,
                 "hp": 75.0,
                 "mp": 57.0,
@@ -231,12 +291,17 @@
                 "points_from_average": 120
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 3,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 715.856,
                 "hp": 235.0,
                 "mp": 171.0,
@@ -250,12 +315,17 @@
                 "points_from_average": 490
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 4,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 715.856,
                 "hp": 235.0,
                 "mp": 171.0,
@@ -269,12 +339,17 @@
                 "points_from_average": 489
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 5,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 665.856,
                 "hp": 250.0,
                 "mp": 190.0,
@@ -288,12 +363,17 @@
                 "points_from_average": 540
             },
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542499200000,
                 "date_sequence": 6,
                 "time_of_day": "afternoon",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 665.856,
                 "hp": 250.0,
                 "mp": 190.0,
@@ -307,12 +387,17 @@
                 "points_from_average": 120
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544400000000,
                 "date_sequence": 1,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 674.029,
                 "hp": 250.0,
                 "mp": 190.0,
@@ -326,12 +411,17 @@
                 "points_from_average": 540
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544486400000,
                 "date_sequence": 1,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 523.448,
                 "hp": 432.0,
                 "mp": 240.0,
@@ -345,12 +435,17 @@
                 "points_from_average": 740
             },
             {
-                "volume": 4,
-                "chapter": 5,
+                "citation": [
+                    {
+                        "volume": 4,
+                        "chapter": 5,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546646400000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 45.12,
                 "mp": 32.4,
@@ -376,8 +471,13 @@
         "date_first_known": 1538092800000,
         "rankings": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538092800000,
                 "rank": 814,
                 "known_above_rank": null
@@ -385,12 +485,17 @@
         ],
         "stats": [
             {
-                "volume": 2,
-                "chapter": 3,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1543363200000,
                 "date_sequence": 1,
                 "time_of_day": "early morning",
-                "id_type": "Appraisal",
+                "scan_type": "Appraisal",
                 "sp": null,
                 "hp": 21.7,
                 "mp": 30.9,
@@ -404,12 +509,17 @@
                 "points_from_average": 8
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544400000000,
                 "date_sequence": 1,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 2.863,
                 "hp": 21.7,
                 "mp": 32.5,
@@ -423,12 +533,17 @@
                 "points_from_average": 9
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544486400000,
                 "date_sequence": 1,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 50.937,
                 "hp": 22.25,
                 "mp": 33.05,
@@ -442,12 +557,17 @@
                 "points_from_average": 9
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544486400000,
                 "date_sequence": 2,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 19.937,
                 "hp": 23.6,
                 "mp": 69.6,
@@ -461,12 +581,17 @@
                 "points_from_average": 40
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544486400000,
                 "date_sequence": 3,
                 "time_of_day": "night",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.937,
                 "hp": 27.0,
                 "mp": 86.8,
@@ -480,12 +605,17 @@
                 "points_from_average": 59
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 33.936,
                 "hp": 28.7,
                 "mp": 91.1,
@@ -499,12 +629,17 @@
                 "points_from_average": 68
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.936,
                 "hp": 29.15,
                 "mp": 136.75,
@@ -518,12 +653,17 @@
                 "points_from_average": 101
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547596800000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 15.411,
                 "hp": 29.15,
                 "mp": 136.75,
@@ -537,12 +677,17 @@
                 "points_from_average": 101
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547596800000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.411,
                 "hp": 29.9,
                 "mp": 153.5,
@@ -568,8 +713,13 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538265600000,
                 "rank": 681,
                 "known_above_rank": null
@@ -577,12 +727,17 @@
         ],
         "stats": [
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544918400000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 65.36,
                 "hp": 29.0,
                 "mp": 55.2,
@@ -596,12 +751,17 @@
                 "points_from_average": 69
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544918400000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.36,
                 "hp": 48.5,
                 "mp": 71.9,
@@ -627,8 +787,13 @@
         "date_first_known": 1538265600000,
         "rankings": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538265600000,
                 "rank": 368,
                 "known_above_rank": null
@@ -636,12 +801,17 @@
         ],
         "stats": [
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544918400000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 33.23,
                 "hp": 28.5,
                 "mp": 48.5,
@@ -655,12 +825,17 @@
                 "points_from_average": 50
             },
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1544918400000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.23,
                 "hp": 34.9,
                 "mp": 60.5,
@@ -674,12 +849,17 @@
                 "points_from_average": 83
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546905600000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 0.23,
                 "hp": 34.9,
                 "mp": 60.5,
@@ -693,12 +873,17 @@
                 "points_from_average": 83
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546905600000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Making",
+                "scan_type": "Making",
                 "sp": 4.19,
                 "hp": 35.0,
                 "mp": 62.8,
@@ -724,8 +909,13 @@
         "date_first_known": 1538697600000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1537833600000,
                 "rank": 0,
                 "known_above_rank": 99726438.0
@@ -733,12 +923,17 @@
         ],
         "stats": [
             {
-                "volume": 3,
-                "chapter": 4,
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1545004800000,
                 "date_sequence": 1,
                 "time_of_day": "afternoon",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 23.0,
                 "mp": 27.0,
@@ -764,8 +959,13 @@
         "date_first_known": 1546732800000,
         "rankings": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546473600000,
                 "rank": 48,
                 "known_above_rank": null
@@ -773,12 +973,17 @@
         ],
         "stats": [
             {
-                "volume": 4,
-                "chapter": 5,
+                "citation": [
+                    {
+                        "volume": 4,
+                        "chapter": 5,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546646400000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 87.9,
                 "mp": 66.7,
@@ -792,12 +997,17 @@
                 "points_from_average": 128
             },
             {
-                "volume": 4,
-                "chapter": 5,
+                "citation": [
+                    {
+                        "volume": 4,
+                        "chapter": 5,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1546646400000,
                 "date_sequence": 2,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": 123.6,
                 "hp": 88.2,
                 "mp": 67.0,
@@ -811,12 +1021,17 @@
                 "points_from_average": 131
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547078400000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": 60.0,
                 "hp": 126.0,
                 "mp": 74.8,
@@ -842,8 +1057,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 3,
                 "known_above_rank": null
@@ -851,12 +1071,17 @@
         ],
         "stats": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 113.8,
                 "mp": 82.8,
@@ -870,12 +1095,17 @@
                 "points_from_average": 179
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 2,
                 "time_of_day": "evening",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 127.1,
                 "mp": 84.1,
@@ -901,8 +1131,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 7,
                 "known_above_rank": null
@@ -910,12 +1145,17 @@
         ],
         "stats": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 97.4,
                 "mp": 76.8,
@@ -929,12 +1169,17 @@
                 "points_from_average": 174
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 2,
                 "time_of_day": "evening",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 98.6,
                 "mp": 80.4,
@@ -960,8 +1205,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 5,
                 "known_above_rank": null
@@ -969,12 +1219,17 @@
         ],
         "stats": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 139.8,
                 "mp": 62.8,
@@ -988,12 +1243,17 @@
                 "points_from_average": 173
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 2,
                 "time_of_day": "evening",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 170.0,
                 "mp": 62.8,
@@ -1019,8 +1279,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 8,
                 "known_above_rank": null
@@ -1028,12 +1293,17 @@
         ],
         "stats": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 91.4,
                 "mp": 104.4,
@@ -1047,12 +1317,17 @@
                 "points_from_average": 158
             },
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 2,
                 "time_of_day": "evening",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 92.7,
                 "mp": 124.9,
@@ -1078,12 +1353,17 @@
         "date_first_known": 1547251200000,
         "stats": [
             {
-                "volume": 5,
-                "chapter": 6,
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1547251200000,
                 "date_sequence": 1,
                 "time_of_day": "morning",
-                "id_type": "Stat Measuring Device",
+                "scan_type": "Stat Measuring Device",
                 "sp": null,
                 "hp": 21.0,
                 "mp": 27.4,
@@ -1109,8 +1389,13 @@
         "date_first_known": 1542326400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 2,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542326400000,
                 "rank": 99728765,
                 "known_above_rank": null
@@ -1128,8 +1413,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 2,
                 "known_above_rank": null
@@ -1147,8 +1437,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 4,
                 "known_above_rank": null
@@ -1166,8 +1461,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 6,
                 "known_above_rank": null
@@ -1185,8 +1485,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 9,
                 "known_above_rank": null
@@ -1204,8 +1509,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 10,
                 "known_above_rank": null
@@ -1223,8 +1533,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 11,
                 "known_above_rank": null
@@ -1242,8 +1557,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 12,
                 "known_above_rank": null
@@ -1261,8 +1581,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 13,
                 "known_above_rank": null
@@ -1280,8 +1605,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 14,
                 "known_above_rank": null
@@ -1299,8 +1629,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 15,
                 "known_above_rank": null
@@ -1318,8 +1653,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 16,
                 "known_above_rank": null
@@ -1337,8 +1677,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 17,
                 "known_above_rank": null
@@ -1356,8 +1701,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 18,
                 "known_above_rank": null
@@ -1375,8 +1725,13 @@
         "date_first_known": 1538006400000,
         "rankings": [
             {
-                "volume": 1,
-                "chapter": 1,
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1538006400000,
                 "rank": 19,
                 "known_above_rank": null
@@ -1404,8 +1759,13 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "volume": 2,
-                "chapter": 3,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542844800000,
                 "rank": 0,
                 "known_above_rank": 99726438.0
@@ -1423,8 +1783,13 @@
         "date_first_known": 1542844800000,
         "rankings": [
             {
-                "volume": 2,
-                "chapter": 3,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "j_novel_part": null
+                    }
+                ],
                 "date_noted": 1542844800000,
                 "rank": 0,
                 "known_above_rank": 99726438.0
