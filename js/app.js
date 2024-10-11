@@ -127,7 +127,7 @@ function toggleStatsTable(explorer, row) {
                     <th>LUC</th>
                     <th>Stat Total</th>
                     <th>Deviation</th>
-                    <th>Citation></th>
+                    <th>Citation</th>
                 </tr></thead><tbody>`;
             
             sortedStats.forEach(stat => {
@@ -146,7 +146,7 @@ function toggleStatsTable(explorer, row) {
                     <td data-label="LUC">${stat.luc}</td>
                     <td data-label="Stat Total">${stat.stat_total}</td>
                     <td data-label="Deviation">${stat.points_from_average}</td>
-                    <td data-label="Citation">Volume ${stat.citation[0]} Chapter ${stat.citation[0]}</td>
+                    <td data-label="Citation">Vol:${stat.citation.volume} Ch:${stat.citation.chapter} JNC Part:${stat.citation.j_novel_part !== null ? stat.citation.j_novel_part : ''}</td>
                 </tr>`;
             });
 
