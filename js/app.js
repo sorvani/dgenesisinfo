@@ -75,7 +75,7 @@ function submitCorrection() {
     
     // Construct the issue title and body
     const issueTitle = `Update${explorerName ? ` for ${encodeURIComponent(explorerName)}` : ''}`;
-    const issueBody = `${encodeURIComponent(correctionDetails).replace(/%0A/g, '\n')}`;
+    const issueBody = `Correction Details:\n\n${encodeURIComponent(correctionDetails).replace(/%0A/g, '\n')}`;
     
     const githubUsername = 'sorvani'; 
     const githubRepo = 'dgenesisinfo';
