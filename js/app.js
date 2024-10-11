@@ -112,16 +112,23 @@ function toggleStatsTable(explorer, row) {
 
             // Build the subtable
             let statsTable = `<table class="stats-table"><thead>
-                <tr><th>Date Noted</th><th>Sequence</th><th>SP</th><th>HP</th><th>MP</th><th>Stat Total</th></tr></thead><tbody>`;
+                <tr>
+                    <th>Reading Date</th>
+                    <th>Sequence</th>
+                    <th>SP</th>
+                    <th>HP</th>
+                    <th>MP</th>
+                    <th>Stat Total</th>
+                </tr></thead><tbody>`;
             
             sortedStats.forEach(stat => {
                 statsTable += `<tr>
-                    <td>${formatDate(stat.date_noted)}</td>
-                    <td>${stat.date_sequence}</td>
-                    <td>${stat.sp !== null ? stat.sp : 'N/A'}</td>
-                    <td>${stat.hp}</td>
-                    <td>${stat.mp}</td>
-                    <td>${stat.stat_total}</td>
+                    <td data-label="Reading Date">${formatDate(stat.date_noted)}</td>
+                    <td data-label="Sequence">${stat.date_sequence}</td>
+                    <td data-label="SP">${stat.sp !== null ? stat.sp : 'N/A'}</td>
+                    <td data-label="HP">${stat.hp}</td>
+                    <td data-label="MP">${stat.mp}</td>
+                    <td data-label="Stat Total">${stat.stat_total}</td>
                 </tr>`;
             });
 
