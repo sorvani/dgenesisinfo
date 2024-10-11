@@ -11,8 +11,28 @@
         <h1>Explorer List by Current WDARL Rank</h1>
         <nav>
             <a href="index.html">Home</a>
+            <a href="#" onclick="showForm(); return false;">Submit a correction</a>
         </nav>
     </header>
+    <section id="correction-form" style="display: none;">
+        <h2>Submit a Correction</h2>
+        <form id="github-issue-form" onsubmit="submitCorrection(); return false;">
+            <label for="correction-type">Correction Type:</label>
+            <select id="correction-type" name="correction-type" required>
+                <option value="explorer data">Explorer Data</option>
+                <option value="explorer stats">Explorer Stats</option>
+                <option value="orb data">Orb Data</option>
+            </select><br><br>
+            
+            <label for="explorer-orb-name">Explorer or Orb Name:</label>
+            <input type="text" id="explorer-orb-name" name="explorer-orb-name"><br><br>
+            
+            <label for="correction-details">Details:</label><br>
+            <textarea id="correction-details" name="correction-details" rows="6" cols="50" required></textarea><br><br>
+            
+            <input type="submit" value="Submit Correction">
+        </form>
+    </section>
     <section id="explorer-info">
         <h2>Explorer Data</h2>
         <table id="explorer-table">
@@ -31,6 +51,7 @@
             </tbody>
         </table>
     </section>
+
     <script src="js/app.js"></script>
 </body>
 </html>

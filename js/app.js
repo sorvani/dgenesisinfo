@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Fetch and display explorer info with latest ranking on explorer_info.html
+    // Fetch and display explorer info with latest ranking on index.html
     if (document.querySelector("#explorer-table")) {
         fetch('data/explorer_info.json')
             .then(response => response.json())
@@ -66,3 +66,37 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 });
+
+// The submitCorrection function for form submission
+function submitCorrection() {
+    const correctionType = document.getElementById('correction-type').value;
+    const explorerName = document.getElementById('explorer-orb-name').value;
+    const correctionDetails = document.getElementById('correction-details').value;
+    
+    // Construct the issue title and body
+    const issueTitle = `${correctionType} Correction${explorerName ? ` for ${encodeURIComponent(explorerName)}` : ''}`;
+    const issueBody = `Correction Type: ${correctionType}\nExplorer: ${encodeURIComponent(explorerName)}\n\nCorrection Details:\n${encodeURIComponent(correctionDetails)}`;
+    
+    const githubUsername = 'sorvani';  // Replace with your GitHub username or organization
+    const githubRepo = 'dgenesisinfo';      // Replace with your repository name
+    const labels = encodeURIComponent(correctionType);  // Use the correction type as a label
+    
+    // Construct the GitHub issue URL
+    const githubIssueUrl = `https://github.com/${githubUsername}/${githubRepo}/issues/new?title=${issueTitle}&body=${issueBody}&labels=${labels}`;
+    
+    // Redirect user to GitHub to finalize the issue
+    window.open(githubIssueUrl, '_blank');
+
+    // Hide the form again after submission
+    const formSection = document.getElementById('correction-form');
+    formSection.style.display = 'none';
+
+    // reset the form fields after submission
+    document.getElementById('github-issue-form').reset();
+}
+
+// Function to show the form
+function showForm() {
+    const formSection = document.getElementById('correction-form');
+    formSection.style.display = 'block';  // Show the form when the link is clicked
+}
