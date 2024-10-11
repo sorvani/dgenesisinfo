@@ -75,10 +75,10 @@ function submitCorrection() {
     
     // Construct the issue title and body
     const issueTitle = `${correctionType} Correction${explorerName ? ` for ${encodeURIComponent(explorerName)}` : ''}`;
-    const issueBody = `Correction Type: ${correctionType}\nExplorer: ${encodeURIComponent(explorerName)}\n\nCorrection Details:\n${encodeURIComponent(correctionDetails)}`;
+    const issueBody = `Correction Type: ${correctionType}\nExplorer: ${encodeURIComponent(explorerName)}\n\nCorrection Details:\n${encodeURIComponent(correctionDetails).replace(/%0A/g, '\n')}`;
     
-    const githubUsername = 'sorvani';  // Replace with your GitHub username or organization
-    const githubRepo = 'dgenesisinfo';      // Replace with your repository name
+    const githubUsername = 'sorvani'; 
+    const githubRepo = 'dgenesisinfo';
     const labels = encodeURIComponent(correctionType);  // Use the correction type as a label
     
     // Construct the GitHub issue URL
