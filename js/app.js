@@ -4,16 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch('data/explorer_info.json')
             .then(response => response.json())
             .then(data => {
-                // Function to format date to MM/DD/YYYY
-                const formatDate = (dateString) => {
-                    if (!dateString) return '';  // Return empty string if dateString is null
-                    const date = new Date(dateString);
-                    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Get month and add leading 0
-                    const day = ('0' + date.getDate()).slice(-2);          // Get day and add leading 0
-                    const year = date.getFullYear();                       // Get year
-                    return `${month}/${day}/${year}`;                      // Return formatted date
-                };
-
                 // Extract the latest rank from the rankings array and sort by rank
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
@@ -53,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <td data-label="Moniker">${moniker}</td>
                                     <td data-label="Nationality">${nationality}</td>
                                     <td data-label="Date First Known">${dateFirstKnown}</td>`;
+
+                    // Add click event to toggle stats subtable
+                    row.addEventListener('click', () => toggleStatsTable(explorer, row));
                     
                     tbody.appendChild(row);
                 });
@@ -95,4 +88,60 @@ function submitCorrection() {
 function showForm() {
     const formSection = document.getElementById('correction-form');
     formSection.style.display = 'block';  // Show the form when the link is clicked
+}
+
+// Function to toggle the stats subtable
+function toggleStatsTable(explorer, row) {
+    let statsRow = row.nextElementSibling;
+
+    // Check if subtable already exists
+    if (statsRow && statsRow.classList.contains('stats-row')) {
+        statsRow.remove();  // Remove the subtable if it already exists (toggle off)
+    } else {
+        // Create new row for the stats subtable
+        statsRow = document.createElement("tr");
+        statsRow.classList.add('stats-row');
+        const statsCell = document.createElement("td");
+        statsCell.setAttribute('colspan', '6');
+
+        if (explorer.stats && explorer.stats.length > 0) {
+            // Sort stats by the sum of date_noted and date_sequence
+            const sortedStats = explorer.stats.sort((a, b) => {
+                return (a.date_noted + a.date_sequence) - (b.date_noted + b.date_sequence);
+            });
+
+            // Build the subtable
+            let statsTable = `<table class="stats-table"><thead>
+                <tr><th>Date Noted</th><th>Sequence</th><th>SP</th><th>HP</th><th>MP</th><th>Stat Total</th></tr></thead><tbody>`;
+            
+            sortedStats.forEach(stat => {
+                statsTable += `<tr>
+                    <td>${formatDate(stat.date_noted)}</td>
+                    <td>${stat.date_sequence}</td>
+                    <td>${stat.sp !== null ? stat.sp : 'N/A'}</td>
+                    <td>${stat.hp}</td>
+                    <td>${stat.mp}</td>
+                    <td>${stat.stat_total}</td>
+                </tr>`;
+            });
+
+            statsTable += '</tbody></table>';
+            statsCell.innerHTML = statsTable;
+        } else {
+            statsCell.innerHTML = '<em>No stats available</em>';
+        }
+
+        statsRow.appendChild(statsCell);
+        row.after(statsRow);  // Insert the subtable after the clicked row
+    }
+}
+
+// Helper function to format dates
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
 }

@@ -121,3 +121,24 @@ table th {
         flex: 2;
     }
 }
+
+.stats-row {
+    background-color: #f9f9f9;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.stats-table th, .stats-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.stats-table th {
+    background-color: #333;
+    color: white;
+}
