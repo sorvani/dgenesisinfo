@@ -145,9 +145,17 @@ function toggleStatsTable(explorer, row) {
                     <td data-label="DEX">${stat.dex}</td>
                     <td data-label="LUC">${stat.luc}</td>
                     <td data-label="Stat Total">${stat.stat_total}</td>
-                    <td data-label="Deviation">${stat.points_from_average}</td>
-                    <td data-label="Citation">Vol:${stat.citation.volume} Ch:${stat.citation.chapter} JNC Part:${stat.citation.j_novel_part !== null ? stat.citation.j_novel_part : ''}</td>
-                </tr>`;
+                    <td data-label="Deviation">${stat.points_from_average}</td>`;
+                    // Check if there's a citation array and add it below the stat
+                    if (stat.citation && stat.citation.length > 0) {
+                        // Loop through citations and display them
+                        stat.citation.forEach(cite => {
+                            statsTable += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.j_novel_part !== null ? cite.j_novel_part : ''}</td>`;
+                        });
+                    } else {
+                        statsTable += `<td data-label="Citation">Missing</td>`;
+                    }
+                statsTable += `</tr>`;
             });
 
             statsTable += '</tbody></table>';
