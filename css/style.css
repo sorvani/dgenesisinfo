@@ -72,7 +72,6 @@ nav a:hover {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
 }
 
 table th, table td {
@@ -86,38 +85,39 @@ table th {
     color: white;
 }
 
-table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
 /* Responsive table for smaller screens */
 @media screen and (max-width: 600px) {
     table, thead, tbody, th, td, tr {
         display: block;
     }
 
-    table tr {
-        margin-bottom: 20px;
+    table thead {
+        display: none;  /* Hide headers */
     }
 
-    table th {
-        display: none;
+    table tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+        display: block;
     }
 
     table td {
-        display: block;
-        text-align: right;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
         position: relative;
-        padding-left: 50%;
+        text-align: left;
     }
 
     table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
+        content: attr(data-label);  /* Use data-label to display the header name */
         font-weight: bold;
+        flex: 1;
         text-align: left;
+        padding-right: 10px;
+    }
+
+    table td {
+        flex: 2;
     }
 }

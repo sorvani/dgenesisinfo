@@ -46,13 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
                     const nameKnown = explorer.public === 1 ? '&#10004;' : '';  // Check as number, not string
 
-                    // Populate the row, placing the Latest Rank as the first column and removing ID
-                    row.innerHTML = `<td>${latestRank}</td>
-                                     <td>${firstName} ${lastName}</td>
-                                     <td>${nameKnown}</td>
-                                     <td>${moniker}</td>
-                                     <td>${nationality}</td>
-                                     <td>${dateFirstKnown}</td>`;
+                    // Populate the row with data-label attributes for responsive design
+                    row.innerHTML = `<td data-label="Rank">${latestRank}</td>
+                                    <td data-label="Name">${firstName} ${lastName}</td>
+                                    <td data-label="Name is Public">${nameKnown}</td>
+                                    <td data-label="Moniker">${moniker}</td>
+                                    <td data-label="Nationality">${nationality}</td>
+                                    <td data-label="Date First Known">${dateFirstKnown}</td>`;
                     
                     tbody.appendChild(row);
                 });
