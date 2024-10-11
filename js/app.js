@@ -115,7 +115,6 @@ function toggleStatsTable(explorer, row) {
                 <tr>
                     <th>Reading Date</th>
                     <th>Scan Type</th>
-                    <th>Sequence</th>
                     <th>SP</th>
                     <th>HP</th>
                     <th>MP</th>
@@ -132,9 +131,8 @@ function toggleStatsTable(explorer, row) {
             
             sortedStats.forEach(stat => {
                 statsTable += `<tr>
-                    <td data-label="Reading Date">${formatDate(stat.date_noted)}</td>
+                    <td data-label="Reading Date">${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
                     <td data-label="Scan Type">${stat.scan_type}</td>
-                    <td data-label="Sequence">${stat.date_sequence}</td>
                     <td data-label="SP">${stat.sp !== null ? stat.sp : ''}</td>
                     <td data-label="HP">${stat.hp}</td>
                     <td data-label="MP">${stat.mp}</td>
