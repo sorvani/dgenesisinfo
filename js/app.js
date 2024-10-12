@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <td data-label="Moniker">${moniker}</td>
                                     <td data-label="Nationality">${nationality}</td>
                                     <td data-label="Date First Known">${dateFirstKnown}</td>
-                                    <td data-label="Citation">${rankCitation}</td>`;
+                                    <td data-label="Rank Citation">${rankCitation}</td>`;
 
                     // Add click event to toggle stats subtable
                     row.addEventListener('click', () => toggleStatsTable(explorer, row));
