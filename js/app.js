@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const moniker = explorer.moniker || '';
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
-                    const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
+                    const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'Unknown';
                     const nameKnown = explorer.public === 1 ? '&#10004;' : '';
                     const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
                                     
