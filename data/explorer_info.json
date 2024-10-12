@@ -911,8 +911,8 @@
             {
                 "citation": [
                     {
-                        "volume": 1,
-                        "chapter": 1,
+                        "volume": null,
+                        "chapter": null,
                         "j_novel_part": null
                     }
                 ],
@@ -1351,6 +1351,20 @@
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": 1547251200000,
+        "rankings": [
+            {
+                "citation": [
+                    {
+                        "volume": null,
+                        "chapter": null,
+                        "j_novel_part": null
+                    }
+                ],
+                "date_noted": null,
+                "rank": 0,
+                "known_above_rank": null
+            }
+        ],
         "stats": [
             {
                 "citation": [
@@ -1746,7 +1760,21 @@
         "public": 0,
         "d-card_region": 12,
         "nationality": "JP",
-        "date_first_known": 1544745600000
+        "date_first_known": 1544745600000,
+        "rankings": [
+            {
+                "citation": [
+                    {
+                        "volume": null,
+                        "chapter": null,
+                        "j_novel_part": null
+                    }
+                ],
+                "date_noted": null,
+                "rank": 0,
+                "known_above_rank": null
+            }
+        ]
     },
     {
         "id": 28,
