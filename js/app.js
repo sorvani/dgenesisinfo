@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch('data/explorer_info.json')
             .then(response => response.json())
             .then(data => {
-                let citation;
                 // Extract the latest rank from the rankings array and sort by rank
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
@@ -20,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                 citeChapter = cite.chapter || '';
                                 citeJNCPart = cite.j_novel_part !== null ? cite.j_novel_part : '';
                             });
-                            citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
+                            explorer.rank_citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
                         } else {
-                            citation = "Missing";
+                            explorer.rank_citation = null;
                         }
                     } else {
                         explorer.latest_rank = null;  // If no rank available
-                        citation = "Missing";
+                        explorer.rank_citation = null;
                     }
                     return explorer;
                 });
@@ -51,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
                     const nameKnown = explorer.public === 1 ? '&#10004;' : '';
+                    const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
                                     
                     // Populate the row with data-label attributes for responsive design
                     row.innerHTML = `<td data-label="Rank">${latestRank}</td>
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <td data-label="Moniker">${moniker}</td>
                                     <td data-label="Nationality">${nationality}</td>
                                     <td data-label="Date First Known">${dateFirstKnown}</td>
-                                    <td data-label="Citation">${citation}</td>`;
+                                    <td data-label="Citation">${rankCitation}</td>`;
 
                     // Add click event to toggle stats subtable
                     row.addEventListener('click', () => toggleStatsTable(explorer, row));
@@ -119,7 +119,7 @@ function toggleStatsTable(explorer, row) {
         statsRow = document.createElement("tr");
         statsRow.classList.add('stats-row');
         const statsCell = document.createElement("td");
-        statsCell.setAttribute('colspan', '6');
+        statsCell.setAttribute('colspan', '7');
 
         if (explorer.stats && explorer.stats.length > 0) {
             // Sort stats by the sum of date_noted and date_sequence
