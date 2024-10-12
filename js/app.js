@@ -34,15 +34,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     const nationality = explorer.nationality || '';
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
-                    const nameKnown = explorer.public === 1 ? '&#10004;' : '';  // Check as number, not string
+                    const nameKnown = explorer.public === 1 ? '&#10004;' : '';
+                    let citeVolume, citeChapter, citeJNCPart, citation;
 
+                    // Check if there's a citation array and populate the citation variable
+                    if (explorer.citation && explorer.citation.length > 0) {
+                        // Loop through citations and display them
+                        explorer.citation.forEach(cite => {
+                            citeVolume = cite.volume || '';
+                            citeChapter = cite.chapter || '';
+                            citeJNCPart = cite.j_novel_part !== null ? cite.j_novel_part : '';
+                        });
+                        citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
+                    } else {
+                        citation = "Missing";
+                    }
+                
                     // Populate the row with data-label attributes for responsive design
                     row.innerHTML = `<td data-label="Rank">${latestRank}</td>
                                     <td data-label="Name">${firstName} ${lastName}</td>
                                     <td data-label="Name is Public">${nameKnown}</td>
                                     <td data-label="Moniker">${moniker}</td>
                                     <td data-label="Nationality">${nationality}</td>
-                                    <td data-label="Date First Known">${dateFirstKnown}</td>`;
+                                    <td data-label="Date First Known">${dateFirstKnown}</td>
+                                    <td data-label="Citation">${citation}</td>`;
 
                     // Add click event to toggle stats subtable
                     row.addEventListener('click', () => toggleStatsTable(explorer, row));
@@ -146,7 +161,7 @@ function toggleStatsTable(explorer, row) {
                     <td data-label="Deviation">${stat.points_from_average}</td>`;
                     // Check if there's a citation array and add it below the stat
                     if (stat.citation && stat.citation.length > 0) {
-                        // Loop through citations and display them
+                        // Loop through citations and display them. normally there is only one, but more could be possible so used loop
                         stat.citation.forEach(cite => {
                             statsTable += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.j_novel_part !== null ? cite.j_novel_part : ''}</td>`;
                         });
