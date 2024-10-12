@@ -4,13 +4,29 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch('data/explorer_info.json')
             .then(response => response.json())
             .then(data => {
+                let citation;
                 // Extract the latest rank from the rankings array and sort by rank
                 const explorersWithRanks = data.map(explorer => {
                     if (explorer.rankings && explorer.rankings.length > 0) {
                         const latestRanking = explorer.rankings.sort((a, b) => b.date_noted - a.date_noted)[0];
                         explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
+                        let citeVolume, citeChapter, citeJNCPart;
+
+                        // Check if there's a citation array and populate the citation variable
+                        if (latestRanking.citation && latestRanking.citation.length > 0) {
+                            // Loop through citations and display them
+                            latestRanking.citation.forEach(cite => {
+                                citeVolume = cite.volume || '';
+                                citeChapter = cite.chapter || '';
+                                citeJNCPart = cite.j_novel_part !== null ? cite.j_novel_part : '';
+                            });
+                            citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
+                        } else {
+                            citation = "Missing";
+                        }
                     } else {
                         explorer.latest_rank = null;  // If no rank available
+                        citation = "Missing";
                     }
                     return explorer;
                 });
@@ -35,21 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const dateFirstKnown = formatDate(explorer.date_first_known);
                     const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'N/A';
                     const nameKnown = explorer.public === 1 ? '&#10004;' : '';
-                    let citeVolume, citeChapter, citeJNCPart, citation;
-
-                    // Check if there's a citation array and populate the citation variable
-                    if (explorer.citation && explorer.citation.length > 0) {
-                        // Loop through citations and display them
-                        explorer.citation.forEach(cite => {
-                            citeVolume = cite.volume || '';
-                            citeChapter = cite.chapter || '';
-                            citeJNCPart = cite.j_novel_part !== null ? cite.j_novel_part : '';
-                        });
-                        citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
-                    } else {
-                        citation = "Missing";
-                    }
-                
+                                    
                     // Populate the row with data-label attributes for responsive design
                     row.innerHTML = `<td data-label="Rank">${latestRank}</td>
                                     <td data-label="Name">${firstName} ${lastName}</td>
