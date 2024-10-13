@@ -61,14 +61,15 @@ function toggleOrbDetails(orb, row) {
                         <th>Probability</th>
                         <th>Cooldown</th>
                         <th>Cooldown in Seconds</th>
+                        <th>Citation</th>
                     </tr>
                 </thead>
                 <tbody>`;
 
             orb.drop_rates.forEach(rate => {
                 const dropCreature = rate.creature !== null ? rate.creature : 'Unknown Monster';
-                const dropDungeon = rate.dungeon !== null ? rate.dungeon : '';
-                const dropFloor = rate.floor !== null ? rate.floor : '';
+                const dropDungeon = rate.dungeon !== undefined ? rate.dungeon : null;
+                const dropFloor = rate.floor !== undefined ? rate.floor : null;
                 // handle null probability info and format numbers with commas
                 const favorableOutcomes = rate.favorable_outcomes !== null ? rate.favorable_outcomes.toLocaleString() : 0;
                 const totalEvents = rate.total_events !== null ? rate.total_events.toLocaleString(): 0;
@@ -92,8 +93,17 @@ function toggleOrbDetails(orb, row) {
                     <td data-label="Drop Floor">${dropFloor}</td>
                     <td data-label="Probability">${probability}</td>
                     <td data-label="Cooldown">${cooldownDisplay}</td>
-                    <td data-label="Cooldown Seconds">${cooldownSeconds}</td>
-                </tr>`;
+                    <td data-label="Cooldown Seconds">${cooldownSeconds}</td>`;
+                // Check if there's a citation array and add it to the stat row
+                if (rate.citation && rate.citation.length > 0) {
+                    // Loop through citations and display them. normally there is only one, but more could be possible so used loop
+                    rate.citation.forEach(cite => {
+                        detailsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.j_novel_part !== null ? cite.j_novel_part : ''}</td>`;
+                    });
+                } else {
+                    detailsContent += `<td data-label="Citation">Missing</td>`;
+                }
+                detailsContent += `</tr>`;
             });
 
             detailsContent += '</tbody></table>';
