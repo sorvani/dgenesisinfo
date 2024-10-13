@@ -158,6 +158,6 @@ table th {
     color: white;
 }
 
-.stats-row tr, .orb-details-row tr {
-    background-color: #daa6a6;
+.stats-row, .orb-details-row {
+    background-color: #bab4eb;
 }
