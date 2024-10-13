@@ -122,6 +122,19 @@ table th {
     table td {
         flex: 2;
     }
+
+    .details-table {
+        background-color: #919191;
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .details-table th, .details-table td {
+        border: 1px solid #242424;
+        padding: 8px;
+        text-align: left;
+    }
 }
 
 .details-table {
@@ -132,7 +145,7 @@ table th {
 }
 
 .details-table th, .details-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #242424;
     padding: 8px;
     text-align: left;
 }
@@ -143,4 +156,8 @@ table th {
 .details-table th {
     background-color: #333;
     color: white;
+}
+
+.stats-row tr, .orb-details-row tr {
+    background-color: #daa6a6;
 }
