@@ -80,7 +80,7 @@ function toggleOrbDetails(orb, row) {
                     // Check if cooldown is less than 1 day, and display in hours if so
                     cooldownDisplay = cooldownDays >= 1 
                         ? `${cooldownDays.toLocaleString()} days` 
-                        : `${(cooldownDays * 24).toFixed(2).toLocaleString()} hours`; // Convert days to hours if less than 1 day
+                        : `${(cooldownDays * 24).toLocaleString()} hours`; // Convert days to hours if less than 1 day
                 }
                 detailsContent += `<tr>
                     <td data-label="Drop Creature">${dropCreature}</td>
