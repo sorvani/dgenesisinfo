@@ -1,23 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector("#orb-table")) {
-        // Fetch orb info and display it sorted by orb_id
+        // Fetch orb info and display it sorted by orb_name alphabetically
         fetch('data/orb_info.json')
             .then(response => response.json())
             .then(data => {
                 const tbody = document.querySelector("#orb-table tbody");
 
-                // Sort orbs by orb_id
-                const sortedOrbs = data.sort((a, b) => a.orb_id - b.orb_id);
+                // Sort orbs by orb_name alphabetically
+                const sortedOrbs = data.sort((a, b) => {
+                    const nameA = a.orb_name.toLowerCase();
+                    const nameB = b.orb_name.toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
 
-                // Populate the table with orb data
+                // Populate the table with orb data (only orb_name, no orb_id)
                 sortedOrbs.forEach(orb => {
                     const row = document.createElement("tr");
 
                     const orbName = orb.orb_name || 'Unknown';
 
                     // Main orb row (clickable to show drop monsters)
-                    row.innerHTML = `<td data-label="Orb ID">${orb.orb_id}</td>
-                                     <td data-label="Orb Name">${orbName}</td>`;
+                    row.innerHTML = `<td data-label="Orb Name">${orbName}</td>`;
 
                     // Add click event to toggle drop monsters
                     row.addEventListener('click', () => toggleOrbDetails(orb, row));
