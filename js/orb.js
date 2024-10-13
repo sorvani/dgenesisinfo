@@ -44,7 +44,7 @@ function toggleOrbDetails(orb, row) {
     } else {
         // Create new row for the orb details (drop monsters)
         detailsRow = document.createElement("tr");
-        detailsRow.classList.add('orb-details-row');
+        detailsRow.classList.add('orb-details-row', 'detail-row');
         const detailsCell = document.createElement("td");
         detailsCell.setAttribute('colspan', '2');
 

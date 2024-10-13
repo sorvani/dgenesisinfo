@@ -83,7 +83,7 @@ function toggleStatsTable(explorer, row) {
     } else {
         // Create new row for the stats subtable
         statsRow = document.createElement("tr");
-        statsRow.classList.add('stats-row');
+        statsRow.classList.add('stats-row', 'detail-row');
         const statsCell = document.createElement("td");
         statsCell.setAttribute('colspan', '7');
 
@@ -127,7 +127,7 @@ function toggleStatsTable(explorer, row) {
                     <td data-label="LUC">${stat.luc}</td>
                     <td data-label="Stat Total">${stat.stat_total}</td>
                     <td data-label="Deviation">${stat.points_from_average}</td>`;
-                    // Check if there's a citation array and add it below the stat
+                    // Check if there's a citation array and add it to the stat row
                     if (stat.citation && stat.citation.length > 0) {
                         // Loop through citations and display them. normally there is only one, but more could be possible so used loop
                         stat.citation.forEach(cite => {
