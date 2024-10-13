@@ -56,8 +56,8 @@ function toggleOrbDetails(orb, row) {
                 <thead>
                     <tr>
                         <th>Dropped By</th>
-                        <th>Drop Dungeon</th>
-                        <th>Drop Floor</th>
+                        <th>In Dungeon</th>
+                        <th>On Floor</th>
                         <th>Probability</th>
                         <th>Cooldown</th>
                         <th>Citation</th>
@@ -98,8 +98,8 @@ function toggleOrbDetails(orb, row) {
                 }
                 detailsContent += `<tr>
                     <td data-label="Dropped By">${dropCreature}</td>
-                    <td data-label="Drop Dungeon">${dropDungeon}</td>
-                    <td data-label="Drop Floor">${dropFloor}</td>
+                    <td data-label="In Dungeon">${dropDungeon}</td>
+                    <td data-label="On Floor">${dropFloor}</td>
                     <td data-label="Probability">${probability}</td>
                     <td data-label="Cooldown">${cooldownDisplay}</td>`;
                 // Check if there's a citation array and add it to the stat row
