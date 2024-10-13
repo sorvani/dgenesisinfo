@@ -44,7 +44,7 @@ function toggleOrbDetails(orb, row) {
     } else {
         // Create new row for the orb details (drop monsters)
         detailsRow = document.createElement("tr");
-        detailsRow.classList.add('orb-details-row', 'detail-row');
+        detailsRow.classList.add('orb-details-row');
         const detailsCell = document.createElement("td");
         detailsCell.setAttribute('colspan', '2');
 
@@ -52,7 +52,7 @@ function toggleOrbDetails(orb, row) {
 
         // If drop_rates exist, display them as a table
         if (orb.drop_rates && orb.drop_rates.length > 0) {
-            detailsContent += `<table class="drop-rate-table">
+            detailsContent += `<table class="details-table">
                 <thead>
                     <tr>
                         <th>Drop Creature</th>

@@ -83,7 +83,7 @@ function toggleStatsTable(explorer, row) {
     } else {
         // Create new row for the stats subtable
         statsRow = document.createElement("tr");
-        statsRow.classList.add('stats-row', 'detail-row');
+        detailsRow.classList.add('stats-row');
         const statsCell = document.createElement("td");
         statsCell.setAttribute('colspan', '7');
 
@@ -94,7 +94,7 @@ function toggleStatsTable(explorer, row) {
             });
 
             // Build the subtable
-            let statsTable = `<table class="stats-table"><thead>
+            let statsTable = `<table class="details-table"><thead>
                 <tr>
                     <th>Reading Date</th>
                     <th>Scan Type</th>
