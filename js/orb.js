@@ -83,6 +83,11 @@ function toggleOrbDetails(orb, row) {
             detailsContent = '<em>No known drop rates</em>';
         }
 
+        // Check if there is a note for the orb and append it
+        if (orb.note) {
+            detailsContent += `<div class="details-note"><strong>Note:</strong> ${orb.note}</div>`;
+        }
+
         detailsCell.innerHTML = detailsContent;
         detailsRow.appendChild(detailsCell);
         row.after(detailsRow);  // Insert the details after the clicked row

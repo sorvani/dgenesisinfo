@@ -1,7 +1,8 @@
 [
     {
         "orb_id": 1,
-        "orb_name": "Making"
+        "orb_name": "Making - メイキング",
+        "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commetned on in story."
     },
     {
         "orb_id": 2,
@@ -812,8 +813,8 @@
     },
     {
         "orb_id": 39,
-        "orb_name": "Undeath / Undying",
-        "note": "Was called Undeath in volume 2 and Undying in volume 5",
+        "orb_name": "Undeath",
+        "note": "Was called Undeath in volume 2 and Undying in volume 5. It is assumed it is the same orb because both were from skeletons on the 10th floor.",
         "drop_rates": [
             {
                 "drop_creature": "Skeleton",
