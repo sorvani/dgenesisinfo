@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             latestRanking.citation.forEach(cite => {
                                 citeVolume = cite.volume || '';
                                 citeChapter = cite.chapter || '';
-                                citeJNCPart = cite.j_novel_part !== null ? cite.j_novel_part : '';
+                                citeJNCPart = cite.jnc_part !== null ? cite.jnc_part : '';
                             });
                             explorer.rank_citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
                         } else {
@@ -131,7 +131,7 @@ function toggleStatsTable(explorer, row) {
                     if (stat.citation && stat.citation.length > 0) {
                         // Loop through citations and display them. normally there is only one, but more could be possible so used loop
                         stat.citation.forEach(cite => {
-                            statsTable += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.j_novel_part !== null ? cite.j_novel_part : ''}</td>`;
+                            statsTable += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
                         });
                     } else {
                         statsTable += `<td data-label="Citation">Missing</td>`;

@@ -18,7 +18,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ]
             }
@@ -29,7 +29,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -41,7 +41,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400001,
@@ -55,7 +55,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": 3
+                        "jnc_part": 3
                     }
                 ],
                 "date_noted": 1538092800000,
@@ -79,7 +79,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": 3
+                        "jnc_part": 3
                     }
                 ],
                 "date_noted": 1538092800000,
@@ -103,7 +103,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": 3
+                        "jnc_part": 3
                     }
                 ],
                 "date_noted": 1538092800000,
@@ -127,7 +127,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538611200000,
@@ -151,7 +151,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538611200000,
@@ -175,7 +175,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1541548800000,
@@ -199,7 +199,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1541548800000,
@@ -223,7 +223,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1541548800000,
@@ -247,7 +247,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -271,7 +271,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -295,7 +295,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -319,7 +319,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -343,7 +343,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -367,7 +367,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542499200000,
@@ -391,7 +391,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544400000000,
@@ -415,7 +415,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544486400000,
@@ -439,7 +439,7 @@
                     {
                         "volume": 4,
                         "chapter": 5,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546646400000,
@@ -475,7 +475,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538092800000,
@@ -489,7 +489,7 @@
                     {
                         "volume": 2,
                         "chapter": 3,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1543363200000,
@@ -513,7 +513,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544400000000,
@@ -537,7 +537,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544486400000,
@@ -561,7 +561,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544486400000,
@@ -585,7 +585,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544486400000,
@@ -609,7 +609,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -633,7 +633,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -657,7 +657,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547596800000,
@@ -681,7 +681,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547596800000,
@@ -717,7 +717,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538265600000,
@@ -731,7 +731,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544918400000,
@@ -755,7 +755,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544918400000,
@@ -791,7 +791,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538265600000,
@@ -805,7 +805,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544918400000,
@@ -829,7 +829,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1544918400000,
@@ -853,7 +853,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546905600000,
@@ -877,7 +877,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546905600000,
@@ -913,7 +913,7 @@
                     {
                         "volume": null,
                         "chapter": null,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1537833600000,
@@ -927,7 +927,7 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1545004800000,
@@ -963,7 +963,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546473600000,
@@ -977,7 +977,7 @@
                     {
                         "volume": 4,
                         "chapter": 5,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546646400000,
@@ -1001,7 +1001,7 @@
                     {
                         "volume": 4,
                         "chapter": 5,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1546646400000,
@@ -1025,7 +1025,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547078400000,
@@ -1061,7 +1061,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1075,7 +1075,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1099,7 +1099,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1135,7 +1135,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1149,7 +1149,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1173,7 +1173,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1209,7 +1209,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1223,7 +1223,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1247,7 +1247,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1283,7 +1283,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1297,7 +1297,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1321,7 +1321,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1357,7 +1357,7 @@
                     {
                         "volume": null,
                         "chapter": null,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": null,
@@ -1371,7 +1371,7 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1547251200000,
@@ -1407,7 +1407,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542326400000,
@@ -1431,7 +1431,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1455,7 +1455,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1479,7 +1479,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1503,7 +1503,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1527,7 +1527,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1551,7 +1551,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1575,7 +1575,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1599,7 +1599,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1623,7 +1623,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1647,7 +1647,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1671,7 +1671,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1695,7 +1695,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1719,7 +1719,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1743,7 +1743,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -1767,7 +1767,7 @@
                     {
                         "volume": null,
                         "chapter": null,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": null,
@@ -1791,7 +1791,7 @@
                     {
                         "volume": 2,
                         "chapter": 3,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542844800000,
@@ -1815,7 +1815,7 @@
                     {
                         "volume": 2,
                         "chapter": 3,
-                        "j_novel_part": null
+                        "jnc_part": null
                     }
                 ],
                 "date_noted": 1542844800000,
