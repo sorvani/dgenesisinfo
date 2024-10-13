@@ -79,25 +79,21 @@ function toggleOrbDetails(orb, row) {
                 } else {
                     probability = `${favorableOutcomes} / ${totalEvents}`;
                     const cooldownDays = (rate.total_events/100000000);
-                    // Check if cooldown is less than 1 day, and display in hours if so
-                    /*cooldownDisplay = cooldownDays >= 1 
-                        ? `${cooldownDays.toLocaleString()} days` 
-                        : `${(cooldownDays * 24).toLocaleString()} hours`; // Convert days to hours if less than 1 day */
                     // Check if cooldown is greater than or equal to 1 day
                     if (cooldownDays >= 1) {
-                        cooldownDisplay = `${cooldownDays.toLocaleString()} days`;
+                        cooldownDisplay = `${cooldownDays.toLocaleString()} day(s)`;
                     } 
                     // If less than 1 day, display in hours
                     else if (cooldownDays >= (1 / 24)) {
-                        cooldownDisplay = `${(cooldownDays * 24).toLocaleString()} hours`;
+                        cooldownDisplay = `${(cooldownDays * 24).toLocaleString()} hour(s)`;
                     } 
                     // If less than 1 hour, display in minutes
                     else if (cooldownDays >= (1 / 1440)) {
-                        cooldownDisplay = `${(cooldownDays * 1440).toLocaleString()} minutes`; // 1 day = 1440 minutes
+                        cooldownDisplay = `${(cooldownDays * 1440).toLocaleString()} minute(s)`; // 1 day = 1440 minutes
                     } 
                     // If less than 1 minute, display in seconds
                     else {
-                        cooldownDisplay = `${(cooldownDays * 86400).toLocaleString()} seconds`; // 1 day = 86400 seconds
+                        cooldownDisplay = `${(cooldownDays * 86400).toLocaleString()} second(s)`; // 1 day = 86400 seconds
                     }
                 }
                 detailsContent += `<tr>
