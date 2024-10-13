@@ -55,7 +55,9 @@ function toggleOrbDetails(orb, row) {
             detailsContent += `<table class="details-table">
                 <thead>
                     <tr>
-                        <th>Drop Creature</th>
+                        <th>Dropped By</th>
+                        <th>Drop Dungeon</th>
+                        <th>Drop Floor</th>
                         <th>Probability</th>
                         <th>Cooldown</th>
                         <th>Cooldown in Seconds</th>
@@ -64,7 +66,9 @@ function toggleOrbDetails(orb, row) {
                 <tbody>`;
 
             orb.drop_rates.forEach(rate => {
-                const dropCreature = rate.drop_creature !== null ? rate.drop_creature : 'Unknown Monster';
+                const dropCreature = rate.creature !== null ? rate.creature : 'Unknown Monster';
+                const dropDungeon = rate.dungeon !== null ? rate.dungeon : '';
+                const dropFloor = rate.floor !== null ? rate.floor : '';
                 // handle null probability info and format numbers with commas
                 const favorableOutcomes = rate.favorable_outcomes !== null ? rate.favorable_outcomes.toLocaleString() : 0;
                 const totalEvents = rate.total_events !== null ? rate.total_events.toLocaleString(): 0;
@@ -83,7 +87,9 @@ function toggleOrbDetails(orb, row) {
                         : `${(cooldownDays * 24).toLocaleString()} hours`; // Convert days to hours if less than 1 day
                 }
                 detailsContent += `<tr>
-                    <td data-label="Drop Creature">${dropCreature}</td>
+                    <td data-label="Dropped By">${dropCreature}</td>
+                    <td data-label="Drop Dungeon">${dropDungeon}</td>
+                    <td data-label="Drop Floor">${dropFloor}</td>
                     <td data-label="Probability">${probability}</td>
                     <td data-label="Cooldown">${cooldownDisplay}</td>
                     <td data-label="Cooldown Seconds">${cooldownSeconds}</td>
