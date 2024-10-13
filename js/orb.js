@@ -60,7 +60,6 @@ function toggleOrbDetails(orb, row) {
                         <th>Drop Floor</th>
                         <th>Probability</th>
                         <th>Cooldown</th>
-                        <th>Cooldown in Seconds</th>
                         <th>Citation</th>
                     </tr>
                 </thead>
@@ -73,32 +72,45 @@ function toggleOrbDetails(orb, row) {
                 // handle null probability info and format numbers with commas
                 const favorableOutcomes = rate.favorable_outcomes !== null ? rate.favorable_outcomes.toLocaleString() : 0;
                 const totalEvents = rate.total_events !== null ? rate.total_events.toLocaleString(): 0;
-                let probability, cooldownDisplay, cooldownSeconds;
+                let probability, cooldownDisplay;
                 if (favorableOutcomes === 0 || totalEvents === 0) {
                     probability = 'Unknown Rate';
                     cooldownDisplay = '';
-                    cooldownSeconds = '';
                 } else {
                     probability = `${favorableOutcomes} / ${totalEvents}`;
                     const cooldownDays = (rate.total_events/100000000);
-                    cooldownSeconds = (rate.total_events/100000000*86400).toLocaleString();
                     // Check if cooldown is less than 1 day, and display in hours if so
-                    cooldownDisplay = cooldownDays >= 1 
+                    /*cooldownDisplay = cooldownDays >= 1 
                         ? `${cooldownDays.toLocaleString()} days` 
-                        : `${(cooldownDays * 24).toLocaleString()} hours`; // Convert days to hours if less than 1 day
+                        : `${(cooldownDays * 24).toLocaleString()} hours`; // Convert days to hours if less than 1 day */
+                    // Check if cooldown is greater than or equal to 1 day
+                    if (cooldownDays >= 1) {
+                        cooldownDisplay = `${cooldownDays.toLocaleString()} days`;
+                    } 
+                    // If less than 1 day, display in hours
+                    else if (cooldownDays >= (1 / 24)) {
+                        cooldownDisplay = `${(cooldownDays * 24).toLocaleString()} hours`;
+                    } 
+                    // If less than 1 hour, display in minutes
+                    else if (cooldownDays >= (1 / 1440)) {
+                        cooldownDisplay = `${(cooldownDays * 1440).toLocaleString()} minutes`; // 1 day = 1440 minutes
+                    } 
+                    // If less than 1 minute, display in seconds
+                    else {
+                        cooldownDisplay = `${(cooldownDays * 86400).toLocaleString()} seconds`; // 1 day = 86400 seconds
+                    }
                 }
                 detailsContent += `<tr>
                     <td data-label="Dropped By">${dropCreature}</td>
                     <td data-label="Drop Dungeon">${dropDungeon}</td>
                     <td data-label="Drop Floor">${dropFloor}</td>
                     <td data-label="Probability">${probability}</td>
-                    <td data-label="Cooldown">${cooldownDisplay}</td>
-                    <td data-label="Cooldown Seconds">${cooldownSeconds}</td>`;
+                    <td data-label="Cooldown">${cooldownDisplay}</td>`;
                 // Check if there's a citation array and add it to the stat row
                 if (rate.citation && rate.citation.length > 0) {
                     // Loop through citations and display them. normally there is only one, but more could be possible so used loop
                     rate.citation.forEach(cite => {
-                        detailsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.j_novel_part !== null ? cite.j_novel_part : ''}</td>`;
+                        detailsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
                     });
                 } else {
                     detailsContent += `<td data-label="Citation">Missing</td>`;
