@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D-Gen: Explorers by Rank</title>
+    <title>D-Gen: Known Orbs</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <h1>Explorer List by Current WDARL Rank</h1>
+        <h1>Orb List by ID</h1>
         <nav>
-            <a href="index.html">Explorer Data</a>
-            <a href="orb_info.html">Known Orbs</a>
-            <a href="#" onclick="showForm(); return false;">Submit a correction</a>
+            <a href="index.html">Explorer List</a>  <!-- Link back to the explorer list -->
+            <a href="orb_info.html">Known Orbs</a> <!-- Active link for the current page -->
+            <a href="#" onclick="showForm(); return false;">Submit a correction</a> <!-- Link to open correction form -->
             <a href="https://j-novel.club/series/d-genesis" target="_blank">Read D-Genesis @ J-Novel Club</a>
         </nav>
     </header>
+
     <section id="correction-form" style="display: none;">
         <h2>Submit a Correction</h2>
         <form id="github-issue-form" onsubmit="submitCorrection(); return false;">
@@ -35,18 +36,14 @@
             <input type="submit" value="Submit Correction">
         </form>
     </section>
-    <section id="explorer-info">
-        <h2>Explorer Data (click/tap on a row to see their stats)</h2>
-        <table id="explorer-table">
+
+    <section id="orb-info">
+        <h2>Orb Data</h2>
+        <table id="orb-table">
             <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Name (Given then Family)</th>
-                    <th>Name is Public</th>
-                    <th>Moniker</th>
-                    <th>Nationality</th>
-                    <th>Date First Known</th>
-                    <th>Rank Citation</th>
+                    <th>Orb ID</th>
+                    <th>Orb Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +52,7 @@
         </table>
     </section>
 
-    <script src="js/explorer.js"></script>
-    <script src="js/correction.js"></script>
+    <script src="js/orb.js"></script>
+    <script src="js/correction.js"></script> <!-- Add the new correction.js file -->
 </body>
 </html>

@@ -1,0 +1,884 @@
+[
+    {
+        "orb_id": 1,
+        "orb_name": "Making"
+    },
+    {
+        "orb_id": 2,
+        "orb_name": "Accelerated Growth",
+        "drop_rates": [
+            {
+                "drop_creature": "Goblin",
+                "favorable_outcomes": 1,
+                "total_events": 1200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 3,
+        "orb_name": "AGI+1",
+        "drop_rates": [
+            {
+                "drop_creature": "Kobold",
+                "favorable_outcomes": 1,
+                "total_events": 50000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 4,
+        "orb_name": "AGIxHP+1",
+        "drop_rates": [
+            {
+                "drop_creature": "Kobold",
+                "favorable_outcomes": 1,
+                "total_events": 20000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Wolf",
+                "favorable_outcomes": 1,
+                "total_events": 7000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 5,
+        "orb_name": "Appraisal",
+        "drop_rates": [
+            {
+                "drop_creature": "Eyeballs",
+                "favorable_outcomes": 1,
+                "total_events": 700000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 6,
+        "orb_name": "Camouflage",
+        "drop_rates": [
+            {
+                "drop_creature": "Chameleon",
+                "favorable_outcomes": 1,
+                "total_events": 1200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 7,
+        "orb_name": "Danger Sense",
+        "drop_rates": [
+            {
+                "drop_creature": "Wolf",
+                "favorable_outcomes": 1,
+                "total_events": 2000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 8,
+        "orb_name": "Darkness Magic (II)",
+        "drop_rates": [
+            {
+                "drop_creature": "Barghest",
+                "favorable_outcomes": 1,
+                "total_events": 100000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 9,
+        "orb_name": "Darkness Magic (VI)",
+        "drop_rates": [
+            {
+                "drop_creature": "Hound of Hectate",
+                "favorable_outcomes": 1,
+                "total_events": 2000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Barghest",
+                "favorable_outcomes": 1,
+                "total_events": 280000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 10,
+        "orb_name": "DEX\u00d7HP+1",
+        "drop_rates": [
+            {
+                "drop_creature": "Goblin",
+                "favorable_outcomes": 1,
+                "total_events": 5000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 11,
+        "orb_name": "Dexterity",
+        "drop_rates": [
+            {
+                "drop_creature": "Genomos",
+                "favorable_outcomes": 1,
+                "total_events": 1000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 12,
+        "orb_name": "Disease Resistance (IV)",
+        "drop_rates": [
+            {
+                "drop_creature": "Barghest",
+                "favorable_outcomes": 1,
+                "total_events": 700000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 13,
+        "orb_name": "Earth Magic",
+        "drop_rates": [
+            {
+                "drop_creature": "Genomos",
+                "favorable_outcomes": 1,
+                "total_events": 90000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 14,
+        "orb_name": "Exchange Alchemy",
+        "drop_rates": [
+            {
+                "drop_creature": "Kobold",
+                "favorable_outcomes": 1,
+                "total_events": 16000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 15,
+        "orb_name": "Fear",
+        "drop_rates": [
+            {
+                "drop_creature": "Eyeballs",
+                "favorable_outcomes": 1,
+                "total_events": 40000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 16,
+        "orb_name": "Fire Magic",
+        "drop_rates": [
+            {
+                "drop_creature": "Lesser Salamandora",
+                "favorable_outcomes": 1,
+                "total_events": 40000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 17,
+        "orb_name": "Impersonation",
+        "drop_rates": [
+            {
+                "drop_creature": "Chameleon",
+                "favorable_outcomes": 1,
+                "total_events": 40000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 18,
+        "orb_name": "Infection",
+        "drop_rates": [
+            {
+                "drop_creature": "Zombie",
+                "favorable_outcomes": 1,
+                "total_events": 900000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 19,
+        "orb_name": "Invisibility",
+        "drop_rates": [
+            {
+                "drop_creature": "Chameleon",
+                "favorable_outcomes": 1,
+                "total_events": 3100000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 20,
+        "orb_name": "Life Detection",
+        "drop_rates": [
+            {
+                "drop_creature": "Kobold",
+                "favorable_outcomes": 1,
+                "total_events": 1200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Barghest",
+                "favorable_outcomes": 1,
+                "total_events": 50000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 20000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Wolf",
+                "favorable_outcomes": 1,
+                "total_events": 24200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Zombie",
+                "favorable_outcomes": 1,
+                "total_events": 20000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 20000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 21,
+        "orb_name": "Magic Resistance (I)",
+        "drop_rates": [
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 700000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 700000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 22,
+        "orb_name": "Mining",
+        "drop_rates": [
+            {
+                "drop_creature": "Genomos",
+                "favorable_outcomes": 1,
+                "total_events": 10000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 23,
+        "orb_name": "Night Vision",
+        "drop_rates": [
+            {
+                "drop_creature": "Genomos",
+                "favorable_outcomes": 1,
+                "total_events": 8000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 24,
+        "orb_name": "Otherworldly Language Comprehension",
+        "drop_rates": [
+            {
+                "drop_creature": "Hound of Hectate",
+                "favorable_outcomes": 1,
+                "total_events": 1000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 25,
+        "orb_name": "Physical Resistance",
+        "drop_rates": [
+            {
+                "drop_creature": "Slime",
+                "favorable_outcomes": 1,
+                "total_events": 100000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 26,
+        "orb_name": "Premature Birth",
+        "drop_rates": [
+            {
+                "drop_creature": "Goblin",
+                "favorable_outcomes": 1,
+                "total_events": 10000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 27,
+        "orb_name": "Premature Death",
+        "drop_rates": [
+            {
+                "drop_creature": "Goblin",
+                "favorable_outcomes": 1,
+                "total_events": 2000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 28,
+        "orb_name": "Premature Growth",
+        "drop_rates": [
+            {
+                "drop_creature": "Goblin",
+                "favorable_outcomes": 1,
+                "total_events": 800000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 29,
+        "orb_name": "Rot",
+        "drop_rates": [
+            {
+                "drop_creature": "Zombie",
+                "favorable_outcomes": 1,
+                "total_events": 400000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 30,
+        "orb_name": "Self-Amputation",
+        "drop_rates": [
+            {
+                "drop_creature": "Lesser Salamandora",
+                "favorable_outcomes": 1,
+                "total_events": 200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 31,
+        "orb_name": "Self-Regeneration",
+        "drop_rates": [
+            {
+                "drop_creature": "Lesser Salamandora",
+                "favorable_outcomes": 1,
+                "total_events": 200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 32,
+        "orb_name": "Status Ailment Resistance (II)",
+        "drop_rates": [
+            {
+                "drop_creature": "Barghest",
+                "favorable_outcomes": 1,
+                "total_events": 500000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 33,
+        "orb_name": "Storage",
+        "drop_rates": [
+            {
+                "drop_creature": "Slime",
+                "favorable_outcomes": 1,
+                "total_events": 7000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 34,
+        "orb_name": "Super Recovery",
+        "drop_rates": [
+            {
+                "drop_creature": "Slime",
+                "favorable_outcomes": 1,
+                "total_events": 1000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 35,
+        "orb_name": "Super Sense",
+        "drop_rates": [
+            {
+                "drop_creature": "Wolf",
+                "favorable_outcomes": 1,
+                "total_events": 500000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  3,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 36,
+        "orb_name": "Surveillance",
+        "drop_rates": [
+            {
+                "drop_creature": "Eyeballs",
+                "favorable_outcomes": 1,
+                "total_events": 300000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 37,
+        "orb_name": "Tongue Shot",
+        "drop_rates": [
+            {
+                "drop_creature": "Chameleon",
+                "favorable_outcomes": 1,
+                "total_events": 500000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 38,
+        "orb_name": "Ultimate Flame Magic",
+        "drop_rates": [
+            {
+                "drop_creature": "Lesser Salamandora",
+                "favorable_outcomes": 1,
+                "total_events": 1700000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 39,
+        "orb_name": "Undeath / Undying",
+        "note": "Was called Undeath in volume 2 and Undying in volume 5",
+        "drop_rates": [
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 1200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            },
+            {
+                "drop_creature": "Skeleton",
+                "favorable_outcomes": 1,
+                "total_events": 1200000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  5,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 40,
+        "orb_name": "Vault",
+        "drop_rates": [
+            {
+                "drop_creature": "Slime",
+                "favorable_outcomes": 1,
+                "total_events": 100000000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 41,
+        "orb_name": "Water Magic",
+        "drop_rates": [
+            {
+                "drop_creature": "Slime",
+                "favorable_outcomes": 1,
+                "total_events": 600000000,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    }
+]

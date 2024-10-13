@@ -142,3 +142,39 @@ table th {
     background-color: #333;
     color: white;
 }
+
+.orb-details-row {
+    background-color: #f9f9f9;
+}
+
+.orb-details-row ul {
+    margin: 0;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.orb-details-row ul li {
+    padding: 5px 0;
+    font-size: 1rem;
+}
+
+.drop-rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.drop-rate-table th, .drop-rate-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.drop-rate-table th {
+    background-color: #333;
+    color: white;
+}
+
+.drop-rate-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
