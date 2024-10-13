@@ -48,6 +48,8 @@
         "drop_rates": [
             {
                 "creature": "Kobold",
+                "dungeon": "Yoyogi",
+                "floor": "2<sup>nd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 50000000,
                 "rate_date": null,
@@ -67,6 +69,8 @@
         "drop_rates": [
             {
                 "creature": "Kobold",
+                "dungeon": "Yoyogi",
+                "floor": "2<sup>nd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 20000000,
                 "rate_date": null,
@@ -299,6 +303,8 @@
         "drop_rates": [
             {
                 "creature": "Kobold",
+                "dungeon": "Yoyogi",
+                "floor": "2<sup>nd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 16000000000,
                 "rate_date": null,
@@ -419,6 +425,8 @@
         "drop_rates": [
             {
                 "creature": "Kobold",
+                "dungeon": "Yoyogi",
+                "floor": "2<sup>nd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 1200000000,
                 "rate_date": null,
@@ -1033,6 +1041,26 @@
                     {
                         "volume":  4,
                         "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 45,
+        "orb_name": "AGI\u00d7HP+2",
+        "note": "Never seen dropped, but was mentioned by Miyoshi when discussing dud orbs. Was named then as AGIxH+2, but making displayed the +1 as HP, so this was standardized to match.",
+        "drop_rates": [
+            {
+                "creature": null,
+                "favorable_outcomes": null,
+                "total_events": null,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": 1,
                         "jnc_part": null
                     }
                 ]
