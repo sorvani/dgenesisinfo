@@ -83,7 +83,7 @@ function toggleStatsTable(explorer, row) {
     } else {
         // Create new row for the stats subtable
         statsRow = document.createElement("tr");
-        detailsRow.classList.add('stats-row');
+        statsRow.classList.add('stats-row');
         const statsCell = document.createElement("td");
         statsCell.setAttribute('colspan', '7');
 
