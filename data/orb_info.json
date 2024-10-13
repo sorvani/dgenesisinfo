@@ -99,6 +99,8 @@
         "drop_rates": [
             {
                 "creature": "Eyeballs",
+                "dungeon": "Wandering Mansion",
+                "floor": "Any",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
                 "rate_date": null,
@@ -156,6 +158,8 @@
         "drop_rates": [
             {
                 "creature": "Barghest",
+                "dungeon": "Yoyogi",
+                "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 100000000,
                 "rate_date": null,
@@ -190,6 +194,8 @@
             },
             {
                 "creature": "Barghest",
+                "dungeon": "Yoyogi",
+                "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 280000000,
                 "rate_date": null,
@@ -251,6 +257,8 @@
         "drop_rates": [
             {
                 "creature": "Barghest",
+                "dungeon": "Yoyogi",
+                "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
                 "rate_date": null,
@@ -310,6 +318,8 @@
         "drop_rates": [
             {
                 "creature": "Eyeballs",
+                "dungeon": "Wandering Mansion",
+                "floor": "Any",
                 "favorable_outcomes": 1,
                 "total_events": 40000000,
                 "rate_date": null,
@@ -329,6 +339,8 @@
         "drop_rates": [
             {
                 "creature": "Lesser Salamandora",
+                "dungeon": "Yoyogi",
+                "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 40000000,
                 "rate_date": null,
@@ -420,6 +432,8 @@
             },
             {
                 "creature": "Barghest",
+                "dungeon": "Yoyogi",
+                "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 50000000,
                 "rate_date": null,
@@ -701,6 +715,8 @@
         "drop_rates": [
             {
                 "creature": "Lesser Salamandora",
+                "dungeon": "Yoyogi",
+                "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 200000000,
                 "rate_date": null,
@@ -720,6 +736,8 @@
         "drop_rates": [
             {
                 "creature": "Lesser Salamandora",
+                "dungeon": "Yoyogi",
+                "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 200000000,
                 "rate_date": null,
@@ -739,6 +757,8 @@
         "drop_rates": [
             {
                 "creature": "Barghest",
+                "dungeon": "Yoyogi",
+                "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 500000000,
                 "rate_date": null,
@@ -819,6 +839,8 @@
         "drop_rates": [
             {
                 "creature": "Eyeballs",
+                "dungeon": "Wandering Mansion",
+                "floor": "Any",
                 "favorable_outcomes": 1,
                 "total_events": 300000000,
                 "rate_date": null,
@@ -857,6 +879,8 @@
         "drop_rates": [
             {
                 "creature": "Lesser Salamandora",
+                "dungeon": "Yoyogi",
+                "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 1700000000,
                 "rate_date": null,
@@ -956,6 +980,8 @@
         "drop_rates": [
             {
                 "creature": "Great White Shark",
+                "dungeon": "Unknown in Okinawa",
+                "floor": null,
                 "favorable_outcomes": 1,
                 "total_events": null,
                 "rate_date": null,
@@ -976,6 +1002,8 @@
         "drop_rates": [
             {
                 "creature": null,
+                "dungeon": "Unknown in France",
+                "floor": null,
                 "favorable_outcomes": 1,
                 "total_events": null,
                 "rate_date": null,
@@ -996,6 +1024,8 @@
         "drop_rates": [
             {
                 "creature": null,
+                "dungeon": "Unknown in Australia",
+                "floor": null,
                 "favorable_outcomes": null,
                 "total_events": null,
                 "rate_date": null,
