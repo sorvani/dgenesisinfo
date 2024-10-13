@@ -226,6 +226,8 @@
         "drop_rates": [
             {
                 "creature": "Genomos",
+                "dungeon": "Yoyogi",
+                "floor": "18",
                 "favorable_outcomes": 1,
                 "total_events": 1000000,
                 "rate_date": null,
@@ -264,6 +266,8 @@
         "drop_rates": [
             {
                 "creature": "Genomos",
+                "dungeon": "Yoyogi",
+                "floor": "18",
                 "favorable_outcomes": 1,
                 "total_events": 90000000,
                 "rate_date": null,
@@ -423,6 +427,8 @@
             },
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 20000000,
                 "rate_date": null,
@@ -462,6 +468,8 @@
             },
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 20000000,
                 "rate_date": null,
@@ -481,6 +489,8 @@
         "drop_rates": [
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
                 "rate_date": null,
@@ -494,6 +504,8 @@
             },
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
                 "rate_date": null,
@@ -513,6 +525,8 @@
         "drop_rates": [
             {
                 "creature": "Genomos",
+                "dungeon": "Yoyogi",
+                "floor": "18",
                 "favorable_outcomes": 1,
                 "total_events": 10000,
                 "rate_date": null,
@@ -532,6 +546,8 @@
         "drop_rates": [
             {
                 "creature": "Genomos",
+                "dungeon": "Yoyogi",
+                "floor": "18",
                 "favorable_outcomes": 1,
                 "total_events": 8000000,
                 "rate_date": null,
@@ -837,6 +853,8 @@
         "drop_rates": [
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 1200000000,
                 "rate_date": null,
@@ -850,6 +868,8 @@
             },
             {
                 "creature": "Skeleton",
+                "dungeon": "Yoyogi",
+                "floor": "10",
                 "favorable_outcomes": 1,
                 "total_events": 1200000000,
                 "rate_date": null,
