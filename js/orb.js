@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     const orbName = orb.orb_name || 'Unknown';
 
                     // Main orb row (clickable to show drop monsters)
-                    row.innerHTML = `<td>${orb.orb_id}</td>
-                                     <td>${orbName}</td>`;
+                    row.innerHTML = `<td data-label="Orb ID">${orb.orb_id}</td>
+                                     <td data-label="Orb Name">${orbName}</td>`;
 
                     // Add click event to toggle drop monsters
                     row.addEventListener('click', () => toggleOrbDetails(orb, row));
