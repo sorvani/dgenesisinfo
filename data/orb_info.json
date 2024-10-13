@@ -2,7 +2,22 @@
     {
         "orb_id": 1,
         "orb_name": "Making - メイキング",
-        "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commented on in story."
+        "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commented on in story.",
+        "drop_rates": [
+            {
+                "drop_creature": null,
+                "favorable_outcomes": null,
+                "total_events": null,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": 1,
+                        "jnc_part": 1
+                    }
+                ]
+            }
+        ]
     },
     {
         "orb_id": 2,
@@ -889,7 +904,7 @@
         "drop_rates": [
             {
                 "drop_creature": "Great White Shark",
-                "favorable_outcomes": null,
+                "favorable_outcomes": 1,
                 "total_events": null,
                 "rate_date": null,
                 "citation": [
@@ -909,7 +924,7 @@
         "drop_rates": [
             {
                 "drop_creature": null,
-                "favorable_outcomes": null,
+                "favorable_outcomes": 1,
                 "total_events": null,
                 "rate_date": null,
                 "citation": [

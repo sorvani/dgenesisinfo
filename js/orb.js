@@ -64,19 +64,26 @@ function toggleOrbDetails(orb, row) {
                 <tbody>`;
 
             orb.drop_rates.forEach(rate => {
-                // Format numbers with commas
-                const favorableOutcomes = rate.favorable_outcomes.toLocaleString();
-                const totalEvents = rate.total_events.toLocaleString();
-                const probability = `${favorableOutcomes} / ${totalEvents}`;
-                const cooldownDays = (rate.total_events/100000000).toLocaleString();
-                const cooldownSeconds = (rate.total_events/100000000*86400).toLocaleString();
-                // Check if cooldown is less than 1 day, and display in hours if so
-                const cooldownDisplay = cooldownDays >= 1 
-                    ? `${cooldownDays.toLocaleString()} days` 
-                    : `${(cooldownDays * 24).toFixed(2).toLocaleString()} hours`; // Convert days to hours if less than 1 day
-
+                const dropCreature = rate.drop_creature !== null ? rate.drop_creature : 'Unknown Monster';
+                // handle null probability info and format numbers with commas
+                const favorableOutcomes = rate.favorable_outcomes !== null ? rate.favorable_outcomes.toLocaleString() : 0;
+                const totalEvents = rate.total_events !== null ? rate.total_events.toLocaleString(): 0;
+                let probability, cooldownDisplay, cooldownSeconds;
+                if (favorableOutcomes === 0 || totalEvents === 0) {
+                    probability = 'Unknown Rate';
+                    cooldownDisplay = '';
+                    cooldownSeconds = '';
+                } else {
+                    probability = `${favorableOutcomes} / ${totalEvents}`;
+                    const cooldownDays = (rate.total_events/100000000);
+                    cooldownSeconds = (rate.total_events/100000000*86400).toLocaleString();
+                    // Check if cooldown is less than 1 day, and display in hours if so
+                    cooldownDisplay = cooldownDays >= 1 
+                        ? `${cooldownDays.toLocaleString()} days` 
+                        : `${(cooldownDays * 24).toFixed(2).toLocaleString()} hours`; // Convert days to hours if less than 1 day
+                }
                 detailsContent += `<tr>
-                    <td data-label="Drop Creature">${rate.drop_creature}</td>
+                    <td data-label="Drop Creature">${dropCreature}</td>
                     <td data-label="Probability">${probability}</td>
                     <td data-label="Cooldown">${cooldownDisplay}</td>
                     <td data-label="Cooldown Seconds">${cooldownSeconds}</td>
