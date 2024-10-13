@@ -57,7 +57,7 @@ function toggleOrbDetails(orb, row) {
                     <tr>
                         <th>Drop Creature</th>
                         <th>Probability</th>
-                        <th>Cooldown in Days</th>
+                        <th>Cooldown</th>
                         <th>Cooldown in Seconds</th>
                     </tr>
                 </thead>
@@ -70,10 +70,15 @@ function toggleOrbDetails(orb, row) {
                 const probability = `${favorableOutcomes} / ${totalEvents}`;
                 const cooldownDays = (rate.total_events/100000000).toLocaleString();
                 const cooldownSeconds = (rate.total_events/100000000*86400).toLocaleString();
+                // Check if cooldown is less than 1 day, and display in hours if so
+                const cooldownDisplay = cooldownDays >= 1 
+                    ? `${cooldownDays.toLocaleString()} days` 
+                    : `${(cooldownDays * 24).toFixed(2).toLocaleString()} hours`; // Convert days to hours if less than 1 day
+
                 detailsContent += `<tr>
                     <td data-label="Drop Creature">${rate.drop_creature}</td>
                     <td data-label="Probability">${probability}</td>
-                    <td data-label="Cooldown Days">${cooldownDays}</td>
+                    <td data-label="Cooldown">${cooldownDisplay}</td>
                     <td data-label="Cooldown Seconds">${cooldownSeconds}</td>
                 </tr>`;
             });

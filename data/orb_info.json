@@ -2,7 +2,7 @@
     {
         "orb_id": 1,
         "orb_name": "Making - メイキング",
-        "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commetned on in story."
+        "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commented on in story."
     },
     {
         "orb_id": 2,
@@ -885,9 +885,10 @@
     {
         "orb_id": 42,
         "orb_name": "Magnetic Field Manipulation",
+        "note": "While we never saw the orb name officially, Iori stated it was named Magnetic Field Manipulation on her D-Card.",
         "drop_rates": [
             {
-                "drop_creature": "Greast White Shark",
+                "drop_creature": "Great White Shark",
                 "favorable_outcomes": null,
                 "total_events": null,
                 "rate_date": null,
@@ -904,6 +905,7 @@
     {
         "orb_id": 43,
         "orb_name": "Healing Magic",
+        "note": "This orb was only mentioned by inference because of Maria having a healing ability. The name is assumed to be Healing Magic at this time as all magic types have the word Magic in the rob name so far.",
         "drop_rates": [
             {
                 "drop_creature": null,
@@ -923,6 +925,7 @@
     {
         "orb_id": 44,
         "orb_name": "Light Magic",
+        "note": "This orb was only mentioned in passing when Tenko was discussing the Witch of Campbell. The name is assumed to be Light Magic",
         "drop_rates": [
             {
                 "drop_creature": null,
