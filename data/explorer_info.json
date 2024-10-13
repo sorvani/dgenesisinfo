@@ -10,15 +10,14 @@
         "date_first_known": 1538006400000,
         "orbs_used": [
             {
-                "id": 1,
-                "name": "Making",
+                "orb_id": 1,
                 "date_acquired": 1538006400000,
                 "date_is_exact": true,
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ]
             }
