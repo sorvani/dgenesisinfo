@@ -67,8 +67,9 @@ function toggleOrbDetails(orb, row) {
 
             orb.drop_rates.forEach(rate => {
                 const dropCreature = rate.creature !== null ? rate.creature : 'Unknown Monster';
-                const dropDungeon = rate.dungeon !== undefined ? rate.dungeon : null;
-                const dropFloor = rate.floor !== undefined ? rate.floor : null;
+                // Set dungeon and floor to 'Unknown' if they are null or undefined
+                const dropDungeon = rate.dungeon != null ? rate.dungeon : 'Unknown';
+                const dropFloor = rate.floor != null ? rate.floor : 'Unknown';
                 // handle null probability info and format numbers with commas
                 const favorableOutcomes = rate.favorable_outcomes !== null ? rate.favorable_outcomes.toLocaleString() : 0;
                 const totalEvents = rate.total_events !== null ? rate.total_events.toLocaleString(): 0;
