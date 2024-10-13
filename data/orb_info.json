@@ -880,5 +880,62 @@
                 ]
             }
         ]
+    },
+    {
+        "orb_id": 42,
+        "orb_name": "Magnetic Field Manipulation",
+        "drop_rates": [
+            {
+                "drop_creature": "Greast White Shark",
+                "favorable_outcomes": null,
+                "total_events": null,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  1,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 43,
+        "orb_name": "Healing Magic",
+        "drop_rates": [
+            {
+                "drop_creature": null,
+                "favorable_outcomes": null,
+                "total_events": null,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  2,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "orb_id": 44,
+        "orb_name": "Light Magic",
+        "drop_rates": [
+            {
+                "drop_creature": null,
+                "favorable_outcomes": null,
+                "total_events": null,
+                "rate_date": null,
+                "citation": [
+                    {
+                        "volume":  4,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
+            }
+        ]
     }
 ]
