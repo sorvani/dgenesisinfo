@@ -70,21 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             tbody.appendChild(row);
                         });
                     });
-                // Fetch the latest commit for explorer_info.json
-                fetch('https://api.github.com/repos/sorvani/dgenesisinfo/commits?path=data/explorer_info.json')
-                .then(response => response.json())
-                .then(commitData => {
-                    // Get the date of the last commit
-                    const lastCommitDate = commitData[0].commit.author.date;
-                    const formattedDate = new Date(lastCommitDate).toLocaleDateString();
-
-                    // Display the last commit date on the page
-                    const footer = document.createElement('footer');
-                    footer.innerHTML = `Last updated on: ${formattedDate}`;
-                    document.body.appendChild(footer);
-                })
-                .catch(error => console.error('Error fetching the last commit date:', error));
-            
             })
             .catch(error => {
                 console.error('Error fetching explorer or orb data:', error);
@@ -94,22 +79,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function to toggle orbs_used and stats subtable
 function toggleOrbsAndStats(explorer, orbData, row) {
-    let detailsRow = row.nextElementSibling;
+    let nextRow = row.nextElementSibling;
 
-    // Check if subtable already exists
-    if (detailsRow && detailsRow.classList.contains('details-row')) {
-        detailsRow.remove();  // Remove the subtable if it already exists (toggle off)
+    // Check if the details rows already exist
+    if (nextRow && nextRow.classList.contains('orb-details-row')) {
+        nextRow.remove();  // Remove both orb and stat rows if toggled off
+        nextRow = row.nextElementSibling;
+        if (nextRow && nextRow.classList.contains('stat-details-row')) {
+            nextRow.remove();  // Remove stats row
+        }
     } else {
-        detailsRow = document.createElement("tr");
-        detailsRow.classList.add('details-row');
-        const detailsCell = document.createElement("td");
-        detailsCell.setAttribute('colspan', '7');
+        // Create new row for orbs_used
+        const orbsRow = document.createElement("tr");
+        orbsRow.classList.add('orb-detail-row');
+        const orbsCell = document.createElement("td");
+        orbsCell.setAttribute('colspan', '7');
 
-        let detailsContent = '<h3>Orbs Used</h3><br>';
-
+        let orbsContent = '<h3>Orbs Used</h3>';
         // Display orbs associated with the explorer
         if (explorer.orbs_used && explorer.orbs_used.length > 0) {
-            detailsContent += `<table class="details-table">
+            orbsContent += `<table class="details-table">
                 <thead>
                     <tr>
                         <th>Orb Name</th>
@@ -132,7 +121,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 } else {
                     citation = 'Missing';
                 }
-                detailsContent += `<tr>
+                orbsContent += `<tr>
                     <td data-label="Orb Name">${orbName}</td>
                     <td data-label="Date Acquired">${dateAcquired}</td>
                     <td data-label="Note">${dateNote}</td>
@@ -140,15 +129,24 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 </tr>`;
             });
 
-            detailsContent += '</tbody></table>';
+            orbsContent += '</tbody></table>';
         } else {
-            detailsContent += '<em>No orbs known to have been used</em>';
+            orbsContent += '<em>No orbs known to have been used</em>';
         }
 
-        // Now, display the stats below the orbs used
-        detailsContent += '<br><h3>Explorer Stats</h3><br>';
+        orbsCell.innerHTML = orbsContent;
+        orbsRow.appendChild(orbsCell);
+        row.after(orbsRow);  // Insert the orbs row after the clicked row
+
+        // Create new row for stats
+        const statsRow = document.createElement("tr");
+        statsRow.classList.add('stats-row');
+        const statsCell = document.createElement("td");
+        statsCell.setAttribute('colspan', '7');
+
+        let statsContent = '<h3>Explorer Stats</h3>';
         if (explorer.stats && explorer.stats.length > 0) {
-            detailsContent += `<table class="details-table"><thead>
+            statsContent += `<table class="details-table"><thead>
                 <tr>
                     <th>Reading Date</th>
                     <th>Scan Type</th>
@@ -167,7 +165,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 </tr></thead><tbody>`;
 
             explorer.stats.forEach(stat => {
-                detailsContent += `<tr>
+                statsContent += `<tr>
                     <td>${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
                     <td>${stat.scan_type}</td>
                     <td>${stat.sp !== null ? stat.sp : ''}</td>
@@ -184,22 +182,22 @@ function toggleOrbsAndStats(explorer, orbData, row) {
 
                 if (stat.citation && stat.citation.length > 0) {
                     stat.citation.forEach(cite => {
-                        detailsContent += `<td>Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
+                        statsContent += `<td>Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
                     });
                 } else {
-                    detailsContent += '<td>Missing</td>';
+                    statsContent += '<td>Missing</td>';
                 }
-                detailsContent += '</tr>';
+                statsContent += '</tr>';
             });
 
-            detailsContent += '</tbody></table>';
+            statsContent += '</tbody></table>';
         } else {
-            detailsContent += '<em>No stats available</em>';
+            statsContent += '<em>No stats available</em>';
         }
 
-        detailsCell.innerHTML = detailsContent;
-        detailsRow.appendChild(detailsCell);
-        row.after(detailsRow);
+        statsCell.innerHTML = statsContent;
+        statsRow.appendChild(statsCell);
+        orbsRow.after(statsRow);
     }
 }
 
