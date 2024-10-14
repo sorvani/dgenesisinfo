@@ -136,7 +136,7 @@ table th {
     }
 
     .details-table h3 {
-        display: block;
+        display: none;
         margin-top: 0px;
     }
     /* floating h3 is annoying */
