@@ -20,6 +20,18 @@
                         "jnc_part": 2
                     }
                 ]
+            },
+            {
+                "orb_id": 40,
+                "date_acquired": "10/05/2018",
+                "date_note": "First Orb from Making selection screen",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 1,
+                        "jnc_part": 5
+                    }
+                ]
             }
         ],
         "rankings": [

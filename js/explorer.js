@@ -124,10 +124,10 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 const orbName = orbInfo ? orbInfo.orb_name : 'Unknown Orb';
                 const dateAcquired = formatDate(orbUsed.date_acquired);
                 const dateNote = orbUsed.date_note || '';
-                let citation;
+                let citation = "";
                 if (orbUsed.citation && orbUsed.citation.length > 0) {
                     orbUsed.citation.forEach(cite => {
-                        citation = `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}<br />`;
+                        citation += `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}<br />`;
                     });
                 } else {
                     citation = 'Missing';
