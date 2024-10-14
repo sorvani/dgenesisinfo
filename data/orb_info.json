@@ -260,7 +260,7 @@
     },
     {
         "orb_id": 12,
-        "orb_name": "Disease Resistance (IV)",
+        "orb_name": "Disease Resistance (4)",
         "drop_rates": [
             {
                 "creature": "Barghest",
@@ -518,7 +518,7 @@
     },
     {
         "orb_id": 21,
-        "orb_name": "Magic Resistance (I)",
+        "orb_name": "Magic Resistance (1)",
         "drop_rates": [
             {
                 "creature": "Skeleton",
@@ -764,7 +764,7 @@
     },
     {
         "orb_id": 32,
-        "orb_name": "Status Ailment Resistance (II)",
+        "orb_name": "Status Ailment Resistance (2)",
         "drop_rates": [
             {
                 "creature": "Barghest",
