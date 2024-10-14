@@ -166,26 +166,26 @@ function toggleOrbsAndStats(explorer, orbData, row) {
 
             explorer.stats.forEach(stat => {
                 statsContent += `<tr>
-                    <td>${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
-                    <td>${stat.scan_type}</td>
-                    <td>${stat.sp !== null ? stat.sp : ''}</td>
-                    <td>${stat.hp.toFixed(2)}</td>
-                    <td>${stat.mp.toFixed(2)}</td>
-                    <td>${stat.str}</td>
-                    <td>${stat.vit}</td>
-                    <td>${stat.int}</td>
-                    <td>${stat.agi}</td>
-                    <td>${stat.dex}</td>
-                    <td>${stat.luc}</td>
-                    <td>${stat.stat_total}</td>
-                    <td>${stat.points_from_average}</td>`;
+                    <td data-label="Reading Date">${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
+                    <td data-label="Scran Type">${stat.scan_type}</td>
+                    <td data-label="SP">${stat.sp !== null ? stat.sp : ''}</td>
+                    <td data-label="HP">${stat.hp.toFixed(2)}</td>
+                    <td data-label="MP">${stat.mp.toFixed(2)}</td>
+                    <td data-label="STR">${stat.str}</td>
+                    <td data-label="VIT">${stat.vit}</td>
+                    <td data-label="INT">${stat.int}</td>
+                    <td data-label="AGI">${stat.agi}</td>
+                    <td data-label="DEX">${stat.dex}</td>
+                    <td data-label="LUC">${stat.luc}</td>
+                    <td data-label="Stat Total">${stat.stat_total}</td>
+                    <td data-label="Deviation">${stat.points_from_average}</td>`;
 
                 if (stat.citation && stat.citation.length > 0) {
                     stat.citation.forEach(cite => {
-                        statsContent += `<td>Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
+                        statsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
                     });
                 } else {
-                    statsContent += '<td>Missing</td>';
+                    statsContent += '<td data-label="Citation">Missing</td>';
                 }
                 statsContent += '</tr>';
             });
