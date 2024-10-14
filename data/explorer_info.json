@@ -32,6 +32,42 @@
                         "jnc_part": 5
                     }
                 ]
+            },
+            {
+                "orb_id": 34,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 25,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 41,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
             }
         ],
         "rankings": [
@@ -186,7 +222,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "jnc_part": null
+                        "jnc_part": 9
                     }
                 ],
                 "date_noted": 1541548800000,
@@ -210,35 +246,11 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "jnc_part": null
+                        "jnc_part": 9
                     }
                 ],
                 "date_noted": 1541548800000,
                 "date_sequence": 2,
-                "time_of_day": "morning",
-                "scan_type": "Making",
-                "sp": 1178.307,
-                "hp": 36.0,
-                "mp": 33.0,
-                "str": 14,
-                "vit": 15,
-                "int": 18,
-                "agi": 10,
-                "dex": 16,
-                "luc": 14,
-                "stat_total": 87,
-                "points_from_average": 27
-            },
-            {
-                "citation": [
-                    {
-                        "volume": 1,
-                        "chapter": 2,
-                        "jnc_part": null
-                    }
-                ],
-                "date_noted": 1541548800000,
-                "date_sequence": 3,
                 "time_of_day": "morning",
                 "scan_type": "Making",
                 "sp": 1176.307,
@@ -480,6 +492,56 @@
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": "09/28/2018",
+        "orbs_used": [
+            {
+                "orb_id": 33,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 34,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 25,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 41,
+                "date_acquired": "11/12/2018",
+                "date_note": "Used immediately after accepting the rquesust to get the OLC orb.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
+            }
+        ],
         "rankings": [
             {
                 "citation": [
