@@ -70,6 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
                             tbody.appendChild(row);
                         });
                     });
+                // Fetch the latest commit for explorer_info.json
+                fetch('https://api.github.com/repos/sorvani/dgenesisinfo/commits?path=data/explorer_info.json')
+                .then(response => response.json())
+                .then(commitData => {
+                    // Get the date of the last commit
+                    const lastCommitDate = commitData[0].commit.author.date;
+                    const formattedDate = new Date(lastCommitDate).toLocaleDateString();
+
+                    // Display the last commit date on the page
+                    const footer = document.createElement('footer');
+                    footer.innerHTML = `Last updated on: ${formattedDate}`;
+                    document.body.appendChild(footer);
+                })
+                .catch(error => console.error('Error fetching the last commit date:', error));
+            
             })
             .catch(error => {
                 console.error('Error fetching explorer or orb data:', error);
@@ -99,7 +114,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                     <tr>
                         <th>Orb Name</th>
                         <th>Date Acquired</th>
-                        <th>Exact Date</th>
+                        <th>Note</th>
                         <th>Citation</th>
                     </tr>
                 </thead><tbody>`;
@@ -112,16 +127,16 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 let citation;
                 if (orbUsed.citation && orbUsed.citation.length > 0) {
                     orbUsed.citation.forEach(cite => {
-                        citation += `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}<br />`;
+                        citation = `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}<br />`;
                     });
                 } else {
-                    citation += 'Missing';
+                    citation = 'Missing';
                 }
                 detailsContent += `<tr>
-                    <td>${orbName}</td>
-                    <td>${dateAcquired}</td>
-                    <td>${dateNote}</td>
-                    <td>${citation}</td>
+                    <td data-label="Orb Name">${orbName}</td>
+                    <td data-label="Date Acquired">${dateAcquired}</td>
+                    <td data-label="Note">${dateNote}</td>
+                    <td data-label="Citation">${citation}</td>
                 </tr>`;
             });
 

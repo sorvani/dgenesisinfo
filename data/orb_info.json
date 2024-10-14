@@ -996,8 +996,8 @@
                 "citation": [
                     {
                         "volume":  1,
-                        "chapter": null,
-                        "jnc_part": null
+                        "chapter": 2,
+                        "jnc_part": 11
                     }
                 ]
             }

@@ -1219,13 +1219,13 @@
         "orbs_used": [
             {
                 "orb_id": 25,
-                "date_acquired": null,
+                "date_acquired": "11/10/2018",
                 "date_note": "Acquired in the first auction",
                 "citation": [
                     {
-                        "volume": null,
-                        "chapter": null,
-                        "jnc_part": null
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
                     }
                 ]
             }
