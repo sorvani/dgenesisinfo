@@ -168,7 +168,7 @@ table th {
     color: white;
 }
 
-.details-row, .orb-details-row, .stat-details-row {
+.orb-details-row, .stat-details-row {
     background-color: #858585;
 }
 
