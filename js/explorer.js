@@ -91,7 +91,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
     } else {
         // Create new row for orbs_used
         const orbsRow = document.createElement("tr");
-        orbsRow.classList.add('orb-detail-row');
+        orbsRow.classList.add('orb-details-row');
         const orbsCell = document.createElement("td");
         orbsCell.setAttribute('colspan', '7');
 
