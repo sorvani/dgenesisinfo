@@ -146,7 +146,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         }
 
         // Now, display the stats below the orbs used
-        detailsContent += '<h3>Explorer Stats</h3>';
+        detailsContent += '<br /><h3>Explorer Stats</h3>';
         if (explorer.stats && explorer.stats.length > 0) {
             detailsContent += `<table class="details-table"><thead>
                 <tr>
