@@ -108,11 +108,18 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 const orbInfo = orbData.find(orb => orb.orb_id === orbUsed.orb_id);
                 const orbName = orbInfo ? orbInfo.orb_name : 'Unknown Orb';
                 const dateAcquired = formatDate(orbUsed.date_acquired);
-                const isExactDate = orbUsed.is_exact_date ? '&#10004;' : '';
-                const citation = orbUsed.citation
+                const isExactDate = orbUsed.is_exact_date == true ? '&#10004;' : orbUsed.is_exact_date;
+                /*const citation = orbUsed.citation
                     ? `Vol:${orbUsed.citation.volume || ''} Ch:${orbUsed.citation.chapter || ''} JNC Part:${orbUsed.citation.jnc_part || ''}`
-                    : 'Missing';
-
+                    : 'Missing';*/
+                let citation;
+                if (orbUsed.citation && orbUsed.citation.length > 0) {
+                    orbUsed.citation.forEach(cite => {
+                        citation += `<td>Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
+                    });
+                } else {
+                    citation += '<td>Missing</td>';
+                }
                 detailsContent += `<tr>
                     <td>${orbName}</td>
                     <td>${dateAcquired}</td>
@@ -123,7 +130,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
 
             detailsContent += '</tbody></table>';
         } else {
-            detailsContent += '<em>No orbs used</em>';
+            detailsContent += '<em>No orbs known to have been used</em>';
         }
 
         // Now, display the stats below the orbs used
