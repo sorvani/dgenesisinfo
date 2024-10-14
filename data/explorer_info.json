@@ -12,7 +12,7 @@
             {
                 "orb_id": 1,
                 "date_acquired": 1538006400000,
-                "date_is_exact": true,
+                "date_note": "Acquired after dropping rebar in dungeon, mid-formation",
                 "citation": [
                     {
                         "volume": 1,
@@ -1214,6 +1214,20 @@
                 "date_noted": 1538006400000,
                 "rank": 5,
                 "known_above_rank": null
+            }
+        ],
+        "orbs_used": [
+            {
+                "orb_id": 25,
+                "date_acquired": null,
+                "date_note": "Acquired in the first auction",
+                "citation": [
+                    {
+                        "volume": null,
+                        "chapter": null,
+                        "jnc_part": null
+                    }
+                ]
             }
         ],
         "stats": [
