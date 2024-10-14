@@ -46,6 +46,7 @@
     {
         "orb_id": 3,
         "orb_name": "AGI+1",
+        "known_effects": "Adds 1 point to the user's AGI stat",
         "drop_rates": [
             {
                 "creature": "Kobold",
@@ -67,6 +68,7 @@
     {
         "orb_id": 4,
         "orb_name": "AGI\u00d7HP+1",
+        "known_effects": "Adds 1 to the default AGI to HP coefficient. It is unknown if this add 1 or 0.1 to the normal 0.1 HP coefficient for AGI.",
         "drop_rates": [
             {
                 "creature": "Kobold",
@@ -1052,6 +1054,7 @@
     {
         "orb_id": 45,
         "orb_name": "AGI\u00d7HP+2",
+        "known_effects": "Adds 2 to the default AGI to HP coefficient. It is unknown if this adds 2 or 0.2 to the normal 0.1 HP coefficient for AGI.",
         "note": "Never seen dropped, but was mentioned by Miyoshi when discussing dud orbs. Was named then as AGIxH+2, but making displayed the +1 as HP, so this was standardized to match.",
         "drop_rates": [
             {
