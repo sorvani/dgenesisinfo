@@ -7,11 +7,11 @@
         "public": 0,
         "d-card_region": 12,
         "nationality": "JP",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "orbs_used": [
             {
                 "orb_id": 1,
-                "date_acquired": 1538006400000,
+                "date_acquired": "09/27/2018",
                 "date_note": "Acquired after dropping rebar in dungeon, mid-formation",
                 "citation": [
                     {
@@ -40,7 +40,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 1
                     }
                 ],
                 "date_noted": 1538006400000,
@@ -52,7 +52,7 @@
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
                 "date_noted": 1538006400001,
@@ -479,7 +479,7 @@
         "public": 0,
         "d-card_region": 12,
         "nationality": "JP",
-        "date_first_known": 1538092800000,
+        "date_first_known": "09/28/2018",
         "rankings": [
             {
                 "citation": [
@@ -917,7 +917,7 @@
         "public": 0,
         "d-card_region": 12,
         "nationality": "JP",
-        "date_first_known": 1538697600000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
@@ -1065,17 +1065,17 @@
         "public": 1,
         "d-card_region": 1,
         "nationality": "US",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 3,
                 "known_above_rank": null
             }
@@ -1139,17 +1139,17 @@
         "public": 1,
         "d-card_region": 1,
         "nationality": "US",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 7,
                 "known_above_rank": null
             }
@@ -1213,17 +1213,17 @@
         "public": 1,
         "d-card_region": 1,
         "nationality": "US",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 5,
                 "known_above_rank": null
             }
@@ -1301,17 +1301,17 @@
         "public": 1,
         "d-card_region": 1,
         "nationality": "US",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 8,
                 "known_above_rank": null
             }
@@ -1432,7 +1432,7 @@
                     {
                         "volume": 1,
                         "chapter": 2,
-                        "jnc_part": null
+                        "jnc_part": 12
                     }
                 ],
                 "date_noted": 1542326400000,
@@ -1463,17 +1463,17 @@
         "public": 1,
         "d-card_region": 22,
         "nationality": "RU",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 2,
                 "known_above_rank": null
             }
@@ -1487,17 +1487,17 @@
         "public": 1,
         "d-card_region": 14,
         "nationality": "CN",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 4,
                 "known_above_rank": null
             }
@@ -1511,17 +1511,17 @@
         "public": 1,
         "d-card_region": 26,
         "nationality": "GB",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 6,
                 "known_above_rank": null
             }
@@ -1535,17 +1535,17 @@
         "public": 0,
         "d-card_region": 2,
         "nationality": "US",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 9,
                 "known_above_rank": null
             }
@@ -1559,17 +1559,17 @@
         "public": 1,
         "d-card_region": 25,
         "nationality": "FR",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 10,
                 "known_above_rank": null
             }
@@ -1583,17 +1583,17 @@
         "public": 1,
         "d-card_region": 24,
         "nationality": "DE",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 11,
                 "known_above_rank": null
             }
@@ -1607,17 +1607,17 @@
         "public": 1,
         "d-card_region": 26,
         "nationality": "GB",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 12,
                 "known_above_rank": null
             }
@@ -1631,17 +1631,17 @@
         "public": 1,
         "d-card_region": 25,
         "nationality": "FR",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 13,
                 "known_above_rank": null
             }
@@ -1655,17 +1655,17 @@
         "public": 1,
         "d-card_region": 24,
         "nationality": "IT",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 14,
                 "known_above_rank": null
             }
@@ -1679,17 +1679,17 @@
         "public": 1,
         "d-card_region": 25,
         "nationality": "FR",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 15,
                 "known_above_rank": null
             }
@@ -1703,17 +1703,17 @@
         "public": 1,
         "d-card_region": 24,
         "nationality": "DE",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 16,
                 "known_above_rank": null
             }
@@ -1727,17 +1727,17 @@
         "public": 1,
         "d-card_region": 11,
         "nationality": "AU",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 17,
                 "known_above_rank": null
             }
@@ -1749,19 +1749,19 @@
         "last_name": "Kimitsu",
         "moniker": null,
         "public": 1,
-        "d-card_region": 12,
+        "d-card_region": 13,
         "nationality": "JP",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 18,
                 "known_above_rank": null
             }
@@ -1775,17 +1775,17 @@
         "public": 1,
         "d-card_region": 24,
         "nationality": "DE",
-        "date_first_known": 1538006400000,
+        "date_first_known": "09/27/2018",
         "rankings": [
             {
                 "citation": [
                     {
                         "volume": 1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1538006400000,
+                "date_noted": "09/27/2018",
                 "rank": 19,
                 "known_above_rank": null
             }
