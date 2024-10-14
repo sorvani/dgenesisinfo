@@ -95,7 +95,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const orbsCell = document.createElement("td");
         orbsCell.setAttribute('colspan', '7');
 
-        let orbsContent = '<h3 class="details-table">Orbs Used</h3>';
+        let orbsContent = '<div class="details-section"><h3>Orbs Used</h3>';
         // Display orbs associated with the explorer
         if (explorer.orbs_used && explorer.orbs_used.length > 0) {
             orbsContent += `<table class="details-table">
@@ -129,9 +129,9 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 </tr>`;
             });
 
-            orbsContent += '</tbody></table>';
+            orbsContent += '</tbody></table></div>';
         } else {
-            orbsContent += '<em>No orbs known to have been used</em>';
+            orbsContent += '<em>No orbs known to have been used</em></div>';
         }
 
         orbsCell.innerHTML = orbsContent;
@@ -144,7 +144,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const statsCell = document.createElement("td");
         statsCell.setAttribute('colspan', '7');
 
-        let statsContent = '<h3 class="details-table">Explorer Stats</h3>';
+        let statsContent = '<div class="details-section"><h3>Explorer Stats</h3>';
         if (explorer.stats && explorer.stats.length > 0) {
             statsContent += `<table class="details-table"><thead>
                 <tr>
@@ -190,9 +190,9 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 statsContent += '</tr>';
             });
 
-            statsContent += '</tbody></table>';
+            statsContent += '</tbody></table></div>';
         } else {
-            statsContent += '<em>No stats available</em>';
+            statsContent += '<em>No stats available</em></div>';
         }
 
         statsCell.innerHTML = statsContent;

@@ -139,6 +139,12 @@ table th {
         display: block;
         margin-top: 0px;
     }
+    /* floating h3 is annoying */
+    .details-section::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 .details-table {
