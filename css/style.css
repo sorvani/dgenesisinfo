@@ -123,6 +123,7 @@ table th {
     }
 
     .details-table {
+        display: block;
         background-color: #919191;
         width: 100%;
         border-collapse: collapse;
@@ -133,6 +134,11 @@ table th {
         border: 1px solid #242424;
         padding: 8px;
         text-align: left;
+    }
+
+    .details-table h3 {
+        display: block;
+        margin-bottom: 10px;
     }
 }
 
