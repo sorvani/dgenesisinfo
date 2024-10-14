@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const row = document.createElement("tr");
 
                     const orbName = orb.orb_name || 'Unknown';
-                    const knownEffects = orb.known_effects || 'Unknown';
+                    const knownEffects = orb.known_effects || 'Not documented';
                     // Main orb row (clickable to show drop monsters)
                     row.innerHTML = `<td data-label="Orb Name">${orbName}</td>
                                     <td data-label="Known Effects">${knownEffects}</td>`;

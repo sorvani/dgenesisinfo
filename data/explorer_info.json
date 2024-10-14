@@ -1439,6 +1439,20 @@
                 "rank": 99728765,
                 "known_above_rank": null
             }
+        ],
+        "orbs_used": [
+            {
+                "orb_id": 34,
+                "date_acquired": "11/16/2018",
+                "date_note": "Acquired in the second auction",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 12
+                    }
+                ]
+            }
         ]
     },
     {

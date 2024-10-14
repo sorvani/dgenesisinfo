@@ -2,7 +2,7 @@
     {
         "orb_id": 1,
         "orb_name": "Making - メイキング",
-        "known_effects": "Allows user to assign free SP to their stats. Can also assign free SP of part members, including grandchild parties. Second affect allows user to select an orb every 100 kills. Orb choices are based on the create killed as kill 100.",
+        "known_effects": "Allows user to assign free SP to their stats. Can also assign free SP of part members, including grandchild parties.<br>Second affect allows user to select an orb every 100 kills. Orb choices are based on the create killed as kill 100.",
         "note": "The actual English name of this orb is still in doubt. The original Japanese version of the light novel used the katakana メイキング which could be romanized as Making, May King, or Mei King. All three romanizations have been commented on in story.",
         "drop_rates": [
             {
@@ -943,6 +943,7 @@
     {
         "orb_id": 40,
         "orb_name": "Vault",
+        "known_effects": "Stores objects in an extra-dimensional space. Time does not pass for objects stored. Has a maximum capacity of approximately under 20 tons",
         "drop_rates": [
             {
                 "creature": "Slime",
