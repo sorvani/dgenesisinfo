@@ -105,7 +105,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const detailsCell = document.createElement("td");
         detailsCell.setAttribute('colspan', '7');
 
-        let detailsContent = '<h3>Orbs Used</h3>';
+        let detailsContent = '<h3>Orbs Used</h3><br>';
 
         // Display orbs associated with the explorer
         if (explorer.orbs_used && explorer.orbs_used.length > 0) {
@@ -146,7 +146,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         }
 
         // Now, display the stats below the orbs used
-        detailsContent += '<br /><h3>Explorer Stats</h3>';
+        detailsContent += '<br><h3>Explorer Stats</h3><br>';
         if (explorer.stats && explorer.stats.length > 0) {
             detailsContent += `<table class="details-table"><thead>
                 <tr>
