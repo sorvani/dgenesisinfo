@@ -1814,6 +1814,20 @@
         "d-card_region": 13,
         "nationality": "JP",
         "date_first_known": "09/27/2018",
+        "orbs_used": [
+            {
+                "orb_id": 42,
+                "date_acquired": "08/30/2015",
+                "date_note": "Date is an estimate, Iori was a college student on summer break. The exact quote is 'The summer of 2015 was comming to an end.'",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 11
+                    }
+                ]
+            }
+        ],
         "rankings": [
             {
                 "citation": [
