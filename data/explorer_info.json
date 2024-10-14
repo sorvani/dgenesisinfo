@@ -796,6 +796,18 @@
                 "date_noted": 1538265600000,
                 "rank": 681,
                 "known_above_rank": null
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "jnc_part": null
+                    }
+                ],
+                "date_noted": "11/18/2018",
+                "rank": 986,
+                "known_above_rank": null
             }
         ],
         "stats": [
