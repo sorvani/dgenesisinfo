@@ -1512,6 +1512,44 @@
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": 1547251200000,
+        "orbs_used": [
+            {
+                "orb_id": 9,
+                "date_acquired": "01/24/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 12
+                    }
+                ]
+            },
+            {
+                "orb_id": 22,
+                "date_acquired": "01/25/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 14
+                    }
+                ]
+            },
+            {
+                "orb_id": 25,
+                "date_acquired": "01/24/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 14
+                    }
+                ]
+            }
+        ],
         "rankings": [
             {
                 "citation": [
@@ -1523,6 +1561,18 @@
                 ],
                 "date_noted": null,
                 "rank": 0,
+                "known_above_rank": null
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 10
+                    }
+                ],
+                "date_noted": "01/24/2019",
+                "rank": 1772,
                 "known_above_rank": null
             }
         ],
@@ -1550,6 +1600,30 @@
                 "luc": 41,
                 "stat_total": 94,
                 "points_from_average": 34
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 5,
+                        "chapter": 6,
+                        "jnc_part": null
+                    }
+                ],
+                "date_noted": "01/24/2019",
+                "date_sequence": 1,
+                "time_of_day": "morning",
+                "scan_type": "Making",
+                "sp": null,
+                "hp": 27.2,
+                "mp": 90.4,
+                "str": 10,
+                "vit": 10,
+                "int": 52,
+                "agi": 32,
+                "dex": 20,
+                "luc": 41,
+                "stat_total": 165,
+                "points_from_average": null
             }
         ]
     },
@@ -2002,6 +2076,56 @@
         "d-card_region": 12,
         "nationality": "JP",
         "date_first_known": 1542844800000,
+        "orbs_used": [
+            {
+                "orb_id": 13,
+                "date_acquired": "01/24/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 12
+                    }
+                ]
+            },
+            {
+                "orb_id": 22,
+                "date_acquired": "01/25/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 14
+                    }
+                ]
+            },
+            {
+                "orb_id": 25,
+                "date_acquired": "01/25/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 14
+                    }
+                ]
+            },
+            {
+                "orb_id": 41,
+                "date_acquired": "01/25/2019",
+                "date_note": "Given by D-Powers",
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 15
+                    }
+                ]
+            }
+        ],
         "rankings": [
             {
                 "citation": [
@@ -2014,6 +2138,56 @@
                 "date_noted": 1542844800000,
                 "rank": 0,
                 "known_above_rank": 99726438.0
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 10
+                    }
+                ],
+                "date_noted": "01/24/2019",
+                "rank": 0,
+                "known_above_rank": 361000
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 10
+                    }
+                ],
+                "date_noted": "01/24/2019",
+                "rank": 1359,
+                "known_above_rank": null
+            }
+        ],
+        "stats": [
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 10
+                    }
+                ],
+                "date_noted": "01/24/2019",
+                "date_sequence": 1,
+                "time_of_day": "morning",
+                "scan_type": "Making",
+                "sp": 0,
+                "hp": 33.2,
+                "mp": 86.0,
+                "str": 14,
+                "vit": 12,
+                "int": 48,
+                "agi": 24,
+                "dex": 34,
+                "luc": 12,
+                "stat_total": 144,
+                "points_from_average": 0
             }
         ]
     },
