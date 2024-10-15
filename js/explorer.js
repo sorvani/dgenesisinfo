@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Extract the latest rank from the rankings array and sort by rank
                         const explorersWithRanks = explorerData.map(explorer => {
                             if (explorer.rankings && explorer.rankings.length > 0) {
-                                const latestRanking = explorer.rankings.sort((a, b) => b.date_noted - a.date_noted)[0];
+                                const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
                                 explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
                                 let citeVolume, citeChapter, citeJNCPart;
 
@@ -209,4 +209,23 @@ function formatDate(dateString) {
     const day = ('0' + date.getDate()).slice(-2);
     const year = date.getFullYear();
     return `${month}/${day}/${year}`;
+}
+
+// Function to check if date_noted is Gregorian and convert to Unix timestamp
+function toUnixTimestamp(dateNoted) {
+    // If dateNoted is a number (already Unix timestamp), return as-is
+    if (typeof dateNoted === 'number') {
+        return dateNoted;
+    }
+
+    // If dateNoted is a valid Gregorian string, convert to Unix timestamp
+    const parsedDate = new Date(dateNoted);
+    
+    // Check if the parsedDate is valid (not "Invalid Date")
+    if (!isNaN(parsedDate.getTime())) {
+        return parsedDate.getTime();  // Convert to Unix timestamp (milliseconds since Jan 1, 1970)
+    } else {
+        console.error('Invalid date format for:', dateNoted);
+        return null;  // Return null if invalid date format
+    }
 }
