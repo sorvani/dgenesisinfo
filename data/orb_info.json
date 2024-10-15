@@ -635,7 +635,7 @@
                     {
                         "volume":  1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 5
                     }
                 ]
             }
@@ -794,6 +794,7 @@
     {
         "orb_id": 33,
         "orb_name": "Storage",
+        "known_effects": "Stores objects in an extra-dimensional space. Time passes at half of real time for objects stored. Has an unknown maximum capacity, but is known to be more than 20 tons. Item can be removed from storage at a distance form the user. Items can also be removed from storage with acceleration.",
         "drop_rates": [
             {
                 "creature": "Slime",
@@ -806,7 +807,7 @@
                     {
                         "volume":  1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 5
                     }
                 ]
             }
@@ -827,7 +828,7 @@
                     {
                         "volume":  1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 5
                     }
                 ]
             }
@@ -966,7 +967,7 @@
                     {
                         "volume":  1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 5
                     }
                 ]
             }
@@ -987,7 +988,7 @@
                     {
                         "volume":  1,
                         "chapter": 1,
-                        "jnc_part": null
+                        "jnc_part": 5
                     }
                 ]
             }
