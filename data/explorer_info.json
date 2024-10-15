@@ -2144,10 +2144,10 @@
                     {
                         "volume": 2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 2
                     }
                 ],
-                "date_noted": 1542844800000,
+                "date_noted": "11/21/2018",
                 "rank": 0,
                 "known_above_rank": 99726438
             },
