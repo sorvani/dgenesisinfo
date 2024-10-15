@@ -13,9 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (explorer.rankings && explorer.rankings.length > 0) {
                                 const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
                                 explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
-                                let citeVolume, citeChapter, citeJNCPart;
+                                
+                                // Check if there is a known_above_rank and use that if latest_rank is null
+                                if (explorer.latest_rank === null && latestRanking.known_above_rank) {
+                                    explorer.latest_rank = `Above ${latestRanking.known_above_rank}`;
+                                    explorer.rank_value_for_sort = latestRanking.known_above_rank; // Use for sorting purposes
+                                } else {
+                                    explorer.rank_value_for_sort = explorer.latest_rank;
+                                }
 
-                                // Check if there's a citation array and populate the citation variable
+                                // Handle citation data
+                                let citeVolume, citeChapter, citeJNCPart;
                                 if (latestRanking.citation && latestRanking.citation.length > 0) {
                                     latestRanking.citation.forEach(cite => {
                                         citeVolume = cite.volume || '';
@@ -29,15 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
                             } else {
                                 explorer.latest_rank = null;
                                 explorer.rank_citation = null;
+                                explorer.rank_value_for_sort = Infinity; // Rank as lowest if completely unknown
                             }
                             return explorer;
                         });
 
-                        // Sort explorers by latest_rank (null ranks at the bottom)
+                        // Sort explorers by latest_rank (or known_above_rank for those with "Above" ranks)
                         explorersWithRanks.sort((a, b) => {
-                            if (a.latest_rank === null) return 1;
-                            if (b.latest_rank === null) return -1;
-                            return a.latest_rank - b.latest_rank;
+                            if (a.rank_value_for_sort === null) return 1;
+                            if (b.rank_value_for_sort === null) return -1;
+                            return a.rank_value_for_sort - b.rank_value_for_sort;
                         });
 
                         // Populate the table with sorted data
