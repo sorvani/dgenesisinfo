@@ -1539,7 +1539,7 @@
             },
             {
                 "orb_id": 25,
-                "date_acquired": "01/24/2019",
+                "date_acquired": "01/25/2019",
                 "date_note": "Given by D-Powers",
                 "citation": [
                     {
@@ -2002,6 +2002,18 @@
                         "jnc_part": 11
                     }
                 ]
+            },
+            {
+                "orb_id": 34,
+                "date_acquired": "01/19/2015",
+                "date_note": "Given to by The Phantom'",
+                "citation": [
+                    {
+                        "volume": 6,
+                        "chapter": 8,
+                        "jnc_part": 15
+                    }
+                ]
             }
         ],
         "rankings": [
@@ -2116,7 +2128,7 @@
             {
                 "orb_id": 41,
                 "date_acquired": "01/25/2019",
-                "date_note": "Given by D-Powers",
+                "date_note": "Given by D-Powers - possibly given to Rokujo",
                 "citation": [
                     {
                         "volume": 7,
