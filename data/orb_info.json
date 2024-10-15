@@ -428,7 +428,7 @@
     {
         "orb_id": 20,
         "orb_name": "Life Detection",
-        "known_effects": "",
+        "known_effects": "Gain a vague awareness of where nearby people and monsters are located. Focus and training can cause it to extend in on direction",
         "drop_rates": [
             {
                 "creature": "Kobold",

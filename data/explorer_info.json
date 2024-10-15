@@ -68,7 +68,20 @@
                         "jnc_part": 10
                     }
                 ]
+            },
+            {
+                "orb_id": 20,
+                "date_acquired": "11/24/2018",
+                "date_note": "Used the Saturday of his dungeon not-date with Mitsurugi.",
+                "citation": [
+                    {
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 10
+                    }
+                ]
             }
+
         ],
         "rankings": [
             {
