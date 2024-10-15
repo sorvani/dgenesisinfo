@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     explorer.rank_value_for_sort = latestRanking.known_above_rank - 1; // Use for sorting purposes
                                 } else {
                                     explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank.toLocaleString() : 'Unknown';
-                                    explorer.rank_value_for_sort = latestRanking.rank;
+                                    explorer.rank_value_for_sort = latestRanking.rank !== 0 ? latestRanking.rank : Infinity;
                                 }
 
                                 // Handle citation data
