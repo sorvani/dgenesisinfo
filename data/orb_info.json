@@ -106,17 +106,17 @@
         "orb_name": "Appraisal",
         "drop_rates": [
             {
-                "creature": "Eyeballs",
+                "creature": "Eyeball",
                 "dungeon": "Wandering Mansion",
                 "floor": "Any",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 7
                     }
                 ]
             }
@@ -163,6 +163,7 @@
     {
         "orb_id": 8,
         "orb_name": "Darkness Magic (II)",
+        "known_effects": "",
         "drop_rates": [
             {
                 "creature": "Barghest",
@@ -175,7 +176,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ]
             }
@@ -184,6 +185,7 @@
     {
         "orb_id": 9,
         "orb_name": "Darkness Magic (VI)",
+        "known_effects": "Summons up to the user's INT / 4 hellhounds. The hellhounds cannot be unsummoned.",
         "drop_rates": [
             {
                 "creature": "Hound of Hectate",
@@ -211,7 +213,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ]
             }
@@ -275,7 +277,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ]
             }
@@ -329,7 +331,7 @@
         "orb_name": "Fear",
         "drop_rates": [
             {
-                "creature": "Eyeballs",
+                "creature": "Eyeball",
                 "dungeon": "Wandering Mansion",
                 "floor": "Any",
                 "favorable_outcomes": 1,
@@ -339,7 +341,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 7
                     }
                 ]
             }
@@ -355,12 +357,12 @@
                 "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 40000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             }
@@ -456,7 +458,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ]
             },
@@ -466,12 +468,12 @@
                 "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 20000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             },
@@ -530,12 +532,12 @@
                 "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 700000000,
-                "rate_date": null,
+                "rate_date": "11/28/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             },
@@ -738,12 +740,12 @@
                 "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 200000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             }
@@ -759,12 +761,12 @@
                 "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 200000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             }
@@ -785,7 +787,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ]
             }
@@ -858,7 +860,7 @@
         "orb_name": "Surveillance",
         "drop_rates": [
             {
-                "creature": "Eyeballs",
+                "creature": "Eyeball",
                 "dungeon": "Wandering Mansion",
                 "floor": "Any",
                 "favorable_outcomes": 1,
@@ -868,7 +870,7 @@
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 7
                     }
                 ]
             }
@@ -903,12 +905,12 @@
                 "floor": "11<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 1700000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             }
@@ -917,6 +919,7 @@
     {
         "orb_id": 39,
         "orb_name": "Undeath",
+        "known_effects": "You shall inherit an eternally undying body.<br>Undead transformation (skeleton)<br>Those who violate the natural order shall receiv fitting renumeration.",
         "note": "Was called Undeath in volume 2 and Undying in volume 5. It is assumed it is the same orb because both were from skeletons on the 10th floor.",
         "drop_rates": [
             {
@@ -925,12 +928,12 @@
                 "floor": "10<sup>th</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 1200000000,
-                "rate_date": null,
+                "rate_date": "11/29/2018",
                 "citation": [
                     {
                         "volume":  2,
                         "chapter": 3,
-                        "jnc_part": null
+                        "jnc_part": 8
                     }
                 ]
             },

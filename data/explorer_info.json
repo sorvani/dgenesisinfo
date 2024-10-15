@@ -80,8 +80,19 @@
                         "jnc_part": 3
                     }
                 ]
+            },
+            {
+                "orb_id": 38,
+                "date_acquired": "11/29/2018",
+                "date_note": null,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "jnc_part": 8
+                    }
+                ]
             }
-
         ],
         "rankings": [
             {
@@ -551,6 +562,30 @@
                         "volume": 1,
                         "chapter": 2,
                         "jnc_part": 10
+                    }
+                ]
+            },
+            {
+                "orb_id": 5,
+                "date_acquired": "11/29/2018",
+                "date_note": null,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "jnc_part": 7
+                    }
+                ]
+            },
+            {
+                "orb_id": 9,
+                "date_acquired": "11/29/2018",
+                "date_note": null,
+                "citation": [
+                    {
+                        "volume": 2,
+                        "chapter": 3,
+                        "jnc_part": 7
                     }
                 ]
             }
@@ -2010,7 +2045,7 @@
         "id": 30,
         "first_name": "Mariann Therese",
         "last_name": "Martin",
-        "moniker": null,
+        "moniker": "Holy Woman",
         "public": 0,
         "d-card_region": null,
         "nationality": "FR",
