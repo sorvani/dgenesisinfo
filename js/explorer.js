@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const explorersWithRanks = explorerData.map(explorer => {
                             if (explorer.rankings && explorer.rankings.length > 0) {
                                 const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
-                                explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank.toLocaleString() : null;
+                                explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
                                 
                                 // Check if there is a known_above_rank and use that if latest_rank is null
                                 if (explorer.latest_rank === null && latestRanking.known_above_rank) {
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     explorer.rank_value_for_sort = latestRanking.known_above_rank; // Use for sorting purposes
                                 } else {
                                     explorer.rank_value_for_sort = explorer.latest_rank;
+                                    explorer.latest_rank = explorer.latest_rank.toLocaleString();
                                 }
 
                                 // Handle citation data
