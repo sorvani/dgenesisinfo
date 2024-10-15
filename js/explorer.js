@@ -17,9 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                 // Check if there is a known_above_rank and use that if latest_rank is null
                                 if (explorer.latest_rank === null && latestRanking.known_above_rank) {
                                     explorer.latest_rank = `Above ${latestRanking.known_above_rank.toLocaleString()}`;
-                                    explorer.rank_value_for_sort = latestRanking.known_above_rank; // Use for sorting purposes
+                                    explorer.rank_value_for_sort = latestRanking.known_above_rank - 1; // Use for sorting purposes
                                 } else {
-                                    explorer.rank_value_for_sort = explorer.latest_rank;
+                                    explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank.toLocaleString() : 'Unknown';
+                                    explorer.rank_value_for_sort = latestRanking.rank;
                                 }
 
                                 // Handle citation data
