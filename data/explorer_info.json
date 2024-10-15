@@ -2159,7 +2159,7 @@
                         "jnc_part": 10
                     }
                 ],
-                "date_noted": "01/24/2019",
+                "date_noted": "01/24/2019T09:00:00",
                 "rank": 0,
                 "known_above_rank": 361000
             },
@@ -2171,7 +2171,7 @@
                         "jnc_part": 10
                     }
                 ],
-                "date_noted": "01/24/2019",
+                "date_noted": "01/24/2019T09:01:00",
                 "rank": 1359,
                 "known_above_rank": null
             }
@@ -2287,6 +2287,54 @@
                 "date_noted": "01/28/2019",
                 "rank": 0, 
                 "known_above_rank": null
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "first_name": "Serina",
+        "last_name": "Takeda",
+        "moniker": null,
+        "public": 0,
+        "d-card_region": 12,
+        "nationality": "JP",
+        "date_first_known": "01/26/2019",
+        "rankings": [
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 15
+                    }
+                ],
+                "date_noted": "01/26/2019",
+                "rank": 0, 
+                "known_above_rank": 99,726,438
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "first_name": "Masato",
+        "last_name": "Fuwa",
+        "moniker": null,
+        "public": 0,
+        "d-card_region": 12,
+        "nationality": "JP",
+        "date_first_known": "01/26/2019",
+        "rankings": [
+            {
+                "citation": [
+                    {
+                        "volume": 7,
+                        "chapter": 9,
+                        "jnc_part": 15
+                    }
+                ],
+                "date_noted": "01/26/2019",
+                "rank": 0, 
+                "known_above_rank": 99,726,438
             }
         ]
     }
