@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                     explorer.rank_value_for_sort = latestRanking.known_above_rank; // Use for sorting purposes
                                 } else {
                                     explorer.rank_value_for_sort = explorer.latest_rank;
-                                    explorer.latest_rank = explorer.latest_rank.toLocaleString();
                                 }
 
                                 // Handle citation data
