@@ -65,7 +65,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         rankingsCell.setAttribute('colspan', '7');
 
         let rankingsContent = '<div class="details-section"><h3>Rankings Over Time</h3>';
-        if (explorer.rankings && explorer.rankings.length > 0) {
+        /*if (explorer.rankings && explorer.rankings.length > 0) {
             rankingsContent += `<table class="details-table">
                 <thead>
                     <tr>
@@ -99,7 +99,8 @@ function toggleOrbsAndStats(explorer, orbData, row) {
             rankingsContent += '</tbody></table></div>';
         } else {
             rankingsContent += '<em>No ranking history available</em></div>';
-        }
+        }*/
+        rankingsContent += '<em>No ranking history available</em></div>';
 
         rankingsCell.innerHTML = rankingsContent;
         rankingsRow.appendChild(rankingsCell);
