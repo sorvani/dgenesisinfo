@@ -256,3 +256,32 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         rankingsRow.after(statsRow);
     }
 }
+
+// Helper function to format dates
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+}
+
+// Function to check if date_noted is Gregorian and convert to Unix timestamp
+function toUnixTimestamp(dateNoted) {
+    // If dateNoted is a number (already Unix timestamp), return as-is
+    if (typeof dateNoted === 'number') {
+        return dateNoted;
+    }
+
+    // If dateNoted is a valid Gregorian string, convert to Unix timestamp
+    const parsedDate = new Date(dateNoted);
+    
+    // Check if the parsedDate is valid (not "Invalid Date")
+    if (!isNaN(parsedDate.getTime())) {
+        return parsedDate.getTime();  // Convert to Unix timestamp (milliseconds since Jan 1, 1970)
+    } else {
+        console.error('Invalid date format for:', dateNoted);
+        return null;  // Return null if invalid date format
+    }
+}
