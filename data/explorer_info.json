@@ -838,22 +838,22 @@
                     {
                         "volume": 3,
                         "chapter": 4,
-                        "jnc_part": null
+                        "jnc_part": 6
                     }
                 ],
-                "date_noted": 1538265600000,
+                "date_noted": "2018-12-16",
                 "rank": 681,
                 "known_above_rank": null
             },
             {
                 "citation": [
                     {
-                        "volume": 3,
-                        "chapter": 4,
-                        "jnc_part": null
+                        "volume": 1,
+                        "chapter": 2,
+                        "jnc_part": 13
                     }
                 ],
-                "date_noted": "11/18/2018",
+                "date_noted": "2018-11-17",
                 "rank": 986,
                 "known_above_rank": null
             }
@@ -929,6 +929,18 @@
                 ],
                 "date_noted": 1538265600000,
                 "rank": 368,
+                "known_above_rank": null
+            },
+            {
+                "citation": [
+                    {
+                        "volume": 3,
+                        "chapter": 4,
+                        "jnc_part": 6
+                    }
+                ],
+                "date_noted": "2018-12-16",
+                "rank": 1421,
                 "known_above_rank": null
             }
         ],
