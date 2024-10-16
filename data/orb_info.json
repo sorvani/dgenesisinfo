@@ -90,12 +90,12 @@
                 "creature": "Wolf",
                 "favorable_outcomes": 1,
                 "total_events": 7000000,
-                "rate_date": null,
+                "rate_date": "2018-12-08",
                 "citation": [
                     {
                         "volume":  3,
                         "chapter": 4,
-                        "jnc_part": null
+                        "jnc_part": 1
                     }
                 ]
             }
@@ -149,12 +149,12 @@
                 "creature": "Wolf",
                 "favorable_outcomes": 1,
                 "total_events": 2000000000,
-                "rate_date": null,
+                "rate_date": "2018-12-08",
                 "citation": [
                     {
                         "volume":  3,
                         "chapter": 4,
-                        "jnc_part": null
+                        "jnc_part": 1
                     }
                 ]
             }
@@ -481,12 +481,12 @@
                 "creature": "Wolf",
                 "favorable_outcomes": 1,
                 "total_events": 24200000000,
-                "rate_date": null,
+                "rate_date": "2018-12-08",
                 "citation": [
                     {
                         "volume":  3,
                         "chapter": 4,
-                        "jnc_part": null
+                        "jnc_part": 1
                     }
                 ]
             },
@@ -844,12 +844,12 @@
                 "creature": "Wolf",
                 "favorable_outcomes": 1,
                 "total_events": 500000000,
-                "rate_date": null,
+                "rate_date": "2018-12-08",
                 "citation": [
                     {
                         "volume":  3,
                         "chapter": 4,
-                        "jnc_part": null
+                        "jnc_part": 1
                     }
                 ]
             }
