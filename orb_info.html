@@ -7,38 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Orb List by Name</h1>
-        <nav>
-            <a href="index.html">Explorer List</a>  <!-- Link back to the explorer list -->
-            <a href="orb_info.html">Known Orbs</a> <!-- Active link for the current page -->
-            <a href="#" onclick="showForm(); return false;">Submit a correction</a> <!-- Link to open correction form -->
-            <a href="https://j-novel.club/series/d-genesis" target="_blank">Read D-Genesis @ J-Novel Club</a>
-        </nav>
-    </header>
+    <div id="header-placeholder"></div>
 
-    <section id="correction-form" style="display: none;">
-        <h2>Submit a Correction</h2>
-        <form id="github-issue-form" onsubmit="submitCorrection(); return false;">
-            <label for="correction-type">Correction Type:</label>
-            <select id="correction-type" name="correction-type" required>
-                <option value="explorer data">Explorer Data</option>
-                <option value="explorer stats">Explorer Stats</option>
-                <option value="orb data">Orb Data</option>
-            </select><br><br>
-            
-            <label for="explorer-orb-name">Explorer or Orb Name:</label>
-            <input type="text" id="explorer-orb-name" name="explorer-orb-name"><br><br>
-            
-            <label for="correction-details">Details:</label><br>
-            <textarea id="correction-details" name="correction-details" rows="6" cols="50" required></textarea><br><br>
-            
-            <input type="submit" value="Submit Correction">
-        </form>
-    </section>
+    <div id="correction-form-placeholder"></div>
 
     <section id="orb-info">
-        <h2>Orb Data</h2>
+        <h2>List of Known Orbs (click/tap on a row to see drop details)</h2>
         <table id="orb-table">
             <thead>
                 <tr>
@@ -52,7 +26,35 @@
         </table>
     </section>
 
-    <script src="js/orb.js"></script>
-    <script src="js/correction.js"></script> <!-- Add the new correction.js file -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load the header.html file into the div
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load correction form
+            fetch('correction-form.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('correction-form-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading correction form:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        });
+    </script>
 </body>
 </html>
