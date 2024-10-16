@@ -1,3 +1,92 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // Fetch and display explorer info with latest ranking on index.html
+    if (document.querySelector("#explorer-table")) {
+        fetch('data/explorer_info.json')
+            .then(response => response.json())
+            .then(explorerData => {
+                // Fetch orb_info to match orbs with explorers
+                fetch('data/orb_info.json')
+                    .then(response => response.json())
+                    .then(orbData => {
+                        // Extract the latest rank from the rankings array and sort by rank
+                        const explorersWithRanks = explorerData.map(explorer => {
+                            if (explorer.rankings && explorer.rankings.length > 0) {
+                                const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
+                                explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
+                                
+                                // Check if there is a known_above_rank and use that if latest_rank is null
+                                if (explorer.latest_rank === null && latestRanking.known_above_rank) {
+                                    explorer.latest_rank = `Above ${latestRanking.known_above_rank.toLocaleString()}`;
+                                    explorer.rank_value_for_sort = latestRanking.known_above_rank - 1; // Use for sorting purposes
+                                } else {
+                                    explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank.toLocaleString() : 'Unknown';
+                                    explorer.rank_value_for_sort = latestRanking.rank !== 0 ? latestRanking.rank : Infinity;
+                                }
+
+                                // Handle citation data
+                                let citeVolume, citeChapter, citeJNCPart;
+                                if (latestRanking.citation && latestRanking.citation.length > 0) {
+                                    latestRanking.citation.forEach(cite => {
+                                        citeVolume = cite.volume || '';
+                                        citeChapter = cite.chapter || '';
+                                        citeJNCPart = cite.jnc_part !== null ? cite.jnc_part : '';
+                                    });
+                                    explorer.rank_citation = `Vol: ${citeVolume} Ch: ${citeChapter} JNC Part: ${citeJNCPart}<br />`;
+                                } else {
+                                    explorer.rank_citation = null;
+                                }
+                            } else {
+                                explorer.latest_rank = null;
+                                explorer.rank_citation = null;
+                                explorer.rank_value_for_sort = Infinity; // Rank as lowest if completely unknown
+                            }
+                            return explorer;
+                        });
+
+                        // Sort explorers by latest_rank (or known_above_rank for those with "Above" ranks)
+                        explorersWithRanks.sort((a, b) => {
+                            if (a.rank_value_for_sort === null) return 1;
+                            if (b.rank_value_for_sort === null) return -1;
+                            return a.rank_value_for_sort - b.rank_value_for_sort;
+                        });
+
+                        // Populate the table with sorted data
+                        const tbody = document.querySelector("#explorer-table tbody");
+                        explorersWithRanks.forEach(explorer => {
+                            const row = document.createElement("tr");
+
+                            // Replace nulls with empty strings
+                            const firstName = explorer.first_name || '';
+                            const lastName = explorer.last_name || '';
+                            const moniker = explorer.moniker || '';
+                            const nationality = explorer.nationality || '';
+                            const dateFirstKnown = formatDate(explorer.date_first_known);
+                            const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'Unknown';
+                            const nameKnown = explorer.public === 1 ? '&#10004;' : '';
+                            const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
+
+                            // Populate the row with data-label attributes for responsive design
+                            row.innerHTML = `<td data-label="Rank">${latestRank}</td>
+                                             <td data-label="Name">${firstName} ${lastName}</td>
+                                             <td data-label="Name is Public">${nameKnown}</td>
+                                             <td data-label="Moniker">${moniker}</td>
+                                             <td data-label="Nationality">${nationality}</td>
+                                             <td data-label="Date First Known">${dateFirstKnown}</td>
+                                             <td data-label="Rank Citation">${rankCitation}</td>`;
+
+                            // Add click event to toggle orbs and stats subtable
+                            row.addEventListener('click', () => toggleOrbsAndStats(explorer, orbData, row));
+
+                            tbody.appendChild(row);
+                        });
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching explorer or orb data:', error);
+            });
+    }
+});
+
 // Function to toggle orbs_used, rankings over time, and stats subtables
 function toggleOrbsAndStats(explorer, orbData, row) {
     let nextRow = row.nextElementSibling;
@@ -65,7 +154,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         rankingsCell.setAttribute('colspan', '7');
 
         let rankingsContent = '<div class="details-section"><h3>Rankings Over Time</h3>';
-        /*if (explorer.rankings && explorer.rankings.length > 0) {
+        if (explorer.rankings && explorer.rankings.length > 0) {
             rankingsContent += `<table class="details-table">
                 <thead>
                     <tr>
@@ -99,8 +188,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
             rankingsContent += '</tbody></table></div>';
         } else {
             rankingsContent += '<em>No ranking history available</em></div>';
-        }*/
-        rankingsContent += '<em>No ranking history available</em></div>';
+        }
 
         rankingsCell.innerHTML = rankingsContent;
         rankingsRow.appendChild(rankingsCell);
