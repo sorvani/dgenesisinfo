@@ -88,6 +88,8 @@
             },
             {
                 "creature": "Wolf",
+                "dungeon": "Yoyogi",
+                "floor": "3<sup>rd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 7000000,
                 "rate_date": "2018-12-08",
@@ -147,6 +149,8 @@
         "drop_rates": [
             {
                 "creature": "Wolf",
+                "dungeon": "Yoyogi",
+                "floor": "3<sup>rd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 2000000000,
                 "rate_date": "2018-12-08",
@@ -479,6 +483,8 @@
             },
             {
                 "creature": "Wolf",
+                "dungeon": "Yoyogi",
+                "floor": "3<sup>rd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 24200000000,
                 "rate_date": "2018-12-08",
@@ -842,6 +848,8 @@
         "drop_rates": [
             {
                 "creature": "Wolf",
+                "dungeon": "Yoyogi",
+                "floor": "3<sup>rd</sup>",
                 "favorable_outcomes": 1,
                 "total_events": 500000000,
                 "rate_date": "2018-12-08",
