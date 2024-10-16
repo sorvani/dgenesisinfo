@@ -924,10 +924,10 @@
                     {
                         "volume": 5,
                         "chapter": 6,
-                        "jnc_part": null
+                        "jnc_part": 9
                     }
                 ],
-                "date_noted": 1538265600000,
+                "date_noted": "2019-01-15",
                 "rank": 368,
                 "known_above_rank": null
             },
