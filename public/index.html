@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorer Stats</title>
-    <script type="module" src="explorer.js"></script>
+    <title>D-Gen: Explorers by WDARL Rank</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="/explorer.js"></script>
 </head>
 <body>
-    <h1>Explorer Stats</h1>
-    <ul id="explorer-list"></ul> <!-- Data will be dynamically inserted here -->
+    <!-- Header will be dynamically loaded here -->
+    <div id="header-container"></div>
+
+    <section id="explorer-info">
+        <h2>Explorer Data by current WDARL Rank (click/tap on a row to see their stats)</h2>
+        <table id="explorer-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name (Given then Family)</th>
+                    <th>Name is Public</th>
+                    <th>Moniker</th>
+                    <th>Nationality</th>
+                    <th>Date First Known</th>
+                    <th>Rank Citation</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <!-- Footer will be dynamically loaded here -->
+    <div id="footer-container"></div>
+
+    <!-- Load Header Script -->
+    <script src="/loadHeader.js"></script>
+    <!-- Load Footer Script -->
+    <script src="/loadFooter.js"></script>
+
 </body>
 </html>
