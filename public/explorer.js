@@ -21,28 +21,34 @@ const db = getFirestore(app);
 // Connect to Firestore Emulator (for local testing)
 //connectFirestoreEmulator(db, "localhost", 8080);
 
-// Function to Fetch Data
 async function fetchExplorers() {
-    const explorerList = document.getElementById("explorer-list");
-    explorerList.innerHTML = "<li>Loading...</li>";
+    console.log("Fetching explorers from Firestore...");
 
     try {
         const explorerCollection = collection(db, "explorer");
         const querySnapshot = await getDocs(explorerCollection);
 
-        explorerList.innerHTML = ""; // Clear loading state
+        console.log(`Found ${querySnapshot.size} documents.`);
+        if (querySnapshot.empty) {
+            console.warn("No explorers found in Firestore.");
+        }
+
+        const explorerList = document.getElementById("explorer-list");
+        explorerList.innerHTML = ""; // Clear previous data
 
         querySnapshot.forEach((doc) => {
             const explorer = doc.data();
+            console.log("Explorer Data:", explorer);
+
             const listItem = document.createElement("li");
             listItem.textContent = `Name: ${explorer.name}, Level: ${explorer.level}, Orbs: ${explorer.orbs}`;
             explorerList.appendChild(listItem);
         });
     } catch (error) {
         console.error("Error fetching explorers:", error);
-        explorerList.innerHTML = "<li>Error loading details</li>";
+        document.getElementById("explorer-list").innerHTML = "<li>Error loading data</li>";
     }
 }
 
-// Run fetch on page load
+// Fetch Data on Page Load
 fetchExplorers();
