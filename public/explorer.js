@@ -5,12 +5,13 @@ import { getFirestore, collection, getDocs } from "https://www.gstatic.com/fireb
 
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDQUZ5NTKDNmY0-RyfzUOrxwSfHs8hE-Rc",
+    authDomain: "d-genesis-info.firebaseapp.com",
+    projectId: "d-genesis-info",
+    storageBucket: "d-genesis-info.firebasestorage.app",
+    messagingSenderId: "552093452402",
+    appId: "1:552093452402:web:9be4caf14f2dcaa8a31aeb",
+    measurementId: "G-2H2DYEB1WE"
 };
 
 // Initialize Firebase
