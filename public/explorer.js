@@ -1,9 +1,7 @@
 // Import Firebase modules
-//import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-//import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getFirestore, collection, getDocs, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+//import { getFirestore, collection, getDocs, connectFirestoreEmulator } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -20,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Connect to Firestore Emulator (for local testing)
-connectFirestoreEmulator(db, "localhost", 8080);
+//connectFirestoreEmulator(db, "localhost", 8080);
 
 // Function to Fetch Data
 async function fetchExplorers() {
