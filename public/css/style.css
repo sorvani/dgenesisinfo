@@ -8,14 +8,14 @@ body {
 header {
     background-color: #333;
     color: white;
-    padding: 20px 0;
+    padding: 5px 0;
     text-align: center;
     font-size: 1.5rem;
 }
 
 nav a {
     color: white;
-    margin: 0 15px;
+    margin: 0;
     text-decoration: none;
     font-size: 1.2rem;
 }
@@ -41,7 +41,7 @@ footer a:hover {
     text-decoration: underline;
 }
 
-#dashboard, #explorer-info {
+#dashboard, #explorer-info, #orb-info {
     margin: 20px;
 }
 
