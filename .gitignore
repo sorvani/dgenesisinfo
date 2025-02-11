@@ -1,2 +1,4 @@
 fire*-debug.log
 node_modules/
+service-account.json
+.firebase/hosting.*.cache
