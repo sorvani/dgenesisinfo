@@ -133,7 +133,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 const citation = formatCitation(orbUsed.citation);
 
                 orbsContent += `<tr>
-                    <td data-label="Orb Name">${orbName}</td>
+                    <td data-label="Orb Name" class="orb-name" data-orb-id="${orbUsed.orb_id}">${orbName}</td>
                     <td data-label="Date Acquired">${dateAcquired}</td>
                     <td data-label="Note">${dateNote}</td>
                     <td data-label="Citation">${citation}</td>
@@ -148,6 +148,9 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         orbsCell.innerHTML = orbsContent;
         orbsRow.appendChild(orbsCell);
         row.after(orbsRow);
+        
+        // 🔹 Call mouseover function after adding the rows
+        addOrbHoverDetails();
 
         // Create new row for Rankings Over Time
         const rankingsRow = document.createElement("tr");
@@ -258,6 +261,45 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         rankingsRow.after(statsRow);
     }
 }
+
+// 🔹 Add mouseover event to show orb details
+function addOrbHoverDetails() {
+    document.querySelectorAll(".orb-name").forEach(orbElement => {
+        orbElement.addEventListener("mouseover", async (event) => {
+            const orbId = event.target.getAttribute("data-orb-id");
+            if (!orbId) return;
+
+            const orbData = await fetchFirestoreData("orb");
+            const orbInfo = orbData.find(orb => orb.orb_id == orbId);
+            //if (!orbInfo) return;
+            if (!orbInfo) {
+                console.log(`Orb ID ${orbId} lookup failed, setting orbInfo to unknowns.`);
+                orbInfo.push({
+                    orb_name: "Unknown Orb",
+                    known_effects: "Unknown",
+                    note: "Unknown"
+                });
+            }
+
+            let tooltip = document.createElement("div");
+            tooltip.classList.add("orb-tooltip");
+            tooltip.innerHTML = `<strong>${orbInfo.orb_name}</strong><br>
+                                 Known Effect(s): ${orbInfo.known_effects || 'Unknown'}<br>
+                                 Note: ${orbInfo.note || 'None'}`;
+            document.body.appendChild(tooltip);
+            tooltip.style.position = "absolute";
+            tooltip.style.left = `${event.pageX + 10}px`;
+            tooltip.style.top = `${event.pageY + 10}px`;
+
+            event.target.addEventListener("mouseleave", () => {
+                tooltip.remove();
+            }, { once: true });
+        });
+    });
+}
+
+// Call the function to enable orb hover details after data loads
+document.addEventListener("DOMContentLoaded", addOrbHoverDetails);
 
 // 🔹 Helper: Format Date
 function formatDate(dateString) {

@@ -195,3 +195,14 @@ table th {
     border-left: 4px solid #ccc; /* Optional: a left border to highlight the note */
     font-style: italic;          /* Italicize the note for emphasis */
 }
+
+.orb-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 1000;
+    white-space: nowrap;
+}
