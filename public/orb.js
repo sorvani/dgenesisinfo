@@ -57,7 +57,7 @@ function populateOrbTable(orbData) {
     sortedOrbs.forEach(orb => {
         const row = document.createElement("tr");
         const orbID = orb.orb_id || 0;
-        row.dataset.id = `explorer-${orbID}`;
+        row.dataset.id = `${orbID}`;
 
         const orbName = orb.orb_name || 'Unknown';
         const knownEffects = orb.known_effects || 'Not documented';
@@ -168,3 +168,16 @@ function toggleOrbDetails(orb, row) {
         row.after(detailsRow);  // Insert the details after the clicked row
     }
 }
+
+document.addEventListener("dataUpdated", async (event) => {
+    if (event.detail.collection === "orb") {
+        console.log("Orb data updated. Reloading table...");
+
+        // Fetch fresh data
+        const orbData = await fetchFirestoreData("orb");
+        console.log("Updated Orb Data:", orbData);
+
+        // Call processorbData() only after orbData is updated
+        processOrbData(orbData);
+    }
+});

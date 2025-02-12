@@ -78,7 +78,7 @@ function populateExplorerTable(explorers, orbData) {
     explorers.forEach(explorer => {
         const row = document.createElement("tr");
         const explorerID = explorer.id || 0;
-        row.dataset.id = `explorer-${explorerID}`;
+        row.dataset.id = `${explorerID}`;
 
         // Replace nulls with empty strings
         const firstName = explorer.first_name || '';
@@ -90,7 +90,8 @@ function populateExplorerTable(explorers, orbData) {
         const nameKnown = explorer.public === 1 ? '&#10004;' : '';
         const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
 
-        row.innerHTML = `<td data-label="Rank">${latestRank}</td>
+        row.innerHTML = `<!-- <td><i class="fas fa-edit edit-icon" style="cursor: pointer;" data-id="${explorer.id}"></i></td> -->
+                         <td data-label="Rank">${latestRank}</td>
                          <td data-label="Name">${firstName} ${lastName}</td>
                          <td data-label="Name is Public">${nameKnown}</td>
                          <td data-label="Moniker">${moniker}</td>
@@ -301,6 +302,20 @@ function addOrbHoverDetails() {
 
 // Call the function to enable orb hover details after data loads
 document.addEventListener("DOMContentLoaded", addOrbHoverDetails);
+
+document.addEventListener("dataUpdated", async (event) => {
+    if (event.detail.collection === "explorer") {
+        console.log("Explorer data updated. Reloading table...");
+
+        // Fetch fresh data
+        const explorerData = await fetchFirestoreData("explorer");
+        const orbData = await fetchFirestoreData("orb");
+        console.log("Updated Explorer Data:", explorerData);
+
+        // Call processExplorerData() only after explorerData is updated
+        processExplorerData(explorerData,orbData);
+    }
+});
 
 // 🔹 Helper: Format Date
 function formatDate(dateString) {
