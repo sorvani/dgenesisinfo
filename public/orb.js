@@ -56,6 +56,8 @@ function populateOrbTable(orbData) {
     // Populate the table with orb data (only orb_name, no orb_id)
     sortedOrbs.forEach(orb => {
         const row = document.createElement("tr");
+        const orbID = orb.orb_id || 0;
+        row.dataset.id = `explorer-${orbID}`;
 
         const orbName = orb.orb_name || 'Unknown';
         const knownEffects = orb.known_effects || 'Not documented';

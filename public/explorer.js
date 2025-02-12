@@ -1,6 +1,6 @@
 // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -77,6 +77,8 @@ function populateExplorerTable(explorers, orbData) {
 
     explorers.forEach(explorer => {
         const row = document.createElement("tr");
+        const explorerID = explorer.id || 0;
+        row.dataset.id = `explorer-${explorerID}`;
 
         // Replace nulls with empty strings
         const firstName = explorer.first_name || '';
