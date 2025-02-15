@@ -31,7 +31,7 @@
         <table id="explorer-table">
             <thead>
                 <tr>
-                    <!-- <th></th> -->
+                    <th class="edit-section">Edit</th>
                     <th>Rank</th>
                     <th>Name (Given then Family)</th>
                     <th>Name is Public</th>
@@ -50,7 +50,7 @@
         <table id="orb-table">
             <thead>
                 <tr>
-                    <!-- <th></th> -->
+                    <th class="edit-section">Edit</th>
                     <th>Orb Name</th>
                     <th>Known Effects</th>
                 </tr>
@@ -68,6 +68,8 @@
     <script type="module" src="/explorer.js"></script>
     <script type="module" src="/orb.js"></script>
     <script type="module" src="/auth.js"></script>
+    <script type="module" src="/authHelper.js"></script>
+
     <script>
         document.getElementById("show-explorer").addEventListener("click", () => {
             document.getElementById("explorer-info").style.display = "block";

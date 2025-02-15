@@ -1,5 +1,6 @@
 // Import Firebase modules
 import { firebaseApp } from "./firebase-config.js";
+import { checkUserCanEdit, updateEditColumnVisibility } from "./authHelper.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
@@ -78,7 +79,8 @@ function populateExplorerTable(explorers, orbData) {
         const nameKnown = explorer.public === 1 ? '&#10004;' : '';
         const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
 
-        row.innerHTML = `<td data-label="Rank">${latestRank}</td>
+        row.innerHTML = `<td class="edit-section">🖊</td>
+                         <td data-label="Rank">${latestRank}</td>
                          <td data-label="Name">${firstName} ${lastName}</td>
                          <td data-label="Name is Public">${nameKnown}</td>
                          <td data-label="Moniker">${moniker}</td>
@@ -106,7 +108,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const orbsRow = document.createElement("tr");
         orbsRow.classList.add('orb-details-row');
         const orbsCell = document.createElement("td");
-        orbsCell.setAttribute('colspan', '7');
+        orbsCell.setAttribute('colspan', '8');
 
         let orbsContent = '<div class="details-section"><h3>Orbs Used</h3>';
         if (explorer.orbs_used && explorer.orbs_used.length > 0) {
@@ -145,7 +147,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const rankingsRow = document.createElement("tr");
         rankingsRow.classList.add('rankings-row');
         const rankingsCell = document.createElement("td");
-        rankingsCell.setAttribute('colspan', '7');
+        rankingsCell.setAttribute('colspan', '8');
 
         let rankingsContent = '<div class="details-section"><h3>Rankings Over Time</h3>';
         if (explorer.rankings && explorer.rankings.length > 0) {
@@ -192,7 +194,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         const statsRow = document.createElement("tr");
         statsRow.classList.add('stat-details-row');
         const statsCell = document.createElement("td");
-        statsCell.setAttribute('colspan', '7');
+        statsCell.setAttribute('colspan', '8');
 
         let statsContent = '<div class="details-section"><h3>Explorer Stats</h3>';
         if (explorer.stats && explorer.stats.length > 0) {
@@ -289,6 +291,17 @@ function addOrbHoverDetails() {
 
 // Call the function to enable orb hover details after data loads
 document.addEventListener("DOMContentLoaded", addOrbHoverDetails);
+
+async function updateExplorerTable() {
+    const canEdit = await checkUserCanEdit(); // Get user edit permissions
+
+    console.log("Updating explorer table...");
+    updateEditColumnVisibility(canEdit);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateExplorerTable();
+});
 
 // 🔹 Helper: Format Date
 function formatDate(dateString) {

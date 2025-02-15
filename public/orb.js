@@ -1,5 +1,6 @@
 // Import Firebase modules
 import { firebaseApp } from "./firebase-config.js";
+import { checkUserCanEdit, updateEditColumnVisibility } from "./authHelper.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
@@ -50,8 +51,11 @@ function populateOrbTable(orbData) {
         const orbName = orb.orb_name || 'Unknown';
         const knownEffects = orb.known_effects || 'Not documented';
         // Main orb row (clickable to show drop monsters)
-        row.innerHTML = `<td data-label="Orb Name">${orbName}</td>
-                        <td data-label="Known Effects">${knownEffects}</td>`;
+        row.innerHTML = `
+            <td class="edit-section">🖊</td>
+            <td data-label="Orb Name">${orbName}</td>
+            <td data-label="Known Effects">${knownEffects}</td>
+                        `;
 
         // Add click event to toggle drop monsters
         row.addEventListener('click', () => toggleOrbDetails(orb, row));
@@ -72,7 +76,7 @@ function toggleOrbDetails(orb, row) {
         detailsRow = document.createElement("tr");
         detailsRow.classList.add('orb-details-row');
         const detailsCell = document.createElement("td");
-        detailsCell.setAttribute('colspan', '2');
+        detailsCell.setAttribute('colspan', '3');
 
         let detailsContent = '';
 
@@ -156,3 +160,14 @@ function toggleOrbDetails(orb, row) {
         row.after(detailsRow);  // Insert the details after the clicked row
     }
 }
+
+async function updateOrbTable() {
+    const canEdit = await checkUserCanEdit(); // Get user edit permissions
+
+    console.log("Updating orb table...");
+    updateEditColumnVisibility(canEdit);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateOrbTable();
+});

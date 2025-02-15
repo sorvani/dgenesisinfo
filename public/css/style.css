@@ -204,6 +204,10 @@ table th {
     font-style: italic;          /* Italicize the note for emphasis */
 }
 
+.edit-section {
+    display: none; /* Ensure default is hidden */
+}
+
 .orb-tooltip {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
