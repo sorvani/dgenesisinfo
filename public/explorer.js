@@ -78,8 +78,7 @@ function populateExplorerTable(explorers, orbData) {
         const nameKnown = explorer.public === 1 ? '&#10004;' : '';
         const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
 
-        row.innerHTML = `<!-- <td><i class="fas fa-edit edit-icon" style="cursor: pointer;" data-id="${explorer.id}"></i></td> -->
-                         <td data-label="Rank">${latestRank}</td>
+        row.innerHTML = `<td data-label="Rank">${latestRank}</td>
                          <td data-label="Name">${firstName} ${lastName}</td>
                          <td data-label="Name is Public">${nameKnown}</td>
                          <td data-label="Moniker">${moniker}</td>
