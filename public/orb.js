@@ -1,39 +1,64 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Import Firebase modules
+import { firebaseApp } from "./firebase-config.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// 🔹 Initialize Firebase & Firestore
+const db = getFirestore(firebaseApp);
+
+document.addEventListener("DOMContentLoaded", async () => {
     if (document.querySelector("#orb-table")) {
-        // Fetch orb info and display it sorted by orb_name alphabetically
-        fetch('data/orb_info.json')
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.querySelector("#orb-table tbody");
+        try {
+            console.log("Fetching orb data...");
+            const orbData = await fetchFirestoreData("orb");
 
-                // Sort orbs by orb_name alphabetically
-                const sortedOrbs = data.sort((a, b) => {
-                    const nameA = a.orb_name.toLowerCase();
-                    const nameB = b.orb_name.toLowerCase();
-                    return nameA.localeCompare(nameB);
-                });
-
-                // Populate the table with orb data (only orb_name, no orb_id)
-                sortedOrbs.forEach(orb => {
-                    const row = document.createElement("tr");
-
-                    const orbName = orb.orb_name || 'Unknown';
-                    const knownEffects = orb.known_effects || 'Not documented';
-                    // Main orb row (clickable to show drop monsters)
-                    row.innerHTML = `<td data-label="Orb Name">${orbName}</td>
-                                    <td data-label="Known Effects">${knownEffects}</td>`;
-
-                    // Add click event to toggle drop monsters
-                    row.addEventListener('click', () => toggleOrbDetails(orb, row));
-
-                    tbody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching the orb data:', error);
-            });
+            processOrbData(orbData);
+        } catch (error) {
+            console.error("Error fetching Firestore data:", error);
+        }
     }
 });
+
+// 🔹 Fetch Data from Firestore Collection
+async function fetchFirestoreData(collectionName) {
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    return querySnapshot.docs.map(doc => doc.data());
+}
+
+// 🔹 Process Orb Data
+function processOrbData(orbData) {
+    // possibly move orb sort here?
+    populateOrbTable(orbData);
+}
+// 🔹 Populate Table with Firestore Data
+function populateOrbTable(orbData) {
+    const tbody = document.querySelector("#orb-table tbody");
+    tbody.innerHTML = ""; // Clear previous data
+
+    // Sort orbs by orb_name alphabetically
+    const sortedOrbs = orbData.sort((a, b) => {
+        const nameA = a.orb_name.toLowerCase();
+        const nameB = b.orb_name.toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+
+    // Populate the table with orb data (only orb_name, no orb_id)
+    sortedOrbs.forEach(orb => {
+        const row = document.createElement("tr");
+        const orbID = orb.orb_id || 0;
+        row.dataset.id = `${orbID}`;
+
+        const orbName = orb.orb_name || 'Unknown';
+        const knownEffects = orb.known_effects || 'Not documented';
+        // Main orb row (clickable to show drop monsters)
+        row.innerHTML = `<td data-label="Orb Name">${orbName}</td>
+                        <td data-label="Known Effects">${knownEffects}</td>`;
+
+        // Add click event to toggle drop monsters
+        row.addEventListener('click', () => toggleOrbDetails(orb, row));
+
+        tbody.appendChild(row);
+    });
+}
 
 // Function to toggle the drop monster details for each orb
 function toggleOrbDetails(orb, row) {

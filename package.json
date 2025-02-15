@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "firebase": "^11.3.0",
+    "firebase-admin": "^13.1.0",
+    "firebase-tools": "^13.30.0",
+    "firebase-utils": "^1.1.3"
+  }
+}
