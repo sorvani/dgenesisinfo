@@ -1,21 +1,9 @@
 // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { firebaseApp } from "./firebase-config.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDQUZ5NTKDNmY0-RyfzUOrxwSfHs8hE-Rc",
-    authDomain: "d-genesis-info.firebaseapp.com",
-    projectId: "d-genesis-info",
-    storageBucket: "d-genesis-info.firebasestorage.app",
-    messagingSenderId: "552093452402",
-    appId: "1:552093452402:web:9be4caf14f2dcaa8a31aeb",
-    measurementId: "G-2H2DYEB1WE"
-};
-
 // 🔹 Initialize Firebase & Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getFirestore(firebaseApp);
 
 document.addEventListener("DOMContentLoaded", async () => {
     if (document.querySelector("#explorer-table")) {
@@ -78,7 +66,7 @@ function populateExplorerTable(explorers, orbData) {
     explorers.forEach(explorer => {
         const row = document.createElement("tr");
         const explorerID = explorer.id || 0;
-        row.dataset.id = `explorer-${explorerID}`;
+        row.dataset.id = `${explorerID}`;
 
         // Replace nulls with empty strings
         const firstName = explorer.first_name || '';
@@ -90,7 +78,8 @@ function populateExplorerTable(explorers, orbData) {
         const nameKnown = explorer.public === 1 ? '&#10004;' : '';
         const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
 
-        row.innerHTML = `<td data-label="Rank">${latestRank}</td>
+        row.innerHTML = `<!-- <td><i class="fas fa-edit edit-icon" style="cursor: pointer;" data-id="${explorer.id}"></i></td> -->
+                         <td data-label="Rank">${latestRank}</td>
                          <td data-label="Name">${firstName} ${lastName}</td>
                          <td data-label="Name is Public">${nameKnown}</td>
                          <td data-label="Moniker">${moniker}</td>

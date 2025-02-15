@@ -1,0 +1,19 @@
+// Import Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "YOUR_PROJECT_URL.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_ID.firebasestorage.app",
+    messagingSenderId: "YOUR_MESSAGING_ID",
+    appId: "YOUR_API_ID",
+    measurementId: "YOUR_MEASUREMENT_ID" // this one is optional from what I read
+};
+
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+
+// Export Firebase app
+export { firebaseApp };

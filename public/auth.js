@@ -1,23 +1,16 @@
 // auth.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDQUZ5NTKDNmY0-RyfzUOrxwSfHs8hE-Rc",
-    authDomain: "d-genesis-info.firebaseapp.com",
-    projectId: "d-genesis-info",
-    storageBucket: "d-genesis-info.firebasestorage.app",
-    messagingSenderId: "552093452402",
-    appId: "1:552093452402:web:9be4caf14f2dcaa8a31aeb",
-    measurementId: "G-2H2DYEB1WE"
-};
+// Import Firebase modules
+import { firebaseApp } from "./firebase-config.js";
+import { 
+    getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { 
+    getFirestore, collection, getDocs, query, where, doc, getDoc, setDoc 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 const auth = getAuth();
-const db = getFirestore();
 const provider = new GoogleAuthProvider();
 
 // UI Elements

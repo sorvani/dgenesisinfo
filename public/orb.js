@@ -1,21 +1,9 @@
 // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDQUZ5NTKDNmY0-RyfzUOrxwSfHs8hE-Rc",
-    authDomain: "d-genesis-info.firebaseapp.com",
-    projectId: "d-genesis-info",
-    storageBucket: "d-genesis-info.firebasestorage.app",
-    messagingSenderId: "552093452402",
-    appId: "1:552093452402:web:9be4caf14f2dcaa8a31aeb",
-    measurementId: "G-2H2DYEB1WE"
-};
+import { firebaseApp } from "./firebase-config.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = getFirestore(firebaseApp);
 
 document.addEventListener("DOMContentLoaded", async () => {
     if (document.querySelector("#orb-table")) {
@@ -57,7 +45,7 @@ function populateOrbTable(orbData) {
     sortedOrbs.forEach(orb => {
         const row = document.createElement("tr");
         const orbID = orb.orb_id || 0;
-        row.dataset.id = `explorer-${orbID}`;
+        row.dataset.id = `${orbID}`;
 
         const orbName = orb.orb_name || 'Unknown';
         const knownEffects = orb.known_effects || 'Not documented';
