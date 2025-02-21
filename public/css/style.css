@@ -1,39 +1,55 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #555;
+    --background-color: #f4f4f4;
+    --border-color: #ddd;
+    --text-color: white;
+    --spacing-sm: 5px;
+    --spacing-md: 10px;
+    --spacing-lg: 20px;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 5px 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: var(--spacing-sm) var(--spacing-md);
     text-align: center;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
-/* Navigation Bar */
 nav {
     display: flex;
     justify-content: center;
-    background: #333;
+    background: var(--primary-color);
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    background: #333;
-    padding: 0;
+    background: var(--primary-color);
+    padding: var(--spacing-md);
     margin: 0;
+    justify-content: center;
 }
 
-/* General hyperlink styling */
 a {
     cursor: pointer;
     text-decoration: none;
-    color: white;
+    color: var(--text-color);
     font-size: 1.2rem;
 }
 
@@ -41,23 +57,27 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Footer styles */
+a:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
 footer {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: var(--spacing-md) 0;
     text-align: left;
 }
 
 #dashboard, #explorer-info, #orb-info {
-    margin: 20px;
+    margin: var(--spacing-lg);
 }
 
 #correction-form {
     background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 20px 0;
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -70,127 +90,104 @@ footer {
     font-weight: bold;
 }
 
-#correction-form input, 
-#correction-form textarea, 
+#correction-form input,
+#correction-form textarea,
 #correction-form select {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0 16px 0;
-    box-sizing: border-box;
+    padding: var(--spacing-md);
+    margin: 8px 0 var(--spacing-lg);
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 #correction-form input[type="submit"] {
-    background-color: #333;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border: none;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: var(--spacing-md) 15px;
     font-size: 1rem;
+    transition: background-color 0.2s ease;
 }
 
 #correction-form input[type="submit"]:hover {
-    background-color: #555;
+    background-color: var(--secondary-color);
 }
 
-/* General table styling */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: var(--spacing-md);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 table th, table td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
 }
 
 table th {
-    background-color: #333;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
-/* Responsive table for smaller screens */
 @media screen and (max-width: 600px) {
     table, thead, tbody, th, td, tr {
         display: block;
     }
 
     table thead {
-        display: none;  /* Hide headers */
+        display: none;
     }
 
     table tr {
         margin-bottom: 15px;
-        border-bottom: 2px solid #ddd;
-        display: block;
+        border-bottom: 2px solid var(--border-color);
     }
 
     table td {
         display: flex;
         justify-content: space-between;
-        padding: 10px;
+        padding: var(--spacing-md);
         position: relative;
-        text-align: left;
     }
 
     table td::before {
-        content: attr(data-label);  /* Use data-label to display the header name */
+        content: attr(data-label);
         font-weight: bold;
         flex: 1;
-        text-align: left;
-        padding-right: 10px;
+        padding-right: var(--spacing-md);
     }
 
     table td {
         flex: 2;
     }
 
-    .details-table {
-        background-color: #919191;
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
+    nav ul {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .details-table th, .details-table td {
-        border: 1px solid #242424;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .details-table h3 {
-        display: none;
-        margin-top: 0px;
-    }
-    /* floating h3 is annoying */
-    .details-section::after {
-        content: "";
-        display: table;
-        clear: both;
+    #edit-modal {
+        width: 90%;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
 .details-table {
     background-color: #919191;
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
 }
 
 .details-table th, .details-table td {
-    border: 1px solid #242424;
-    padding: 8px;
-    text-align: left;
+    border-color: #242424;
 }
 
 .details-table tr {
     background-color: #dddddd;
-}
-.details-table th {
-    background-color: #333;
-    color: white;
 }
 
 .orb-details-row, .rankings-row, .stat-details-row {
@@ -198,23 +195,75 @@ table th {
 }
 
 .details-note {
-    margin-top: 10px;
-    padding: 10px;
-    border-left: 4px solid #ccc; /* Optional: a left border to highlight the note */
-    font-style: italic;          /* Italicize the note for emphasis */
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-left: 4px solid #ccc;
+    font-style: italic;
 }
 
 .edit-section {
-    display: none; /* Ensure default is hidden */
+    display: none;
 }
 
 .orb-tooltip {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 5px;
+    color: var(--text-color);
+    padding: var(--spacing-sm);
     border-radius: 5px;
     font-size: 12px;
     z-index: 1000;
     white-space: nowrap;
+}
+
+#edit-modal {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+#edit-modal label {
+    display: block;
+    margin: var(--spacing-md) 0;
+}
+
+#edit-modal input, #edit-modal textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#edit-modal textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+#edit-modal button {
+    margin: var(--spacing-md) var(--spacing-sm) 0 0;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#edit-modal button:hover {
+    background-color: var(--secondary-color);
+}
+
+.edit-icon {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--primary-color);
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.edit-icon:hover, .edit-icon:focus {
+    color: var(--secondary-color);
 }

@@ -1,6 +1,6 @@
 // Import Firebase modules
 import { firebaseApp } from "./firebase-config.js";
-import { checkUserCanEdit, updateEditColumnVisibility } from "./authHelper.js";
+import { checkUserCanEdit, updateEditColumnVisibility, initializeEditButtons } from "./authHelper.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
@@ -23,18 +23,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 // 🔹 Fetch Data from Firestore Collection
 async function fetchFirestoreData(collectionName) {
     const querySnapshot = await getDocs(collection(db, collectionName));
-    return querySnapshot.docs.map(doc => doc.data());
+    const docs = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() }));
+    console.log(`Fetched ${docs.length} documents from ${collectionName}:`, docs.slice(0, 3)); // Log first 3 for debugging
+    return docs;
 }
 
 // 🔹 Process Explorer Data
 function processExplorerData(explorerData, orbData) {
-    // Extract the latest rank from rankings array
     const explorersWithRanks = explorerData.map(explorer => {
         if (explorer.rankings && explorer.rankings.length > 0) {
             const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
             explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
 
-            // Handle "Above Rank" cases
             if (explorer.latest_rank === null && latestRanking.known_above_rank) {
                 explorer.latest_rank = `Above ${latestRanking.known_above_rank.toLocaleString()}`;
                 explorer.rank_value_for_sort = latestRanking.known_above_rank - 1;
@@ -43,7 +43,6 @@ function processExplorerData(explorerData, orbData) {
                 explorer.rank_value_for_sort = latestRanking.rank !== 0 ? latestRanking.rank : Infinity;
             }
 
-            // Handle citations
             explorer.rank_citation = formatCitation(latestRanking.citation);
         } else {
             explorer.latest_rank = null;
@@ -53,7 +52,6 @@ function processExplorerData(explorerData, orbData) {
         return explorer;
     });
 
-    // Sort Explorers by Rank
     explorersWithRanks.sort((a, b) => a.rank_value_for_sort - b.rank_value_for_sort);
 
     populateExplorerTable(explorersWithRanks, orbData);
@@ -62,24 +60,24 @@ function processExplorerData(explorerData, orbData) {
 // 🔹 Populate Table with Firestore Data
 function populateExplorerTable(explorers, orbData) {
     const tbody = document.querySelector("#explorer-table tbody");
-    tbody.innerHTML = ""; // Clear previous data
+    tbody.innerHTML = "";
 
     explorers.forEach(explorer => {
         const row = document.createElement("tr");
-        const explorerID = explorer.id || 0;
-        row.dataset.id = `${explorerID}`;
+        const explorerDocId = explorer.docId; // Use Firestore doc ID
+        console.log(`Explorer docId: ${explorerDocId}, internal id: ${explorer.id}`); // Log for verification
+        row.dataset.id = `${explorerDocId}`; // Still use docId for dataset consistency
 
-        // Replace nulls with empty strings
         const firstName = explorer.first_name || '';
         const lastName = explorer.last_name || '';
         const moniker = explorer.moniker || '';
         const nationality = explorer.nationality || '';
         const dateFirstKnown = formatDate(explorer.date_first_known);
         const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'Unknown';
-        const nameKnown = explorer.public === 1 ? '&#10004;' : '';
+        const nameKnown = explorer.public === 1 ? '✔' : '';
         const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
 
-        row.innerHTML = `<td class="edit-section">🖊</td>
+        row.innerHTML = `<td class="edit-section"><button data-doc-id="${explorerDocId}" class="edit-icon">🖊</button></td>
                          <td data-label="Rank">${latestRank}</td>
                          <td data-label="Name">${firstName} ${lastName}</td>
                          <td data-label="Name is Public">${nameKnown}</td>
@@ -101,9 +99,9 @@ function toggleOrbsAndStats(explorer, orbData, row) {
     if (nextRow && nextRow.classList.contains('orb-details-row')) {
         nextRow.remove();
         nextRow = row.nextElementSibling;
-        if (nextRow && nextRow.classList.contains('rankings-row')) nextRow.remove();  // Remove rankings row
+        if (nextRow && nextRow.classList.contains('rankings-row')) nextRow.remove();
         nextRow = row.nextElementSibling;
-        if (nextRow && nextRow.classList.contains('stat-details-row')) nextRow.remove();  // Remove stats row
+        if (nextRow && nextRow.classList.contains('stat-details-row')) nextRow.remove();
     } else {
         const orbsRow = document.createElement("tr");
         orbsRow.classList.add('orb-details-row');
@@ -140,10 +138,8 @@ function toggleOrbsAndStats(explorer, orbData, row) {
         orbsRow.appendChild(orbsCell);
         row.after(orbsRow);
         
-        // 🔹 Call mouseover function after adding the rows
         addOrbHoverDetails();
 
-        // Create new row for Rankings Over Time
         const rankingsRow = document.createElement("tr");
         rankingsRow.classList.add('rankings-row');
         const rankingsCell = document.createElement("td");
@@ -188,9 +184,8 @@ function toggleOrbsAndStats(explorer, orbData, row) {
 
         rankingsCell.innerHTML = rankingsContent;
         rankingsRow.appendChild(rankingsCell);
-        orbsRow.after(rankingsRow);  // Insert the rankings row after orbs
+        orbsRow.after(rankingsRow);
 
-        // Create new row for stats
         const statsRow = document.createElement("tr");
         statsRow.classList.add('stat-details-row');
         const statsCell = document.createElement("td");
@@ -262,14 +257,13 @@ function addOrbHoverDetails() {
 
             const orbData = await fetchFirestoreData("orb");
             const orbInfo = orbData.find(orb => orb.orb_id == orbId);
-            //if (!orbInfo) return;
             if (!orbInfo) {
                 console.log(`Orb ID ${orbId} lookup failed, setting orbInfo to unknowns.`);
-                orbInfo.push({
+                orbInfo = {
                     orb_name: "Unknown Orb",
                     known_effects: "Unknown",
                     note: "Unknown"
-                });
+                };
             }
 
             let tooltip = document.createElement("div");
@@ -289,12 +283,8 @@ function addOrbHoverDetails() {
     });
 }
 
-// Call the function to enable orb hover details after data loads
-document.addEventListener("DOMContentLoaded", addOrbHoverDetails);
-
 async function updateExplorerTable() {
-    const canEdit = await checkUserCanEdit(); // Get user edit permissions
-
+    const canEdit = await checkUserCanEdit();
     console.log("Updating explorer table...");
     updateEditColumnVisibility(canEdit);
 }

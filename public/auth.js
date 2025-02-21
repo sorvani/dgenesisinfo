@@ -6,6 +6,7 @@ import {
 import { 
     getFirestore, doc, setDoc, getDoc 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { initializeEditButtons } from "./authHelper.js"; // Import for edit buttons
 
 // Initialize Firebase
 const auth = getAuth(firebaseApp);
@@ -27,7 +28,7 @@ loginBtn.addEventListener("click", async () => {
         await checkAndUpdateUser(user);
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline";
-        logoutBtn.innerHTML=`Logout: ${user.displayName}`;
+        logoutBtn.innerHTML = `Logout: ${user.displayName}`;
     } catch (error) {
         console.error("Login failed:", error);
     }
@@ -39,11 +40,7 @@ logoutBtn.addEventListener("click", () => {
         console.log("User logged out");
         logoutBtn.style.display = "none";
         loginBtn.style.display = "inline";
-        console.log("Can Edit:", canEdit);
-        console.log("Edit Sections Found:", editSections.length);
-        editSections.forEach(section => {
-            section.style.visibility = "hidden";
-        });
+        updateEditColumnVisibility(false);
     }).catch(error => console.error(error));
 });
 
@@ -55,12 +52,11 @@ async function checkAndUpdateUser(user) {
         await setDoc(userDocRef, {
             name: user.displayName || "Anonymous",
             email: user.email,
-            canEdit: false, //amdin must manually set this to true.
+            canEdit: false,
         });
         console.log("New user document created");
-        return false
+        return false;
     } else {
-        // Only get canEdit from Firestore
         const canEdit = userSnap.data().canEdit || false;
         console.log(`User already exists, Firestore canEdit:`, canEdit);
         return canEdit;
@@ -68,42 +64,37 @@ async function checkAndUpdateUser(user) {
 }
 
 // Listen for authentication state changes
+let currentCanEdit = false;
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         console.log("User signed in:", user);
-        // Fetch user data and wait for Firestore response
         const canEdit = await checkAndUpdateUser(user);
+        currentCanEdit = canEdit;
         
-        // Explicitly update UI to show the logged-in state
         document.getElementById("login-btn").style.display = "none";
         document.getElementById("logout-btn").style.display = "inline";
-        document.getElementById("logout-btn").innerHTML=`Logout: ${user.displayName}`;
-        // Ensure edit column updates after Firestore has returned canEdit
+        document.getElementById("logout-btn").innerHTML = `Logout: ${user.displayName}`;
+
         setTimeout(() => {
             console.log("Finalizing UI updates after Firestore fetch.");
-            // Update visibility for the edit column
             updateEditColumnVisibility(canEdit);
-        }, 300); // Small delay to prevent race conditions
-
+            if (canEdit) {
+                initializeEditButtons();
+            }
+        }, 500); // 500ms delay
     } else {
         console.log("No user signed in");
-        
-        // Hide edit functionality
+        currentCanEdit = false;
         updateEditColumnVisibility(false);
-
-        // Reset UI for logged-out state
         document.getElementById("login-btn").style.display = "inline";
         document.getElementById("logout-btn").style.display = "none";
     }
 });
 
 function updateEditColumnVisibility(canEdit) {
-    // Get all current and future `.edit-section` elements
     const editSections = document.querySelectorAll(".edit-section");
-
     editSections.forEach(section => {
         section.style.display = canEdit ? "table-cell" : "none";
     });
-
     console.log(`Updated ${editSections.length} elements to ${canEdit ? "show" : "hide"} edit column.`);
 }
