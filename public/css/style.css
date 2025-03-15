@@ -173,8 +173,6 @@ table th {
     #edit-modal {
         width: 90%;
         top: 10%;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 
@@ -216,9 +214,39 @@ table th {
     white-space: nowrap;
 }
 
+/* Consolidated #edit-modal styles */
 #edit-modal {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    width: 500px; /* Default width for larger screens */
+    max-height: 80vh; /* Allow scrolling if content overflows */
+    overflow-y: auto;
+}
+
+#edit-modal .modal-content {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-lg);
+    border-radius: 5px;
+}
+
+#edit-modal .close {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-md);
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+#edit-modal .close:hover {
+    color: var(--secondary-color);
 }
 
 #edit-modal label {
@@ -266,4 +294,17 @@ table th {
 
 .edit-icon:hover, .edit-icon:focus {
     color: var(--secondary-color);
+}
+
+.sub-item {
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.sub-item label {
+    display: inline-block;
+    margin-right: var(--spacing-md);
 }
