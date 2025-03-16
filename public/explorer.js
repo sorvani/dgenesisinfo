@@ -1,7 +1,7 @@
 // Import Firebase modules
 import { firebaseApp } from "./firebase-config.js";
 import { checkUserCanEdit, updateEditColumnVisibility, initializeEditButtons } from "./authHelper.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
 const db = getFirestore(firebaseApp);
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const explorerData = await fetchFirestoreData("explorer");
             const orbData = await fetchFirestoreData("orb");
 
-            processExplorerData(explorerData, orbData);
+            await processExplorerData(explorerData, orbData);
         } catch (error) {
             console.error("Error fetching Firestore data:", error);
         }
@@ -29,8 +29,8 @@ async function fetchFirestoreData(collectionName) {
 }
 
 // 🔹 Process Explorer Data
-function processExplorerData(explorerData, orbData) {
-    const explorersWithRanks = explorerData.map(explorer => {
+async function processExplorerData(explorerData, orbData) {
+    const explorersWithRanks = await Promise.all(explorerData.map(async (explorer) => {
         if (explorer.rankings && explorer.rankings.length > 0) {
             const latestRanking = explorer.rankings.sort((a, b) => toUnixTimestamp(b.date_noted) - toUnixTimestamp(a.date_noted))[0];
             explorer.latest_rank = latestRanking.rank !== 0 ? latestRanking.rank : null;
@@ -43,18 +43,48 @@ function processExplorerData(explorerData, orbData) {
                 explorer.rank_value_for_sort = latestRanking.rank !== 0 ? latestRanking.rank : Infinity;
             }
 
-            explorer.rank_citation = formatCitation(latestRanking.citation);
+            // Fetch citation data using citationId
+            const citationId = latestRanking.citationId;
+            if (citationId && isValidCitationId(citationId)) {
+                const citationDoc = await getCitationData(explorer.docId, citationId);
+                explorer.rank_citation = formatCitation(citationDoc);
+            } else {
+                explorer.rank_citation = 'Missing';
+            }
         } else {
             explorer.latest_rank = null;
             explorer.rank_citation = null;
             explorer.rank_value_for_sort = Infinity;
         }
         return explorer;
-    });
+    }));
 
     explorersWithRanks.sort((a, b) => a.rank_value_for_sort - b.rank_value_for_sort);
 
     populateExplorerTable(explorersWithRanks, orbData);
+}
+
+// 🔹 Validate Citation ID (check if it's a UUID)
+function isValidCitationId(citationId) {
+    if (typeof citationId !== 'string') return false;
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    return uuidRegex.test(citationId) || citationId === 'auto-id'; // Allow 'auto-id' for auto-generated IDs
+}
+
+// 🔹 Fetch Citation Data from Subcollection
+async function getCitationData(docId, citationId) {
+    try {
+        const citationRef = doc(db, `explorer/${docId}/citations`, citationId);
+        const citationSnap = await getDoc(citationRef);
+        if (citationSnap.exists()) {
+            return citationSnap.data();
+        }
+        console.log(`No citation found for ${docId}/${citationId}, using default`);
+        return { chapter: '', jnc_part: '', volume: '' };
+    } catch (error) {
+        console.error("Error fetching citation:", error);
+        return { chapter: '', jnc_part: '', volume: '' };
+    }
 }
 
 // 🔹 Populate Table with Firestore Data
@@ -64,9 +94,9 @@ function populateExplorerTable(explorers, orbData) {
 
     explorers.forEach(explorer => {
         const row = document.createElement("tr");
-        const explorerDocId = explorer.docId; // Use Firestore doc ID
-        console.log(`Explorer docId: ${explorerDocId}, internal id: ${explorer.id}`); // Log for verification
-        row.dataset.id = `${explorerDocId}`; // Still use docId for dataset consistency
+        const explorerDocId = explorer.docId;
+        console.log(`Explorer docId: ${explorerDocId}, internal id: ${explorer.id}`);
+        row.dataset.id = `${explorerDocId}`;
 
         const firstName = explorer.first_name || '';
         const lastName = explorer.last_name || '';
@@ -75,7 +105,7 @@ function populateExplorerTable(explorers, orbData) {
         const dateFirstKnown = formatDate(explorer.date_first_known);
         const latestRank = explorer.latest_rank !== null ? explorer.latest_rank : 'Unknown';
         const nameKnown = explorer.public === 1 ? '✔' : '';
-        const rankCitation = explorer.rank_citation !== null ? explorer.rank_citation : 'Missing';
+        const rankCitation = explorer.rank_citation || 'Missing';
 
         row.innerHTML = `<td class="edit-section"><button data-doc-id="${explorerDocId}" class="edit-icon">🖊</button></td>
                          <td data-label="Rank">${latestRank}</td>
@@ -86,14 +116,20 @@ function populateExplorerTable(explorers, orbData) {
                          <td data-label="Date First Known">${dateFirstKnown}</td>
                          <td data-label="Rank Citation">${rankCitation}</td>`;
 
-        row.addEventListener('click', () => toggleOrbsAndStats(explorer, orbData, row));
+        row.addEventListener('click', async () => {
+            try {
+                await toggleOrbsAndStats(explorer, orbData, row);
+            } catch (error) {
+                console.error("Error toggling orbs and stats:", error);
+            }
+        });
 
         tbody.appendChild(row);
     });
 }
 
 // 🔹 Function to Toggle Orbs & Stats
-function toggleOrbsAndStats(explorer, orbData, row) {
+async function toggleOrbsAndStats(explorer, orbData, row) {
     let nextRow = row.nextElementSibling;
 
     if (nextRow && nextRow.classList.contains('orb-details-row')) {
@@ -114,12 +150,15 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                 <th>Orb Name</th><th>Date Acquired</th><th>Note</th><th>Citation</th>
                 </tr></thead><tbody>`;
 
-            explorer.orbs_used.forEach(orbUsed => {
+            for (const orbUsed of explorer.orbs_used) {
                 const orbInfo = orbData.find(orb => orb.orb_id === orbUsed.orb_id);
                 const orbName = orbInfo ? orbInfo.orb_name : 'Unknown Orb';
                 const dateAcquired = formatDate(orbUsed.date_acquired);
                 const dateNote = orbUsed.date_note || '';
-                const citation = formatCitation(orbUsed.citation);
+                const citationId = orbUsed.citationId;
+                const citation = citationId && isValidCitationId(citationId)
+                    ? formatCitation(await getCitationData(explorer.docId, citationId))
+                    : 'Missing';
 
                 orbsContent += `<tr>
                     <td data-label="Orb Name" class="orb-name" data-orb-id="${orbUsed.orb_id}">${orbName}</td>
@@ -127,7 +166,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                     <td data-label="Note">${dateNote}</td>
                     <td data-label="Citation">${citation}</td>
                 </tr>`;
-            });
+            }
 
             orbsContent += '</tbody></table></div>';
         } else {
@@ -157,25 +196,22 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                     </tr>
                 </thead><tbody>`;
 
-            explorer.rankings.forEach(ranking => {
+            for (const ranking of explorer.rankings) {
                 const dateNoted = formatDate(ranking.date_noted);
                 const rank = ranking.rank !== 0 ? ranking.rank.toLocaleString() : 'Unknown';
                 const knownAbove = ranking.known_above_rank ? `Above ${ranking.known_above_rank.toLocaleString()}` : '';
-                let citation = '';
-                if (ranking.citation && ranking.citation.length > 0) {
-                    ranking.citation.forEach(cite => {
-                        citation += `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}<br />`;
-                    });
-                } else {
-                    citation = 'Missing';
-                }
+                const citationId = ranking.citationId;
+                const citation = citationId && isValidCitationId(citationId)
+                    ? formatCitation(await getCitationData(explorer.docId, citationId))
+                    : 'Missing';
+
                 rankingsContent += `<tr>
                     <td data-label="Rank">${rank}</td>
                     <td data-label="Known Above Rank">${knownAbove}</td>
                     <td data-label="Date Noted">${dateNoted}</td>
                     <td data-label="Citation">${citation}</td>
                 </tr>`;
-            });
+            }
 
             rankingsContent += '</tbody></table></div>';
         } else {
@@ -211,7 +247,7 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                     <th>Citation</th>
                 </tr></thead><tbody>`;
 
-            explorer.stats.forEach(stat => {
+            for (const stat of explorer.stats) {
                 statsContent += `<tr>
                     <td data-label="Reading Date">${formatDate(stat.date_noted)} - ${stat.date_sequence}</td>
                     <td data-label="Scan Type">${stat.scan_type}</td>
@@ -227,15 +263,12 @@ function toggleOrbsAndStats(explorer, orbData, row) {
                     <td data-label="Stat Total">${stat.stat_total}</td>
                     <td data-label="Deviation">${stat.points_from_average}</td>`;
 
-                if (stat.citation && stat.citation.length > 0) {
-                    stat.citation.forEach(cite => {
-                        statsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
-                    });
-                } else {
-                    statsContent += '<td data-label="Citation">Missing</td>';
-                }
-                statsContent += '</tr>';
-            });
+                const citationId = stat.citationId;
+                const citation = citationId && isValidCitationId(citationId)
+                    ? formatCitation(await getCitationData(explorer.docId, citationId))
+                    : 'Missing';
+                statsContent += `<td data-label="Citation">${citation}</td></tr>`;
+            }
 
             statsContent += '</tbody></table></div>';
         } else {
@@ -256,7 +289,7 @@ function addOrbHoverDetails() {
             if (!orbId) return;
 
             const orbData = await fetchFirestoreData("orb");
-            const orbInfo = orbData.find(orb => orb.orb_id == orbId);
+            let orbInfo = orbData.find(orb => orb.orb_id == orbId);
             if (!orbInfo) {
                 console.log(`Orb ID ${orbId} lookup failed, setting orbInfo to unknowns.`);
                 orbInfo = {
@@ -308,7 +341,7 @@ function toUnixTimestamp(dateNoted) {
 }
 
 // 🔹 Helper: Format Citation
-function formatCitation(citations) {
-    if (!citations || citations.length === 0) return 'Missing';
-    return citations.map(cite => `Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part:${cite.jnc_part || ''}`).join("<br />");
+function formatCitation(citation) {
+    if (!citation || typeof citation !== 'object') return 'Missing';
+    return `Vol:${citation.volume || ''} Ch:${citation.chapter || ''} JNC Part:${citation.jnc_part || ''}`;
 }

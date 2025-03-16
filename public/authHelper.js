@@ -154,10 +154,11 @@ async function renderSubItemsWithCitations(items, containerId, renderFunction) {
     const container = document.getElementById(containerId);
     container.innerHTML = '';
     for (const [index, item] of items.entries()) {
-        const citationData = item.citationId ? await getCitationData(item.citationId, currentCollection, currentDocId) : { chapter: '', jnc_part: '', volume: '' };
+        const citationId = item.citationId;
+        const citationData = citationId ? await getCitationData(citationId, currentCollection, currentDocId) : { chapter: '', jnc_part: '', volume: '' };
         const div = document.createElement('div');
         div.className = 'sub-item';
-        div.innerHTML = renderFunction(item, index, citationData);
+        div.innerHTML = renderFunction({ ...item, citationId }, index, citationData);
         container.appendChild(div);
     }
 }
@@ -170,6 +171,7 @@ async function getCitationData(citationId, collection, docId) {
         if (citationSnap.exists()) {
             return citationSnap.data();
         }
+        console.log(`No citation found for ${docId}/${citationId}, using default`);
         return { chapter: '', jnc_part: '', volume: '' };
     } catch (error) {
         console.error("Error fetching citation:", error);
@@ -181,10 +183,11 @@ async function getCitationData(citationId, collection, docId) {
 function renderRanking(item, index, citationData) {
     return `
         <label>Rank: <input type="number" name="rankings[${index}][rank]" value="${item.rank || ''}"></label>
+        <label>Known Above Rank: <input type="number" name="rankings[${index}][known_above_rank]" value="${item.known_above_rank || ''}"></label>
         <label>Date Noted: <input type="date" name="rankings[${index}][date_noted]" value="${item.date_noted ? new Date(item.date_noted).toISOString().split('T')[0] : ''}"></label>
-        <label>Chapter: <input type="number" name="rankings[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
-        <label>JNC Part: <input type="number" name="rankings[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
-        <label>Volume: <input type="number" name="rankings[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
+        <label>Chapter: <input type="text" name="rankings[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
+        <label>JNC Part: <input type="text" name="rankings[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
+        <label>Volume: <input type="text" name="rankings[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
         <button type="button" onclick="removeSubItem('rankings', ${index})">Remove</button><br>
     `;
 }
@@ -196,9 +199,18 @@ function renderStat(item, index, citationData) {
         <label>SP: <input type="number" name="stats[${index}][sp]" value="${item.sp || ''}"></label>
         <label>HP: <input type="number" step="0.01" name="stats[${index}][hp]" value="${item.hp || ''}"></label>
         <label>MP: <input type="number" step="0.01" name="stats[${index}][mp]" value="${item.mp || ''}"></label>
-        <label>Chapter: <input type="number" name="stats[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
-        <label>JNC Part: <input type="number" name="stats[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
-        <label>Volume: <input type="number" name="stats[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
+        <label>STR: <input type="number" name="stats[${index}][str]" value="${item.str || ''}"></label>
+        <label>VIT: <input type="number" name="stats[${index}][vit]" value="${item.vit || ''}"></label>
+        <label>INT: <input type="number" name="stats[${index}][int]" value="${item.int || ''}"></label>
+        <label>AGI: <input type="number" name="stats[${index}][agi]" value="${item.agi || ''}"></label>
+        <label>DEX: <input type="number" name="stats[${index}][dex]" value="${item.dex || ''}"></label>
+        <label>LUC: <input type="number" name="stats[${index}][luc]" value="${item.luc || ''}"></label>
+        <label>Stat Total: <input type="number" name="stats[${index}][stat_total]" value="${item.stat_total || ''}"></label>
+        <label>Points From Average: <input type="number" name="stats[${index}][points_from_average]" value="${item.points_from_average || ''}"></label>
+        <label>Date Sequence: <input type="text" name="stats[${index}][date_sequence]" value="${item.date_sequence || ''}"></label>
+        <label>Chapter: <input type="text" name="stats[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
+        <label>JNC Part: <input type="text" name="stats[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
+        <label>Volume: <input type="text" name="stats[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
         <button type="button" onclick="removeSubItem('stats', ${index})">Remove</button><br>
     `;
 }
@@ -207,9 +219,10 @@ function renderOrbUsed(item, index, citationData) {
     return `
         <label>Orb ID: <input type="text" name="orbs_used[${index}][orb_id]" value="${item.orb_id || ''}"></label>
         <label>Date Acquired: <input type="date" name="orbs_used[${index}][date_acquired]" value="${item.date_acquired ? new Date(item.date_acquired).toISOString().split('T')[0] : ''}"></label>
-        <label>Chapter: <input type="number" name="orbs_used[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
-        <label>JNC Part: <input type="number" name="orbs_used[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
-        <label>Volume: <input type="number" name="orbs_used[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
+        <label>Date Note: <input type="text" name="orbs_used[${index}][date_note]" value="${item.date_note || ''}"></label>
+        <label>Chapter: <input type="text" name="orbs_used[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
+        <label>JNC Part: <input type="text" name="orbs_used[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
+        <label>Volume: <input type="text" name="orbs_used[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
         <button type="button" onclick="removeSubItem('orbs_used', ${index})">Remove</button><br>
     `;
 }
@@ -219,31 +232,35 @@ function renderDropRate(item, index, citationData) {
         <label>Creature: <input type="text" name="drop_rates[${index}][creature]" value="${item.creature || ''}"></label>
         <label>Dungeon: <input type="text" name="drop_rates[${index}][dungeon]" value="${item.dungeon || ''}"></label>
         <label>Probability: <input type="number" step="0.01" name="drop_rates[${index}][probability]" value="${item.probability || ''}"></label>
-        <label>Chapter: <input type="number" name="drop_rates[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
-        <label>JNC Part: <input type="number" name="drop_rates[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
-        <label>Volume: <input type="number" name="drop_rates[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
+        <label>Chapter: <input type="text" name="drop_rates[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
+        <label>JNC Part: <input type="text" name="drop_rates[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
+        <label>Volume: <input type="text" name="drop_rates[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
         <button type="button" onclick="removeSubItem('drop_rates', ${index})">Remove</button><br>
     `;
 }
 
 window.addRanking = function() {
     const container = document.getElementById("rankings-container");
-    const currentItems = Array.from(container.children).map((_, index) => ({ rank: '', date_noted: '', citationId: '' }));
-    currentItems.push({ rank: '', date_noted: '', citationId: '' });
+    const currentItems = Array.from(container.children).map((_, index) => ({ rank: '', known_above_rank: '', date_noted: '', citationId: '' }));
+    currentItems.push({ rank: '', known_above_rank: '', date_noted: '', citationId: '' });
     renderSubItemsWithCitations(currentItems, "rankings-container", renderRanking);
 };
 
 window.addStat = function() {
     const container = document.getElementById("stats-container");
-    const currentItems = Array.from(container.children).map((_, index) => ({ date_noted: '', scan_type: '', sp: '', hp: '', mp: '', citationId: '' }));
-    currentItems.push({ date_noted: '', scan_type: '', sp: '', hp: '', mp: '', citationId: '' });
+    const currentItems = Array.from(container.children).map((_, index) => ({ 
+        date_noted: '', scan_type: '', sp: '', hp: '', mp: '', str: '', vit: '', int: '', agi: '', dex: '', luc: '', stat_total: '', points_from_average: '', date_sequence: '', citationId: '' 
+    }));
+    currentItems.push({ 
+        date_noted: '', scan_type: '', sp: '', hp: '', mp: '', str: '', vit: '', int: '', agi: '', dex: '', luc: '', stat_total: '', points_from_average: '', date_sequence: '', citationId: '' 
+    });
     renderSubItemsWithCitations(currentItems, "stats-container", renderStat);
 };
 
 window.addOrbUsed = function() {
     const container = document.getElementById("orbs-used-container");
-    const currentItems = Array.from(container.children).map((_, index) => ({ orb_id: '', date_acquired: '', citationId: '' }));
-    currentItems.push({ orb_id: '', date_acquired: '', citationId: '' });
+    const currentItems = Array.from(container.children).map((_, index) => ({ orb_id: '', date_acquired: '', date_note: '', citationId: '' }));
+    currentItems.push({ orb_id: '', date_acquired: '', date_note: '', citationId: '' });
     renderSubItemsWithCitations(currentItems, "orbs-used-container", renderOrbUsed);
 };
 
@@ -264,7 +281,7 @@ window.removeSubItem = function(field, index) {
             if (match) {
                 const key = match[2];
                 item[key] = input.value;
-                if (key === 'rank') item[key] = parseInt(input.value) || null;
+                if (['rank', 'known_above_rank', 'str', 'vit', 'int', 'agi', 'dex', 'luc', 'stat_total', 'points_from_average'].includes(key)) item[key] = parseInt(input.value) || null;
                 if (['sp', 'hp', 'mp', 'probability'].includes(key)) item[key] = parseFloat(input.value) || null;
             }
         });
@@ -281,6 +298,25 @@ function addModalButtons(form) {
     `;
     const closeBtn = document.querySelector("#edit-modal .close");
     closeBtn.onclick = () => document.getElementById("edit-modal").style.display = "none";
+}
+
+// Utility to clean undefined values from an object recursively
+function cleanUndefined(obj) {
+    if (obj === null || obj === undefined) return null;
+    if (Array.isArray(obj)) {
+        return obj.map(cleanUndefined).filter(item => item !== null);
+    }
+    if (typeof obj === 'object') {
+        const cleaned = {};
+        for (const key in obj) {
+            const value = cleanUndefined(obj[key]);
+            if (value !== undefined) {
+                cleaned[key] = value;
+            }
+        }
+        return Object.keys(cleaned).length ? cleaned : null;
+    }
+    return obj;
 }
 
 export async function saveEdit() {
@@ -305,89 +341,99 @@ export async function saveEdit() {
             let currentIndex = -1;
             let currentRanking = {};
             rankingInputs.forEach(input => {
-                const match = input.name.match(/\[(\d+)\]\[(.*?)\]/);
+                const match = input.name.match(/rankings\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
                 if (match) {
                     const index = parseInt(match[1]);
                     const key = match[2];
+                    const subKey = match[3];
                     if (index !== currentIndex) {
-                        if (currentIndex !== -1) {
-                            updates.rankings.push(currentRanking);
-                            saveCitation(currentRanking.citation, currentCollection, currentDocId, currentRanking.citationId);
+                        if (currentIndex !== -1 && Object.keys(currentRanking).length) {
+                            console.log(`Saving ranking[${currentIndex}] with citationData:`, currentRanking.citationData);
+                            updates.rankings.push(cleanUndefined({ ...currentRanking, citation: undefined }));
+                            saveCitation(currentRanking.citationData || {}, currentCollection, currentDocId, currentRanking.citationId);
                         }
                         currentIndex = index;
-                        currentRanking = { citationId: crypto.randomUUID() };
+                        currentRanking = { citationId: crypto.randomUUID(), citationData: {} };
                     }
-                    currentRanking[key] = input.value || null;
-                    if (key === 'rank') currentRanking[key] = parseInt(input.value) || null;
-                    if (key.startsWith('citation[')) {
-                        const citationKey = key.replace('citation[', '').replace(']', '');
-                        currentRanking.citation = currentRanking.citation || {};
-                        currentRanking.citation[citationKey] = input.value || null;
+                    if (key === 'rank' || key === 'known_above_rank') {
+                        currentRanking[key] = input.value ? parseInt(input.value) : null;
+                    } else if (key === 'date_noted') {
+                        currentRanking[key] = input.value || null;
+                    } else if (key === 'citation' && subKey) {
+                        currentRanking.citationData[subKey] = input.value !== undefined ? (input.value || null) : null;
                     }
                 }
             });
             if (Object.keys(currentRanking).length) {
-                updates.rankings.push(currentRanking);
-                saveCitation(currentRanking.citation, currentCollection, currentDocId, currentRanking.citationId);
+                console.log(`Saving ranking[${currentIndex}] with citationData:`, currentRanking.citationData);
+                updates.rankings.push(cleanUndefined({ ...currentRanking, citation: undefined }));
+                saveCitation(currentRanking.citationData || {}, currentCollection, currentDocId, currentRanking.citationId);
             }
 
             const statInputs = form.querySelectorAll('[name^="stats"]');
             currentIndex = -1;
             let currentStat = {};
             statInputs.forEach(input => {
-                const match = input.name.match(/\[(\d+)\]\[(.*?)\]/);
+                const match = input.name.match(/stats\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
                 if (match) {
                     const index = parseInt(match[1]);
                     const key = match[2];
+                    const subKey = match[3];
                     if (index !== currentIndex) {
-                        if (currentIndex !== -1) {
-                            updates.stats.push(currentStat);
-                            saveCitation(currentStat.citation, currentCollection, currentDocId, currentStat.citationId);
+                        if (currentIndex !== -1 && Object.keys(currentStat).length) {
+                            console.log(`Saving stat[${currentIndex}] with citationData:`, currentStat.citationData);
+                            updates.stats.push(cleanUndefined({ ...currentStat, citation: undefined }));
+                            saveCitation(currentStat.citationData || {}, currentCollection, currentDocId, currentStat.citationId);
                         }
                         currentIndex = index;
-                        currentStat = { citationId: crypto.randomUUID() };
+                        currentStat = { citationId: crypto.randomUUID(), citationData: {} };
                     }
-                    currentStat[key] = input.value || null;
-                    if (['sp', 'hp', 'mp'].includes(key)) currentStat[key] = parseFloat(input.value) || null;
-                    if (key.startsWith('citation[')) {
-                        const citationKey = key.replace('citation[', '').replace(']', '');
-                        currentStat.citation = currentStat.citation || {};
-                        currentStat.citation[citationKey] = input.value || null;
+                    if (key === 'date_noted' || key === 'scan_type' || key === 'date_sequence') {
+                        currentStat[key] = input.value || null;
+                    } else if (['sp', 'hp', 'mp'].includes(key)) {
+                        currentStat[key] = input.value ? parseFloat(input.value) : null;
+                    } else if (['str', 'vit', 'int', 'agi', 'dex', 'luc', 'stat_total', 'points_from_average'].includes(key)) {
+                        currentStat[key] = input.value ? parseInt(input.value) : null;
+                    } else if (key === 'citation' && subKey) {
+                        currentStat.citationData[subKey] = input.value !== undefined ? (input.value || null) : null;
                     }
                 }
             });
             if (Object.keys(currentStat).length) {
-                updates.stats.push(currentStat);
-                saveCitation(currentStat.citation, currentCollection, currentDocId, currentStat.citationId);
+                console.log(`Saving stat[${currentIndex}] with citationData:`, currentStat.citationData);
+                updates.stats.push(cleanUndefined({ ...currentStat, citation: undefined }));
+                saveCitation(currentStat.citationData || {}, currentCollection, currentDocId, currentStat.citationId);
             }
 
             const orbUsedInputs = form.querySelectorAll('[name^="orbs_used"]');
             currentIndex = -1;
             let currentOrbUsed = {};
             orbUsedInputs.forEach(input => {
-                const match = input.name.match(/\[(\d+)\]\[(.*?)\]/);
+                const match = input.name.match(/orbs_used\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
                 if (match) {
                     const index = parseInt(match[1]);
                     const key = match[2];
+                    const subKey = match[3];
                     if (index !== currentIndex) {
-                        if (currentIndex !== -1) {
-                            updates.orbs_used.push(currentOrbUsed);
-                            saveCitation(currentOrbUsed.citation, currentCollection, currentDocId, currentOrbUsed.citationId);
+                        if (currentIndex !== -1 && Object.keys(currentOrbUsed).length) {
+                            console.log(`Saving orb_used[${currentIndex}] with citationData:`, currentOrbUsed.citationData);
+                            updates.orbs_used.push(cleanUndefined({ ...currentOrbUsed, citation: undefined }));
+                            saveCitation(currentOrbUsed.citationData || {}, currentCollection, currentDocId, currentOrbUsed.citationId);
                         }
                         currentIndex = index;
-                        currentOrbUsed = { citationId: crypto.randomUUID() };
+                        currentOrbUsed = { citationId: crypto.randomUUID(), citationData: {} };
                     }
-                    currentOrbUsed[key] = input.value || null;
-                    if (key.startsWith('citation[')) {
-                        const citationKey = key.replace('citation[', '').replace(']', '');
-                        currentOrbUsed.citation = currentOrbUsed.citation || {};
-                        currentOrbUsed.citation[citationKey] = input.value || null;
+                    if (key === 'orb_id' || key === 'date_acquired' || key === 'date_note') {
+                        currentOrbUsed[key] = input.value || null;
+                    } else if (key === 'citation' && subKey) {
+                        currentOrbUsed.citationData[subKey] = input.value !== undefined ? (input.value || null) : null;
                     }
                 }
             });
             if (Object.keys(currentOrbUsed).length) {
-                updates.orbs_used.push(currentOrbUsed);
-                saveCitation(currentOrbUsed.citation, currentCollection, currentDocId, currentOrbUsed.citationId);
+                console.log(`Saving orb_used[${currentIndex}] with citationData:`, currentOrbUsed.citationData);
+                updates.orbs_used.push(cleanUndefined({ ...currentOrbUsed, citation: undefined }));
+                saveCitation(currentOrbUsed.citationData || {}, currentCollection, currentDocId, currentOrbUsed.citationId);
             }
 
         } else if (currentCollection === "orb") {
@@ -402,38 +448,50 @@ export async function saveEdit() {
             currentIndex = -1;
             let currentDropRate = {};
             dropRateInputs.forEach(input => {
-                const match = input.name.match(/\[(\d+)\]\[(.*?)\]/);
+                const match = input.name.match(/drop_rates\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
                 if (match) {
                     const index = parseInt(match[1]);
                     const key = match[2];
+                    const subKey = match[3];
                     if (index !== currentIndex) {
-                        if (currentIndex !== -1) {
-                            updates.drop_rates.push(currentDropRate);
-                            saveCitation(currentDropRate.citation, currentCollection, currentDocId, currentDropRate.citationId);
+                        if (currentIndex !== -1 && Object.keys(currentDropRate).length) {
+                            console.log(`Saving drop_rate[${currentIndex}] with citationData:`, currentDropRate.citationData);
+                            updates.drop_rates.push(cleanUndefined({ ...currentDropRate, citation: undefined }));
+                            saveCitation(currentDropRate.citationData || {}, currentCollection, currentDocId, currentDropRate.citationId);
                         }
                         currentIndex = index;
-                        currentDropRate = { citationId: crypto.randomUUID() };
+                        currentDropRate = { citationId: crypto.randomUUID(), citationData: {} };
                     }
-                    currentDropRate[key] = input.value || null;
-                    if (key === 'probability') currentDropRate[key] = parseFloat(input.value) || null;
-                    if (key.startsWith('citation[')) {
-                        const citationKey = key.replace('citation[', '').replace(']', '');
-                        currentDropRate.citation = currentDropRate.citation || {};
-                        currentDropRate.citation[citationKey] = input.value || null;
+                    if (key === 'creature' || key === 'dungeon') {
+                        currentDropRate[key] = input.value || null;
+                    } else if (key === 'probability') {
+                        currentDropRate[key] = input.value ? parseFloat(input.value) : null;
+                    } else if (key === 'citation' && subKey) {
+                        currentDropRate.citationData[subKey] = input.value !== undefined ? (input.value || null) : null;
                     }
                 }
             });
             if (Object.keys(currentDropRate).length) {
-                updates.drop_rates.push(currentDropRate);
-                saveCitation(currentDropRate.citation, currentCollection, currentDocId, currentDropRate.citationId);
+                console.log(`Saving drop_rate[${currentIndex}] with citationData:`, currentDropRate.citationData);
+                updates.drop_rates.push(cleanUndefined({ ...currentDropRate, citation: undefined }));
+                saveCitation(currentDropRate.citationData || {}, currentCollection, currentDocId, currentDropRate.citationId);
             }
         }
 
+        // Clean up empty arrays and remove undefined values
         ['rankings', 'stats', 'orbs_used', 'drop_rates'].forEach(field => {
             if (updates[field]) {
-                updates[field] = updates[field].filter(item => Object.values(item).some(val => val !== null && val !== ''));
+                updates[field] = updates[field].filter(item => {
+                    return item && Object.values(item).some(val => val !== null && val !== '' && val !== undefined);
+                });
             }
         });
+
+        // Final cleanup of undefined values
+        updates = cleanUndefined(updates);
+
+        // Log the updates object to debug
+        console.log("Updates object before save:", JSON.stringify(updates, null, 2));
 
         const docRef = doc(db, currentCollection, currentDocId);
         await updateDoc(docRef, updates);
@@ -442,17 +500,17 @@ export async function saveEdit() {
         window.location.reload();
     } catch (error) {
         console.error("Error saving edit:", error);
-        alert("Failed to save changes.");
+        alert("Failed to save changes. Check console for details.");
     }
 }
 
 function saveCitation(citationData, collection, docId, citationId) {
-    if (citationData) {
-        const citationRef = doc(db, `${collection}/${docId}/citations`, citationId);
-        setDoc(citationRef, {
-            chapter: citationData.chapter || null,
-            jnc_part: citationData.jnc_part || null,
-            volume: citationData.volume || null
-        }, { merge: true }).catch(error => console.error("Error saving citation:", error));
-    }
+    console.log(`Saving citation for ${collection}/${docId}/citations/${citationId}:`, citationData);
+    const cleanedCitationData = cleanUndefined({
+        chapter: citationData.chapter !== undefined ? citationData.chapter || null : null,
+        jnc_part: citationData.jnc_part !== undefined ? citationData.jnc_part || null : null,
+        volume: citationData.volume !== undefined ? citationData.volume || null : null
+    });
+    const citationRef = doc(db, `${collection}/${docId}/citations`, citationId);
+    setDoc(citationRef, cleanedCitationData || { chapter: null, jnc_part: null, volume: null }, { merge: true }).catch(error => console.error("Error saving citation:", error));
 }

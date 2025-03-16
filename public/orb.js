@@ -1,7 +1,7 @@
 // Import Firebase modules
 import { firebaseApp } from "./firebase-config.js";
 import { checkUserCanEdit, updateEditColumnVisibility, initializeEditButtons } from "./authHelper.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // 🔹 Initialize Firebase & Firestore
 const db = getFirestore(firebaseApp);
@@ -25,6 +25,35 @@ async function fetchFirestoreData(collectionName) {
     const docs = querySnapshot.docs.map(doc => ({ docId: doc.id, ...doc.data() }));
     console.log(`Fetched ${docs.length} documents from ${collectionName}:`, docs.slice(0, 3));
     return docs;
+}
+
+// 🔹 Validate Citation ID (check if it's a UUID)
+function isValidCitationId(citationId) {
+    if (typeof citationId !== 'string') return false;
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    return uuidRegex.test(citationId) || citationId === 'auto-id'; // Allow 'auto-id' for auto-generated IDs
+}
+
+// 🔹 Fetch Citation Data from Subcollection
+async function getCitationData(docId, citationId) {
+    try {
+        const citationRef = doc(db, `orb/${docId}/citations`, citationId);
+        const citationSnap = await getDoc(citationRef);
+        if (citationSnap.exists()) {
+            return citationSnap.data();
+        }
+        console.log(`No citation found for ${docId}/${citationId}, using default`);
+        return { chapter: '', jnc_part: '', volume: '' };
+    } catch (error) {
+        console.error("Error fetching citation:", error);
+        return { chapter: '', jnc_part: '', volume: '' };
+    }
+}
+
+// 🔹 Format Citation
+function formatCitation(citation) {
+    if (!citation || typeof citation !== 'object') return 'Missing';
+    return `Vol:${citation.volume || ''} Ch:${citation.chapter || ''} JNC Part:${citation.jnc_part || ''}`;
 }
 
 // 🔹 Process Orb Data
@@ -65,7 +94,7 @@ function populateOrbTable(orbData) {
 }
 
 // Function to toggle the drop monster details for each orb
-function toggleOrbDetails(orb, row) {
+async function toggleOrbDetails(orb, row) {
     let detailsRow = row.nextElementSibling;
 
     if (detailsRow && detailsRow.classList.contains('orb-details-row')) {
@@ -92,7 +121,7 @@ function toggleOrbDetails(orb, row) {
                 </thead>
                 <tbody>`;
 
-            orb.drop_rates.forEach(rate => {
+            for (const rate of orb.drop_rates) {
                 const dropCreature = rate.creature !== null ? rate.creature : 'Unknown Monster';
                 const dropDungeon = rate.dungeon != null ? rate.dungeon : 'Unknown';
                 const dropFloor = rate.floor != null ? rate.floor : 'Unknown';
@@ -115,21 +144,22 @@ function toggleOrbDetails(orb, row) {
                         cooldownDisplay = `${(cooldownDays * 86400).toLocaleString()} second(s)`;
                     }
                 }
+
                 detailsContent += `<tr>
                     <td data-label="Dropped By">${dropCreature}</td>
                     <td data-label="In Dungeon">${dropDungeon}</td>
                     <td data-label="On Floor">${dropFloor}</td>
                     <td data-label="Probability">${probability}</td>
                     <td data-label="Cooldown">${cooldownDisplay}</td>`;
-                if (rate.citation && rate.citation.length > 0) {
-                    rate.citation.forEach(cite => {
-                        detailsContent += `<td data-label="Citation">Vol:${cite.volume || ''} Ch:${cite.chapter || ''} JNC Part: ${cite.jnc_part !== null ? cite.jnc_part : ''}</td>`;
-                    });
-                } else {
-                    detailsContent += `<td data-label="Citation">Missing</td>`;
-                }
+
+                // Handle citation using citationId
+                const citationId = rate.citationId;
+                const citation = citationId && isValidCitationId(citationId)
+                    ? formatCitation(await getCitationData(orb.docId, citationId))
+                    : 'Missing';
+                detailsContent += `<td data-label="Citation">${citation}</td>`;
                 detailsContent += `</tr>`;
-            });
+            }
 
             detailsContent += '</tbody></table>';
         } else {
