@@ -231,7 +231,8 @@ function renderDropRate(item, index, citationData) {
     return `
         <label>Creature: <input type="text" name="drop_rates[${index}][creature]" value="${item.creature || ''}"></label>
         <label>Dungeon: <input type="text" name="drop_rates[${index}][dungeon]" value="${item.dungeon || ''}"></label>
-        <label>Probability: <input type="number" step="0.01" name="drop_rates[${index}][probability]" value="${item.probability || ''}"></label>
+        <label>Favorable Outcomes: <input type="number" name="drop_rates[${index}][favorable_outcomes]" value="${item.favorable_outcomes || ''}"></label>
+        <label>Total Events: <input type="number" name="drop_rates[${index}][total_events]" value="${item.total_events || ''}"></label>
         <label>Chapter: <input type="text" name="drop_rates[${index}][citation][chapter]" value="${citationData.chapter || ''}"></label>
         <label>JNC Part: <input type="text" name="drop_rates[${index}][citation][jnc_part]" value="${citationData.jnc_part || ''}"></label>
         <label>Volume: <input type="text" name="drop_rates[${index}][citation][volume]" value="${citationData.volume || ''}"></label>
@@ -324,6 +325,7 @@ export async function saveEdit() {
         const modal = document.getElementById("edit-modal");
         const form = modal.querySelector("form");
         let updates = {};
+        let currentIndex = -1; // Declare currentIndex once here
 
         if (currentCollection === "explorer") {
             updates = {
@@ -338,7 +340,6 @@ export async function saveEdit() {
             };
 
             const rankingInputs = form.querySelectorAll('[name^="rankings"]');
-            let currentIndex = -1;
             let currentRanking = {};
             rankingInputs.forEach(input => {
                 const match = input.name.match(/rankings\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
@@ -371,7 +372,6 @@ export async function saveEdit() {
             }
 
             const statInputs = form.querySelectorAll('[name^="stats"]');
-            currentIndex = -1;
             let currentStat = {};
             statInputs.forEach(input => {
                 const match = input.name.match(/stats\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
@@ -406,7 +406,6 @@ export async function saveEdit() {
             }
 
             const orbUsedInputs = form.querySelectorAll('[name^="orbs_used"]');
-            currentIndex = -1;
             let currentOrbUsed = {};
             orbUsedInputs.forEach(input => {
                 const match = input.name.match(/orbs_used\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
@@ -445,7 +444,6 @@ export async function saveEdit() {
             };
 
             const dropRateInputs = form.querySelectorAll('[name^="drop_rates"]');
-            currentIndex = -1;
             let currentDropRate = {};
             dropRateInputs.forEach(input => {
                 const match = input.name.match(/drop_rates\[(\d+)\]\[(.*?)\](?:\[([^\]]*)\])?/);
@@ -464,8 +462,10 @@ export async function saveEdit() {
                     }
                     if (key === 'creature' || key === 'dungeon') {
                         currentDropRate[key] = input.value || null;
-                    } else if (key === 'probability') {
-                        currentDropRate[key] = input.value ? parseFloat(input.value) : null;
+                    } else if (key === 'favorable_outcomes') {
+                        currentDropRate[key] = input.value ? parseInt(input.value) : null;
+                    } else if (key === 'total_events') {
+                        currentDropRate[key] = input.value ? parseInt(input.value) : null;
                     } else if (key === 'citation' && subKey) {
                         currentDropRate.citationData[subKey] = input.value !== undefined ? (input.value || null) : null;
                     }
