@@ -1,57 +1,35 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import {
-  getExplorers,
-  getExplorerBySlug,
+  Character,
   getOrbById,
   getFullName,
   getLatestRanking,
   formatRank,
   formatDate,
-  formatCitation,
   getNationalityFlag,
 } from "@/lib/data";
 import { CitationBadge } from "@/components/CitationBadge";
 
-export async function generateStaticParams() {
-  const explorers = getExplorers();
-  return explorers.map((e) => ({ slug: e.slug }));
+interface CharacterDetailProps {
+  character: Character;
+  backHref: string;
+  backLabel: string;
 }
 
-export async function generateMetadata(
-  props: PageProps<"/explorers/[slug]">
-): Promise<Metadata> {
-  const { slug } = await props.params;
-  const explorer = getExplorerBySlug(slug);
-  if (!explorer) return { title: "Explorer Not Found" };
-  const name = getFullName(explorer);
-  return {
-    title: `${name}${explorer.moniker ? ` "${explorer.moniker}"` : ""}`,
-    description: `Stats, rankings, and skill orbs for ${name} from D-Genesis.`,
-  };
-}
-
-export default async function ExplorerDetailPage(
-  props: PageProps<"/explorers/[slug]">
-) {
-  const { slug } = await props.params;
-  const explorer = getExplorerBySlug(slug);
-  if (!explorer) notFound();
-
-  const name = getFullName(explorer);
-  const latestRanking = getLatestRanking(explorer);
-  const flag = getNationalityFlag(explorer.nationality);
+export function CharacterDetail({ character, backHref, backLabel }: CharacterDetailProps) {
+  const name = getFullName(character);
+  const latestRanking = getLatestRanking(character);
+  const flag = getNationalityFlag(character.nationality);
 
   // Sort rankings by date (most recent first)
-  const sortedRankings = [...explorer.rankings].sort((a, b) => {
+  const sortedRankings = [...character.rankings].sort((a, b) => {
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     return dateB - dateA;
   });
 
   // Sort stats by date and sequence
-  const sortedStats = [...explorer.stats].sort((a, b) => {
+  const sortedStats = [...character.stats].sort((a, b) => {
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     if (dateA !== dateB) return dateA - dateB;
@@ -62,70 +40,77 @@ export default async function ExplorerDetailPage(
     <>
       <div className="detail-header">
         <div className="detail-breadcrumb">
-          <Link href="/explorers">← WDARL Rankings</Link>
+          <Link href={backHref}>← {backLabel}</Link>
         </div>
         <h1 className="detail-title">
           {name}
-          {!explorer.public && <span className="wdarl-anon-badge">✱ Anonymous on WDARL</span>}
+          {!character.public && character.in_wdarl && <span className="wdarl-anon-badge">✱ Anonymous on WDARL</span>}
         </h1>
-        {explorer.moniker && (
+        {character.moniker && (
           <div className="detail-subtitle">
-            &ldquo;{explorer.moniker}&rdquo;
+            &ldquo;{character.moniker}&rdquo;
           </div>
         )}
         <div className="detail-meta">
-          <div className="detail-meta-item">
-            <span className="detail-meta-label">Rank:</span>
-            <strong style={{ color: "var(--accent-amber)", fontFamily: "var(--font-mono)" }}>
-              #{formatRank(latestRanking)}
-            </strong>
-          </div>
-          {explorer.sex && (
+          {character.in_wdarl && (
+            <div className="detail-meta-item">
+              <span className="detail-meta-label">Rank:</span>
+              <strong style={{ color: "var(--accent-amber)", fontFamily: "var(--font-mono)" }}>
+                #{formatRank(latestRanking)}
+              </strong>
+            </div>
+          )}
+          {character.sex && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">Sex:</span>
-              <span>{explorer.sex}</span>
+              <span>{character.sex}</span>
             </div>
           )}
-          {explorer.birthday && (
+          {character.birthday && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">Birthday:</span>
-              <span>{explorer.birthday}</span>
+              <span>{character.birthday}</span>
             </div>
           )}
-          {explorer.nationality && (
+          {character.nationality && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">Nationality:</span>
               <span>
-                {flag} {explorer.nationality}
+                {flag} {character.nationality}
               </span>
             </div>
           )}
-          {explorer.date_first_known && (
+          {character.date_first_known && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">First Known:</span>
-              <span>{formatDate(explorer.date_first_known)}</span>
+              <span>{formatDate(character.date_first_known)}</span>
             </div>
           )}
-          {latestRanking?.citation && (
+          {character.in_wdarl && latestRanking?.citation && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">Rank Citation:</span>
               <CitationBadge citation={latestRanking.citation} />
             </div>
           )}
         </div>
+        {character.citation && (
+          <div style={{ marginTop: 'var(--space-md)' }}>
+            <CitationBadge citation={character.citation} />
+          </div>
+        )}
       </div>
 
-      {explorer.note && (
+      {character.note && (
         <section className="detail-section">
           <h2 className="detail-section-title">Note</h2>
-          <div className="card" style={{ padding: 'var(--space-md)', whiteSpace: 'pre-wrap', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: explorer.note }} />
+          <div className="card" style={{ padding: 'var(--space-md)', whiteSpace: 'pre-wrap', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: character.note }} />
         </section>
       )}
 
       {/* ── Orbs Used ─────────────────── */}
-      <section className="detail-section">
-        <h2 className="detail-section-title">Orbs Used</h2>
-        {explorer.orbs_used.length > 0 ? (
+      {character.orbs_used && character.orbs_used.length > 0 && (
+        <section className="detail-section">
+          <h2 className="detail-section-title">Orbs Used</h2>
           <>
             {/* Desktop table */}
             <div className="data-table-wrapper detail-desktop-only">
@@ -139,7 +124,7 @@ export default async function ExplorerDetailPage(
                   </tr>
                 </thead>
                 <tbody>
-                  {explorer.orbs_used.map((orbUsed, i) => {
+                  {character.orbs_used.map((orbUsed, i) => {
                     const orbInfo = orbUsed.orb_id
                       ? getOrbById(orbUsed.orb_id)
                       : null;
@@ -172,7 +157,7 @@ export default async function ExplorerDetailPage(
             </div>
             {/* Mobile stacked cards */}
             <div className="detail-mobile-only">
-              {explorer.orbs_used.map((orbUsed, i) => {
+              {character.orbs_used.map((orbUsed, i) => {
                 const orbInfo = orbUsed.orb_id
                   ? getOrbById(orbUsed.orb_id)
                   : null;
@@ -210,17 +195,13 @@ export default async function ExplorerDetailPage(
               })}
             </div>
           </>
-        ) : (
-          <p style={{ color: "var(--text-muted)" }}>
-            No orbs known to have been used.
-          </p>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* ── Rankings Over Time ─────────── */}
-      <section className="detail-section">
-        <h2 className="detail-section-title">Rankings Over Time</h2>
-        {sortedRankings.length > 0 ? (
+      {character.rankings && sortedRankings.length > 0 && (
+        <section className="detail-section">
+          <h2 className="detail-section-title">Rankings Over Time</h2>
           <>
             {/* Desktop table */}
             <div className="data-table-wrapper detail-desktop-only">
@@ -285,17 +266,13 @@ export default async function ExplorerDetailPage(
               ))}
             </div>
           </>
-        ) : (
-          <p style={{ color: "var(--text-muted)" }}>
-            No ranking history available.
-          </p>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* ── Explorer Stats ─────────────── */}
-      <section className="detail-section">
-        <h2 className="detail-section-title">Explorer Stats</h2>
-        {sortedStats.length > 0 ? (
+      {character.stats && sortedStats.length > 0 && (
+        <section className="detail-section">
+          <h2 className="detail-section-title">Combat Stats</h2>
           <>
             {/* Desktop table */}
             <div className="data-table-wrapper detail-desktop-only">
@@ -423,22 +400,6 @@ export default async function ExplorerDetailPage(
               ))}
             </div>
           </>
-        ) : (
-          <p style={{ color: "var(--text-muted)" }}>No stats available.</p>
-        )}
-      </section>
-
-      {/* ── Radar Chart Placeholder ────── */}
-      {sortedStats.length > 0 && (
-        <section className="detail-section">
-          <h2 className="detail-section-title">Stat Visualization</h2>
-          <div className="radar-placeholder">
-            <div className="radar-placeholder-icon">📊</div>
-            <p>Radar / Spider chart coming soon</p>
-            <p style={{ fontSize: "0.8rem", marginTop: "0.5rem" }}>
-              Will visualize STR, VIT, INT, AGI, DEX, LUC over time
-            </p>
-          </div>
         </section>
       )}
     </>

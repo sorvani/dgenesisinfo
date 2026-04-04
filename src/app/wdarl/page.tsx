@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getExplorers, getAllUniqueRankingCitations } from "@/lib/data";
+import { getCharacters, getAllUniqueRankingCitations } from "@/lib/data";
 import { ExplorersGrid } from "@/components/ExplorersGrid";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ExplorersPage() {
-  const explorers = getExplorers();
+  const characters = getCharacters().filter(c => c.in_wdarl);
   const citations = getAllUniqueRankingCitations();
 
   return (
@@ -17,12 +17,12 @@ export default function ExplorersPage() {
       <div className="page-header">
         <h1>WDARL Explorer Rankings</h1>
         <p>
-          World Dungeon Association Ranking List — {explorers.length} known
+          World Dungeon Association Ranking List — {characters.length} known
           explorers sorted by current rank. Click an explorer to view their full
           stats, orbs, and ranking history.
         </p>
       </div>
-      <ExplorersGrid initialExplorers={explorers} citations={citations} />
+      <ExplorersGrid initialCharacters={characters} citations={citations} />
     </>
   );
 }

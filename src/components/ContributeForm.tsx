@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { type Orb, type Explorer, type TimelineEvent, getIANATimezone } from '@/lib/data';
+import { type Orb, type Character, type TimelineEvent, getIANATimezone } from '@/lib/data';
 
 interface Props {
   orbs: Orb[];
-  explorers: Explorer[];
+  characters: Character[];
   timeline: TimelineEvent[];
 }
 
@@ -36,18 +36,24 @@ const dropRateSchema: FieldDef[] = [
   ...citationSchema
 ];
 
-const explorerBaseSchema: FieldDef[] = [
+const characterBaseSchema: FieldDef[] = [
   { key: 'slug', label: 'Slug (ID)', type: 'text', required: true },
   { key: 'first_name', label: 'First Name', type: 'text' },
   { key: 'last_name', label: 'Last Name', type: 'text' },
   { key: 'moniker', label: 'Moniker', type: 'text' },
   { key: 'nationality', label: 'Nationality (e.g. JP, US)', type: 'text' },
   { key: 'date_first_known', label: 'Date First Known', type: 'date' },
+  { key: 'in_wdarl', label: 'In WDARL (Enables Stats/Rankings)', type: 'boolean' },
   { key: 'public', label: 'Public on WDARL', type: 'boolean' },
   { key: 'area', label: 'Area on D-Card', type: 'number' },
   { key: 'birthday', label: 'Birthday', type: 'text' },
   { key: 'sex', label: 'Sex', type: 'text' },
-  { key: 'note', label: 'Note (HTML OK)', type: 'textarea' }
+  { key: '_initial_rank', label: 'Initial Rank (New Character Only)', type: 'number' },
+  { key: '_initial_stat_total', label: 'Initial Stat Total (New Character Only)', type: 'number' },
+  { key: '_initial_orb_id', label: 'Initial Orb ID Acquired (New Character Only)', type: 'number' },
+  { key: 'tags', label: 'Tags (comma separated)', type: 'text' },
+  { key: 'note', label: 'Note (HTML OK)', type: 'textarea' },
+  ...citationSchema
 ];
 
 const rankingSchema: FieldDef[] = [
@@ -140,6 +146,8 @@ function DynamicForm({ schema, initialData, onSave, onCancel, actionName }: { sc
 
           if (field.type === 'hidden') return null;
 
+          if (field.key.startsWith('_initial_') && (initialData.slug || data.in_wdarl === false)) return null;
+
           return (
             <div key={field.key} style={{ gridColumn: field.type === 'textarea' ? '1 / -1' : 'auto' }}>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 'bold', marginBottom: 'var(--space-xs)' }}>{field.label}</label>
@@ -224,8 +232,8 @@ function ListView({ items, summaryFn, onAdd, onEdit, onCopy, onDelete }: { items
 type ViewState = 'list' | 'form';
 type EditAction = 'add' | 'edit' | 'copy';
 
-export function ContributeForm({ orbs, explorers, timeline }: Props) {
-  const [type, setType] = useState<'orb' | 'explorer' | 'timeline'>('explorer');
+export function ContributeForm({ orbs, characters, timeline }: Props) {
+  const [type, setType] = useState<'orb' | 'character' | 'timeline'>('character');
   const [selectedSlug, setSelectedSlug] = useState<string>('');
   const [section, setSection] = useState<string>('base'); 
   
@@ -240,7 +248,7 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
   };
 
   const handleTypeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newType = e.target.value as 'orb' | 'explorer' | 'timeline';
+    const newType = e.target.value as 'orb' | 'character' | 'timeline';
     setType(newType);
     if (newType === 'timeline') {
       setSelectedSlug('timeline');
@@ -277,8 +285,12 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
       isArray = true;
       sectionName = "Events";
     } else if (type === 'orb') {
-      const found = orbs.find(o => o.slug === selectedSlug);
-      entity = found ? { ...found } : null;
+      if (selectedSlug === '__new__') {
+        entity = {};
+      } else {
+        const found = orbs.find(o => o.slug === selectedSlug);
+        entity = found ? { ...found } : null;
+      }
       if (section === 'base') {
         schema = orbBaseSchema;
         if (entity) delete entity.drop_rates;
@@ -286,14 +298,21 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
         schema = dropRateSchema; items = entity?.drop_rates || []; isArray = true; sectionName = "Drop Rates";
       }
     } else {
-      const found = explorers.find(ex => ex.slug === selectedSlug);
-      entity = found ? { ...found } : null;
+      if (selectedSlug === '__new__') {
+        entity = { in_wdarl: true }; // default to true
+      } else {
+        const found = characters.find(ex => ex.slug === selectedSlug);
+        entity = found ? { ...found } : null;
+      }
       if (section === 'base') {
-        schema = explorerBaseSchema;
+        schema = characterBaseSchema;
         if (entity) {
           delete entity.rankings;
           delete entity.stats;
           delete entity.orbs_used;
+          if (Array.isArray(entity.tags)) {
+            entity.tags = entity.tags.join(', ');
+          }
         }
       } else if (section === 'rankings') {
         schema = rankingSchema; items = entity?.rankings || []; isArray = true; sectionName = "Rankings";
@@ -316,8 +335,8 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
   };
 
   const executeGitHubRedirect = (actionType: string, payloadStr: string) => {
-    const target = type === 'timeline' ? 'Timeline Event' : `${type === 'orb' ? 'Orb' : 'Explorer'} (${selectedSlug}) -> ${sectionName}`;
-    const entityTitle = type === 'timeline' ? 'Timeline' : type === 'orb' ? 'Orb' : 'Explorer';
+    const target = type === 'timeline' ? 'Timeline Event' : `${type === 'orb' ? 'Orb' : 'Character'} (${selectedSlug}) -> ${sectionName}`;
+    const entityTitle = type === 'timeline' ? 'Timeline' : type === 'orb' ? 'Orb' : 'Character';
     const title = type === 'timeline' ? `Update Timeline Event` : `Update ${entityTitle}: ${selectedSlug}`;
     const body = `### Proposed Contribution\n**Action:** \`${actionType}\`\n**Target:** \`${target}\`\n\n**Payload:**\n\`\`\`json\n${payloadStr}\n\`\`\`\n`;
     const url = `https://github.com/sorvani/dgenesisinfo/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
@@ -398,6 +417,29 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
     if (payload.birthday) {
       payload.birthday = normalizeBirthday(payload.birthday);
     }
+    
+    if (section === 'base' && selectedSlug === '__new__') {
+       if (payload._initial_rank) {
+         payload.rankings = [{ rank: payload._initial_rank, known_above_rank: null, date_noted: payload.date_first_known || null, citation: null }];
+       } else { payload.rankings = []; }
+       
+       if (payload._initial_stat_total) {
+         payload.stats = [{ stat_total: payload._initial_stat_total, points_from_average: payload._initial_stat_total - 60, date_noted: payload.date_first_known || null, date_sequence: 1, scan_type: null, sp: null, hp: null, mp: null, str: null, vit: null, int: null, agi: null, dex: null, luc: null, citation: null }];
+       } else { payload.stats = []; }
+       
+       if (payload._initial_orb_id) {
+         payload.orbs_used = [{ orb_id: payload._initial_orb_id, date_acquired: payload.date_first_known || null, date_note: null, citation: null }];
+       } else { payload.orbs_used = []; }
+    }
+    
+    delete payload._initial_rank;
+    delete payload._initial_stat_total;
+    delete payload._initial_orb_id;
+
+    if (typeof payload.tags === 'string') {
+      payload.tags = payload.tags.split(',').map((t: string) => t.trim()).filter(Boolean);
+    }
+
     // Auto-calculate points_from_average for stat entries (average is 60)
     if (section === 'stats' && payload.stat_total != null) {
       payload.points_from_average = payload.stat_total - 60;
@@ -418,7 +460,7 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
         <div>
           <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Record Type</label>
           <select value={type} onChange={handleTypeSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-            <option value="explorer">Explorer</option>
+            <option value="character">Character Data</option>
             <option value="orb">Skill Orb</option>
             <option value="timeline">Timeline</option>
           </select>
@@ -428,10 +470,11 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
           <div>
             <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Select Record</label>
             <select value={selectedSlug} onChange={handleEntitySelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-              <option value="">-- Choose {type === 'orb' ? 'an orb' : 'an explorer'} to edit --</option>
+              <option value="">-- Choose {type === 'orb' ? 'an orb' : 'a character'} to edit --</option>
+              <option value="__new__" style={{ fontWeight: 'bold' }}>➕ Create New {type === 'orb' ? 'Orb' : 'Character'}</option>
               {type === 'orb' 
                 ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
-                : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
+                : characters.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
               }
             </select>
           </div>
@@ -441,14 +484,14 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
           {selectedSlug ? (
             <div className="animate-in">
               <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Section to Edit</label>
-              <select value={section} onChange={handleSectionSelect} disabled={type === 'timeline'} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: type === 'timeline' ? 'var(--bg-secondary)' : 'var(--bg-primary)', color: 'var(--text-primary)', cursor: type === 'timeline' ? 'not-allowed' : 'auto' }}>
+              <select value={section} onChange={handleSectionSelect} disabled={type === 'timeline' || selectedSlug === '__new__'} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: (type === 'timeline' || selectedSlug === '__new__') ? 'var(--bg-secondary)' : 'var(--bg-primary)', color: 'var(--text-primary)', cursor: (type === 'timeline' || selectedSlug === '__new__') ? 'not-allowed' : 'auto' }}>
                 {type === 'timeline' ? (
                   <option value="events">All Events Array</option>
                 ) : (
                   <option value="base">Base Details</option>
                 )}
                 {type === 'orb' && <option value="drop_rates">Drop Rates Array</option>}
-                {type === 'explorer' && (
+                {type === 'character' && (
                   <>
                     <option value="rankings">Rankings Array</option>
                     <option value="orbs_used">Orbs Used Array</option>

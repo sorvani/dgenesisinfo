@@ -2,21 +2,22 @@
 
 import Link from "next/link";
 import {
-  type Explorer,
+  type Character,
   getHistoricalRankingAt,
   getFullName,
 } from "@/lib/data";
 
 interface Props {
-  explorers: Explorer[];
+  characters: Character[];
   maxScore: number | null;
   asOfLabel: string;
   onClose: () => void;
+  routePrefix?: string;
 }
 
-export function WdarlTable({ explorers, maxScore, asOfLabel, onClose }: Props) {
-  // Only show explorers that have a known rank (not "unknown")
-  const ranked = explorers
+export function WdarlTable({ characters, maxScore, asOfLabel, onClose, routePrefix = '/characters' }: Props) {
+  // Only show characters that have a known rank (not "unknown")
+  const ranked = characters
     .map((e) => {
       const ranking = getHistoricalRankingAt(e, maxScore);
       const rankVal =
@@ -25,7 +26,7 @@ export function WdarlTable({ explorers, maxScore, asOfLabel, onClose }: Props) {
           : ranking?.known_above_rank
             ? ranking.known_above_rank - 1
             : null;
-      return { explorer: e, ranking, rankVal };
+      return { character: e, ranking, rankVal };
     })
     .filter((r) => r.rankVal !== null)
     .sort((a, b) => (a.rankVal ?? Infinity) - (b.rankVal ?? Infinity));
@@ -55,38 +56,38 @@ export function WdarlTable({ explorers, maxScore, asOfLabel, onClose }: Props) {
               </tr>
             </thead>
             <tbody>
-              {ranked.map(({ explorer, ranking }) => {
-                const isPublic = explorer.public;
+              {ranked.map(({ character, ranking }) => {
+                const isPublic = character.public;
                 const rankDisplay =
                   ranking && ranking.rank && ranking.rank !== 0
                     ? ranking.rank.toLocaleString()
                     : "—";
 
                 return (
-                  <tr key={explorer.slug}>
+                  <tr key={character.slug}>
                     <td className="wdarl-rank">{rankDisplay}</td>
-                    <td>{explorer.area ?? "—"}</td>
+                    <td>{character.area ?? "—"}</td>
                     <td>
                       {isPublic
-                        ? explorer.nationality || ""
+                        ? character.nationality || ""
                         : ""}
                     </td>
                     <td>
                       {isPublic ? (
                         <Link
-                          href={`/explorers/${explorer.slug}`}
+                          href={`${routePrefix}/${character.slug}`}
                           className="wdarl-name-link"
                           onClick={onClose}
                         >
-                          {getFullName(explorer)}
+                          {getFullName(character)}
                         </Link>
                       ) : (
                         <Link
-                          href={`/explorers/${explorer.slug}`}
+                          href={`${routePrefix}/${character.slug}`}
                           className="wdarl-name-anon"
                           onClick={onClose}
                         >
-                          ✱ <span className="wdarl-name-anon-hint">({getFullName(explorer)})</span>
+                          ✱ <span className="wdarl-name-anon-hint">({getFullName(character)})</span>
                         </Link>
                       )}
                     </td>

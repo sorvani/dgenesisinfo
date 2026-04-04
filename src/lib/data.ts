@@ -1,4 +1,4 @@
-import explorersData from '@/data/explorers.json';
+import charactersData from '@/data/characters.json';
 import orbsData from '@/data/orbs.json';
 import timelineData from '@/data/timeline.json';
 
@@ -42,7 +42,7 @@ export interface OrbUsed {
   citation: Citation | null;
 }
 
-export interface Explorer {
+export interface Character {
   slug: string;
   first_name: string | null;
   last_name: string | null;
@@ -54,6 +54,9 @@ export interface Explorer {
   birthday: string | null;
   sex: string | null;
   note: string | null;
+  in_wdarl: boolean;
+  tags: string[];
+  citation?: Citation | null;
   rankings: Ranking[];
   stats: Stat[];
   orbs_used: OrbUsed[];
@@ -90,14 +93,14 @@ export interface TimelineEvent {
 
 // ─── Data Access ─────────────────────────────────────────────────────
 
-const explorers: Explorer[] = explorersData as Explorer[];
+const characters: Character[] = charactersData as Character[];
 const orbs: Orb[] = orbsData as Orb[];
 const timeline: TimelineEvent[] = timelineData as TimelineEvent[];
 
 /** Get latest rank value for sorting (lower = better) */
-function getLatestRankValue(explorer: Explorer): number {
-  if (!explorer.rankings || explorer.rankings.length === 0) return Infinity;
-  const sorted = [...explorer.rankings].reverse().sort((a, b) => {
+function getLatestRankValue(character: Character): number {
+  if (!character.rankings || character.rankings.length === 0) return Infinity;
+  const sorted = [...character.rankings].reverse().sort((a, b) => {
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     return dateB - dateA;
@@ -108,14 +111,14 @@ function getLatestRankValue(explorer: Explorer): number {
   return Infinity;
 }
 
-/** Get all explorers sorted by current rank */
-export function getExplorers(): Explorer[] {
-  return [...explorers].sort((a, b) => getLatestRankValue(a) - getLatestRankValue(b));
+/** Get all characters sorted by current rank */
+export function getCharacters(): Character[] {
+  return [...characters].sort((a, b) => getLatestRankValue(a) - getLatestRankValue(b));
 }
 
-/** Get a single explorer by slug */
-export function getExplorerBySlug(slug: string): Explorer | undefined {
-  return explorers.find(e => e.slug === slug);
+/** Get a single character by slug */
+export function getCharacterBySlug(slug: string): Character | undefined {
+  return characters.find(c => c.slug === slug);
 }
 
 /** Get all orbs sorted alphabetically */
@@ -265,8 +268,8 @@ export function getCitationScore(citation: Citation | null): number {
 /** Get all unique citations attached to rankings across all explorers, sorted chronologically */
 export function getAllUniqueRankingCitations(): Citation[] {
   const map = new Map<number, Citation>();
-  explorers.forEach(ex => {
-    ex.rankings.forEach(r => {
+  characters.forEach(c => {
+    c.rankings.forEach(r => {
       const score = getCitationScore(r.citation);
       if (score > 0 && !map.has(score)) {
         map.set(score, r.citation as Citation);
@@ -277,10 +280,10 @@ export function getAllUniqueRankingCitations(): Citation[] {
 }
 
 /** Get the latest ranking for an explorer at or before a maximum citation score */
-export function getHistoricalRankingAt(explorer: Explorer, maxScore: number | null = null): Ranking | null {
-  if (!explorer.rankings || explorer.rankings.length === 0) return null;
+export function getHistoricalRankingAt(character: Character, maxScore: number | null = null): Ranking | null {
+  if (!character.rankings || character.rankings.length === 0) return null;
   
-  let validRankings = [...explorer.rankings];
+  let validRankings = [...character.rankings];
   if (maxScore !== null) {
     validRankings = validRankings.filter(r => getCitationScore(r.citation) <= maxScore);
   }
@@ -301,8 +304,8 @@ export function getHistoricalRankingAt(explorer: Explorer, maxScore: number | nu
 }
 
 /** Get rank value specifically for sorting (lower = better), factoring in history limit */
-export function getHistoricalRankValueAt(explorer: Explorer, maxScore: number | null = null): number {
-  const latest = getHistoricalRankingAt(explorer, maxScore);
+export function getHistoricalRankValueAt(character: Character, maxScore: number | null = null): number {
+  const latest = getHistoricalRankingAt(character, maxScore);
   if (!latest) return Infinity; // unranked
   if (latest.rank && latest.rank !== 0) return latest.rank;
   if (latest.known_above_rank) return latest.known_above_rank - 1;
@@ -310,8 +313,8 @@ export function getHistoricalRankValueAt(explorer: Explorer, maxScore: number | 
 }
 
 /** Get the latest ranking for an explorer */
-export function getLatestRanking(explorer: Explorer): Ranking | null {
-  return getHistoricalRankingAt(explorer, null);
+export function getLatestRanking(character: Character): Ranking | null {
+  return getHistoricalRankingAt(character, null);
 }
 
 /** Format rank for display */
@@ -323,8 +326,8 @@ export function formatRank(ranking: Ranking | null): string {
 }
 
 /** Format explorer full name */
-export function getFullName(explorer: Explorer): string {
-  return `${explorer.first_name || ''} ${explorer.last_name || ''}`.trim() || 'Unknown';
+export function getFullName(character: Character): string {
+  return `${character.first_name || ''} ${character.last_name || ''}`.trim() || 'Unknown';
 }
 
 /** Get nationality flag emoji from country code */

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  type Explorer,
+  type Character,
   getHistoricalRankingAt,
   formatRank,
   getFullName,
@@ -8,45 +8,45 @@ import {
   getNationalityFlag,
 } from "@/lib/data";
 
-export function ExplorerCard({ explorer, historicalMaxScore = null }: { explorer: Explorer, historicalMaxScore?: number | null }) {
-  const latestRanking = getHistoricalRankingAt(explorer, historicalMaxScore);
+export function CharacterCard({ character, historicalMaxScore = null, routePrefix = '/characters' }: { character: Character, historicalMaxScore?: number | null, routePrefix?: string }) {
+  const latestRanking = getHistoricalRankingAt(character, historicalMaxScore);
   const rank = latestRanking ? formatRank(latestRanking) : 'Unranked At Time';
-  const name = getFullName(explorer);
-  const flag = getNationalityFlag(explorer.nationality);
+  const name = getFullName(character);
+  const flag = getNationalityFlag(character.nationality);
 
   return (
-    <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`} style={{ display: 'block', height: '100%' }}>
+    <Link href={`${routePrefix}/${character.slug}`} id={`character-${character.slug}`} style={{ display: 'block', height: '100%' }}>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>
+        <div className="character-card-name" style={{ fontSize: '1.5rem' }}>
           {name}
-          {!explorer.public && <span className="wdarl-anon-badge">✱ Anonymous</span>}
+          {!character.public && <span className="wdarl-anon-badge">✱ Anonymous</span>}
         </div>
-        <div className="explorer-card-rank" style={{ fontSize: '1.125rem', color: rank === 'Unranked At Time' ? 'var(--text-muted)' : 'inherit' }}>
+        <div className="character-card-rank" style={{ fontSize: '1.125rem', color: rank === 'Unranked At Time' ? 'var(--text-muted)' : 'inherit' }}>
           {rank === 'Unranked At Time' || rank === 'Unknown' ? rank : `#${rank}`}
         </div>
-        {explorer.moniker && (
-          <div className="explorer-card-moniker">&ldquo;{explorer.moniker}&rdquo;</div>
+        {character.moniker && (
+          <div className="character-card-moniker">&ldquo;{character.moniker}&rdquo;</div>
         )}
-        <div className="explorer-card-meta" style={{ marginTop: 'auto', paddingTop: 'var(--space-md)' }}>
-          {explorer.sex && (
-            <span>👤 {explorer.sex}</span>
+        <div className="character-card-meta" style={{ marginTop: 'auto', paddingTop: 'var(--space-md)' }}>
+          {character.sex && (
+            <span>👤 {character.sex}</span>
           )}
-          {explorer.birthday && (
-            <span>🎂 {explorer.birthday}</span>
+          {character.birthday && (
+            <span>🎂 {character.birthday}</span>
           )}
-          {explorer.nationality && (
+          {character.nationality && (
             <span>
-              {flag} {explorer.nationality}
+              {flag} {character.nationality}
             </span>
           )}
-          {explorer.date_first_known && (
-            <span>📅 {formatDate(explorer.date_first_known)}</span>
+          {character.date_first_known && (
+            <span>📅 {formatDate(character.date_first_known)}</span>
           )}
-          {explorer.orbs_used.length > 0 && (
-            <span>🔮 {explorer.orbs_used.length} orbs</span>
+          {character.orbs_used.length > 0 && (
+            <span>🔮 {character.orbs_used.length} orbs</span>
           )}
-          {explorer.stats.length > 0 && (
-            <span>📊 {explorer.stats.length} readings</span>
+          {character.stats.length > 0 && (
+            <span>📊 {character.stats.length} readings</span>
           )}
         </div>
       </div>

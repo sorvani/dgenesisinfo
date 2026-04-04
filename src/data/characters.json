@@ -378,6 +378,10 @@
           "jnc_part": "8"
         }
       }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "D-Powers"
     ]
   },
   {
@@ -620,6 +624,10 @@
           "jnc_part": "7"
         }
       }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "D-Powers"
     ]
   },
   {
@@ -692,7 +700,9 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "ryoko-saito",
@@ -798,7 +808,9 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "miharu-naruse",
@@ -843,7 +855,11 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "JDA"
+    ]
   },
   {
     "slug": "cathy",
@@ -922,7 +938,9 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "simon-gershwin",
@@ -995,6 +1013,10 @@
           "jnc_part": "13"
         }
       }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
     ]
   },
   {
@@ -1057,7 +1079,11 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ]
   },
   {
     "slug": "mason-garcia",
@@ -1130,6 +1156,10 @@
           "jnc_part": "10"
         }
       }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
     ]
   },
   {
@@ -1192,7 +1222,11 @@
         "citation": null
       }
     ],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ]
   },
   {
     "slug": "komugi-rokujo",
@@ -1295,7 +1329,9 @@
           "jnc_part": "14"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "asha-ahmed-jain",
@@ -1333,7 +1369,9 @@
           "jnc_part": null
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "dmitri-nelnikov",
@@ -1360,7 +1398,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "junxi-huang",
@@ -1398,7 +1438,9 @@
           "jnc_part": "13"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "william",
@@ -1436,7 +1478,9 @@
           "jnc_part": "13"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "lansom-malson",
@@ -1463,7 +1507,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "victor",
@@ -1490,7 +1536,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "edgar",
@@ -1517,7 +1565,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "tobias",
@@ -1544,7 +1594,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "thierry",
@@ -1571,7 +1623,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "ettore",
@@ -1598,7 +1652,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "quentin",
@@ -1625,7 +1681,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "heinz",
@@ -1652,7 +1710,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "ella-alcott",
@@ -1679,7 +1739,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "iori-kimitsu",
@@ -1727,7 +1789,9 @@
           "jnc_part": "15"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "gordon",
@@ -1754,7 +1818,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "haruomi-nakajima",
@@ -1781,7 +1847,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "eri-mishiro",
@@ -1887,7 +1955,9 @@
           "jnc_part": "15"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "shota-mishiro",
@@ -1914,7 +1984,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "mariann-therese-martin",
@@ -1952,7 +2024,9 @@
           "jnc_part": "1"
         }
       }
-    ]
+    ],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "silkie-subway",
@@ -1979,7 +2053,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "serina-takeda",
@@ -2006,7 +2082,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "masato-fuwa",
@@ -2033,7 +2111,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "dennis-takaoka",
@@ -2060,7 +2140,9 @@
       }
     ],
     "stats": [],
-    "orbs_used": []
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": []
   },
   {
     "slug": "mama",
@@ -2098,6 +2180,33 @@
           "jnc_part": "13"
         }
       }
+    ],
+    "in_wdarl": true,
+    "tags": []
+  },
+  {
+    "slug": "kakeru-furai",
+    "first_name": "Kakeru",
+    "last_name": "Furai",
+    "moniker": null,
+    "nationality": "JP",
+    "date_first_known": "2018-09-27",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Male",
+    "note": "Works at the JDA.\nWas Miharu Naruse's original supervisor/boss.",
+    "in_wdarl": false,
+    "rankings": [],
+    "stats": [],
+    "orbs_used": [],
+    "citation": {
+      "volume": "1",
+      "chapter": "1",
+      "jnc_part": "2"
+    },
+    "tags": [
+      "JDA"
     ]
   }
 ]

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getExplorers, getOrbs, getTimelineEvents } from "@/lib/data";
+import { getCharacters, getOrbs, getTimelineEvents } from "@/lib/data";
 
 export default function Home() {
-  const explorers = getExplorers();
+  const characters = getCharacters();
   const orbs = getOrbs();
   const timeline = getTimelineEvents();
 
@@ -18,8 +18,8 @@ export default function Home() {
         </p>
         <div className="hero-stats">
           <div className="hero-stat">
-            <div className="hero-stat-value">{explorers.length}</div>
-            <div className="hero-stat-label">Explorers</div>
+            <div className="hero-stat-value">{characters.length}</div>
+            <div className="hero-stat-label">Characters</div>
           </div>
           <div className="hero-stat">
             <div className="hero-stat-value">{orbs.length}</div>
@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           <div className="hero-stat">
             <div className="hero-stat-value">
-              {explorers.reduce((sum, e) => sum + e.stats.length, 0)}
+              {characters.reduce((sum, c) => sum + c.stats.length, 0)}
             </div>
             <div className="hero-stat-label">Stat Readings</div>
           </div>
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-actions">
-          <Link href="/explorers" className="btn btn-primary" id="cta-explorers">
+          <Link href="/wdarl" className="btn btn-primary" id="cta-explorers">
             View WDARL Rankings
           </Link>
           <Link href="/orbs" className="btn btn-secondary" id="cta-orbs">

@@ -10,7 +10,8 @@ export function Navbar() {
 
   const links = [
     { href: "/", label: "Home" },
-    { href: "/explorers", label: "WDARL Rankings" },
+    { href: "/wdarl", label: "WDARL Rankings" },
+    { href: "/characters", label: "Characters" },
     { href: "/orbs", label: "Skill Orbs" },
     { href: "/timeline", label: "Timeline" },
     { href: "/contribute", label: "Contribute" },

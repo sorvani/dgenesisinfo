@@ -1,22 +1,23 @@
 "use client";
 
 import { useState } from 'react';
-import { type Explorer, type Citation, getHistoricalRankValueAt, formatCitation, getCitationScore } from '@/lib/data';
-import { ExplorerCard } from './ExplorerCard';
+import { type Character, type Citation, getHistoricalRankValueAt, formatCitation, getCitationScore } from '@/lib/data';
+import { CharacterCard } from './ExplorerCard';
 import { WdarlTable } from './WdarlTable';
 
 interface Props {
-  initialExplorers: Explorer[];
+  initialCharacters: Character[];
   citations: Citation[];
+  routePrefix?: string;
 }
 
-export function ExplorersGrid({ initialExplorers, citations }: Props) {
+export function ExplorersGrid({ initialCharacters, citations, routePrefix = '/wdarl' }: Props) {
   const [maxScoreStr, setMaxScoreStr] = useState<string>('current');
   const [showWdarl, setShowWdarl] = useState(false);
 
   const maxScore = maxScoreStr === 'current' ? null : Number(maxScoreStr);
 
-  const explorers = [...initialExplorers].sort((a, b) => {
+  const characters = [...initialCharacters].sort((a, b) => {
     return getHistoricalRankValueAt(a, maxScore) - getHistoricalRankValueAt(b, maxScore);
   });
 
@@ -44,13 +45,13 @@ export function ExplorersGrid({ initialExplorers, citations }: Props) {
       </div>
 
       <div className="card-grid">
-        {explorers.map((explorer, i) => (
+        {characters.map((character, i) => (
           <div
-            key={explorer.slug}
+            key={character.slug}
             className="animate-in"
             style={{ animationDelay: `${Math.min(i * 10, 200)}ms`, height: '100%' }}
           >
-            <ExplorerCard explorer={explorer} historicalMaxScore={maxScore} />
+            <CharacterCard character={character} historicalMaxScore={maxScore} routePrefix={routePrefix} />
           </div>
         ))}
       </div>
@@ -62,10 +63,11 @@ export function ExplorersGrid({ initialExplorers, citations }: Props) {
         const asOfLabel = selectedCitation ? formatCitation(selectedCitation) : 'Current (Latest Known)';
         return (
           <WdarlTable
-            explorers={explorers}
+            characters={characters}
             maxScore={maxScore}
             asOfLabel={asOfLabel}
             onClose={() => setShowWdarl(false)}
+            routePrefix={routePrefix}
           />
         );
       })()}

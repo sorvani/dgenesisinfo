@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getOrbs, getExplorers, getTimelineEvents } from '@/lib/data';
+import { getOrbs, getCharacters, getTimelineEvents } from '@/lib/data';
 import { ContributeForm } from '@/components/ContributeForm';
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ContributePage() {
   const orbs = getOrbs();
-  const explorers = getExplorers();
+  const characters = getCharacters();
   const timeline = getTimelineEvents();
   
   return (
@@ -22,7 +22,7 @@ export default function ContributePage() {
         </p>
       </div>
       <div className="card" style={{ maxWidth: '800px', margin: '0 auto', boxShadow: 'var(--shadow-md)' }}>
-        <ContributeForm orbs={orbs} explorers={explorers} timeline={timeline} />
+        <ContributeForm orbs={orbs} characters={characters} timeline={timeline} />
       </div>
     </>
   );
