@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { getExplorers, getOrbs } from "@/lib/data";
+import { getExplorers, getOrbs, getTimelineEvents } from "@/lib/data";
 
 export default function Home() {
   const explorers = getExplorers();
   const orbs = getOrbs();
+  const timeline = getTimelineEvents();
 
   return (
     <>
@@ -29,6 +30,10 @@ export default function Home() {
               {explorers.reduce((sum, e) => sum + e.stats.length, 0)}
             </div>
             <div className="hero-stat-label">Stat Readings</div>
+          </div>
+          <div className="hero-stat">
+            <div className="hero-stat-value">{timeline.length}</div>
+            <div className="hero-stat-label">Timeline Events</div>
           </div>
         </div>
         <div className="hero-actions">
