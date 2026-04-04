@@ -1300,6 +1300,7 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   font-size: 0.9rem;
   color: var(--text-primary);
   line-height: 1.7;
+  white-space: pre-wrap;
 }
 
 .timeline-event-citation {
