@@ -17,12 +17,18 @@ export function ExplorerCard({ explorer }: { explorer: Explorer }) {
   return (
     <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`}>
       <div className="card">
-        <div className="explorer-card-rank">#{rank}</div>
-        <div className="explorer-card-name">{name}</div>
+        <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>{name}</div>
+        <div className="explorer-card-rank" style={{ fontSize: '1.125rem' }}>#{rank}</div>
         {explorer.moniker && (
           <div className="explorer-card-moniker">&ldquo;{explorer.moniker}&rdquo;</div>
         )}
         <div className="explorer-card-meta">
+          {explorer.sex && (
+            <span>👤 {explorer.sex}</span>
+          )}
+          {explorer.birthday && (
+            <span>🎂 {explorer.birthday}</span>
+          )}
           {explorer.nationality && (
             <span>
               {flag} {explorer.nationality}

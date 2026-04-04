@@ -50,6 +50,8 @@ export interface Explorer {
   nationality: string | null;
   date_first_known: string | null;
   public: number;
+  birthday: string | null;
+  sex: string | null;
   rankings: Ranking[];
   stats: Stat[];
   orbs_used: OrbUsed[];
@@ -82,7 +84,7 @@ const orbs: Orb[] = orbsData as Orb[];
 /** Get latest rank value for sorting (lower = better) */
 function getLatestRankValue(explorer: Explorer): number {
   if (!explorer.rankings || explorer.rankings.length === 0) return Infinity;
-  const sorted = [...explorer.rankings].sort((a, b) => {
+  const sorted = [...explorer.rankings].reverse().sort((a, b) => {
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     return dateB - dateA;
@@ -108,6 +110,11 @@ export function getOrbs(): Orb[] {
   return [...orbs].sort((a, b) => {
     const nameA = (a.orb_name || '').toLowerCase();
     const nameB = (b.orb_name || '').toLowerCase();
+    
+    // Force "Making" to be first
+    if (nameA === 'making') return -1;
+    if (nameB === 'making') return 1;
+    
     return nameA.localeCompare(nameB);
   });
 }
@@ -152,7 +159,7 @@ export function formatDate(dateStr: string | null): string {
 /** Get the latest ranking for an explorer */
 export function getLatestRanking(explorer: Explorer): Ranking | null {
   if (!explorer.rankings || explorer.rankings.length === 0) return null;
-  return [...explorer.rankings].sort((a, b) => {
+  return [...explorer.rankings].reverse().sort((a, b) => {
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     return dateB - dateA;

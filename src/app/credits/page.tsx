@@ -33,11 +33,39 @@ export default function CreditsPage() {
         <dl className="credits-list">
           <div className="credits-row">
             <dt>Author</dt>
-            <dd>KONO Tsuranori (之貫紀)</dd>
+            <dd>
+              <a
+                href="https://x.com/KonoTsuranori"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                KONO Tsuranori (之貫紀)
+              </a>
+            </dd>
           </div>
           <div className="credits-row">
             <dt>Illustrator</dt>
-            <dd>ttl</dd>
+            <dd>
+              <a
+                href="https://xfolio.jp/en/portfolio/ttl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ttl
+              </a>
+            </dd>
+          </div>
+          <div className="credits-row">
+            <dt>Manga</dt>
+            <dd>
+              <a
+                href="https://x.com/Miya_Taira"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Miya Taira (平未夜)
+              </a>
+            </dd>
           </div>
         </dl>
 

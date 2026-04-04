@@ -77,6 +77,18 @@ export default async function ExplorerDetailPage(
               #{formatRank(latestRanking)}
             </strong>
           </div>
+          {explorer.sex && (
+            <div className="detail-meta-item">
+              <span className="detail-meta-label">Sex:</span>
+              <span>{explorer.sex}</span>
+            </div>
+          )}
+          {explorer.birthday && (
+            <div className="detail-meta-item">
+              <span className="detail-meta-label">Birthday:</span>
+              <span>{explorer.birthday}</span>
+            </div>
+          )}
           {explorer.nationality && (
             <div className="detail-meta-item">
               <span className="detail-meta-label">Nationality:</span>

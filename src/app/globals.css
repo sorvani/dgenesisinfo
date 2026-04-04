@@ -689,6 +689,8 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   color: var(--accent-purple);
   margin-bottom: var(--space-md);
   margin-top: var(--space-xl);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .credits-card h2:first-of-type {
@@ -705,11 +707,6 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   display: flex;
   gap: var(--space-lg);
   padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.credits-row:last-child {
-  border-bottom: none;
 }
 
 .credits-row dt {
