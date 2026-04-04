@@ -369,10 +369,8 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
         local_time = '12:00:00';
       }
 
-      // Cleanup citations if pre-history or empty
-      if (rest.pre_history) {
-        rest.citation = null;
-      } else if (rest.citation) {
+      // Cleanup citations if empty
+      if (rest.citation) {
         if (!rest.citation.volume && !rest.citation.chapter && !rest.citation.jnc_part) {
           rest.citation = null;
         }
