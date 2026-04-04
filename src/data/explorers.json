@@ -1,6 +1,5 @@
 [
   {
-    "id": "id-000",
     "slug": "keigo-yoshimura",
     "first_name": "Keigo",
     "last_name": "Yoshimura",
@@ -380,7 +379,6 @@
     ]
   },
   {
-    "id": "id-001",
     "slug": "azusa-miyoshi",
     "first_name": "Azusa",
     "last_name": "Miyoshi",
@@ -621,7 +619,6 @@
     ]
   },
   {
-    "id": "id-002",
     "slug": "haruka-mitsurugu",
     "first_name": "Haruka",
     "last_name": "Mitsurugu",
@@ -692,7 +689,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-003",
     "slug": "ryoko-saito",
     "first_name": "Ryoko",
     "last_name": "Saito",
@@ -797,7 +793,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-004",
     "slug": "miharu-naruse",
     "first_name": "Miharu",
     "last_name": "Naruse",
@@ -841,7 +836,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-005",
     "slug": "cathy",
     "first_name": "Cathy",
     "last_name": null,
@@ -919,7 +913,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-006",
     "slug": "simon-gershwin",
     "first_name": "Simon",
     "last_name": "Gershwin",
@@ -991,7 +984,6 @@
     ]
   },
   {
-    "id": "id-007",
     "slug": "joshua-rich",
     "first_name": "Joshua",
     "last_name": "Rich",
@@ -1052,7 +1044,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-008",
     "slug": "mason-garcia",
     "first_name": "Mason",
     "last_name": "Garcia",
@@ -1124,7 +1115,6 @@
     ]
   },
   {
-    "id": "id-009",
     "slug": "natalie-stewart",
     "first_name": "Natalie",
     "last_name": "Stewart",
@@ -1185,7 +1175,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-010",
     "slug": "komugi-rokujo",
     "first_name": "Komugi",
     "last_name": "Rokujo",
@@ -1287,7 +1276,6 @@
     ]
   },
   {
-    "id": "id-011",
     "slug": "asha-ahmed-jain",
     "first_name": "Asha",
     "last_name": "Ahmed Jain",
@@ -1324,7 +1312,6 @@
     ]
   },
   {
-    "id": "id-012",
     "slug": "dmitri-nelnikov",
     "first_name": "Dmitri",
     "last_name": "Nelnikov",
@@ -1350,7 +1337,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-013",
     "slug": "junxi-huang",
     "first_name": "Junxi",
     "last_name": "Huang",
@@ -1387,7 +1373,6 @@
     ]
   },
   {
-    "id": "id-014",
     "slug": "william",
     "first_name": "William",
     "last_name": null,
@@ -1424,7 +1409,6 @@
     ]
   },
   {
-    "id": "id-015",
     "slug": "lansom-malson",
     "first_name": "Lansom",
     "last_name": "Malson",
@@ -1450,7 +1434,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-016",
     "slug": "victor",
     "first_name": "Victor",
     "last_name": null,
@@ -1476,7 +1459,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-017",
     "slug": "edgar",
     "first_name": "Edgar",
     "last_name": null,
@@ -1502,7 +1484,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-018",
     "slug": "tobias",
     "first_name": "Tobias",
     "last_name": null,
@@ -1528,7 +1509,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-019",
     "slug": "thierry",
     "first_name": "Thierry",
     "last_name": null,
@@ -1554,7 +1534,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-020",
     "slug": "ettore",
     "first_name": "Ettore",
     "last_name": null,
@@ -1580,7 +1559,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-021",
     "slug": "quentin",
     "first_name": "Quentin",
     "last_name": null,
@@ -1606,7 +1584,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-022",
     "slug": "heinz",
     "first_name": "Heinz",
     "last_name": null,
@@ -1632,7 +1609,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-023",
     "slug": "ella-alcott",
     "first_name": "Ella",
     "last_name": "Alcott",
@@ -1658,7 +1634,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-024",
     "slug": "iori-kimitsu",
     "first_name": "Iori",
     "last_name": "Kimitsu",
@@ -1667,7 +1642,7 @@
     "date_first_known": "2018-09-27",
     "public": 1,
     "birthday": null,
-    "sex": "Male",
+    "sex": "Female",
     "rankings": [
       {
         "rank": 18,
@@ -1705,7 +1680,6 @@
     ]
   },
   {
-    "id": "id-025",
     "slug": "gordon",
     "first_name": "Gordon",
     "last_name": null,
@@ -1731,7 +1705,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-026",
     "slug": "haruomi-nakajima",
     "first_name": "Haruomi",
     "last_name": "Nakajima",
@@ -1757,7 +1730,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-027",
     "slug": "eri-mishiro",
     "first_name": "Eri",
     "last_name": "Mishiro",
@@ -1862,7 +1834,6 @@
     ]
   },
   {
-    "id": "id-028",
     "slug": "shota-mishiro",
     "first_name": "Shota",
     "last_name": "Mishiro",
@@ -1888,7 +1859,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-029",
     "slug": "mariann-therese-martin",
     "first_name": "Mariann Therese",
     "last_name": "Martin",
@@ -1925,7 +1895,6 @@
     ]
   },
   {
-    "id": "id-030",
     "slug": "silkie-subway",
     "first_name": "Silkie",
     "last_name": "Subway",
@@ -1951,7 +1920,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-031",
     "slug": "serina-takeda",
     "first_name": "Serina",
     "last_name": "Takeda",
@@ -1977,7 +1945,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-032",
     "slug": "masato-fuwa",
     "first_name": "Masato",
     "last_name": "Fuwa",
@@ -2003,7 +1970,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-033",
     "slug": "dennis-takaoka",
     "first_name": "Dennis",
     "last_name": "Takaoka",
@@ -2029,7 +1995,6 @@
     "orbs_used": []
   },
   {
-    "id": "id-034",
     "slug": "mama",
     "first_name": "Mama",
     "last_name": null,

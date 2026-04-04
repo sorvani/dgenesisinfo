@@ -24,7 +24,7 @@ export default function ExplorersPage() {
       <div className="card-grid">
         {explorers.map((explorer, i) => (
           <div
-            key={explorer.id}
+            key={explorer.slug}
             className="animate-in"
             style={{ animationDelay: `${Math.min(i * 50, 500)}ms` }}
           >

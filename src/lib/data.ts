@@ -42,7 +42,6 @@ export interface OrbUsed {
 }
 
 export interface Explorer {
-  id: string;
   slug: string;
   first_name: string | null;
   last_name: string | null;
