@@ -64,7 +64,10 @@ export default async function ExplorerDetailPage(
         <div className="detail-breadcrumb">
           <Link href="/explorers">← WDARL Rankings</Link>
         </div>
-        <h1 className="detail-title">{name}</h1>
+        <h1 className="detail-title">
+          {name}
+          {!explorer.public && <span className="wdarl-anon-badge">✱ Anonymous on WDARL</span>}
+        </h1>
         {explorer.moniker && (
           <div className="detail-subtitle">
             &ldquo;{explorer.moniker}&rdquo;

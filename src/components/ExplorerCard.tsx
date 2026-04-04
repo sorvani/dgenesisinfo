@@ -17,7 +17,10 @@ export function ExplorerCard({ explorer, historicalMaxScore = null }: { explorer
   return (
     <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`} style={{ display: 'block', height: '100%' }}>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>{name}</div>
+        <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>
+          {name}
+          {!explorer.public && <span className="wdarl-anon-badge">✱ Anonymous</span>}
+        </div>
         <div className="explorer-card-rank" style={{ fontSize: '1.125rem', color: rank === 'Unranked At Time' ? 'var(--text-muted)' : 'inherit' }}>
           {rank === 'Unranked At Time' || rank === 'Unknown' ? rank : `#${rank}`}
         </div>
