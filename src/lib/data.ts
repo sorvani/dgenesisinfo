@@ -66,7 +66,6 @@ export interface DropRate {
 }
 
 export interface Orb {
-  id: string;
   slug: string;
   orb_id: number | null;
   orb_name: string | null;
