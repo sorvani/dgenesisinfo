@@ -291,7 +291,7 @@ export function ContributeForm({ orbs, explorers }: Props) {
         <div>
           <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Select Record</label>
           <select value={selectedSlug} onChange={handleEntitySelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-            <option value="">-- Choose a record to edit --</option>
+            <option value="">-- Choose {type === 'orb' ? 'an orb' : 'an explorer'} to edit --</option>
             {type === 'orb' 
               ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
               : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
