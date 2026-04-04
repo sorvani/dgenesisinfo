@@ -123,24 +123,60 @@ export default async function ExplorerDetailPage(
       <section className="detail-section">
         <h2 className="detail-section-title">Orbs Used</h2>
         {explorer.orbs_used.length > 0 ? (
-          <div className="data-table-wrapper">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Orb Name</th>
-                  <th>Date Acquired</th>
-                  <th>Note</th>
-                  <th>Citation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {explorer.orbs_used.map((orbUsed, i) => {
-                  const orbInfo = orbUsed.orb_id
-                    ? getOrbById(orbUsed.orb_id)
-                    : null;
-                  return (
-                    <tr key={i}>
-                      <td>
+          <>
+            {/* Desktop table */}
+            <div className="data-table-wrapper detail-desktop-only">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Orb Name</th>
+                    <th>Date Acquired</th>
+                    <th>Note</th>
+                    <th>Citation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {explorer.orbs_used.map((orbUsed, i) => {
+                    const orbInfo = orbUsed.orb_id
+                      ? getOrbById(orbUsed.orb_id)
+                      : null;
+                    return (
+                      <tr key={i}>
+                        <td>
+                          {orbInfo ? (
+                            <Link
+                              href={`/orbs/${orbInfo.slug}`}
+                              style={{ color: "var(--accent-teal)" }}
+                            >
+                              {orbInfo.orb_name}
+                            </Link>
+                          ) : (
+                            <span className="value-muted">Unknown Orb</span>
+                          )}
+                        </td>
+                        <td>{formatDate(orbUsed.date_acquired)}</td>
+                        <td style={{ whiteSpace: "normal", maxWidth: "300px" }}>
+                          {orbUsed.date_note || "—"}
+                        </td>
+                        <td>
+                          <CitationBadge citation={orbUsed.citation} />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            {/* Mobile stacked cards */}
+            <div className="detail-mobile-only">
+              {explorer.orbs_used.map((orbUsed, i) => {
+                const orbInfo = orbUsed.orb_id
+                  ? getOrbById(orbUsed.orb_id)
+                  : null;
+                return (
+                  <div key={i} className="mobile-stacked-card">
+                    <div className="mobile-stacked-row mobile-stacked-row-primary">
+                      <span className="mobile-stacked-name">
                         {orbInfo ? (
                           <Link
                             href={`/orbs/${orbInfo.slug}`}
@@ -151,20 +187,26 @@ export default async function ExplorerDetailPage(
                         ) : (
                           <span className="value-muted">Unknown Orb</span>
                         )}
-                      </td>
-                      <td>{formatDate(orbUsed.date_acquired)}</td>
-                      <td style={{ whiteSpace: "normal", maxWidth: "300px" }}>
-                        {orbUsed.date_note || "—"}
-                      </td>
-                      <td>
+                      </span>
+                      <span className="mobile-stacked-date">
+                        {formatDate(orbUsed.date_acquired)}
+                      </span>
+                    </div>
+                    {orbUsed.date_note && (
+                      <div className="mobile-stacked-row mobile-stacked-row-note">
+                        {orbUsed.date_note}
+                      </div>
+                    )}
+                    {orbUsed.citation && (
+                      <div className="mobile-stacked-row mobile-stacked-row-citation">
                         <CitationBadge citation={orbUsed.citation} />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </>
         ) : (
           <p style={{ color: "var(--text-muted)" }}>
             No orbs known to have been used.
@@ -176,38 +218,70 @@ export default async function ExplorerDetailPage(
       <section className="detail-section">
         <h2 className="detail-section-title">Rankings Over Time</h2>
         {sortedRankings.length > 0 ? (
-          <div className="data-table-wrapper">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Known Above</th>
-                  <th>Date Noted</th>
-                  <th>Citation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedRankings.map((ranking, i) => (
-                  <tr key={i}>
-                    <td className="value-highlight">
-                      {ranking.rank && ranking.rank !== 0
-                        ? ranking.rank.toLocaleString()
-                        : "—"}
-                    </td>
-                    <td>
-                      {ranking.known_above_rank
-                        ? `Above ${ranking.known_above_rank.toLocaleString()}`
-                        : "—"}
-                    </td>
-                    <td>{formatDate(ranking.date_noted)}</td>
-                    <td>
-                      <CitationBadge citation={ranking.citation} />
-                    </td>
+          <>
+            {/* Desktop table */}
+            <div className="data-table-wrapper detail-desktop-only">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Known Above</th>
+                    <th>Date Noted</th>
+                    <th>Citation</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {sortedRankings.map((ranking, i) => (
+                    <tr key={i}>
+                      <td className="value-highlight">
+                        {ranking.rank && ranking.rank !== 0
+                          ? ranking.rank.toLocaleString()
+                          : "—"}
+                      </td>
+                      <td>
+                        {ranking.known_above_rank
+                          ? `Above ${ranking.known_above_rank.toLocaleString()}`
+                          : "—"}
+                      </td>
+                      <td>{formatDate(ranking.date_noted)}</td>
+                      <td>
+                        <CitationBadge citation={ranking.citation} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {/* Mobile stacked cards */}
+            <div className="detail-mobile-only">
+              {sortedRankings.map((ranking, i) => (
+                <div key={i} className="mobile-stacked-card">
+                  <div className="mobile-stacked-row mobile-stacked-row-primary">
+                    <span>
+                      <span className="value-highlight" style={{ marginRight: "var(--space-sm)" }}>
+                        {ranking.rank && ranking.rank !== 0
+                          ? `#${ranking.rank.toLocaleString()}`
+                          : "—"}
+                      </span>
+                      {ranking.known_above_rank && (
+                        <span className="value-muted" style={{ fontSize: "0.8rem" }}>
+                          Above {ranking.known_above_rank.toLocaleString()}
+                        </span>
+                      )}
+                    </span>
+                    <span className="mobile-stacked-date">
+                      {formatDate(ranking.date_noted)}
+                    </span>
+                  </div>
+                  {ranking.citation && (
+                    <div className="mobile-stacked-row mobile-stacked-row-citation">
+                      <CitationBadge citation={ranking.citation} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           <p style={{ color: "var(--text-muted)" }}>
             No ranking history available.

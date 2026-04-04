@@ -737,6 +737,62 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   animation: fadeInUp 0.5s ease forwards;
 }
 
+/* ─── Mobile Stacked Cards (Explorer Detail) ────────────── */
+.detail-mobile-only {
+  display: none;
+}
+
+.mobile-stacked-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.mobile-stacked-card + .mobile-stacked-card {
+  margin-top: var(--space-sm);
+}
+
+.mobile-stacked-row {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.mobile-stacked-row-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.mobile-stacked-name {
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-stacked-date {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mobile-stacked-row-note {
+  padding-top: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: normal;
+}
+
+.mobile-stacked-row-citation {
+  padding-top: 0;
+  padding-bottom: var(--space-sm);
+}
+
 /* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
   .navbar-links {
@@ -775,6 +831,14 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
 
   .data-table-wrapper {
     font-size: 0.8rem;
+  }
+
+  .detail-desktop-only {
+    display: none;
+  }
+
+  .detail-mobile-only {
+    display: block;
   }
 }
 
