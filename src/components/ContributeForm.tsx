@@ -229,16 +229,24 @@ export function ContributeForm({ orbs, explorers }: Props) {
   let entity: any = null;
   if (selectedSlug) {
     if (type === 'orb') {
-      entity = orbs.find(o => o.slug === selectedSlug);
+      const found = orbs.find(o => o.slug === selectedSlug);
+      entity = found ? { ...found } : null;
       if (section === 'base') {
         schema = orbBaseSchema;
+        if (entity) delete entity.drop_rates;
       } else if (section === 'drop_rates') {
         schema = dropRateSchema; items = entity?.drop_rates || []; isArray = true; sectionName = "Drop Rates";
       }
     } else {
-      entity = explorers.find(ex => ex.slug === selectedSlug);
+      const found = explorers.find(ex => ex.slug === selectedSlug);
+      entity = found ? { ...found } : null;
       if (section === 'base') {
         schema = explorerBaseSchema;
+        if (entity) {
+          delete entity.rankings;
+          delete entity.stats;
+          delete entity.orbs_used;
+        }
       } else if (section === 'rankings') {
         schema = rankingSchema; items = entity?.rankings || []; isArray = true; sectionName = "Rankings";
       } else if (section === 'orbs_used') {
