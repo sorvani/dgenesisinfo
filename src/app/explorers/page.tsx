@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { getExplorers } from "@/lib/data";
-import { ExplorerCard } from "@/components/ExplorerCard";
+import { getExplorers, getAllUniqueRankingCitations } from "@/lib/data";
+import { ExplorersGrid } from "@/components/ExplorersGrid";
 
 export const metadata: Metadata = {
   title: "WDARL Explorer Rankings",
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function ExplorersPage() {
   const explorers = getExplorers();
+  const citations = getAllUniqueRankingCitations();
 
   return (
     <>
@@ -21,17 +22,7 @@ export default function ExplorersPage() {
           stats, orbs, and ranking history.
         </p>
       </div>
-      <div className="card-grid">
-        {explorers.map((explorer, i) => (
-          <div
-            key={explorer.slug}
-            className="animate-in"
-            style={{ animationDelay: `${Math.min(i * 50, 500)}ms`, height: '100%' }}
-          >
-            <ExplorerCard explorer={explorer} />
-          </div>
-        ))}
-      </div>
+      <ExplorersGrid initialExplorers={explorers} citations={citations} />
     </>
   );
 }

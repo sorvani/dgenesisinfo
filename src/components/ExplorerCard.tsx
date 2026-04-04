@@ -1,16 +1,16 @@
 import Link from "next/link";
 import {
   type Explorer,
-  getLatestRanking,
+  getHistoricalRankingAt,
   formatRank,
   getFullName,
   formatDate,
   getNationalityFlag,
 } from "@/lib/data";
 
-export function ExplorerCard({ explorer }: { explorer: Explorer }) {
-  const latestRanking = getLatestRanking(explorer);
-  const rank = formatRank(latestRanking);
+export function ExplorerCard({ explorer, historicalMaxScore = null }: { explorer: Explorer, historicalMaxScore?: number | null }) {
+  const latestRanking = getHistoricalRankingAt(explorer, historicalMaxScore);
+  const rank = latestRanking ? formatRank(latestRanking) : 'Unranked At Time';
   const name = getFullName(explorer);
   const flag = getNationalityFlag(explorer.nationality);
 
@@ -18,7 +18,9 @@ export function ExplorerCard({ explorer }: { explorer: Explorer }) {
     <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`} style={{ display: 'block', height: '100%' }}>
       <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>{name}</div>
-        <div className="explorer-card-rank" style={{ fontSize: '1.125rem' }}>#{rank}</div>
+        <div className="explorer-card-rank" style={{ fontSize: '1.125rem', color: rank === 'Unranked At Time' ? 'var(--text-muted)' : 'inherit' }}>
+          {rank === 'Unranked At Time' || rank === 'Unknown' ? rank : `#${rank}`}
+        </div>
         {explorer.moniker && (
           <div className="explorer-card-moniker">&ldquo;{explorer.moniker}&rdquo;</div>
         )}

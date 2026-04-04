@@ -155,14 +155,65 @@ export function formatDate(dateStr: string | null): string {
   }
 }
 
-/** Get the latest ranking for an explorer */
-export function getLatestRanking(explorer: Explorer): Ranking | null {
+/** Calculate a comparable numeric score from a citation (e.g. Vol 1, Ch 2, Part 3 = 1,002,003) */
+export function getCitationScore(citation: Citation | null): number {
+  if (!citation) return 0;
+  const v = parseFloat(citation.volume || '0') || 0;
+  const c = parseFloat(citation.chapter || '0') || 0;
+  const p = parseFloat(citation.jnc_part || '0') || 0;
+  return (v * 1000000) + (c * 1000) + p;
+}
+
+/** Get all unique citations attached to rankings across all explorers, sorted chronologically */
+export function getAllUniqueRankingCitations(): Citation[] {
+  const map = new Map<number, Citation>();
+  explorers.forEach(ex => {
+    ex.rankings.forEach(r => {
+      const score = getCitationScore(r.citation);
+      if (score > 0 && !map.has(score)) {
+        map.set(score, r.citation as Citation);
+      }
+    });
+  });
+  return Array.from(map.values()).sort((a, b) => getCitationScore(a) - getCitationScore(b));
+}
+
+/** Get the latest ranking for an explorer at or before a maximum citation score */
+export function getHistoricalRankingAt(explorer: Explorer, maxScore: number | null = null): Ranking | null {
   if (!explorer.rankings || explorer.rankings.length === 0) return null;
-  return [...explorer.rankings].reverse().sort((a, b) => {
+  
+  let validRankings = [...explorer.rankings];
+  if (maxScore !== null) {
+    validRankings = validRankings.filter(r => getCitationScore(r.citation) <= maxScore);
+  }
+  
+  if (validRankings.length === 0) return null;
+  
+  // Sort descending by score primarily, then date
+  return validRankings.sort((a, b) => {
+    const scoreA = getCitationScore(a.citation);
+    const scoreB = getCitationScore(b.citation);
+    if (scoreA !== scoreB) return scoreB - scoreA;
+    
+    // Fallback date sort if citations perfectly match or are 0
     const dateA = a.date_noted ? new Date(a.date_noted).getTime() : 0;
     const dateB = b.date_noted ? new Date(b.date_noted).getTime() : 0;
     return dateB - dateA;
   })[0];
+}
+
+/** Get rank value specifically for sorting (lower = better), factoring in history limit */
+export function getHistoricalRankValueAt(explorer: Explorer, maxScore: number | null = null): number {
+  const latest = getHistoricalRankingAt(explorer, maxScore);
+  if (!latest) return Infinity; // unranked
+  if (latest.rank && latest.rank !== 0) return latest.rank;
+  if (latest.known_above_rank) return latest.known_above_rank - 1;
+  return Infinity;
+}
+
+/** Get the latest ranking for an explorer */
+export function getLatestRanking(explorer: Explorer): Ranking | null {
+  return getHistoricalRankingAt(explorer, null);
 }
 
 /** Format rank for display */
