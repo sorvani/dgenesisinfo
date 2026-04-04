@@ -293,56 +293,133 @@ export default async function ExplorerDetailPage(
       <section className="detail-section">
         <h2 className="detail-section-title">Explorer Stats</h2>
         {sortedStats.length > 0 ? (
-          <div className="data-table-wrapper">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Seq</th>
-                  <th>Scan</th>
-                  <th>SP</th>
-                  <th>HP</th>
-                  <th>MP</th>
-                  <th>STR</th>
-                  <th>VIT</th>
-                  <th>INT</th>
-                  <th>AGI</th>
-                  <th>DEX</th>
-                  <th>LUC</th>
-                  <th>Total</th>
-                  <th>Dev</th>
-                  <th>Citation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedStats.map((stat, i) => (
-                  <tr key={i}>
-                    <td>{formatDate(stat.date_noted)}</td>
-                    <td className="value-muted">{stat.date_sequence ?? "—"}</td>
-                    <td>{stat.scan_type || "—"}</td>
-                    <td className="value-highlight">
-                      {stat.sp !== null ? stat.sp : "—"}
-                    </td>
-                    <td>{stat.hp !== null ? stat.hp : "—"}</td>
-                    <td>{stat.mp !== null ? stat.mp : "—"}</td>
-                    <td>{stat.str ?? "—"}</td>
-                    <td>{stat.vit ?? "—"}</td>
-                    <td>{stat.int ?? "—"}</td>
-                    <td>{stat.agi ?? "—"}</td>
-                    <td>{stat.dex ?? "—"}</td>
-                    <td>{stat.luc ?? "—"}</td>
-                    <td className="value-highlight">
-                      {stat.stat_total ?? "—"}
-                    </td>
-                    <td>{stat.points_from_average ?? "—"}</td>
-                    <td>
-                      <CitationBadge citation={stat.citation} />
-                    </td>
+          <>
+            {/* Desktop table */}
+            <div className="data-table-wrapper detail-desktop-only">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Seq</th>
+                    <th>Scan</th>
+                    <th>SP</th>
+                    <th>HP</th>
+                    <th>MP</th>
+                    <th>STR</th>
+                    <th>VIT</th>
+                    <th>INT</th>
+                    <th>AGI</th>
+                    <th>DEX</th>
+                    <th>LUC</th>
+                    <th>Total</th>
+                    <th>Dev</th>
+                    <th>Citation</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {sortedStats.map((stat, i) => (
+                    <tr key={i}>
+                      <td>{formatDate(stat.date_noted)}</td>
+                      <td className="value-muted">{stat.date_sequence ?? "—"}</td>
+                      <td>{stat.scan_type || "—"}</td>
+                      <td className="value-highlight">
+                        {stat.sp !== null ? stat.sp : "—"}
+                      </td>
+                      <td>{stat.hp !== null ? stat.hp : "—"}</td>
+                      <td>{stat.mp !== null ? stat.mp : "—"}</td>
+                      <td>{stat.str ?? "—"}</td>
+                      <td>{stat.vit ?? "—"}</td>
+                      <td>{stat.int ?? "—"}</td>
+                      <td>{stat.agi ?? "—"}</td>
+                      <td>{stat.dex ?? "—"}</td>
+                      <td>{stat.luc ?? "—"}</td>
+                      <td className="value-highlight">
+                        {stat.stat_total ?? "—"}
+                      </td>
+                      <td>{stat.points_from_average ?? "—"}</td>
+                      <td>
+                        <CitationBadge citation={stat.citation} />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {/* Mobile stat cards */}
+            <div className="detail-mobile-only">
+              {sortedStats.map((stat, i) => (
+                <div key={i} className="mobile-stat-card">
+                  <div className="mobile-stat-header">
+                    <div className="mobile-stat-header-row">
+                      <span>
+                        {formatDate(stat.date_noted)}
+                        {stat.date_sequence != null && (
+                          <span className="value-muted"> · #{stat.date_sequence}</span>
+                        )}
+                      </span>
+                    </div>
+                    <div className="mobile-stat-header-row">
+                      <span className="value-muted">
+                        {stat.scan_type || "—"}
+                      </span>
+                      <span className="value-highlight">
+                        SP {stat.sp !== null ? stat.sp : "—"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mobile-stat-grid">
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">HP</span>
+                      <span className="mobile-stat-value">{stat.hp !== null ? stat.hp : "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">MP</span>
+                      <span className="mobile-stat-value">{stat.mp !== null ? stat.mp : "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">STR</span>
+                      <span className="mobile-stat-value">{stat.str ?? "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">VIT</span>
+                      <span className="mobile-stat-value">{stat.vit ?? "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">INT</span>
+                      <span className="mobile-stat-value">{stat.int ?? "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">AGI</span>
+                      <span className="mobile-stat-value">{stat.agi ?? "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">DEX</span>
+                      <span className="mobile-stat-value">{stat.dex ?? "—"}</span>
+                    </div>
+                    <div className="mobile-stat-cell">
+                      <span className="mobile-stat-label">LUC</span>
+                      <span className="mobile-stat-value">{stat.luc ?? "—"}</span>
+                    </div>
+                  </div>
+                  <div className="mobile-stat-totals">
+                    <span>
+                      <span className="mobile-stat-label">Total</span>
+                      <span className="value-highlight">{stat.stat_total ?? "—"}</span>
+                    </span>
+                    <span>
+                      <span className="mobile-stat-label">Dev</span>
+                      <span>{stat.points_from_average ?? "—"}</span>
+                    </span>
+                  </div>
+                  {stat.citation && (
+                    <div className="mobile-stacked-row mobile-stacked-row-citation">
+                      <CitationBadge citation={stat.citation} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           <p style={{ color: "var(--text-muted)" }}>No stats available.</p>
         )}

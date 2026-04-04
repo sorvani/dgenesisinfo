@@ -76,7 +76,6 @@ const statSchema: FieldDef[] = [
   { key: 'dex', label: 'DEX', type: 'number' },
   { key: 'luc', label: 'LUC', type: 'number' },
   { key: 'stat_total', label: 'Total Stats', type: 'number' },
-  { key: 'points_from_average', label: 'Points from Average', type: 'number' },
   ...citationSchema
 ];
 
@@ -189,7 +188,7 @@ type ViewState = 'list' | 'form';
 type EditAction = 'add' | 'edit' | 'copy';
 
 export function ContributeForm({ orbs, explorers }: Props) {
-  const [type, setType] = useState<'orb' | 'explorer'>('orb');
+  const [type, setType] = useState<'orb' | 'explorer'>('explorer');
   const [selectedSlug, setSelectedSlug] = useState<string>('');
   const [section, setSection] = useState<string>('base'); 
   
@@ -289,6 +288,10 @@ export function ContributeForm({ orbs, explorers }: Props) {
     if (payload.birthday) {
       payload.birthday = normalizeBirthday(payload.birthday);
     }
+    // Auto-calculate points_from_average for stat entries (average is 60)
+    if (section === 'stats' && payload.stat_total != null) {
+      payload.points_from_average = payload.stat_total - 60;
+    }
     executeGitHubRedirect(editAction.toUpperCase(), JSON.stringify(payload, null, 2));
     if (isArray) setViewState('list');
   };
@@ -301,12 +304,12 @@ export function ContributeForm({ orbs, explorers }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.5fr)', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
+      <div className="contribute-form-selectors">
         <div>
           <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Record Type</label>
           <select value={type} onChange={handleTypeSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-            <option value="orb">Skill Orb</option>
             <option value="explorer">Explorer</option>
+            <option value="orb">Skill Orb</option>
           </select>
         </div>
         
