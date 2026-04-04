@@ -9,6 +9,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 99726438,
@@ -388,6 +389,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 814,
@@ -628,6 +630,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 681,
@@ -698,6 +701,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 368,
@@ -802,6 +806,7 @@
     "public": 0,
     "birthday": "April 3",
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -845,6 +850,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 48,
@@ -922,6 +928,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 3,
@@ -993,6 +1000,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 7,
@@ -1053,6 +1061,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 5,
@@ -1124,6 +1133,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 8,
@@ -1184,6 +1194,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1285,6 +1296,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 99728765,
@@ -1321,6 +1333,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 2,
@@ -1346,6 +1359,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 4,
@@ -1382,6 +1396,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 6,
@@ -1418,6 +1433,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 9,
@@ -1443,6 +1459,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 10,
@@ -1468,6 +1485,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 11,
@@ -1493,6 +1511,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 12,
@@ -1518,6 +1537,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 13,
@@ -1543,6 +1563,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 14,
@@ -1568,6 +1589,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 15,
@@ -1593,6 +1615,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 16,
@@ -1618,6 +1641,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 17,
@@ -1643,6 +1667,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 18,
@@ -1689,6 +1714,7 @@
     "public": 1,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 19,
@@ -1714,6 +1740,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1739,6 +1766,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1843,6 +1871,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1868,6 +1897,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1904,6 +1934,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1929,6 +1960,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1954,6 +1986,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -1979,6 +2012,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Male",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
@@ -2004,6 +2038,7 @@
     "public": 0,
     "birthday": null,
     "sex": "Female",
+    "note": null,
     "rankings": [
       {
         "rank": 0,
