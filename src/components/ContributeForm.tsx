@@ -325,7 +325,7 @@ export function ContributeForm({ orbs, explorers }: Props) {
               initialData={{ ...entity }} 
               actionName="Edit Base Details"
               onSave={handleSaveForm}
-              onCancel={() => {}}
+              onCancel={() => { setSelectedSlug(''); resetFlow(); }}
             />
           ) : viewState === 'list' ? (
             <ListView 
