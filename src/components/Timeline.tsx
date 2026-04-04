@@ -5,8 +5,8 @@ import {
   type TimelineEvent,
   getTimelineEventDate,
   getBookLabel,
-  formatCitation,
 } from '@/lib/data';
+import { CitationBadge } from '@/components/CitationBadge';
 
 interface Props {
   events: TimelineEvent[];
@@ -126,7 +126,6 @@ export function Timeline({ events, books }: Props) {
                 globalIndex++;
 
                 const dateStr = getTimelineEventDate(event);
-                const citationStr = event.citation ? formatCitation(event.citation) : null;
 
                 return (
                   <div
@@ -153,9 +152,9 @@ export function Timeline({ events, books }: Props) {
                         className="timeline-event-text"
                         dangerouslySetInnerHTML={{ __html: event.event }}
                       />
-                      {citationStr && (
+                      {event.citation && (
                         <div className="timeline-event-citation">
-                          <span className="citation-badge">📖 {citationStr}</span>
+                          <CitationBadge citation={event.citation} />
                         </div>
                       )}
                     </div>
