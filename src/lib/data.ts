@@ -1,5 +1,6 @@
 import explorersData from '@/data/explorers.json';
 import orbsData from '@/data/orbs.json';
+import timelineData from '@/data/timeline.json';
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -76,10 +77,22 @@ export interface Orb {
   drop_rates: DropRate[];
 }
 
+export interface TimelineEvent {
+  id: number;
+  date_utc: string;
+  date_label: string | null;
+  display_time: boolean;
+  timezone: string;
+  book: number;
+  event: string;
+  citation: Citation | null;
+}
+
 // ─── Data Access ─────────────────────────────────────────────────────
 
 const explorers: Explorer[] = explorersData as Explorer[];
 const orbs: Orb[] = orbsData as Orb[];
+const timeline: TimelineEvent[] = timelineData as TimelineEvent[];
 
 /** Get latest rank value for sorting (lower = better) */
 function getLatestRankValue(explorer: Explorer): number {
@@ -127,6 +140,90 @@ export function getOrbBySlug(slug: string): Orb | undefined {
 /** Find an orb by its numeric orb_id */
 export function getOrbById(orbId: number): Orb | undefined {
   return orbs.find(o => o.orb_id === orbId);
+}
+
+/** Get all timeline events sorted by date_utc then id */
+export function getTimelineEvents(): TimelineEvent[] {
+  return [...timeline].sort((a, b) => {
+    const dateA = new Date(a.date_utc).getTime();
+    const dateB = new Date(b.date_utc).getTime();
+    if (dateA !== dateB) return dateA - dateB;
+    return a.id - b.id;
+  });
+}
+
+/** Get unique book numbers from timeline */
+export function getTimelineBooks(): number[] {
+  const books = new Set(timeline.map(e => e.book));
+  return Array.from(books).sort((a, b) => a - b);
+}
+
+// ─── Timezone Helpers ────────────────────────────────────────────────
+
+/** Map of timezone abbreviations to IANA timezone identifiers */
+const TZ_MAP: Record<string, string> = {
+  JST: 'Asia/Tokyo',
+  EST: 'America/New_York',
+  CST: 'America/Chicago',
+  MST: 'America/Denver',
+  PST: 'America/Los_Angeles',
+  UTC: 'UTC',
+  GMT: 'UTC',
+  CET: 'Europe/Paris',
+  EET: 'Europe/Athens',
+  IST: 'Asia/Kolkata',
+  KST: 'Asia/Seoul',
+  CST_CN: 'Asia/Shanghai',
+};
+
+/** Get IANA timezone from abbreviation */
+export function getIANATimezone(tz: string): string {
+  return TZ_MAP[tz] || 'Asia/Tokyo';
+}
+
+/** Format a UTC date for display in the given timezone, date-only */
+export function formatTimelineDate(dateUtc: string, timezone: string): string {
+  const date = new Date(dateUtc);
+  const iana = getIANATimezone(timezone);
+  return date.toLocaleDateString('en-US', {
+    timeZone: iana,
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+/** Format a UTC date for display in the given timezone, with time */
+export function formatTimelineDateTime(dateUtc: string, timezone: string): string {
+  const date = new Date(dateUtc);
+  const iana = getIANATimezone(timezone);
+  const datePart = date.toLocaleDateString('en-US', {
+    timeZone: iana,
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const timePart = date.toLocaleTimeString('en-US', {
+    timeZone: iana,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: date.getUTCSeconds() > 0 ? '2-digit' : undefined,
+    hour12: false,
+  });
+  return `${datePart} ${timePart} ${timezone}`;
+}
+
+/** Get the display string for a timeline event */
+export function getTimelineEventDate(event: TimelineEvent): string {
+  if (event.date_label) return event.date_label;
+  if (event.display_time) return formatTimelineDateTime(event.date_utc, event.timezone);
+  return formatTimelineDate(event.date_utc, event.timezone);
+}
+
+/** Get the book label */
+export function getBookLabel(book: number): string {
+  if (book === 0) return 'Pre-History';
+  return `Book ${book}`;
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────

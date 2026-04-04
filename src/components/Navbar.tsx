@@ -12,6 +12,7 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/explorers", label: "WDARL Rankings" },
     { href: "/orbs", label: "Skill Orbs" },
+    { href: "/timeline", label: "Timeline" },
     { href: "/contribute", label: "Contribute" },
   ];
 
