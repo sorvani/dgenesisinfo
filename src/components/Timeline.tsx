@@ -47,7 +47,7 @@ export function Timeline({ events, books }: Props) {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -61,14 +61,14 @@ export function Timeline({ events, books }: Props) {
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
-    return () => observerRef.current?.disconnect();
-  }, []);
+    observerRef.current = observer;
 
-  const cardRef = (el: HTMLDivElement | null) => {
-    if (el && observerRef.current) {
-      observerRef.current.observe(el);
-    }
-  };
+    // Observe all currently rendered timeline rows
+    const elements = document.querySelectorAll('.timeline-row');
+    elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [filteredEvents]);
 
   let globalIndex = 0;
 
@@ -102,7 +102,7 @@ export function Timeline({ events, books }: Props) {
       <div className="timeline-container" id="timeline-container">
         {groupedByBook.map((group, groupIdx) => {
           return (
-            <div key={group.book}>
+            <div key={`${group.book}-${groupIdx}`}>
               {/* Book Divider */}
               <div
                 className="timeline-book-divider"
@@ -129,7 +129,6 @@ export function Timeline({ events, books }: Props) {
                     key={event.id}
                     className={`timeline-row timeline-row-${side}${isVisible ? ' visible' : ''}`}
                     data-event-id={event.id}
-                    ref={cardRef}
                   >
                     {/* Dot on center line */}
                     <div className="timeline-dot-wrapper">
@@ -146,7 +145,10 @@ export function Timeline({ events, books }: Props) {
                           <span className="timeline-tz-badge">{event.timezone}</span>
                         )}
                       </div>
-                      <p className="timeline-event-text">{event.event}</p>
+                      <div 
+                        className="timeline-event-text"
+                        dangerouslySetInnerHTML={{ __html: event.event }}
+                      />
                       {citationStr && (
                         <div className="timeline-event-citation">
                           <span className="citation-badge">📖 {citationStr}</span>

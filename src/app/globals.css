@@ -1202,12 +1202,13 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
 .timeline-row-left .timeline-event-card {
   margin-right: calc(50% - 480px);
   margin-left: auto;
-  text-align: right;
+  text-align: left;
 }
 
 .timeline-row-right .timeline-event-card {
   margin-left: calc(50% - 480px);
   margin-right: auto;
+  text-align: right;
 }
 
 /* Dot on center line */
@@ -1267,7 +1268,7 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   flex-wrap: wrap;
 }
 
-.timeline-row-left .timeline-event-date-row {
+.timeline-row-right .timeline-event-date-row {
   justify-content: flex-end;
 }
 
