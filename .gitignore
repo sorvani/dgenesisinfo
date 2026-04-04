@@ -1,5 +1,44 @@
-fire*-debug.log
-node_modules/
-service-account.json
-.firebase/hosting.*.cache
-firebase-config.js
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env
+.env*.local
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Firebase service account key - NEVER commit
+d-genesis-info-firebase-adminsdk-*.json
+
+# Export tools
+exported-data/
+export-firebase-data.mjs
