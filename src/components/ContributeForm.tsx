@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from 'react';
-import { type Orb, type Explorer } from '@/lib/data';
+import { type Orb, type Explorer, type TimelineEvent, getIANATimezone } from '@/lib/data';
 
 interface Props {
   orbs: Orb[];
   explorers: Explorer[];
+  timeline: TimelineEvent[];
 }
 
 // ─── Dynamic Form Engine Definitions ─────────────────────────────────────
 
-type FieldType = 'text' | 'number' | 'textarea' | 'date' | 'boolean';
+type FieldType = 'text' | 'number' | 'textarea' | 'date' | 'time' | 'timezone_select' | 'boolean' | 'hidden';
 interface FieldDef { key: string; label: string; type: FieldType; required?: boolean; }
 
 const citationSchema: FieldDef[] = [
@@ -60,6 +61,18 @@ const orbUsedSchema: FieldDef[] = [
   { key: 'orb_id', label: 'Orb ID (Numeric)', type: 'number' },
   { key: 'date_acquired', label: 'Date Acquired', type: 'date' },
   { key: 'date_note', label: 'Date Note', type: 'textarea' },
+  ...citationSchema
+];
+
+const timelineSchema: FieldDef[] = [
+  { key: 'id', label: 'ID', type: 'hidden' },
+  { key: 'local_date', label: 'Local Date', type: 'date', required: true },
+  { key: 'local_time', label: 'Local Time (24-hour)', type: 'time' },
+  { key: 'timezone', label: 'Timezone', type: 'timezone_select', required: true },
+  { key: 'date_label', label: 'Date Label Override', type: 'text' },
+  { key: 'display_time', label: 'Display Specific Time', type: 'boolean' },
+  { key: 'pre_history', label: 'Pre-History Event', type: 'boolean' },
+  { key: 'event', label: 'Details (HTML OK)', type: 'textarea', required: true },
   ...citationSchema
 ];
 
@@ -125,6 +138,8 @@ function DynamicForm({ schema, initialData, onSave, onCancel, actionName }: { sc
 
           const inputStyle = { width: '100%', padding: 'var(--space-sm)', borderRadius: '4px', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'inherit' };
 
+          if (field.type === 'hidden') return null;
+
           return (
             <div key={field.key} style={{ gridColumn: field.type === 'textarea' ? '1 / -1' : 'auto' }}>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 'bold', marginBottom: 'var(--space-xs)' }}>{field.label}</label>
@@ -136,6 +151,25 @@ function DynamicForm({ schema, initialData, onSave, onCancel, actionName }: { sc
                 <input type="number" step="any" value={val as number|string} onChange={onChange} required={field.required} style={inputStyle} />
               ) : field.type === 'date' ? (
                 <input type="date" value={val as string} onChange={onChange} required={field.required} style={inputStyle} />
+              ) : field.type === 'time' ? (
+                <input type="time" step="1" value={val as string} onChange={onChange} required={field.required} style={inputStyle} />
+              ) : field.type === 'timezone_select' ? (
+                <select value={val as string} onChange={onChange} required={field.required} style={inputStyle}>
+                  <option value="">-- Select Timezone --</option>
+                  <option value="JST">JST (Japan Standard Time)</option>
+                  <option value="EST">EST (Eastern Time)</option>
+                  <option value="CST">CST (Central Time)</option>
+                  <option value="MST">MST (Mountain Time)</option>
+                  <option value="PST">PST (Pacific Time)</option>
+                  <option disabled>──────────</option>
+                  <option value="UTC">UTC</option>
+                  <option value="GMT">GMT</option>
+                  <option value="CET">CET (Central European Time)</option>
+                  <option value="EET">EET (Eastern European Time)</option>
+                  <option value="IST">IST (Indian Standard Time)</option>
+                  <option value="KST">KST (Korea Standard Time)</option>
+                  <option value="CST_CN">CST_CN (China Standard Time)</option>
+                </select>
               ) : (
                 <input type="text" value={val as string} onChange={onChange} required={field.required} style={inputStyle} />
               )}
@@ -190,8 +224,8 @@ function ListView({ items, summaryFn, onAdd, onEdit, onCopy, onDelete }: { items
 type ViewState = 'list' | 'form';
 type EditAction = 'add' | 'edit' | 'copy';
 
-export function ContributeForm({ orbs, explorers }: Props) {
-  const [type, setType] = useState<'orb' | 'explorer'>('explorer');
+export function ContributeForm({ orbs, explorers, timeline }: Props) {
+  const [type, setType] = useState<'orb' | 'explorer' | 'timeline'>('explorer');
   const [selectedSlug, setSelectedSlug] = useState<string>('');
   const [section, setSection] = useState<string>('base'); 
   
@@ -206,9 +240,15 @@ export function ContributeForm({ orbs, explorers }: Props) {
   };
 
   const handleTypeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setType(e.target.value as 'orb' | 'explorer');
-    setSelectedSlug('');
-    setSection('base');
+    const newType = e.target.value as 'orb' | 'explorer' | 'timeline';
+    setType(newType);
+    if (newType === 'timeline') {
+      setSelectedSlug('timeline');
+      setSection('events');
+    } else {
+      setSelectedSlug('');
+      setSection('base');
+    }
     resetFlow();
   };
 
@@ -230,7 +270,13 @@ export function ContributeForm({ orbs, explorers }: Props) {
 
   let entity: any = null;
   if (selectedSlug) {
-    if (type === 'orb') {
+    if (type === 'timeline') {
+      entity = { events: timeline };
+      schema = timelineSchema;
+      items = [...timeline];
+      isArray = true;
+      sectionName = "Events";
+    } else if (type === 'orb') {
       const found = orbs.find(o => o.slug === selectedSlug);
       entity = found ? { ...found } : null;
       if (section === 'base') {
@@ -265,12 +311,14 @@ export function ContributeForm({ orbs, explorers }: Props) {
     if (section === 'rankings') return `Rank ${item.rank || (item.known_above_rank ? `> ${item.known_above_rank}` : '?')} (${item.date_noted || 'No Date'})`;
     if (section === 'stats') return `Total: ${item.stat_total || '?'} | Scan: ${item.scan_type || '?'} (${item.date_noted || 'No Date'})`;
     if (section === 'orbs_used') return `Orb ID: ${item.orb_id || '?'} (${item.date_acquired || 'No Date'})`;
+    if (section === 'events') return `${item.date_label || item.date_utc}: ${(item.event || '').substring(0, 50)}...`;
     return JSON.stringify(item).substring(0, 50)+'...';
   };
 
   const executeGitHubRedirect = (actionType: string, payloadStr: string) => {
-    const target = `${type === 'orb' ? 'Orb' : 'Explorer'} (${selectedSlug}) -> ${sectionName}`;
-    const title = `Update ${type === 'orb' ? 'Orb' : 'Explorer'}: ${selectedSlug}`;
+    const target = type === 'timeline' ? 'Timeline Event' : `${type === 'orb' ? 'Orb' : 'Explorer'} (${selectedSlug}) -> ${sectionName}`;
+    const entityTitle = type === 'timeline' ? 'Timeline' : type === 'orb' ? 'Orb' : 'Explorer';
+    const title = type === 'timeline' ? `Update Timeline Event` : `Update ${entityTitle}: ${selectedSlug}`;
     const body = `### Proposed Contribution\n**Action:** \`${actionType}\`\n**Target:** \`${target}\`\n\n**Payload:**\n\`\`\`json\n${payloadStr}\n\`\`\`\n`;
     const url = `https://github.com/sorvani/dgenesisinfo/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
     window.open(url, '_blank');
@@ -286,8 +334,60 @@ export function ContributeForm({ orbs, explorers }: Props) {
     return bday;
   };
 
+  const prepareTimelineData = (item: any) => {
+    if (type !== 'timeline' || !item) return item;
+    const mapped = { ...item };
+    if (mapped.date_utc) {
+      const iana = getIANATimezone(mapped.timezone || 'JST');
+      try {
+        const localDt = new Date(mapped.date_utc).toLocaleString('sv', { timeZone: iana });
+        const [ld, lt] = localDt.split(' ');
+        mapped.local_date = ld;
+        mapped.local_time = lt;
+      } catch (e) {}
+    } else {
+      mapped.local_date = '';
+      mapped.local_time = '00:00:00';
+      if (!mapped.timezone) mapped.timezone = 'JST';
+    }
+    return mapped;
+  };
+
   const handleSaveForm = (data: any) => {
     const payload = { ...data };
+    
+    if (type === 'timeline') {
+      const { local_date, ...rest } = payload;
+      let { local_time } = payload;
+      
+      if (rest.id == null || rest.id === '') {
+        const maxId = timeline.reduce((max, evt) => Math.max(max, evt.id || 0), 0);
+        rest.id = maxId + 1;
+      }
+
+      if (!local_time) {
+        local_time = '12:00:00';
+      }
+
+      if (local_date && local_time) {
+        const iana = getIANATimezone(rest.timezone || 'JST');
+        const localUTC = new Date(`${local_date}T${local_time}Z`);
+        let currentUTC = localUTC.getTime();
+        for(let i=0; i<3; i++) {
+           const rendered = new Date(currentUTC).toLocaleString('sv', { timeZone: iana });
+           const renderedLocalUTC = new Date(rendered.replace(' ', 'T') + 'Z').getTime();
+           const diff = localUTC.getTime() - renderedLocalUTC;
+           if (diff === 0) break;
+           currentUTC += diff;
+        }
+        rest.date_utc = new Date(currentUTC).toISOString().split('.')[0] + 'Z';
+      }
+      
+      executeGitHubRedirect(editAction.toUpperCase(), JSON.stringify(rest, null, 2));
+      if (isArray) setViewState('list');
+      return;
+    }
+    
     if (payload.birthday) {
       payload.birthday = normalizeBirthday(payload.birthday);
     }
@@ -313,29 +413,35 @@ export function ContributeForm({ orbs, explorers }: Props) {
           <select value={type} onChange={handleTypeSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
             <option value="explorer">Explorer</option>
             <option value="orb">Skill Orb</option>
+            <option value="timeline">Timeline</option>
           </select>
         </div>
         
-        <div>
-          <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Select Record</label>
-          <select value={selectedSlug} onChange={handleEntitySelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-            <option value="">-- Choose {type === 'orb' ? 'an orb' : 'an explorer'} to edit --</option>
-            {type === 'orb' 
-              ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
-              : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
-            }
-          </select>
-        </div>
+        {type !== 'timeline' && (
+          <div>
+            <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Select Record</label>
+            <select value={selectedSlug} onChange={handleEntitySelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+              <option value="">-- Choose {type === 'orb' ? 'an orb' : 'an explorer'} to edit --</option>
+              {type === 'orb' 
+                ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
+                : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
+              }
+            </select>
+          </div>
+        )}
 
         <div>
           {selectedSlug ? (
             <div className="animate-in">
               <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Section to Edit</label>
-              <select value={section} onChange={handleSectionSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-                <option value="base">Base Details</option>
-                {type === 'orb' ? (
-                  <option value="drop_rates">Drop Rates Array</option>
+              <select value={section} onChange={handleSectionSelect} disabled={type === 'timeline'} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: type === 'timeline' ? 'var(--bg-secondary)' : 'var(--bg-primary)', color: 'var(--text-primary)', cursor: type === 'timeline' ? 'not-allowed' : 'auto' }}>
+                {type === 'timeline' ? (
+                  <option value="events">All Events Array</option>
                 ) : (
+                  <option value="base">Base Details</option>
+                )}
+                {type === 'orb' && <option value="drop_rates">Drop Rates Array</option>}
+                {type === 'explorer' && (
                   <>
                     <option value="rankings">Rankings Array</option>
                     <option value="orbs_used">Orbs Used Array</option>
@@ -377,7 +483,7 @@ export function ContributeForm({ orbs, explorers }: Props) {
           ) : (
             <DynamicForm 
               schema={schema} 
-              initialData={activeItem} 
+              initialData={prepareTimelineData(activeItem)} 
               actionName={editAction === 'add' ? 'Create New Entry' : editAction === 'copy' ? 'Create Copy from Entry' : 'Edit Entry'}
               onSave={handleSaveForm}
               onCancel={() => setViewState('list')}

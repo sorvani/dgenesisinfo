@@ -83,7 +83,7 @@ export interface TimelineEvent {
   date_label: string | null;
   display_time: boolean;
   timezone: string;
-  book: number;
+  pre_history?: boolean;
   event: string;
   citation: Citation | null;
 }
@@ -154,7 +154,7 @@ export function getTimelineEvents(): TimelineEvent[] {
 
 /** Get unique book numbers from timeline */
 export function getTimelineBooks(): number[] {
-  const books = new Set(timeline.map(e => e.book));
+  const books = new Set(timeline.map(e => e.pre_history ? 0 : Number(e.citation?.volume || 0)));
   return Array.from(books).sort((a, b) => a - b);
 }
 

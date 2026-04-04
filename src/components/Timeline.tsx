@@ -19,15 +19,19 @@ export function Timeline({ events, books }: Props) {
 
   const filteredEvents = activeBook === 'all'
     ? events
-    : events.filter(e => e.book === activeBook);
+    : events.filter(e => {
+        const ebook = e.pre_history ? 0 : Number(e.citation?.volume || 0);
+        return ebook === activeBook;
+      });
 
   // Group events by book for rendering dividers
   const groupedByBook: { book: number; events: TimelineEvent[] }[] = [];
   let currentBook: number | null = null;
   for (const event of filteredEvents) {
-    if (event.book !== currentBook) {
-      groupedByBook.push({ book: event.book, events: [] });
-      currentBook = event.book;
+    const ebook = event.pre_history ? 0 : Number(event.citation?.volume || 0);
+    if (ebook !== currentBook) {
+      groupedByBook.push({ book: ebook, events: [] });
+      currentBook = ebook;
     }
     groupedByBook[groupedByBook.length - 1].events.push(event);
   }

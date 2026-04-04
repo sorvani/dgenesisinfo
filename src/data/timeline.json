@@ -5,9 +5,9 @@
     "date_label": "Early Summer 2015",
     "display_time": false,
     "timezone": "JST",
-    "book": 0,
     "event": "The Ring becomes the first Dungeon (time of year taken from Iori's background story that dungeons appeared at the beginning of the season)",
-    "citation": null
+    "citation": null,
+    "pre_history": true
   },
   {
     "id": 2,
@@ -15,9 +15,9 @@
     "date_label": "Late Summer 2015",
     "display_time": false,
     "timezone": "JST",
-    "book": 0,
     "event": "Iori gets her D-Card and orb in a dungeon in Okinawa",
-    "citation": null
+    "citation": null,
+    "pre_history": true
   },
   {
     "id": 3,
@@ -25,9 +25,9 @@
     "date_label": "Late 2015",
     "display_time": false,
     "timezone": "JST",
-    "book": 0,
     "event": "Miyoshi gets her D-Card on a card tour",
-    "citation": null
+    "citation": null,
+    "pre_history": true
   },
   {
     "id": 4,
@@ -35,9 +35,9 @@
     "date_label": "Later half of 2016",
     "display_time": false,
     "timezone": "JST",
-    "book": 0,
     "event": "David sees Marianne healing people and they form Altum Foraminis Sacri Esse otherwise known as the Church of the Deep Chasm",
-    "citation": null
+    "citation": null,
+    "pre_history": true
   },
   {
     "id": 5,
@@ -45,9 +45,13 @@
     "date_label": "Late September 2018",
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Noted as \"late September\" in the text, Dr Ainsworth discusses the discovery of Otherworldly Language Comprehension in Russia",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 6,
@@ -55,9 +59,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Keigo gets his D-Card and Making. Radio announcement about Team Simon clearing the first mid-depth dungeon.",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 7,
@@ -65,9 +73,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Keigo figures out that May King was Making and how to use it to display and assign his own stats (increase only)",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 8,
@@ -75,9 +87,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Keigo enters Yoyogi for the first time and learns about consecutive killing SP rates",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 9,
@@ -85,9 +101,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Keigo learns about in/out SP and obtains Vault",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 10,
@@ -95,9 +115,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Keigo obtains Water Magic and learns about the cooldown on Making's 100 kill pop up",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 11,
@@ -105,9 +129,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Time skip and Keigo has a collection of orbs. D-Powers the party is legally formed",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 12,
@@ -115,9 +143,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "The first auction goes live",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 13,
@@ -125,9 +157,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "The first auction completes to them earning ~11 billion yen (pre-tax).",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 14,
@@ -135,9 +171,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "First orb handover at JDA, learn about travel ban",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 15,
@@ -145,9 +185,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Visit Midori for first scans",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 16,
@@ -155,9 +199,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Hand off orb to Team Simon",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 17,
@@ -165,9 +213,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Naruse asks them to find Otherworldly Language Comprehension",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 18,
@@ -175,9 +227,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "They decide to go full Mad Max mode when diving to deeper floors.",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 19,
@@ -185,9 +241,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Second orb auction completes earning them ~13.5 billion yen (pre-tax). Also assist Asha with obtaining her D-Card and Super Recovery",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 20,
@@ -195,9 +255,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Dinner with Asha",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 21,
@@ -205,9 +269,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 1,
     "event": "Visit Midori for second scans and learn about Making lowering stats after reaching 100. Leaves LUC at 100 and gets immediate call from Mitsurugi",
-    "citation": null
+    "citation": {
+      "volume": "1",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 22,
@@ -215,9 +283,13 @@
     "date_label": "November X, 2018",
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "David with Church of the Deep Chasm learns about Asha's recovery",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 23,
@@ -225,9 +297,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Dolly (Mad Max version of an RV) arrives",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 24,
@@ -235,9 +311,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "First dive past floor 1 and they learn Making kicks on kill 100 not on 100 specific creatures. On the 5th floor, Encounter Hound of Hecate (Barghest Field Boss?) and obtain 2 OLC orbs.",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 25,
@@ -245,9 +325,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Return and discuss OLC with Naruse",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 26,
@@ -255,9 +339,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Director Mizuho proves he is extra stupid and D-Powers decides to auction OLC",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 27,
@@ -265,9 +353,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Keigo implies the cause to Agent Tanaka and they dive into Yoyogi and trigger the Wandering Manor after a merry chase.",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 28,
@@ -275,9 +367,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Survive the Wandering Manor and obtain Appraisal, Dark Magic VI, summon the Arthurs, obtain Ultimate Fire Magic",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 29,
@@ -285,9 +381,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Return to surface to find OLC sold for ~416 billion yen to the DSF. They also give the 2nd OLC to Naruse and hint at Heaven's Leaks",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 30,
@@ -295,9 +395,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Lead the various intelligence agency on a colonial worm chase around the 9th floor. Return to the surface and learn about the party system and choose that to validate Heaven's Leaks",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 31,
@@ -305,9 +409,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "OLC handoff to Monica and fun with Russian kill team.",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 32,
@@ -315,9 +423,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 2,
     "event": "Naruse translates information from RU22-0012 (mining) and BF26-003 (food drops).",
-    "citation": null
+    "citation": {
+      "volume": "2",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 33,
@@ -325,9 +437,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Discover that Making can display party member details and allows adjustments, learn that half of SP is normally auto dispensed and decide to create a boot camp. Also determine drop rate stats and how it is affect by LUC",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 34,
@@ -335,9 +451,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Obtain Mining and defeat Enkai/Ngai",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 35,
@@ -345,9 +465,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Descend to the 20th floor and mine Vanadium",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 36,
@@ -355,9 +479,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Discussion on lots of OLC content, coin the term D-Factors, decide to form D-Powers LLC",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 37,
@@ -365,9 +493,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Pick up the first Stat Scanner",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 38,
@@ -375,9 +507,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Use Making on Mitsurugui and Saito, and spend their SP",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 39,
@@ -385,9 +521,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Quantify Naruse's stats with the scanning machine",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 40,
@@ -395,9 +535,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Discover Arthur swap limit for carried items, Naruse tells her superiors about Heaven's Leaks",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 41,
@@ -405,9 +549,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "Heaven's Leaks goes live",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 42,
@@ -415,9 +563,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 3,
     "event": "D-Powers asked to create a D-Card verifier, because telepathy + tests!",
-    "citation": null
+    "citation": {
+      "volume": "3",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 43,
@@ -425,9 +577,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Naruse informs JDA of the request to rent conference room for Boot Camp. D-Powers broke Midori's brain with the verifier.",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 44,
@@ -435,9 +591,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Learn about Arthur pit SP reset. Spawn Manor on 1st floor of Yoyogi",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 45,
@@ -445,9 +605,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Discover note from Dr. Tylor in Klingon on the Book's final page.",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 46,
@@ -455,9 +619,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Hire Cathy for the boot camp",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 47,
@@ -465,9 +633,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Negotiate with JDA over Item Box (Storage)",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 48,
@@ -475,9 +647,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Put Cathy through boot camp and spend her excess SP",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 49,
@@ -485,9 +661,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Press conference and announce Appraisal, SMD, D-Card verifier",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 50,
@@ -495,9 +675,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 4,
     "event": "Discussion with Simon about Dr. Tylor and the Klingon inscription",
-    "citation": null
+    "citation": {
+      "volume": "4",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 51,
@@ -505,9 +689,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Set up Saito on Arthur drop training and then explore Yokohama with Tenko",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 52,
@@ -515,9 +703,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Boot Camp day 1 with Team Simon and Komugi (gem freak)",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 53,
@@ -525,9 +717,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Cathy given Water Magic Orb as employee benefit. The New York D-Card verifiers receive email from Miyoshi offering to book the Javis Center for the meetup, the conversation confirms that King Salmon and the Witch of Campbell are in Japan diving Yoyogi",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 54,
@@ -535,9 +731,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Sign for rights to Yokohama \"1st floor\" and tell Naruse about how mining drops are set",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 55,
@@ -545,9 +745,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Miyoshi publishes their thesis on dungeonization. Then they tail Saito and Tenko in Yoyogi and the Phantom makes his debut. Miyoshi goes Rambo on 10th floor with Arthur drop method. Keigo collected a Darkness VI orb for Komugi",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 56,
@@ -555,9 +759,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Hellpups summoned by Miyoshi. Falcon Labs breaks Yokohama during weapon testing",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 57,
@@ -565,9 +773,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "JDA (Saiga) dumps Yokohama on D-Powers. Naruse visits D-Powers to inform them of the Yokohama problem and witnesses Miyoshi use storage for the first time.",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 58,
@@ -575,9 +787,13 @@
     "date_label": "January X, 2019",
     "display_time": false,
     "timezone": "JST",
-    "book": 5,
     "event": "Assumed January 17 JST - Book 5 Epilogue Dr Jones is at a dungeon formation and comments on kill possibility of forming dungeons similar to Keigo's rebar kill.",
-    "citation": null
+    "citation": {
+      "volume": "5",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 59,
@@ -585,9 +801,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 6,
     "event": "Late night - Keigo and Miyoshi experiment on slimes in Yoyogi to confirm Alien Drool for Dungeon Patent. Existential talk about dungeons",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 60,
@@ -595,9 +815,13 @@
     "date_label": null,
     "display_time": true,
     "timezone": "JST",
-    "book": 6,
     "event": "U.S. President Albert Handler authorizes a nuclear weapon be used in Yokohama if it is proven that the cleaners can split outside the dungeon. Informs Prime Minister Ibe",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 61,
@@ -605,9 +829,13 @@
     "date_label": null,
     "display_time": true,
     "timezone": "JST",
-    "book": 6,
     "event": "Prime Minister Ibe quietly gathers select personnel and informs them of what the U.S is doing.",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 62,
@@ -615,9 +843,13 @@
     "date_label": null,
     "display_time": true,
     "timezone": "JST",
-    "book": 6,
     "event": "Team Simon is informed of the Yokohama problem while on the 18th floor of Yoyogi with Cathy along as a guest",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 63,
@@ -625,9 +857,13 @@
     "date_label": null,
     "display_time": true,
     "timezone": "JST",
-    "book": 6,
     "event": "Keigo and Miyoshi ride the Tokyu Toyoko Line to Yokohama and discuss using Mansion to depop all the things and Ultimate Fire Magic is a last resort because privacy. Also confirm that the 2000 Verifiers were successfully assembled",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 64,
@@ -635,9 +871,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 6,
     "event": "Various testing in the dungeon with Team I and Team Simon",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 65,
@@ -645,9 +885,13 @@
     "date_label": null,
     "display_time": true,
     "timezone": "JST",
-    "book": 6,
     "event": "The bomb goes off and everything disappears",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 66,
@@ -655,9 +899,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 6,
     "event": "Teams find themselves on Level 31 of Yoyogi. The Phantom makes an appearance and gives Iori a Super Recovery Orb. Safe zone confirmed on Level 32. Keigo and Miyoshi meet Dr. Tylor and Ms Maker.",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 67,
@@ -665,9 +913,13 @@
     "date_label": "January X, 2019",
     "display_time": false,
     "timezone": "JST",
-    "book": 6,
     "event": "Film crew discussion on identity of the people they filmed",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 68,
@@ -675,9 +927,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 6,
     "event": "Ibe gets a haircut",
-    "citation": null
+    "citation": {
+      "volume": "6",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 69,
@@ -685,9 +941,13 @@
     "date_label": "January X, 2019",
     "display_time": false,
     "timezone": "EST",
-    "book": 7,
     "event": "Timezone wise, this is likely the 19th EST, Dalton and Mashford (John Smith) discuss the success/fail of the U.S. nuke.",
-    "citation": null
+    "citation": {
+      "volume": "7",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 70,
@@ -695,9 +955,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 7,
     "event": "Keigo and Miyoshi venture back into Yokohama and discover the infinite stairs",
-    "citation": null
+    "citation": {
+      "volume": "7",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 71,
@@ -705,9 +969,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 7,
     "event": "Late morning or Afternoon: Keigo is outed by Saito that he is the Phantom. Her Proof: His Ngai ring.",
-    "citation": null
+    "citation": {
+      "volume": "7",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 72,
@@ -715,9 +983,13 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 7,
     "event": "Evening: Keigo tells the full truth of getting rank 1 to Miyoshi and Naruse (Does not tell Naruse about Making/Mei King)",
-    "citation": null
+    "citation": {
+      "volume": "7",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   },
   {
     "id": 73,
@@ -725,8 +997,12 @@
     "date_label": null,
     "display_time": false,
     "timezone": "JST",
-    "book": 7,
     "event": "Midday: Cathy barges into the office stating she got Mining to Drop, Simon slunk in after her asking them to store it.",
-    "citation": null
+    "citation": {
+      "volume": "7",
+      "chapter": null,
+      "jnc_part": null
+    },
+    "pre_history": false
   }
 ]
