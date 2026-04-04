@@ -55,13 +55,20 @@ export function ExplorersGrid({ initialExplorers, citations }: Props) {
         ))}
       </div>
 
-      {showWdarl && (
-        <WdarlTable
-          explorers={explorers}
-          maxScore={maxScore}
-          onClose={() => setShowWdarl(false)}
-        />
-      )}
+      {showWdarl && (() => {
+        const selectedCitation = maxScore !== null
+          ? citations.find(c => getCitationScore(c) === maxScore)
+          : null;
+        const asOfLabel = selectedCitation ? formatCitation(selectedCitation) : 'Current (Latest Known)';
+        return (
+          <WdarlTable
+            explorers={explorers}
+            maxScore={maxScore}
+            asOfLabel={asOfLabel}
+            onClose={() => setShowWdarl(false)}
+          />
+        );
+      })()}
     </>
   );
 }

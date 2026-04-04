@@ -10,10 +10,11 @@ import {
 interface Props {
   explorers: Explorer[];
   maxScore: number | null;
+  asOfLabel: string;
   onClose: () => void;
 }
 
-export function WdarlTable({ explorers, maxScore, onClose }: Props) {
+export function WdarlTable({ explorers, maxScore, asOfLabel, onClose }: Props) {
   // Only show explorers that have a known rank (not "unknown")
   const ranked = explorers
     .map((e) => {
@@ -36,7 +37,7 @@ export function WdarlTable({ explorers, maxScore, onClose }: Props) {
           <div>
             <div className="wdarl-modal-title">WDARL</div>
             <div className="wdarl-modal-subtitle">
-              World Dungeon Association Ranking List
+              World Dungeon Association Ranking List — As of: {asOfLabel}
             </div>
           </div>
           <button className="wdarl-close-btn" onClick={onClose}>
