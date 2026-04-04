@@ -293,7 +293,7 @@ export function ContributeForm({ orbs, explorers }: Props) {
             <option value="">-- Choose a record to edit --</option>
             {type === 'orb' 
               ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
-              : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''} ({e.slug})</option>)
+              : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''}</option>)
             }
           </select>
         </div>
