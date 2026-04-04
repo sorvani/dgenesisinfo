@@ -8,14 +8,44 @@ interface Props {
   explorers: Explorer[];
 }
 
+type ExplorerSection = 'details' | 'rankings' | 'orbs_used' | 'stats';
+
 export function ContributeForm({ orbs, explorers }: Props) {
   const [type, setType] = useState<'orb' | 'explorer'>('orb');
   const [selectedSlug, setSelectedSlug] = useState<string>('');
+  const [explorerSection, setExplorerSection] = useState<ExplorerSection>('details');
   const [formData, setFormData] = useState<string>('');
   const [jsonError, setJsonError] = useState<string | null>(null);
 
+  const loadFormData = (currentType: 'orb' | 'explorer', slug: string, section: ExplorerSection) => {
+    if (!slug) {
+      setFormData('');
+      return;
+    }
+    
+    if (currentType === 'orb') {
+      const entity = orbs.find(o => o.slug === slug);
+      if (entity) setFormData(JSON.stringify(entity, null, 2));
+    } else {
+      const entity = explorers.find(ex => ex.slug === slug);
+      if (entity) {
+        if (section === 'details') {
+          const { rankings, stats, orbs_used, ...details } = entity;
+          setFormData(JSON.stringify(details, null, 2));
+        } else if (section === 'rankings') {
+          setFormData(JSON.stringify(entity.rankings, null, 2));
+        } else if (section === 'orbs_used') {
+          setFormData(JSON.stringify(entity.orbs_used, null, 2));
+        } else if (section === 'stats') {
+          setFormData(JSON.stringify(entity.stats, null, 2));
+        }
+      }
+    }
+  };
+
   const handleTypeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setType(e.target.value as 'orb' | 'explorer');
+    const newType = e.target.value as 'orb' | 'explorer';
+    setType(newType);
     setSelectedSlug('');
     setFormData('');
     setJsonError(null);
@@ -25,21 +55,14 @@ export function ContributeForm({ orbs, explorers }: Props) {
     const slug = e.target.value;
     setSelectedSlug(slug);
     setJsonError(null);
-    if (!slug) {
-      setFormData('');
-      return;
-    }
-    
-    let entity;
-    if (type === 'orb') {
-      entity = orbs.find(o => o.slug === slug);
-    } else {
-      entity = explorers.find(ex => ex.slug === slug);
-    }
-
-    if (entity) {
-      setFormData(JSON.stringify(entity, null, 2));
-    }
+    loadFormData(type, slug, explorerSection);
+  };
+  
+  const handleSectionSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const section = e.target.value as ExplorerSection;
+    setExplorerSection(section);
+    setJsonError(null);
+    loadFormData(type, selectedSlug, section);
   };
 
   const handleJsonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,19 +83,26 @@ export function ContributeForm({ orbs, explorers }: Props) {
       return;
     }
     
-    const entityTypeStr = type === 'orb' ? 'Orb' : 'Explorer';
-    const title = `Update ${entityTypeStr}: ${selectedSlug}`;
+    let title = "";
+    if (type === 'orb') {
+      title = `Update Orb: ${selectedSlug}`;
+    } else {
+      let sectionName = "Details";
+      if (explorerSection === 'rankings') sectionName = "Rankings";
+      if (explorerSection === 'orbs_used') sectionName = "Orbs Used";
+      if (explorerSection === 'stats') sectionName = "Stats";
+      title = `Update Explorer ${sectionName}: ${selectedSlug}`;
+    }
+
     const body = `### Proposed Edit for ${selectedSlug}\n\nPlease review and apply the following JSON changes:\n\n\`\`\`json\n${formData}\n\`\`\`\n`;
     
     const url = `https://github.com/sorvani/dgenesisinfo/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
     window.open(url, '_blank');
   };
 
-  const currentList = type === 'orb' ? orbs : explorers;
-
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
         <div>
           <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Record Type</label>
           <select 
@@ -92,13 +122,29 @@ export function ContributeForm({ orbs, explorers }: Props) {
             onChange={handleEntitySelect}
             style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
           >
-            <option value="">-- Choose a record to branch --</option>
+            <option value="">-- Choose a record to edit --</option>
             {type === 'orb' 
               ? orbs.map(o => <option key={o.slug} value={o.slug}>{o.orb_name || o.slug}</option>)
-              : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name} ({e.slug})</option>)
+              : explorers.map(e => <option key={e.slug} value={e.slug}>{e.first_name} {e.last_name || ''} ({e.slug})</option>)
             }
           </select>
         </div>
+
+        {type === 'explorer' && selectedSlug && (
+          <div className="animate-in">
+            <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Section to Edit</label>
+            <select 
+              value={explorerSection} 
+              onChange={handleSectionSelect}
+              style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+            >
+              <option value="details">Base Details</option>
+              <option value="rankings">Rankings Array</option>
+              <option value="orbs_used">Orbs Used Array</option>
+              <option value="stats">Stats Array</option>
+            </select>
+          </div>
+        )}
       </div>
 
       {selectedSlug && (
