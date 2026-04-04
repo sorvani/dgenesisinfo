@@ -10,7 +10,7 @@ interface Props {
 
 // ─── Dynamic Form Engine Definitions ─────────────────────────────────────
 
-type FieldType = 'text' | 'number' | 'textarea' | 'date';
+type FieldType = 'text' | 'number' | 'textarea' | 'date' | 'boolean';
 interface FieldDef { key: string; label: string; type: FieldType; required?: boolean; }
 
 const citationSchema: FieldDef[] = [
@@ -42,7 +42,8 @@ const explorerBaseSchema: FieldDef[] = [
   { key: 'moniker', label: 'Moniker', type: 'text' },
   { key: 'nationality', label: 'Nationality (e.g. JP, US)', type: 'text' },
   { key: 'date_first_known', label: 'Date First Known', type: 'date' },
-  { key: 'public', label: 'Public Level (Number)', type: 'number' },
+  { key: 'public', label: 'Public on WDARL', type: 'boolean' },
+  { key: 'area', label: 'Area (Dungeon Number)', type: 'number' },
   { key: 'birthday', label: 'Birthday', type: 'text' },
   { key: 'sex', label: 'Sex', type: 'text' },
   { key: 'note', label: 'Note (HTML OK)', type: 'textarea' }
@@ -88,7 +89,7 @@ const getVal = (obj: any, key: string) => {
   return (obj[key] !== undefined && obj[key] !== null) ? obj[key] : '';
 };
 
-const setVal = (obj: any, key: string, val: string | number | null) => {
+const setVal = (obj: any, key: string, val: string | number | boolean | null) => {
   const newObj = JSON.parse(JSON.stringify(obj || {})); 
   if (key.includes('.')) {
     const [a,b] = key.split('.');
@@ -129,6 +130,8 @@ function DynamicForm({ schema, initialData, onSave, onCancel, actionName }: { sc
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 'bold', marginBottom: 'var(--space-xs)' }}>{field.label}</label>
               {field.type === 'textarea' ? (
                 <textarea value={val as string} onChange={onChange} rows={3} required={field.required} style={inputStyle} />
+              ) : field.type === 'boolean' ? (
+                <input type="checkbox" checked={!!val} onChange={(e) => setData(setVal(data, field.key, e.target.checked))} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
               ) : field.type === 'number' ? (
                 <input type="number" step="any" value={val as number|string} onChange={onChange} required={field.required} style={inputStyle} />
               ) : field.type === 'date' ? (

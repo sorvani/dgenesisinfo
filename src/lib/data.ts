@@ -48,7 +48,8 @@ export interface Explorer {
   moniker: string | null;
   nationality: string | null;
   date_first_known: string | null;
-  public: number;
+  public: boolean;
+  area: number | null;
   birthday: string | null;
   sex: string | null;
   note: string | null;
