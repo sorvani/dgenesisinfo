@@ -152,7 +152,7 @@ function DynamicForm({ schema, initialData, onSave, onCancel, actionName }: { sc
               ) : field.type === 'date' ? (
                 <input type="date" value={val as string} onChange={onChange} required={field.required} style={inputStyle} />
               ) : field.type === 'time' ? (
-                <input type="time" step="1" value={val as string} onChange={onChange} required={field.required} style={inputStyle} />
+                <input type="time" step="1" value={data.display_time ? (val as string) : ''} disabled={!data.display_time} onChange={onChange} required={field.required && data.display_time} style={{ ...inputStyle, opacity: data.display_time ? 1 : 0.5, cursor: data.display_time ? 'auto' : 'not-allowed' }} title={!data.display_time ? 'Time is locked because Display Specific Time is unchecked. Defaults to Noon.' : ''} />
               ) : field.type === 'timezone_select' ? (
                 <select value={val as string} onChange={onChange} required={field.required} style={inputStyle}>
                   <option value="">-- Select Timezone --</option>
@@ -357,16 +357,25 @@ export function ContributeForm({ orbs, explorers, timeline }: Props) {
     const payload = { ...data };
     
     if (type === 'timeline') {
-      const { local_date, ...rest } = payload;
-      let { local_time } = payload;
+      const { local_date, local_time: _discard_time, ...rest } = payload;
+      let local_time = _discard_time;
       
       if (rest.id == null || rest.id === '') {
         const maxId = timeline.reduce((max, evt) => Math.max(max, evt.id || 0), 0);
         rest.id = maxId + 1;
       }
 
-      if (!local_time) {
+      if (!rest.display_time || !local_time) {
         local_time = '12:00:00';
+      }
+
+      // Cleanup citations if pre-history or empty
+      if (rest.pre_history) {
+        rest.citation = null;
+      } else if (rest.citation) {
+        if (!rest.citation.volume && !rest.citation.chapter && !rest.citation.jnc_part) {
+          rest.citation = null;
+        }
       }
 
       if (local_date && local_time) {
