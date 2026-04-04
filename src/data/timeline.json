@@ -6,7 +6,11 @@
     "display_time": false,
     "timezone": "JST",
     "event": "The Ring becomes the first Dungeon.\nTime of year taken from Iori's background story that dungeons appeared at the beginning of the season.",
-    "citation": null,
+    "citation": {
+      "volume": "1",
+      "chapter": "1",
+      "jnc_part": "1"
+    },
     "pre_history": true
   },
   {
