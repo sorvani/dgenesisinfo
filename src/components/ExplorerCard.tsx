@@ -15,14 +15,14 @@ export function ExplorerCard({ explorer }: { explorer: Explorer }) {
   const flag = getNationalityFlag(explorer.nationality);
 
   return (
-    <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`}>
-      <div className="card">
+    <Link href={`/explorers/${explorer.slug}`} id={`explorer-${explorer.slug}`} style={{ display: 'block', height: '100%' }}>
+      <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="explorer-card-name" style={{ fontSize: '1.5rem' }}>{name}</div>
         <div className="explorer-card-rank" style={{ fontSize: '1.125rem' }}>#{rank}</div>
         {explorer.moniker && (
           <div className="explorer-card-moniker">&ldquo;{explorer.moniker}&rdquo;</div>
         )}
-        <div className="explorer-card-meta">
+        <div className="explorer-card-meta" style={{ marginTop: 'auto', paddingTop: 'var(--space-md)' }}>
           {explorer.sex && (
             <span>👤 {explorer.sex}</span>
           )}

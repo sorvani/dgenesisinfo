@@ -11,12 +11,12 @@ export function OrbCard({ orb }: { orb: Orb }) {
     effectsText.length > 120 ? effectsText.slice(0, 120) + "…" : effectsText;
 
   return (
-    <Link href={`/orbs/${orb.slug}`} id={`orb-${orb.slug}`}>
-      <div className="card">
+    <Link href={`/orbs/${orb.slug}`} id={`orb-${orb.slug}`} style={{ display: 'block', height: '100%' }}>
+      <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div className="orb-card-name">{orb.orb_name || "Unknown"}</div>
         <div className="orb-card-effects">{truncated}</div>
         {orb.drop_rates.length > 0 && (
-          <div className="orb-card-drops">
+          <div className="orb-card-drops" style={{ marginTop: 'auto', paddingTop: 'var(--space-md)' }}>
             {orb.drop_rates.length} known drop source
             {orb.drop_rates.length !== 1 ? "s" : ""}
           </div>

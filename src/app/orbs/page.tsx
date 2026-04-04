@@ -23,9 +23,9 @@ export default function OrbsPage() {
       <div className="card-grid">
         {orbs.map((orb, i) => (
           <div
-            key={orb.id}
+            key={orb.slug}
             className="animate-in"
-            style={{ animationDelay: `${Math.min(i * 50, 500)}ms` }}
+            style={{ animationDelay: `${Math.min(i * 50, 500)}ms`, height: '100%' }}
           >
             <OrbCard orb={orb} />
           </div>

@@ -26,7 +26,7 @@ export default function ExplorersPage() {
           <div
             key={explorer.slug}
             className="animate-in"
-            style={{ animationDelay: `${Math.min(i * 50, 500)}ms` }}
+            style={{ animationDelay: `${Math.min(i * 50, 500)}ms`, height: '100%' }}
           >
             <ExplorerCard explorer={explorer} />
           </div>
