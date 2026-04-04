@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { type Explorer, type Citation, getHistoricalRankValueAt, formatCitation, getCitationScore } from '@/lib/data';
 import { ExplorerCard } from './ExplorerCard';
+import { WdarlTable } from './WdarlTable';
 
 interface Props {
   initialExplorers: Explorer[];
@@ -11,6 +12,7 @@ interface Props {
 
 export function ExplorersGrid({ initialExplorers, citations }: Props) {
   const [maxScoreStr, setMaxScoreStr] = useState<string>('current');
+  const [showWdarl, setShowWdarl] = useState(false);
 
   const maxScore = maxScoreStr === 'current' ? null : Number(maxScoreStr);
 
@@ -33,6 +35,12 @@ export function ExplorersGrid({ initialExplorers, citations }: Props) {
              return <option key={i} value={score}>{formatCitation(c)}</option>;
           })}
         </select>
+        <button
+          onClick={() => setShowWdarl(true)}
+          className="btn btn-secondary wdarl-toggle-btn"
+        >
+          📋 WDARL View
+        </button>
       </div>
 
       <div className="card-grid">
@@ -46,6 +54,14 @@ export function ExplorersGrid({ initialExplorers, citations }: Props) {
           </div>
         ))}
       </div>
+
+      {showWdarl && (
+        <WdarlTable
+          explorers={explorers}
+          maxScore={maxScore}
+          onClose={() => setShowWdarl(false)}
+        />
+      )}
     </>
   );
 }

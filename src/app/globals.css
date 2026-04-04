@@ -575,6 +575,165 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   vertical-align: middle;
 }
 
+/* ─── WDARL Table Modal ─────────────────────────────────── */
+.wdarl-toggle-btn {
+  white-space: nowrap;
+}
+
+.wdarl-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.wdarl-modal {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.wdarl-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 2px solid var(--accent-teal);
+  background: var(--bg-secondary);
+}
+
+.wdarl-modal-title {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wdarl-modal-subtitle {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.wdarl-close-btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.wdarl-close-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: var(--accent-rose);
+}
+
+.wdarl-table-scroll {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.wdarl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.wdarl-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.wdarl-table th {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.wdarl-table td {
+  padding: var(--space-xs) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.wdarl-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.wdarl-table tbody tr:hover {
+  background: rgba(45, 212, 191, 0.04);
+}
+
+.wdarl-rank {
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-align: right;
+  min-width: 3ch;
+}
+
+.wdarl-name-link {
+  color: var(--text-primary);
+}
+
+.wdarl-name-link:hover {
+  color: var(--accent-teal);
+}
+
+.wdarl-name-anon {
+  color: var(--accent-rose);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.wdarl-name-anon:hover {
+  color: var(--accent-rose);
+  opacity: 0.8;
+}
+
+.wdarl-name-anon-hint {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.8em;
+}
+
 /* ─── Radar Chart Placeholder ───────────────────────────── */
 .radar-placeholder {
   background: var(--bg-secondary);
