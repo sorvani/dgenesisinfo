@@ -108,12 +108,12 @@ export function getExplorerBySlug(slug: string): Explorer | undefined {
 /** Get all orbs sorted alphabetically */
 export function getOrbs(): Orb[] {
   return [...orbs].sort((a, b) => {
+    // Force "Making" to be first using its exact slug
+    if (a.slug === 'making') return -1;
+    if (b.slug === 'making') return 1;
+
     const nameA = (a.orb_name || '').toLowerCase();
     const nameB = (b.orb_name || '').toLowerCase();
-    
-    // Force "Making" to be first
-    if (nameA === 'making') return -1;
-    if (nameB === 'making') return 1;
     
     return nameA.localeCompare(nameB);
   });

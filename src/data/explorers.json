@@ -8,6 +8,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-27",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 99726438,
@@ -386,6 +388,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-28",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 814,
@@ -625,6 +629,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-30",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 681,
@@ -694,6 +700,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-30",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 368,
@@ -797,6 +805,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-27",
     "public": 0,
+    "birthday": "April 3",
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -839,6 +849,8 @@
     "nationality": "US",
     "date_first_known": "2019-01-06",
     "public": 1,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 48,
@@ -915,6 +927,8 @@
     "nationality": "US",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 3,
@@ -985,6 +999,8 @@
     "nationality": "US",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 7,
@@ -1044,6 +1060,8 @@
     "nationality": "US",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 5,
@@ -1114,6 +1132,8 @@
     "nationality": "US",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 8,
@@ -1173,6 +1193,8 @@
     "nationality": "JP",
     "date_first_known": "2019-01-12",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -1273,6 +1295,8 @@
     "nationality": "IN",
     "date_first_known": "2018-11-16",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 99728765,
@@ -1308,6 +1332,8 @@
     "nationality": "RU",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 2,
@@ -1332,6 +1358,8 @@
     "nationality": "CN",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 4,
@@ -1367,6 +1395,8 @@
     "nationality": "GB",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 6,
@@ -1402,6 +1432,8 @@
     "nationality": "US",
     "date_first_known": "2018-09-27",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 9,
@@ -1426,6 +1458,8 @@
     "nationality": "FR",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 10,
@@ -1450,6 +1484,8 @@
     "nationality": "DE",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 11,
@@ -1474,6 +1510,8 @@
     "nationality": "GB",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 12,
@@ -1498,6 +1536,8 @@
     "nationality": "FR",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 13,
@@ -1522,6 +1562,8 @@
     "nationality": "IT",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 14,
@@ -1546,6 +1588,8 @@
     "nationality": "FR",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 15,
@@ -1570,6 +1614,8 @@
     "nationality": "DE",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 16,
@@ -1594,6 +1640,8 @@
     "nationality": "AU",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 17,
@@ -1618,6 +1666,8 @@
     "nationality": "JP",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 18,
@@ -1663,6 +1713,8 @@
     "nationality": "DE",
     "date_first_known": "2018-09-27",
     "public": 1,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 19,
@@ -1687,6 +1739,8 @@
     "nationality": "JP",
     "date_first_known": "2018-12-14",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 0,
@@ -1711,6 +1765,8 @@
     "nationality": "JP",
     "date_first_known": "2018-11-22",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -1814,6 +1870,8 @@
     "nationality": "JP",
     "date_first_known": "2018-11-22",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 0,
@@ -1838,6 +1896,8 @@
     "nationality": "FR",
     "date_first_known": "2018-11-21",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -1873,6 +1933,8 @@
     "nationality": "US",
     "date_first_known": "2019-01-28",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -1897,6 +1959,8 @@
     "nationality": "JP",
     "date_first_known": "2019-01-26",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
@@ -1921,6 +1985,8 @@
     "nationality": "JP",
     "date_first_known": "2019-01-26",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 0,
@@ -1945,6 +2011,8 @@
     "nationality": "JP",
     "date_first_known": "2019-02-23",
     "public": 0,
+    "birthday": null,
+    "sex": "Male",
     "rankings": [
       {
         "rank": 0,
@@ -1969,6 +2037,8 @@
     "nationality": "JP",
     "date_first_known": "2019-02-06",
     "public": 0,
+    "birthday": null,
+    "sex": "Female",
     "rankings": [
       {
         "rank": 0,
