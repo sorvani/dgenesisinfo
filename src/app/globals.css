@@ -251,10 +251,9 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
 .hero-subtitle {
   color: var(--text-secondary);
   font-size: clamp(1rem, 2vw, 1.25rem);
-  max-width: 600px;
+  max-width: 850px;
   margin: 0 auto var(--space-xl);
   line-height: 1.7;
-  text-wrap: balance;
 }
 
 .hero-stats {

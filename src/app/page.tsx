@@ -12,9 +12,8 @@ export default function Home() {
           <span className="accent">D-Genesis</span> Stats
         </h1>
         <p className="hero-subtitle">
-          A fan-curated database tracking explorer rankings, combat stats,
-          and skill orbs.<br/>Based on the light novel <em>D-Genesis: Three Years
-          after the Dungeons Appeared</em>.
+          A fan-curated database tracking explorer rankings, combat stats, and
+          skill orbs from <span style={{ display: 'inline-block' }}><em>D-Genesis: Three Years after the Dungeons Appeared</em>.</span>
         </p>
         <div className="hero-stats">
           <div className="hero-stat">
