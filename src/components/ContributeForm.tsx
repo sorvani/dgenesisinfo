@@ -278,7 +278,7 @@ export function ContributeForm({ orbs, explorers }: Props) {
 
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: selectedSlug ? '1fr 2fr 1.5fr' : '1fr 2fr', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.5fr)', gap: 'var(--space-md)', marginBottom: 'var(--space-lg)' }}>
         <div>
           <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Record Type</label>
           <select value={type} onChange={handleTypeSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
@@ -298,23 +298,32 @@ export function ContributeForm({ orbs, explorers }: Props) {
           </select>
         </div>
 
-        {selectedSlug && (
-          <div className="animate-in">
-            <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Section to Edit</label>
-            <select value={section} onChange={handleSectionSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-              <option value="base">Base Details</option>
-              {type === 'orb' ? (
-                <option value="drop_rates">Drop Rates Array</option>
-              ) : (
-                <>
-                  <option value="rankings">Rankings Array</option>
-                  <option value="orbs_used">Orbs Used Array</option>
-                  <option value="stats">Stats Array</option>
-                </>
-              )}
-            </select>
-          </div>
-        )}
+        <div>
+          {selectedSlug ? (
+            <div className="animate-in">
+              <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold' }}>Section to Edit</label>
+              <select value={section} onChange={handleSectionSelect} style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+                <option value="base">Base Details</option>
+                {type === 'orb' ? (
+                  <option value="drop_rates">Drop Rates Array</option>
+                ) : (
+                  <>
+                    <option value="rankings">Rankings Array</option>
+                    <option value="orbs_used">Orbs Used Array</option>
+                    <option value="stats">Stats Array</option>
+                  </>
+                )}
+              </select>
+            </div>
+          ) : (
+            <div>
+              <label style={{ display: 'block', marginBottom: 'var(--space-xs)', fontWeight: 'bold', color: 'var(--text-muted)' }}>Section to Edit</label>
+              <select disabled style={{ width: '100%', padding: 'var(--space-sm)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)', background: 'var(--bg-secondary)', color: 'var(--text-muted)', cursor: 'not-allowed' }}>
+                <option>-- Select a record first --</option>
+              </select>
+            </div>
+          )}
+        </div>
       </div>
 
       {selectedSlug && entity && (
