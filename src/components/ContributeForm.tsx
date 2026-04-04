@@ -43,7 +43,7 @@ const explorerBaseSchema: FieldDef[] = [
   { key: 'nationality', label: 'Nationality (e.g. JP, US)', type: 'text' },
   { key: 'date_first_known', label: 'Date First Known', type: 'date' },
   { key: 'public', label: 'Public on WDARL', type: 'boolean' },
-  { key: 'area', label: 'Area (Dungeon Number)', type: 'number' },
+  { key: 'area', label: 'Area on D-Card', type: 'number' },
   { key: 'birthday', label: 'Birthday', type: 'text' },
   { key: 'sex', label: 'Sex', type: 'text' },
   { key: 'note', label: 'Note (HTML OK)', type: 'textarea' }

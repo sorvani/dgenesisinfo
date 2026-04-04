@@ -43,7 +43,7 @@ export function Navbar() {
           ))}
           <li>
             <a
-              href="https://j-novel.club/series/d-genesis"
+              href="https://j-novel.club/series?search=d-genesis"
               target="_blank"
               rel="noopener noreferrer"
               className="external-link"
