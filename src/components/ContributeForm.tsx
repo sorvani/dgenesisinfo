@@ -44,7 +44,8 @@ const explorerBaseSchema: FieldDef[] = [
   { key: 'date_first_known', label: 'Date First Known', type: 'date' },
   { key: 'public', label: 'Public Level (Number)', type: 'number' },
   { key: 'birthday', label: 'Birthday', type: 'text' },
-  { key: 'sex', label: 'Sex', type: 'text' }
+  { key: 'sex', label: 'Sex', type: 'text' },
+  { key: 'note', label: 'Note (HTML OK)', type: 'textarea' }
 ];
 
 const rankingSchema: FieldDef[] = [

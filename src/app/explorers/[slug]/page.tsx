@@ -112,6 +112,13 @@ export default async function ExplorerDetailPage(
         </div>
       </div>
 
+      {explorer.note && (
+        <section className="detail-section">
+          <h2 className="detail-section-title">Note</h2>
+          <div className="card" style={{ padding: 'var(--space-md)', whiteSpace: 'pre-wrap', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: explorer.note }} />
+        </section>
+      )}
+
       {/* ── Orbs Used ─────────────────── */}
       <section className="detail-section">
         <h2 className="detail-section-title">Orbs Used</h2>

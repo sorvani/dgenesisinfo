@@ -51,6 +51,7 @@ export interface Explorer {
   public: number;
   birthday: string | null;
   sex: string | null;
+  note: string | null;
   rankings: Ranking[];
   stats: Stat[];
   orbs_used: OrbUsed[];
