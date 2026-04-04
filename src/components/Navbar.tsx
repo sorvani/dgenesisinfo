@@ -31,17 +31,23 @@ export function Navbar() {
           {menuOpen ? "✕" : "☰"}
         </button>
         <ul className={`navbar-links${menuOpen ? " open" : ""}`}>
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={pathname === link.href ? "active" : ""}
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((link) => {
+            const isActive = link.href === "/" 
+              ? pathname === "/" 
+              : pathname === link.href || pathname.startsWith(`${link.href}/`);
+              
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={isActive ? "active" : ""}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
           <li>
             <a
               href="https://j-novel.club/series?search=d-genesis"

@@ -179,6 +179,11 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   transition: all var(--transition-fast);
 }
 
+.navbar-links a.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .navbar-links a:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
