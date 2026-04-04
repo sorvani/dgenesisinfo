@@ -274,8 +274,22 @@ export function ContributeForm({ orbs, explorers }: Props) {
     window.open(url, '_blank');
   };
 
+  const normalizeBirthday = (bday: string) => {
+    if (!bday) return bday;
+    const d = new Date(bday + (bday.match(/\d{4}/) ? '' : ' 2000'));
+    if (!isNaN(d.getTime())) {
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return `${months[d.getMonth()]} ${d.getDate()}`;
+    }
+    return bday;
+  };
+
   const handleSaveForm = (data: any) => {
-    executeGitHubRedirect(editAction.toUpperCase(), JSON.stringify(data, null, 2));
+    const payload = { ...data };
+    if (payload.birthday) {
+      payload.birthday = normalizeBirthday(payload.birthday);
+    }
+    executeGitHubRedirect(editAction.toUpperCase(), JSON.stringify(payload, null, 2));
     if (isArray) setViewState('list');
   };
 
