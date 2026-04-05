@@ -1363,6 +1363,68 @@ h3 { font-size: clamp(1.125rem, 2.5vw, 1.5rem); }
   .contribute-form-selectors {
     grid-template-columns: 1fr;
   }
+
+  /* ── Timeline Mobile ─────────────────────────────────────── */
+  .timeline-container {
+    padding-left: 28px;
+    padding-right: var(--space-sm);
+  }
+
+  /* Move center line to the left */
+  .timeline-container::before {
+    left: 14px;
+    transform: none;
+  }
+
+  /* All rows flow as single column, left-to-right */
+  .timeline-row {
+    flex-direction: row !important;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Reset card margins – full width, single side */
+  .timeline-row-left .timeline-event-card,
+  .timeline-row-right .timeline-event-card {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+
+  /* Cards span full available width */
+  .timeline-event-card {
+    width: 100%;
+  }
+
+  /* Reposition the dot to the left line */
+  .timeline-dot-wrapper {
+    left: 14px;
+    position: absolute;
+  }
+
+  /* Align date rows to the left consistently */
+  .timeline-row-right .timeline-event-date-row {
+    justify-content: flex-start;
+  }
+
+  /* Tighter card padding on small screens */
+  .timeline-event-card {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .timeline-filter-bar {
+    padding: var(--space-sm) var(--space-xs);
+    gap: var(--space-xs);
+  }
+
+  .timeline-filter-pill {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+  }
+
+  .timeline-book-divider-label {
+    font-size: 0.75rem;
+    padding: 4px 14px;
+  }
 }
 
 @media (max-width: 480px) {
