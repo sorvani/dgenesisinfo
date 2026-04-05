@@ -339,7 +339,9 @@ export function ContributeForm({ orbs, characters, timeline }: Props) {
     const entityTitle = type === 'timeline' ? 'Timeline' : type === 'orb' ? 'Orb' : 'Character';
     const title = type === 'timeline' ? `Update Timeline Event` : `Update ${entityTitle}: ${selectedSlug}`;
     const body = `### Proposed Contribution\n**Action:** \`${actionType}\`\n**Target:** \`${target}\`\n\n**Payload:**\n\`\`\`json\n${payloadStr}\n\`\`\`\n`;
-    const url = `https://github.com/sorvani/dgenesisinfo/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+    const typeLabelMap = { orb: 'orb data', character: 'character data', timeline: 'timeline data' };
+    const labels = `contribution,${typeLabelMap[type]}`;
+    const url = `https://github.com/sorvani/dgenesisinfo/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent(labels)}`;
     window.open(url, '_blank');
   };
 
