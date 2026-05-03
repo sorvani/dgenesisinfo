@@ -561,6 +561,27 @@
         "stat_total": 176,
         "points_from_average": 116,
         "citation": null
+      },
+      {
+        "date_noted": "2019-03-08",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 32.471,
+        "hp": 29.9,
+        "mp": 153.5,
+        "str": 10,
+        "vit": 11,
+        "int": 90,
+        "agi": 30,
+        "dex": 25,
+        "luc": 10,
+        "stat_total": 176,
+        "points_from_average": 116,
+        "citation": {
+          "volume": "10",
+          "jnc_part": "5",
+          "chapter": "13"
+        }
       }
     ],
     "orbs_used": [
