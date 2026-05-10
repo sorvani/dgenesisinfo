@@ -51,3 +51,11 @@ export-firebase-data.mjs
 .dev.vars*
 !.dev.vars.example
 !.env.example
+
+# SvelteKit
+/web/.svelte-kit/
+/web/node_modules/
+/web/worker-configuration.d.ts
+
+# Generated ingest SQL — rebuild with: node database/ingest/generate-sql.mjs
+/database/ingest/ingest.sql
