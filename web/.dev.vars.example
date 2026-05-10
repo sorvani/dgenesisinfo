@@ -1,7 +1,10 @@
 # Copy to .dev.vars and fill in values. Never commit .dev.vars.
 
-# Wrangler profile to use for all wrangler CLI commands (see ~/.wrangler/config/)
-WRANGLER_PROFILE=dgenesisinfo
+# Cloudflare credentials for this account (scopes: D1, Pages)
+# Account ID: right sidebar of any Cloudflare dashboard page
+# API Token:  dash.cloudflare.com/profile/api-tokens → Create Token → Edit Cloudflare Workers template
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_API_TOKEN=
 
 # GitHub OAuth App credentials (Settings → Developer settings → OAuth Apps)
 GITHUB_CLIENT_ID=
