@@ -1,20 +1,21 @@
 import type { PageServerLoad } from './$types';
-import { getCharacters, getOrbs, getTimelineEvents } from '$lib/server/data';
 
 export const load: PageServerLoad = async ({ platform }) => {
 	const db = platform!.env.DB;
-	const [characters, orbs, timeline] = await Promise.all([
-		getCharacters(db),
-		getOrbs(db),
-		getTimelineEvents(db),
+
+	const [chars, orbs, timeline, stats] = await db.batch([
+		db.prepare('SELECT COUNT(*) AS n FROM characters'),
+		db.prepare('SELECT COUNT(*) AS n FROM orbs'),
+		db.prepare('SELECT COUNT(*) AS n FROM timeline_events'),
+		db.prepare('SELECT COUNT(*) AS n FROM character_stats'),
 	]);
 
 	return {
 		stats: {
-			characters: characters.length,
-			orbs:       orbs.length,
-			timeline:   timeline.length,
-			stats:      characters.reduce((n, c) => n + c.stats.length, 0),
+			characters: (chars.results[0]  as { n: number }).n,
+			orbs:       (orbs.results[0]   as { n: number }).n,
+			timeline:   (timeline.results[0] as { n: number }).n,
+			stats:      (stats.results[0]  as { n: number }).n,
 		},
 	};
 };
