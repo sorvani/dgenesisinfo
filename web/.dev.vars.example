@@ -1,0 +1,11 @@
+# Copy to .dev.vars and fill in values. Never commit .dev.vars.
+
+# Wrangler profile to use for all wrangler CLI commands (see ~/.wrangler/config/)
+WRANGLER_PROFILE=dgenesisinfo
+
+# GitHub OAuth App credentials (Settings → Developer settings → OAuth Apps)
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+# Random secret for signing — generate with: openssl rand -hex 32
+SESSION_SECRET=
