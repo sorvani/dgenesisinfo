@@ -1,14 +1,29 @@
 # Copy to .dev.vars and fill in values. Never commit .dev.vars.
 
-# Cloudflare credentials for this account (scopes: D1, Pages)
-# Account ID: right sidebar of any Cloudflare dashboard page
-# API Token:  dash.cloudflare.com/profile/api-tokens → Create Token → Edit Cloudflare Workers template
+# ── Cloudflare credentials ────────────────────────────────────────────────────
+# These are NOT automatically loaded as shell env vars by wrangler.
+# wrangler reads CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID from the shell
+# environment, not from this file.
+#
+# Option A — export manually before running wrangler commands:
+#   export CLOUDFLARE_API_TOKEN=...
+#   export CLOUDFLARE_ACCOUNT_ID=...
+#
+# Option B — use direnv (https://direnv.net) to auto-load on cd:
+#   brew install direnv
+#   Add `eval "$(direnv hook zsh)"` to ~/.zshrc
+#   Then: cp .dev.vars .envrc && direnv allow
+#   direnv will export all vars in .envrc when you enter this directory.
+#
 CLOUDFLARE_ACCOUNT_ID=
 CLOUDFLARE_API_TOKEN=
 
-# GitHub OAuth App credentials (Settings → Developer settings → OAuth Apps)
+# ── GitHub OAuth App credentials ──────────────────────────────────────────────
+# Settings → Developer settings → OAuth Apps → New OAuth App
+# Callback URL: https://<your-pages-domain>/auth/callback
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 
-# Random secret for signing — generate with: openssl rand -hex 32
+# ── Session signing ───────────────────────────────────────────────────────────
+# Generate with: openssl rand -hex 32
 SESSION_SECRET=
