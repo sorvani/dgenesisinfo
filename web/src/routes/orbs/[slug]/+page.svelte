@@ -15,10 +15,7 @@
 <div class="container page">
 	<a href="/orbs" class="back-link">← Skill Orbs</a>
 
-	<div class="orb-header">
-		<h1 class="page-title">{orb.orb_name}</h1>
-		<span class="badge badge--id">Orb #{orb.orb_id}</span>
-	</div>
+	<h1 class="page-title">{orb.orb_name}</h1>
 
 	{#if orb.known_effects}
 		<div class="data-section">
@@ -34,9 +31,9 @@
 	{#if orb.note}
 		<div class="data-section">
 			<p class="section-heading">Notes</p>
-			<div class="card note-card">
+			<div class="notes-body">
 				{#each formatEffects(orb.note) as line}
-					<p class="rich-text">{@html line}</p>
+					<p class="note-line">{@html line}</p>
 				{/each}
 			</div>
 		</div>
@@ -101,20 +98,16 @@
 </div>
 
 <style>
-	.orb-header {
+	.notes-body {
 		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		margin-bottom: 0.25rem;
-		flex-wrap: wrap;
+		flex-direction: column;
+		gap: 0.375rem;
 	}
 
-	.note-card {
-		border-left: 3px solid var(--accent);
-	}
-
-	.note-card .rich-text + .rich-text {
-		margin-top: 0.5rem;
+	.note-line {
+		font-size: 0.875rem;
+		color: var(--text-3);
+		line-height: 1.6;
 	}
 
 	.card .rich-text + .rich-text {

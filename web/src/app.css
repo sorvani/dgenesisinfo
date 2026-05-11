@@ -1,4 +1,4 @@
-/* ── Design tokens ───────────────────────────────────────────────────────────── */
+/* ── Design tokens — light (default) ─────────────────────────────────────────── */
 :root {
 	--bg:          #f7f4f0;
 	--bg-card:     #ffffff;
@@ -14,11 +14,55 @@
 	--accent-dark: #b85a14;
 	--accent-bg:   #fdf2ea;
 
-	--radius:   4px;
+	--shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+	--shadow-hover: 0 4px 12px rgba(224,112,32,0.15), 0 1px 3px rgba(0,0,0,0.08);
+
+	--radius:    4px;
 	--radius-lg: 8px;
 
 	--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 	--font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Design tokens — dark ────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg:          #111014;
+		--bg-card:     #1c1a20;
+		--bg-subtle:   #252330;
+		--border:      #2e2c38;
+		--border-soft: #242230;
+
+		--text:        #f0eee8;
+		--text-2:      #b0a898;
+		--text-3:      #6e6860;
+
+		--accent:      #e07020;
+		--accent-dark: #f08030;
+		--accent-bg:   #2a1a08;
+
+		--shadow-card: 0 1px 3px rgba(0,0,0,0.4);
+		--shadow-hover: 0 4px 12px rgba(224,112,32,0.2), 0 1px 3px rgba(0,0,0,0.3);
+	}
+}
+
+[data-theme="dark"] {
+	--bg:          #111014;
+	--bg-card:     #1c1a20;
+	--bg-subtle:   #252330;
+	--border:      #2e2c38;
+	--border-soft: #242230;
+
+	--text:        #f0eee8;
+	--text-2:      #b0a898;
+	--text-3:      #6e6860;
+
+	--accent:      #e07020;
+	--accent-dark: #f08030;
+	--accent-bg:   #2a1a08;
+
+	--shadow-card: 0 1px 3px rgba(0,0,0,0.4);
+	--shadow-hover: 0 4px 12px rgba(224,112,32,0.2), 0 1px 3px rgba(0,0,0,0.3);
 }
 
 /* ── Reset & base ────────────────────────────────────────────────────────────── */
@@ -130,12 +174,13 @@ h3 { font-size: 1rem; font-weight: 600; }
 }
 
 .section-heading {
-	font-size: 0.6875rem;
+	font-size: 0.875rem;
 	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: var(--text-3);
+	letter-spacing: 0.01em;
+	color: var(--text);
 	margin-bottom: 0.75rem;
+	padding-left: 0.75rem;
+	border-left: 3px solid var(--accent);
 }
 
 /* ── Back link ───────────────────────────────────────────────────────────────── */
@@ -157,6 +202,7 @@ h3 { font-size: 1rem; font-weight: 600; }
 	border: 1px solid var(--border);
 	border-radius: var(--radius-lg);
 	padding: 1.25rem;
+	box-shadow: var(--shadow-card);
 }
 
 .card-grid {

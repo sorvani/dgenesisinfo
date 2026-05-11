@@ -30,6 +30,7 @@
 	.orb-card {
 		background: var(--bg-card);
 		border: 1px solid var(--border);
+		border-top: 3px solid var(--border);
 		border-radius: var(--radius-lg);
 		padding: 1.25rem;
 		display: flex;
@@ -37,12 +38,15 @@
 		gap: 0.5rem;
 		text-decoration: none;
 		color: inherit;
-		transition: border-color 0.15s, box-shadow 0.15s;
+		box-shadow: var(--shadow-card);
+		transition: border-color 0.15s, border-top-color 0.15s, box-shadow 0.15s, transform 0.15s;
 	}
 
 	.orb-card:hover {
-		border-color: var(--accent);
-		box-shadow: 0 2px 8px rgba(224, 112, 32, 0.1);
+		border-top-color: var(--accent);
+		border-color: var(--border);
+		box-shadow: var(--shadow-hover);
+		transform: translateY(-2px);
 		text-decoration: none;
 	}
 
