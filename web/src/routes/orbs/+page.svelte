@@ -8,7 +8,12 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Skill Orbs</h1>
-		<span class="page-count"><em>{data.orbs.length} known orbs</em></span>
+		<div class="page-header-right">
+			<span class="page-count"><em>{data.orbs.length} known orbs</em></span>
+			{#if data.user}
+				<a href="/contribute?type=orb&op=insert" class="action-add">+ Add Orb</a>
+			{/if}
+		</div>
 	</div>
 
 	<div class="card-grid">

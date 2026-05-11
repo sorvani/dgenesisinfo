@@ -8,7 +8,12 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Bestiary</h1>
-		<span class="page-count"><em>{data.monsters.length} creatures</em></span>
+		<div class="page-header-right">
+			<span class="page-count"><em>{data.monsters.length} creatures</em></span>
+			{#if data.user}
+				<a href="/contribute?type=monster&op=insert" class="action-add">+ Add Creature</a>
+			{/if}
+		</div>
 	</div>
 
 	<div class="card-grid">

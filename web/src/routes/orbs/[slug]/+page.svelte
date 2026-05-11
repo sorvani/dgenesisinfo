@@ -11,7 +11,12 @@
 <div class="container page">
 	<a href="/orbs" class="back-link">← Skill Orbs</a>
 
-	<h1 class="page-title">{orb.orb_name}</h1>
+	<div class="detail-title-row">
+		<h1 class="page-title">{orb.orb_name}</h1>
+		{#if data.user}
+			<a href="/contribute?type=orb&op=update&id={orb.id}" class="action-edit">✏ Edit</a>
+		{/if}
+	</div>
 
 	{#if orb.known_effects}
 		<div class="data-section">

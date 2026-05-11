@@ -375,6 +375,58 @@ h3 { font-size: 1rem; font-weight: 600; }
 
 .site-footer__inner a:hover { color: var(--accent); }
 
+/* ── Page header helpers ─────────────────────────────────────────────────────── */
+.page-header-right {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.detail-title-row {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	margin-bottom: 0.25rem;
+}
+
+/* ── Add / Edit action buttons ───────────────────────────────────────────────── */
+.action-add {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.3rem 0.75rem;
+	border: 1px solid var(--accent);
+	border-radius: var(--radius);
+	background: transparent;
+	color: var(--accent);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.15s, color 0.15s;
+	cursor: pointer;
+}
+
+.action-add:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+.action-edit {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.25rem 0.625rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: transparent;
+	color: var(--text-3);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	text-decoration: none;
+	transition: border-color 0.15s, color 0.15s;
+	cursor: pointer;
+}
+
+.action-edit:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
 /* ── Entity chip link (dungeon, explorer, orb inline links) ──────────────────── */
 .entity-chip {
 	display: inline-flex;

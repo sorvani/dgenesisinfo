@@ -9,7 +9,12 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Explorers</h1>
-		<span class="page-count"><em>{data.explorers.length} known explorers</em></span>
+		<div class="page-header-right">
+			<span class="page-count"><em>{data.explorers.length} known explorers</em></span>
+			{#if data.user}
+				<a href="/contribute?type=character&op=insert" class="action-add">+ Add Explorer</a>
+			{/if}
+		</div>
 	</div>
 
 	<div class="card-grid">

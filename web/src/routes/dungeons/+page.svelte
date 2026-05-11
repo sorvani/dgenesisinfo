@@ -9,7 +9,12 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Dungeons</h1>
-		<span class="page-count"><em>{data.dungeons.length} known dungeons</em></span>
+		<div class="page-header-right">
+			<span class="page-count"><em>{data.dungeons.length} known dungeons</em></span>
+			{#if data.user}
+				<a href="/contribute?type=dungeon&op=insert" class="action-add">+ Add Dungeon</a>
+			{/if}
+		</div>
 	</div>
 
 	<div class="card-grid">

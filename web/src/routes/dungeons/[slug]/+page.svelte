@@ -11,7 +11,12 @@
 <div class="container page">
 	<a href="/dungeons" class="back-link">← Dungeons</a>
 
-	<h1 class="page-title">{d.name}</h1>
+	<div class="detail-title-row">
+		<h1 class="page-title">{d.name}</h1>
+		{#if data.user}
+			<a href="/contribute?type=dungeon&op=update&id={d.id}" class="action-edit">✏ Edit</a>
+		{/if}
+	</div>
 
 	<div class="meta-chips">
 		{#if d.area_label || d.area != null}

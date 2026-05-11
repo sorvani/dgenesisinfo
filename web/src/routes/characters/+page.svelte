@@ -9,7 +9,12 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Characters</h1>
-		<span class="page-count"><em>{data.characters.length} named characters</em></span>
+		<div class="page-header-right">
+			<span class="page-count"><em>{data.characters.length} named characters</em></span>
+			{#if data.user}
+				<a href="/contribute?type=character&op=insert" class="action-add">+ Add Character</a>
+			{/if}
+		</div>
 	</div>
 
 	{#if data.characters.length === 0}

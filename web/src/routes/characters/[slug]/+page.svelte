@@ -50,6 +50,9 @@
 		{#if c.in_wdarl && !c.is_public}
 			<span class="anon-badge">✦ Anonymous on WDARL</span>
 		{/if}
+		{#if data.user}
+			<a href="/contribute?type=character&op=update&id={c.id}" class="action-edit">✏ Edit</a>
+		{/if}
 	</div>
 	{#if c.monikers?.length}
 		<div class="char-monikers">

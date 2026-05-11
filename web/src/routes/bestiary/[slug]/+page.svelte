@@ -16,6 +16,9 @@
 		{#if m.category}
 			<span class="category-badge">{m.category}</span>
 		{/if}
+		{#if data.user}
+			<a href="/contribute?type=monster&op=update&id={m.id}" class="action-edit">✏ Edit</a>
+		{/if}
 	</div>
 
 	{#if m.citation.volume}
