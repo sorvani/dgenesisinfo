@@ -23,6 +23,15 @@
 		}
 	});
 
+	let deleteDialog: HTMLDialogElement;
+	let deleteForm: HTMLFormElement;
+	function openDeleteConfirm() { deleteDialog?.showModal(); }
+	function cancelDelete() { deleteDialog?.close(); }
+	function confirmDelete() {
+		deleteDialog?.close();
+		deleteForm?.requestSubmit();
+	}
+
 	// ── Character fields ──────────────────────────────────────────────────────
 	let c_firstName      = $state('');
 	let c_lastName       = $state('');
@@ -418,20 +427,18 @@
 				<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
 			{/if}
 			{#if entityId && operation !== 'delete'}
+				<button type="button" class="btn btn--danger" onclick={openDeleteConfirm}>Delete</button>
 				<form
+					bind:this={deleteForm}
 					method="POST"
 					action="?/submit"
 					use:enhance={() => async ({ update }) => { await update({ reset: false }); }}
+					style="display:none"
 				>
 					<input type="hidden" name="entity_type"   value={entityType} />
 					<input type="hidden" name="operation"     value="delete" />
 					<input type="hidden" name="entity_id"     value={entityId} />
 					<input type="hidden" name="proposed_data" value={'{}'} />
-					<button
-						type="submit"
-						class="btn btn--danger"
-						onclick={(e) => { if (!confirm('Submit a deletion request for this record? An admin will review before it is removed.')) e.preventDefault(); }}
-					>Delete</button>
 				</form>
 			{/if}
 			{#if operation === 'delete'}
@@ -906,6 +913,18 @@
 	</div>
 </div>
 
+<dialog bind:this={deleteDialog} class="confirm-dialog" onclose={() => {}}>
+	<h3 class="confirm-dialog__title">Delete this record?</h3>
+	<p class="confirm-dialog__body">
+		An admin will review this deletion request for <code>#{entityId}</code>
+		({entityType.replace(/_/g, ' ')}) before the record is removed.
+	</p>
+	<div class="confirm-dialog__actions">
+		<button type="button" class="btn btn--ghost" onclick={cancelDelete}>Cancel</button>
+		<button type="button" class="btn btn--danger" onclick={confirmDelete}>Delete</button>
+	</div>
+</dialog>
+
 <style>
 	.banner {
 		border-radius: var(--radius);
@@ -942,6 +961,44 @@
 		background: var(--bg-subtle);
 		padding: 0.1em 0.35em;
 		border-radius: 3px;
+	}
+
+	.confirm-dialog {
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		background: var(--bg-card);
+		color: var(--text);
+		padding: 1.5rem 1.75rem;
+		max-width: 28rem;
+		box-shadow: var(--shadow-hover);
+	}
+	.confirm-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(2px);
+	}
+	.confirm-dialog__title {
+		font-size: 1.0625rem;
+		font-weight: 700;
+		color: var(--text);
+		margin: 0 0 0.5rem;
+	}
+	.confirm-dialog__body {
+		font-size: 0.9rem;
+		color: var(--text-2);
+		line-height: 1.6;
+		margin: 0 0 1.25rem;
+	}
+	.confirm-dialog__body code {
+		font-family: var(--font-mono);
+		font-size: 0.85em;
+		background: var(--bg-subtle);
+		padding: 0.1em 0.35em;
+		border-radius: 3px;
+	}
+	.confirm-dialog__actions {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.625rem;
 	}
 
 	.field-grid {
