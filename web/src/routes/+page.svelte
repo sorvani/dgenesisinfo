@@ -91,7 +91,7 @@
 
 <style>
 	/* ── Header ── */
-	.home-header { margin-bottom: 1.75rem; }
+	.home-header { margin-bottom: 1.75rem; max-width: 680px; margin-left: auto; margin-right: auto; }
 
 	.home-title {
 		font-size: 2rem;
@@ -113,6 +113,8 @@
 		padding: 0;
 		overflow: hidden;
 		max-width: 680px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.wdarl-header {
