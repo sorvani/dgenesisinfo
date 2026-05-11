@@ -250,6 +250,35 @@
 	}
 	function removeTag(i: number) { c_tags = c_tags.filter((_, idx) => idx !== i); }
 
+	// All distinct tags/monikers used anywhere in the character set, sorted.
+	const allTags = $derived.by(() => {
+		const s = new Set<string>();
+		for (const c of data.characters) for (const t of c.tags ?? []) s.add(t);
+		return [...s].sort((a, b) => a.localeCompare(b));
+	});
+	const allMonikers = $derived.by(() => {
+		const s = new Set<string>();
+		for (const c of data.characters) for (const m of c.monikers ?? []) s.add(m);
+		return [...s].sort((a, b) => a.localeCompare(b));
+	});
+
+	function suggest(all: string[], query: string, used: string[]): string[] {
+		const q = query.trim().toLowerCase();
+		const usedSet = new Set(used);
+		const matches = all.filter(t => !usedSet.has(t) && (q === '' || t.toLowerCase().includes(q)));
+		return matches.slice(0, 8);
+	}
+
+	function pickSuggestion(value: string, kind: 'tag' | 'moniker') {
+		if (kind === 'tag') {
+			c_tagInput = value;
+			addTagChip();
+		} else {
+			c_monikerInput = value;
+			addMonikerChip();
+		}
+	}
+
 	function buildProposedData(): string {
 		const cite = { volume: cite_vol || null, chapter: cite_ch || null, jnc_part: cite_part || null, source_type: cite_source_type || null };
 
@@ -445,10 +474,21 @@
 						<span class="chip">{m}<button type="button" class="chip-remove" onclick={() => removeMoniker(i)}>✕</button></span>
 					{/each}
 					{#if c_monikerAdding}
-						<input class="chip-input-inline" type="text" bind:value={c_monikerInput}
-							placeholder="moniker…" autofocus
-							onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addMonikerChip(); } if (e.key === 'Escape') { c_monikerInput = ''; c_monikerAdding = false; } }}
-							onblur={() => addMonikerChip()} />
+						{@const monikerSuggestions = suggest(allMonikers, c_monikerInput, c_monikers)}
+						<span class="chip-input-wrap">
+							<input class="chip-input-inline" type="text" bind:value={c_monikerInput}
+								placeholder="moniker…" autofocus
+								onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addMonikerChip(); } if (e.key === 'Escape') { c_monikerInput = ''; c_monikerAdding = false; } }}
+								onblur={() => addMonikerChip()} />
+							{#if monikerSuggestions.length}
+								<div class="chip-suggestions">
+									{#each monikerSuggestions as s}
+										<button type="button" class="chip-suggestion"
+											onmousedown={(e) => { e.preventDefault(); pickSuggestion(s, 'moniker'); }}>{s}</button>
+									{/each}
+								</div>
+							{/if}
+						</span>
 					{/if}
 				</div>
 			</div>
@@ -462,10 +502,21 @@
 						<span class="chip">{t}<button type="button" class="chip-remove" onclick={() => removeTag(i)}>✕</button></span>
 					{/each}
 					{#if c_tagAdding}
-						<input class="chip-input-inline" type="text" bind:value={c_tagInput}
-							placeholder="tag…" autofocus
-							onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTagChip(); } if (e.key === 'Escape') { c_tagInput = ''; c_tagAdding = false; } }}
-							onblur={() => addTagChip()} />
+						{@const tagSuggestions = suggest(allTags, c_tagInput, c_tags)}
+						<span class="chip-input-wrap">
+							<input class="chip-input-inline" type="text" bind:value={c_tagInput}
+								placeholder="tag…" autofocus
+								onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTagChip(); } if (e.key === 'Escape') { c_tagInput = ''; c_tagAdding = false; } }}
+								onblur={() => addTagChip()} />
+							{#if tagSuggestions.length}
+								<div class="chip-suggestions">
+									{#each tagSuggestions as s}
+										<button type="button" class="chip-suggestion"
+											onmousedown={(e) => { e.preventDefault(); pickSuggestion(s, 'tag'); }}>{s}</button>
+									{/each}
+								</div>
+							{/if}
+						</span>
 					{/if}
 				</div>
 			</div>
@@ -978,6 +1029,47 @@
 		font-size: 0.8125rem !important;
 		width: 140px !important;
 		height: auto !important;
+	}
+
+	.chip-input-wrap {
+		position: relative;
+		display: inline-block;
+	}
+
+	.chip-suggestions {
+		position: absolute;
+		top: calc(100% + 2px);
+		left: 0;
+		min-width: 100%;
+		max-width: 240px;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-hover);
+		z-index: 60;
+		padding: 0.2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+	}
+
+	.chip-suggestion {
+		text-align: left;
+		background: none;
+		border: none;
+		padding: 0.3rem 0.5rem;
+		font-size: 0.8125rem;
+		color: var(--text-2);
+		border-radius: 3px;
+		cursor: pointer;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.chip-suggestion:hover {
+		background: var(--accent-bg);
+		color: var(--accent);
 	}
 
 	.readonly-id {
