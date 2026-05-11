@@ -1,19 +1,14 @@
 # Copy to .dev.vars and fill in values. Never commit .dev.vars.
 
 # ── Cloudflare credentials ────────────────────────────────────────────────────
-# These are NOT automatically loaded as shell env vars by wrangler.
 # wrangler reads CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID from the shell
-# environment, not from this file.
-#
-# Option A — export manually before running wrangler commands:
-#   export CLOUDFLARE_API_TOKEN=...
-#   export CLOUDFLARE_ACCOUNT_ID=...
-#
-# Option B — use direnv (https://direnv.net) to auto-load on cd:
-#   brew install direnv
-#   Add `eval "$(direnv hook zsh)"` to ~/.zshrc
-#   Then: cp .dev.vars .envrc && direnv allow
-#   direnv will export all vars in .envrc when you enter this directory.
+# environment, not from this file. The `deploy` npm script wraps wrangler with
+# `dotenv -e .dev.vars --` so these values get injected automatically:
+#   npm run deploy
+# For other wrangler CLI commands (D1 setup, etc.), prefix with:
+#   npx dotenv -e .dev.vars -- wrangler <command>
+# Pinning the account here also ensures deploys go to the correct Cloudflare
+# account even when `wrangler login` is authenticated as a different account.
 #
 CLOUDFLARE_ACCOUNT_ID=
 CLOUDFLARE_API_TOKEN=
