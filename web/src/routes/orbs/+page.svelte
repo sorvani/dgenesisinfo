@@ -8,7 +8,7 @@
 <div class="container page">
 	<div class="page-header">
 		<h1 class="page-title">Skill Orbs</h1>
-		<span class="page-count">{data.orbs.length} orbs</span>
+		<span class="page-count"><em>{data.orbs.length} known orbs</em></span>
 	</div>
 
 	<div class="card-grid">

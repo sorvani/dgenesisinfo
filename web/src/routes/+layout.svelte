@@ -34,3 +34,10 @@
 </nav>
 
 {@render children()}
+
+<footer class="site-footer">
+	<div class="site-footer__inner">
+		Design &copy; {new Date().getFullYear()} J. Busch | All source data copyright of the original rights holders
+		<a href="/credits">listed here</a>.
+	</div>
+</footer>
