@@ -134,6 +134,40 @@ function normalizeCurrentForDiff(entityType: string, row: Record<string, unknown
 	return out;
 }
 
+const ROUTE_PREFIX: Record<string, string> = {
+	character: '/characters',
+	orb:       '/orbs',
+	dungeon:   '/dungeons',
+	monster:   '/bestiary',
+};
+
+async function resolveEntityUrl(db: D1Database, type: string, entityId: number | null, proposed: Record<string, unknown>): Promise<string | null> {
+	// Sub-records link to their parent (where the row actually lives).
+	if (type === 'character_stat' || type === 'character_ranking' || type === 'character_orb') {
+		const charId = (proposed.character_id as number | null) ?? (
+			entityId ? (await db.prepare(`SELECT character_id FROM ${TABLE_MAP[type]} WHERE id = ?`).bind(entityId).first<{ character_id: number }>())?.character_id ?? null : null
+		);
+		if (!charId) return null;
+		const row = await db.prepare('SELECT slug FROM characters WHERE id = ?').bind(charId).first<{ slug: string }>();
+		return row ? `/characters/${row.slug}` : null;
+	}
+	if (type === 'orb_drop_rate') {
+		const orbId = (proposed.orb_id as number | null) ?? (
+			entityId ? (await db.prepare('SELECT orb_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ orb_id: number }>())?.orb_id ?? null : null
+		);
+		if (!orbId) return null;
+		const row = await db.prepare('SELECT slug FROM orbs WHERE id = ?').bind(orbId).first<{ slug: string }>();
+		return row ? `/orbs/${row.slug}` : null;
+	}
+
+	// Top-level entities with their own detail page — need entity_id and a slug column.
+	const prefix = ROUTE_PREFIX[type];
+	if (!prefix || !entityId) return null;
+	const table = TABLE_MAP[type];
+	const row = await db.prepare(`SELECT slug FROM ${table} WHERE id = ?`).bind(entityId).first<{ slug: string }>();
+	return row ? `${prefix}/${row.slug}` : null;
+}
+
 async function resolveEntityLabel(db: D1Database, type: string, entityId: number | null, proposed: Record<string, unknown>): Promise<string | null> {
 	switch (type) {
 		case 'character': {
@@ -194,6 +228,7 @@ export interface Submission {
 	proposed: Record<string, unknown>;
 	current: Record<string, unknown> | null;
 	entity_label: string | null;
+	entity_url: string | null;
 	status: string;
 	reviewed_by: number | null; reviewed_at: string | null; admin_note: string | null;
 	github_username: string;
@@ -218,19 +253,23 @@ export const load: PageServerLoad = async ({ platform }) => {
 	const pending: Submission[] = await Promise.all(
 		(pendingRes.results as RawSubmission[]).map(async s => {
 			const proposed = JSON.parse(s.proposed_data);
-			const [current, entity_label] = await Promise.all([
+			const [current, entity_label, entity_url] = await Promise.all([
 				resolveCurrentEntity(db, s.entity_type, s.entity_id),
 				resolveEntityLabel(db, s.entity_type, s.entity_id, proposed),
+				resolveEntityUrl(db, s.entity_type, s.entity_id, proposed),
 			]);
-			return { ...s, proposed, current, entity_label };
+			return { ...s, proposed, current, entity_label, entity_url };
 		})
 	);
 
 	const recent: Submission[] = await Promise.all(
 		(recentRes.results as RawSubmission[]).map(async s => {
 			const proposed = JSON.parse(s.proposed_data);
-			const entity_label = await resolveEntityLabel(db, s.entity_type, s.entity_id, proposed);
-			return { ...s, proposed, current: null, entity_label };
+			const [entity_label, entity_url] = await Promise.all([
+				resolveEntityLabel(db, s.entity_type, s.entity_id, proposed),
+				resolveEntityUrl(db, s.entity_type, s.entity_id, proposed),
+			]);
+			return { ...s, proposed, current: null, entity_label, entity_url };
 		})
 	);
 

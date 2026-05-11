@@ -128,7 +128,13 @@
 							<tr>
 								<td><span class={opClass(s.operation)}>{opLabel(s.operation)}</span></td>
 								<td>{s.entity_type.replace(/_/g, ' ')}</td>
-								<td style="font-weight:500;">{s.entity_label ?? '—'}</td>
+								<td style="font-weight:500;">
+								{#if s.entity_url && s.entity_label}
+									<a href={s.entity_url}>{s.entity_label}</a>
+								{:else}
+									{s.entity_label ?? '—'}
+								{/if}
+							</td>
 								<td>@{s.github_username}</td>
 								<td>
 									<span class="status-badge" class:approved={s.status === 'approved'} class:rejected={s.status === 'rejected'}>
