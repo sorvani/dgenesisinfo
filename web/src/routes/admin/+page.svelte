@@ -60,6 +60,7 @@
 					<div class="sub-meta">
 						<span class={opClass(s.operation)}>{opLabel(s.operation)}</span>
 						<strong>{s.entity_type.replace(/_/g, ' ')}</strong>
+						{#if s.entity_label}<span class="sub-label">{s.entity_label}</span>{/if}
 						{#if s.entity_id}<span class="sub-id">#{s.entity_id}</span>{/if}
 					</div>
 					<div class="sub-who">
@@ -120,13 +121,14 @@
 			<div class="card" style="padding: 0; overflow: hidden;">
 				<table class="data-table">
 					<thead>
-						<tr><th>Op</th><th>Type</th><th>By</th><th>Status</th><th>Reviewed</th><th>Note</th></tr>
+						<tr><th>Op</th><th>Type</th><th>Entity</th><th>By</th><th>Status</th><th>Reviewed</th><th>Note</th></tr>
 					</thead>
 					<tbody>
 						{#each data.recent as s}
 							<tr>
 								<td><span class={opClass(s.operation)}>{opLabel(s.operation)}</span></td>
 								<td>{s.entity_type.replace(/_/g, ' ')}</td>
+								<td style="font-weight:500;">{s.entity_label ?? '—'}</td>
 								<td>@{s.github_username}</td>
 								<td>
 									<span class="status-badge" class:approved={s.status === 'approved'} class:rejected={s.status === 'rejected'}>
@@ -166,7 +168,8 @@
 		font-size: 0.9375rem;
 	}
 
-	.sub-id { color: var(--text-3); font-size: 0.8125rem; font-family: var(--font-mono); }
+	.sub-id    { color: var(--text-3); font-size: 0.8125rem; font-family: var(--font-mono); }
+	.sub-label { color: var(--text); font-size: 0.9375rem; font-weight: 600; }
 
 	.sub-who {
 		display: flex;

@@ -134,6 +134,50 @@ function normalizeCurrentForDiff(entityType: string, row: Record<string, unknown
 	return out;
 }
 
+async function resolveEntityLabel(db: D1Database, type: string, entityId: number | null, proposed: Record<string, unknown>): Promise<string | null> {
+	switch (type) {
+		case 'character': {
+			const first = proposed.first_name as string | null;
+			const last  = proposed.last_name  as string | null;
+			if (first || last) return [first, last].filter(Boolean).join(' ');
+			if (entityId) {
+				const row = await db.prepare('SELECT first_name, last_name FROM characters WHERE id = ?').bind(entityId).first<{ first_name: string | null; last_name: string | null }>();
+				return row ? [row.first_name, row.last_name].filter(Boolean).join(' ') || null : null;
+			}
+			return null;
+		}
+		case 'orb':
+			return (proposed.orb_name as string) || null;
+		case 'dungeon':
+		case 'monster':
+			return (proposed.name as string) || null;
+		case 'timeline_event': {
+			const ev = proposed.event as string | null;
+			return ev ? ev.replace(/<[^>]*>/g, '').slice(0, 60) : null;
+		}
+		case 'character_stat':
+		case 'character_ranking':
+		case 'character_orb': {
+			const charId = (proposed.character_id as number | null) ?? (
+				entityId ? (await db.prepare(`SELECT character_id FROM ${TABLE_MAP[type]} WHERE id = ?`).bind(entityId).first<{ character_id: number }>())?.character_id ?? null : null
+			);
+			if (!charId) return null;
+			const row = await db.prepare('SELECT first_name, last_name FROM characters WHERE id = ?').bind(charId).first<{ first_name: string | null; last_name: string | null }>();
+			return row ? [row.first_name, row.last_name].filter(Boolean).join(' ') || null : null;
+		}
+		case 'orb_drop_rate': {
+			const orbId = (proposed.orb_id as number | null) ?? (
+				entityId ? (await db.prepare('SELECT orb_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ orb_id: number }>())?.orb_id ?? null : null
+			);
+			if (!orbId) return null;
+			const row = await db.prepare('SELECT orb_name FROM orbs WHERE id = ?').bind(orbId).first<{ orb_name: string }>();
+			return row?.orb_name ?? null;
+		}
+		default:
+			return null;
+	}
+}
+
 // Fetch current state of an entity so we can diff it
 async function resolveCurrentEntity(db: D1Database, type: string, id: number | null): Promise<Record<string, unknown> | null> {
 	if (!id) return null;
@@ -149,6 +193,7 @@ export interface Submission {
 	entity_type: string; entity_id: number | null; operation: string;
 	proposed: Record<string, unknown>;
 	current: Record<string, unknown> | null;
+	entity_label: string | null;
 	status: string;
 	reviewed_by: number | null; reviewed_at: string | null; admin_note: string | null;
 	github_username: string;
@@ -171,18 +216,23 @@ export const load: PageServerLoad = async ({ platform }) => {
 	]);
 
 	const pending: Submission[] = await Promise.all(
-		(pendingRes.results as RawSubmission[]).map(async s => ({
-			...s,
-			proposed: JSON.parse(s.proposed_data),
-			current: await resolveCurrentEntity(db, s.entity_type, s.entity_id),
-		}))
+		(pendingRes.results as RawSubmission[]).map(async s => {
+			const proposed = JSON.parse(s.proposed_data);
+			const [current, entity_label] = await Promise.all([
+				resolveCurrentEntity(db, s.entity_type, s.entity_id),
+				resolveEntityLabel(db, s.entity_type, s.entity_id, proposed),
+			]);
+			return { ...s, proposed, current, entity_label };
+		})
 	);
 
-	const recent: Submission[] = (recentRes.results as RawSubmission[]).map(s => ({
-		...s,
-		proposed: JSON.parse(s.proposed_data),
-		current: null,
-	}));
+	const recent: Submission[] = await Promise.all(
+		(recentRes.results as RawSubmission[]).map(async s => {
+			const proposed = JSON.parse(s.proposed_data);
+			const entity_label = await resolveEntityLabel(db, s.entity_type, s.entity_id, proposed);
+			return { ...s, proposed, current: null, entity_label };
+		})
+	);
 
 	return { pending, recent };
 };

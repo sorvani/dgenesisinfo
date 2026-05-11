@@ -257,7 +257,7 @@
 			<div class="field">
 				<label class="field-label" for="f-op">Operation</label>
 				<select id="f-op" bind:value={operation}>
-					<option value="insert">New record</option>
+					{#if !entityId}<option value="insert">New record</option>{/if}
 					<option value="update">Update existing</option>
 					<option value="delete">Delete record</option>
 				</select>
