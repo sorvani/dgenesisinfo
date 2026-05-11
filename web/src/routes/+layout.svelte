@@ -84,6 +84,7 @@
 
 		<button class="hamburger" aria-label="Menu" onclick={(e) => { e.stopPropagation(); mobileMenuOpen = !mobileMenuOpen; }}>
 			<span class:open={mobileMenuOpen}></span>
+			{#if data.pendingCount > 0 && !mobileMenuOpen}<span class="pending-badge hamburger-badge">{data.pendingCount}</span>{/if}
 		</button>
 	</div>
 
@@ -220,6 +221,9 @@
 	}
 
 	/* ── Hamburger ── */
+	.hamburger { position: relative; }
+	.hamburger-badge { position: absolute; top: 2px; right: 2px; margin: 0; }
+
 	.hamburger {
 		display: none;
 		flex-direction: column;
