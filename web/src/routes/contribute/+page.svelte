@@ -293,6 +293,36 @@
 		}
 	}
 
+	// Live thousands-separator formatting for the drop-rate inputs.
+	function formatThousands(n: number | null): string {
+		return (n === null || n === undefined) ? '' : n.toLocaleString('en-US');
+	}
+
+	function handleCommaInput(e: Event, setter: (v: number | null) => void) {
+		const target = e.currentTarget as HTMLInputElement;
+		const oldVal = target.value;
+		const cursor = target.selectionStart ?? oldVal.length;
+		const digitsBefore = oldVal.slice(0, cursor).replace(/[^\d]/g, '').length;
+
+		const clean = oldVal.replace(/[^\d]/g, '');
+		const raw = clean === '' ? null : parseInt(clean, 10);
+		setter(raw);
+
+		const formatted = formatThousands(raw);
+		target.value = formatted;
+
+		// Restore cursor at the same digit-position in the newly formatted string.
+		let newCursor = formatted.length;
+		let count = 0;
+		for (let i = 0; i < formatted.length; i++) {
+			if (/\d/.test(formatted[i])) {
+				count++;
+				if (count > digitsBefore) { newCursor = i; break; }
+			}
+		}
+		target.setSelectionRange(newCursor, newCursor);
+	}
+
 	function buildProposedData(): string {
 		const cite = { volume: cite_vol || null, chapter: cite_ch || null, jnc_part: cite_part || null, source_type: cite_source_type || null };
 
@@ -811,9 +841,15 @@
 				<div class="field field--wide">
 					<label class="field-label">Drop rate <span class="hint">e.g. 1 per 280,000,000 kills</span></label>
 					<div class="drops-row">
-						<input type="number" class="drops-row__drops" placeholder="1" bind:value={dr_favOut} aria-label="Drops" />
+						<input type="text" inputmode="numeric" class="drops-row__drops"
+							placeholder="1" aria-label="Drops"
+							value={formatThousands(dr_favOut)}
+							oninput={(e) => handleCommaInput(e, (v) => dr_favOut = v)} />
 						<span class="drops-row__sep">per</span>
-						<input type="number" class="drops-row__total" placeholder="280,000,000" bind:value={dr_total} aria-label="Per kills" />
+						<input type="text" inputmode="numeric" class="drops-row__total"
+							placeholder="280,000,000" aria-label="Per kills"
+							value={formatThousands(dr_total)}
+							oninput={(e) => handleCommaInput(e, (v) => dr_total = v)} />
 						<span class="drops-row__sep">kills</span>
 					</div>
 				</div>
