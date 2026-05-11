@@ -1,61 +1,21 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files
-.env
-.env*.local
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# Firebase service account key - NEVER commit
-d-genesis-info-firebase-adminsdk-*.json
-
-# Export tools
-exported-data/
-export-firebase-data.mjs
-
-# OpenNext
-.open-next
-
-# wrangler files
-.wrangler
-.dev.vars*
-!.dev.vars.example
-!.env.example
-
 # SvelteKit
 /web/.svelte-kit/
 /web/node_modules/
 /web/worker-configuration.d.ts
 
+# Cloudflare
+.wrangler/
+web/.dev.vars*
+!web/.dev.vars.example
+
 # Generated ingest SQL — rebuild with: node database/ingest/generate-sql.mjs
 /database/ingest/ingest.sql
+
+# Leftover Next.js build artifacts
+.next/
+out/
+node_modules/
+*.tsbuildinfo
+
+# macOS
+.DS_Store

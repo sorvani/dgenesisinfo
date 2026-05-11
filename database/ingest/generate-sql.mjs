@@ -19,9 +19,9 @@ import { fileURLToPath } from 'url';
 const __dir = dirname(fileURLToPath(import.meta.url));
 const root  = resolve(__dir, '../..');
 
-const characters = JSON.parse(readFileSync(resolve(root, 'src/data/characters.json'), 'utf8'));
-const orbs       = JSON.parse(readFileSync(resolve(root, 'src/data/orbs.json'),       'utf8'));
-const timeline   = JSON.parse(readFileSync(resolve(root, 'src/data/timeline.json'),   'utf8'));
+const characters = JSON.parse(readFileSync(resolve(root, 'data/characters.json'), 'utf8'));
+const orbs       = JSON.parse(readFileSync(resolve(root, 'data/orbs.json'),       'utf8'));
+const timeline   = JSON.parse(readFileSync(resolve(root, 'data/timeline.json'),   'utf8'));
 
 const lines = [];
 
