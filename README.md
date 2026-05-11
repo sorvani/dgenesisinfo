@@ -39,12 +39,15 @@ node ../database/ingest/generate-sql.mjs
 npx wrangler d1 execute dgenesisinfo --remote --file=../database/ingest/ingest.sql
 ```
 
-## Cloudflare Pages settings
+## Deploying changes
 
-When connecting this repo for automatic deploys, set:
-- **Root directory:** `web`
-- **Build command:** `npm run build`
-- **Build output directory:** `.svelte-kit/cloudflare`
+This project deploys manually via Wrangler (not connected to git auto-deploy).
+
+```bash
+cd web
+npm run build
+npx wrangler pages deploy .svelte-kit/cloudflare --project-name dgenesisinfo --branch main
+```
 
 ## Contributing
 
