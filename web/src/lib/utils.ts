@@ -160,6 +160,29 @@ export function getCitationScore(citation: Citation | null): number {
 	return (v * 1_000_000) + (c * 1_000) + p;
 }
 
+// Floor display helper: "10" → "10<sup>th</sup>", "5-7" → "5-7", "B1" → "B1",
+// "10<sup>th</sup>" (legacy) → unchanged. Pass result through {@html}.
+export function formatFloor(floor: string | null | undefined): string {
+	if (!floor) return '';
+	const trimmed = floor.trim();
+	if (!trimmed) return '';
+	// Already contains HTML — assume the author hand-formatted it, leave alone.
+	if (trimmed.includes('<')) return trimmed;
+	// "10th", "1st", etc. — re-wrap the suffix.
+	const suffixed = trimmed.match(/^(\d+)(st|nd|rd|th)$/i);
+	if (suffixed) return `${suffixed[1]}<sup>${suffixed[2].toLowerCase()}</sup>`;
+	// Pure number — add the right ordinal suffix.
+	if (/^\d+$/.test(trimmed)) {
+		const n = parseInt(trimmed, 10);
+		const v = n % 100;
+		const suffix = (v >= 11 && v <= 13) ? 'th'
+			: ['th','st','nd','rd','th','th','th','th','th','th'][n % 10];
+		return `${n}<sup>${suffix}</sup>`;
+	}
+	// Range, basement, or anything else — leave as written.
+	return trimmed;
+}
+
 export function formatCitation(citation: Citation | null): string {
 	if (!citation) return '';
 	const parts: string[] = [];

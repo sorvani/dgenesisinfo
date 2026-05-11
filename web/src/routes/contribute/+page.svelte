@@ -723,7 +723,7 @@
 				</div>
 				<div class="field field--sm">
 					<label class="field-label">Floor</label>
-					<input type="text" placeholder='e.g. 2<sup>nd</sup>' bind:value={dr_floor} />
+					<input type="text" placeholder="e.g. 2, B1, or 5–7" bind:value={dr_floor} />
 				</div>
 				<div class="field field--sm">
 					<label class="field-label">Favorable Outcomes</label>
@@ -757,7 +757,7 @@
 				</div>
 				<div class="field field--sm">
 					<label class="field-label">Floor</label>
-					<input type="text" placeholder="e.g. 2&lt;sup&gt;nd&lt;/sup&gt; or 5–7" bind:value={md_floor} />
+					<input type="text" placeholder="e.g. 2, B1, or 5–7" bind:value={md_floor} />
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { formatDate, formatCitation } from '$lib/utils';
+	import { formatDate, formatCitation, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil } from 'lucide-svelte';
 	import Flag from '$lib/Flag.svelte';
@@ -95,7 +95,7 @@
 							{#each data.creatures as c}
 								<tr>
 									<td><a href="/bestiary/{c.monster_slug}">{c.monster_name}</a></td>
-									<td>{#if c.floor}{@html c.floor}{:else}—{/if}</td>
+									<td>{#if c.floor}{@html formatFloor(c.floor)}{:else}—{/if}</td>
 									<td>{#if c.citation.volume}<span class="badge badge--citation">{formatCitation(c.citation)}</span>{:else}—{/if}</td>
 									{#if data.user}
 										<td class="row-edit-col">
@@ -121,7 +121,7 @@
 			<div class="chip-group">
 				{#each data.orbs as o}
 					<a href="/orbs/{o.slug}" class="entity-chip">
-						{o.orb_name}{#if o.floor}<span class="chip-floor">{@html o.floor}</span>{/if}
+						{o.orb_name}{#if o.floor}<span class="chip-floor">{@html formatFloor(o.floor)}</span>{/if}
 					</a>
 				{/each}
 			</div>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { formatCitation, formatProbability, formatCooldown } from '$lib/utils';
+	import { formatCitation, formatProbability, formatCooldown, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil } from 'lucide-svelte';
 	let { data }: { data: PageData } = $props();
@@ -58,7 +58,7 @@
 							{#each data.dungeons as loc}
 								<tr>
 									<td><a href="/dungeons/{loc.dungeon_slug}">{loc.dungeon_name}</a></td>
-									<td>{#if loc.floor}{@html loc.floor}{:else}—{/if}</td>
+									<td>{#if loc.floor}{@html formatFloor(loc.floor)}{:else}—{/if}</td>
 									<td>{#if loc.citation.volume}<span class="badge badge--citation">{formatCitation(loc.citation)}</span>{:else}—{/if}</td>
 									{#if data.user}
 										<td class="row-edit-col">
@@ -102,7 +102,7 @@
 										<a href="/dungeons/{drop.dungeon_slug}" class="entity-chip">{drop.dungeon}</a>
 									{:else if drop.dungeon}{drop.dungeon}{:else}—{/if}
 								</td>
-								<td>{#if drop.floor}{@html drop.floor}{:else}—{/if}</td>
+								<td>{#if drop.floor}{@html formatFloor(drop.floor)}{:else}—{/if}</td>
 								<td>
 									{#if drop.favorable_outcomes && drop.total_events}
 										<span class="accent-num">{formatProbability(drop.favorable_outcomes, drop.total_events)}</span>

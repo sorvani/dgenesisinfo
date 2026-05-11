@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getFullName, formatProbability, formatCooldown, formatCitation } from '$lib/utils';
+	import { getFullName, formatProbability, formatCooldown, formatCitation, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	let { data }: { data: PageData } = $props();
 	const orb = $derived(data.orb);
@@ -60,7 +60,7 @@
 										<a href="/dungeons/{dr.dungeon_slug}" class="entity-chip">{dr.dungeon}</a>
 									{:else if dr.dungeon}{dr.dungeon}{:else}—{/if}
 								</td>
-								<td>{#if dr.floor}{@html dr.floor}{:else}—{/if}</td>
+								<td>{#if dr.floor}{@html formatFloor(dr.floor)}{:else}—{/if}</td>
 								<td>
 									{#if dr.favorable_outcomes && dr.total_events}
 										<span class="accent-num">{formatProbability(dr.favorable_outcomes, dr.total_events)}</span>
