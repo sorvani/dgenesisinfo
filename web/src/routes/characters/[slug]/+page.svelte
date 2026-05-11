@@ -17,6 +17,10 @@
 	const latestRanking      = $derived(getHistoricalRankingAt(c.rankings));
 	const firstKnownCitation = $derived(c.cite_first_known?.volume ? c.cite_first_known : null);
 
+	let rankingsOpen = $state(true);
+	let statsOpen    = $state(true);
+	let orbsOpen     = $state(true);
+
 	// Most recent first — rankings use citation score as the sort key
 	const sortedRankings = $derived(
 		[...c.rankings].sort((a, b) => getCitationScore(b.citation) - getCitationScore(a.citation))
@@ -115,65 +119,54 @@
 	<!-- ── Rankings ── -->
 	{#if c.is_explorer && sortedRankings.length}
 		<div class="data-section">
-			<details open>
-				<summary class="section-heading collapsible">Rankings</summary>
-				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
-					<table class="data-table">
-						<thead>
-							<tr>
-								<th>Rank</th>
-								<th>Known Above</th>
-								<th>Date Noted</th>
-								<th>Citation</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each sortedRankings as r}
+			<p class="section-heading">Rankings</p>
+			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+				<table class="data-table">
+					<thead>
+						<tr><th>Rank</th><th>Known Above</th><th>Date Noted</th><th>Citation</th></tr>
+					</thead>
+					<tbody>
+						{#each sortedRankings as r, i}
+							{#if i === 0 || rankingsOpen}
 								<tr>
 									<td class="rank-cell">{r.rank ? '#' + r.rank.toLocaleString() : '—'}</td>
 									<td>{r.known_above_rank ? r.known_above_rank.toLocaleString() : '—'}</td>
 									<td>{formatDate(r.date_noted)}</td>
-									<td>
-										{#if r.citation.volume}
-											<span class="badge badge--citation">{formatCitation(r.citation)}</span>
-										{:else}—{/if}
-									</td>
+									<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
 								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			</details>
+							{/if}
+						{/each}
+						{#if sortedRankings.length > 1}
+							<tr>
+								<td colspan="4">
+									<button class="show-more-btn" onclick={() => rankingsOpen = !rankingsOpen}>
+										{rankingsOpen ? 'Show less' : `Show ${sortedRankings.length - 1} more`}
+									</button>
+								</td>
+							</tr>
+						{/if}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	{/if}
 
 	<!-- ── Stats ── -->
 	{#if c.is_explorer && sortedStats.length}
 		<div class="data-section">
-			<details open>
-				<summary class="section-heading collapsible">Stat Readings</summary>
-				<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto; margin-top: 0.75rem;">
-					<table class="data-table stat-table">
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Seq</th>
-								<th>Type</th>
-								<th>STR</th>
-								<th>VIT</th>
-								<th>INT</th>
-								<th>AGI</th>
-								<th>DEX</th>
-								<th>LUC</th>
-								<th>Total</th>
-								<th>HP</th>
-								<th>MP</th>
-								<th>SP</th>
-								<th>Citation</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each sortedStats as s}
+			<p class="section-heading">Stat Readings</p>
+			<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto; margin-top: 0.75rem;">
+				<table class="data-table stat-table">
+					<thead>
+						<tr>
+							<th>Date</th><th>Seq</th><th>Type</th>
+							<th>STR</th><th>VIT</th><th>INT</th><th>AGI</th><th>DEX</th><th>LUC</th>
+							<th>Total</th><th>HP</th><th>MP</th><th>SP</th><th>Citation</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each sortedStats as s, i}
+							{#if i === 0 || statsOpen}
 								<tr>
 									<td>{formatDate(s.date_noted)}</td>
 									<td class="seq-cell">{s.date_sequence}</td>
@@ -188,55 +181,57 @@
 									<td class="stat-val">{s.hp ?? '—'}</td>
 									<td class="stat-val">{s.mp ?? '—'}</td>
 									<td class="stat-val">{s.sp ?? '—'}</td>
-									<td>
-										{#if s.citation.volume}
-											<span class="badge badge--citation">{formatCitation(s.citation)}</span>
-										{:else}—{/if}
-									</td>
+									<td>{#if s.citation.volume}<span class="badge badge--citation">{formatCitation(s.citation)}</span>{:else}—{/if}</td>
 								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			</details>
+							{/if}
+						{/each}
+						{#if sortedStats.length > 1}
+							<tr>
+								<td colspan="14">
+									<button class="show-more-btn" onclick={() => statsOpen = !statsOpen}>
+										{statsOpen ? 'Show less' : `Show ${sortedStats.length - 1} more`}
+									</button>
+								</td>
+							</tr>
+						{/if}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	{/if}
 
 	<!-- ── Orbs ── -->
 	{#if c.is_explorer && c.orbs_used.length}
 		<div class="data-section">
-			<details open>
-				<summary class="section-heading collapsible">Skill Orbs</summary>
-				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
-					<table class="data-table">
-						<thead>
-							<tr>
-								<th>Orb</th>
-								<th>Date Acquired</th>
-								<th>Citation</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each c.orbs_used as ou}
+			<p class="section-heading">Skill Orbs</p>
+			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+				<table class="data-table">
+					<thead>
+						<tr><th>Orb</th><th>Date Acquired</th><th>Citation</th></tr>
+					</thead>
+					<tbody>
+						{#each c.orbs_used as ou, i}
+							{#if i === 0 || orbsOpen}
 								{@const orb = getOrb(ou.orb_id)}
 								<tr>
-									<td>
-										{#if orb}
-											<a href="/orbs/{orb.slug}">{orb.orb_name}</a>
-										{:else}Unknown{/if}
-									</td>
+									<td>{#if orb}<a href="/orbs/{orb.slug}">{orb.orb_name}</a>{:else}Unknown{/if}</td>
 									<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
-									<td>
-										{#if ou.citation.volume}
-											<span class="badge badge--citation">{formatCitation(ou.citation)}</span>
-										{:else}—{/if}
-									</td>
+									<td>{#if ou.citation.volume}<span class="badge badge--citation">{formatCitation(ou.citation)}</span>{:else}—{/if}</td>
 								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-			</details>
+							{/if}
+						{/each}
+						{#if c.orbs_used.length > 1}
+							<tr>
+								<td colspan="3">
+									<button class="show-more-btn" onclick={() => orbsOpen = !orbsOpen}>
+										{orbsOpen ? 'Show less' : `Show ${c.orbs_used.length - 1} more`}
+									</button>
+								</td>
+							</tr>
+						{/if}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	{/if}
 
@@ -348,30 +343,20 @@
 		white-space: nowrap;
 	}
 
-	/* ── Collapsible sections ── */
-	details { border: none; }
-
-	summary.collapsible {
+	/* ── Show more/less ── */
+	.show-more-btn {
+		background: none;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-size: 0.8125rem;
+		color: var(--accent);
 		cursor: pointer;
-		list-style: none;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		user-select: none;
+		font-weight: 600;
+		width: 100%;
+		text-align: left;
 	}
 
-	summary.collapsible::after {
-		content: '▾';
-		font-size: 0.75rem;
-		color: var(--text-3);
-		transition: transform 0.15s;
-	}
-
-	details:not([open]) summary.collapsible::after {
-		transform: rotate(-90deg);
-	}
-
-	summary::-webkit-details-marker { display: none; }
+	.show-more-btn:hover { color: var(--accent-dark); }
 
 	/* ── Note ── */
 	.note-content :global(p) {
