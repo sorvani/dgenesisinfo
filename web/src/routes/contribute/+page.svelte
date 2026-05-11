@@ -234,22 +234,21 @@
 
 <div class="form-bar">
 	<div class="container form-bar__inner">
-		<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
-		<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
+		<div class="form-bar__title">
+			<span>Submit a Contribution</span>
+			<span class="form-bar__sub">Reviewed by an admin before being applied</span>
+		</div>
+		<div class="form-bar__actions">
+			{#if form?.success}<span class="form-bar__ok">Submitted ✓</span>{/if}
+			{#if form?.error}<span class="form-bar__err">{form.error}</span>{/if}
+			<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
+			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
+		</div>
 	</div>
 </div>
 
-<div class="container page">
-	<h1 class="page-title">Submit a Contribution</h1>
-	<p class="page-subtitle">All submissions are reviewed by an admin before being applied.</p>
-
-	{#if form?.success}
-		<div class="banner banner--success">Submission received — thank you!</div>
-	{/if}
-	{#if form?.error}
-		<div class="banner banner--error">{form.error}</div>
-	{/if}
-
+<div class="contribute-body">
+	<div class="container">
 	<form id="contribute-form" bind:this={formEl} method="POST" action="?/submit" onsubmit={handleSubmit}>
 		<input type="hidden" name="entity_type" value={entityType} />
 		<input type="hidden" name="operation"   value={operation} />
@@ -652,6 +651,7 @@
 		{/if}
 
 	</form>
+	</div>
 </div>
 
 <style>
@@ -826,12 +826,43 @@
 		z-index: 50;
 		background: var(--bg);
 		border-bottom: 1px solid var(--border-soft);
-		padding: 0.625rem 0;
+		padding: 0.5rem 0;
 	}
 
 	:global(.form-bar__inner) {
 		display: flex;
-		justify-content: flex-end;
-		gap: 0.75rem;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	:global(.form-bar__title) {
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	:global(.form-bar__sub) {
+		font-size: 0.75rem;
+		font-weight: 400;
+		color: var(--text-3);
+	}
+
+	:global(.form-bar__actions) {
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+		flex-shrink: 0;
+	}
+
+	:global(.form-bar__ok)  { font-size: 0.8125rem; color: #065f46; }
+	:global(.form-bar__err) { font-size: 0.8125rem; color: #991b1b; }
+
+	:global(.contribute-body) {
+		height: calc(100vh - 52px - 57px);
+		overflow-y: auto;
+		padding: 1.5rem 0;
 	}
 </style>
