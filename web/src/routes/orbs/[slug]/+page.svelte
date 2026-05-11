@@ -4,9 +4,15 @@
 	let { data }: { data: PageData } = $props();
 	const orb = $derived(data.orb);
 
-	function formatEffects(html: string | null): string[] {
+	interface Part { block: boolean; content: string; }
+
+	function formatEffects(html: string | null): Part[] {
 		if (!html) return [];
-		return html.split(/<br\s*\/?>/gi).map(s => s.trim()).filter(Boolean);
+		const blockTags = /^<(div|figure|table|ul|ol|img)/i;
+		return html.split(/<br\s*\/?>/gi)
+			.map(s => s.trim())
+			.filter(Boolean)
+			.map(s => ({ block: blockTags.test(s), content: s }));
 	}
 </script>
 
@@ -21,8 +27,12 @@
 		<div class="data-section">
 			<p class="section-heading">Known Effects</p>
 			<div class="card">
-				{#each formatEffects(orb.known_effects) as line}
-					<p class="rich-text">{@html line}</p>
+				{#each formatEffects(orb.known_effects) as part}
+					{#if part.block}
+						{@html part.content}
+					{:else}
+						<p class="rich-text">{@html part.content}</p>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -32,8 +42,12 @@
 		<div class="data-section">
 			<p class="section-heading">Notes</p>
 			<div class="notes-body">
-				{#each formatEffects(orb.note) as line}
-					<p class="note-line">{@html line}</p>
+				{#each formatEffects(orb.note) as part}
+					{#if part.block}
+						{@html part.content}
+					{:else}
+						<p class="note-line">{@html part.content}</p>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -110,8 +124,33 @@
 		line-height: 1.6;
 	}
 
+	.note-line :global(code) {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		background: var(--bg-subtle);
+		padding: 0.1em 0.35em;
+		border-radius: 3px;
+		color: var(--text-2);
+	}
+
 	.card .rich-text + .rich-text {
 		margin-top: 0.5rem;
+	}
+
+	/* Image rows embedded in notes/effects */
+	:global(.note-images) {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-end;
+		margin-top: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	:global(.note-images img) {
+		height: 140px;
+		width: auto;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
 	}
 
 	.users-grid {
