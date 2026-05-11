@@ -9,6 +9,7 @@
 	type Theme = 'auto' | 'light' | 'dark';
 	let theme      = $state<Theme>('auto');
 	let userMenuOpen = $state(false);
+	let mobileMenuOpen = $state(false);
 
 	onMount(() => {
 		theme = (localStorage.getItem('theme') as Theme) || 'auto';
@@ -27,6 +28,7 @@
 
 	function closeMenu(e: MouseEvent) {
 		if (!(e.target as Element).closest('.user-menu')) userMenuOpen = false;
+		if (!(e.target as Element).closest('.site-nav')) mobileMenuOpen = false;
 	}
 
 	const themeLabel: Record<Theme, string> = { auto: 'Auto', light: 'Light', dark: 'Dark' };
@@ -68,7 +70,7 @@
 					{/if}
 				</div>
 			{:else}
-				<a href="/auth/login" class="btn btn--primary" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in</a>
+				<a href="/auth/login" class="btn btn--primary btn--auth" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in</a>
 			{/if}
 
 			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
@@ -77,7 +79,31 @@
 				{:else}<SunMoon size={16} />{/if}
 			</button>
 		</div>
+
+		<button class="hamburger" aria-label="Menu" onclick={(e) => { e.stopPropagation(); mobileMenuOpen = !mobileMenuOpen; }}>
+			<span class:open={mobileMenuOpen}></span>
+		</button>
 	</div>
+
+	{#if mobileMenuOpen}
+		<div class="mobile-menu">
+			<a href="/explorers" onclick={() => mobileMenuOpen = false}>Explorers</a>
+			<a href="/characters" onclick={() => mobileMenuOpen = false}>Characters</a>
+			<a href="/orbs" onclick={() => mobileMenuOpen = false}>Orbs</a>
+			<a href="/timeline" onclick={() => mobileMenuOpen = false}>Timeline</a>
+			<a href="/bestiary" onclick={() => mobileMenuOpen = false}>Bestiary</a>
+			<a href="/dungeons" onclick={() => mobileMenuOpen = false}>Dungeons</a>
+			<div class="mobile-menu__divider"></div>
+			<a class="mobile-menu__jnc" href="https://j-novel.club/series?search=d-genesis" target="_blank" rel="noopener noreferrer" onclick={() => mobileMenuOpen = false}>Read @ J-Novel Club ↗</a>
+			{#if data.user}
+				<form method="POST" action="/auth/logout">
+					<button type="submit" class="mobile-menu__btn">Log out ({data.user.githubUsername})</button>
+				</form>
+			{:else}
+				<a href="/auth/login" onclick={() => mobileMenuOpen = false}>Log in</a>
+			{/if}
+		</div>
+	{/if}
 </nav>
 
 <main>
@@ -173,5 +199,96 @@
 	.theme-btn:hover {
 		border-color: var(--accent);
 		color: var(--accent);
+	}
+
+	/* ── Hamburger ── */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 36px;
+		height: 36px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		margin-left: 0.5rem;
+		flex-shrink: 0;
+	}
+
+	.hamburger span,
+	.hamburger span::before,
+	.hamburger span::after {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: var(--text);
+		border-radius: 2px;
+		transition: transform 0.2s, opacity 0.2s;
+		position: relative;
+	}
+
+	.hamburger span::before,
+	.hamburger span::after {
+		content: '';
+		position: absolute;
+		left: 0;
+	}
+
+	.hamburger span::before { top: -7px; }
+	.hamburger span::after  { top: 7px; }
+
+	.hamburger span.open { background: transparent; }
+	.hamburger span.open::before { transform: translateY(7px) rotate(45deg); }
+	.hamburger span.open::after  { transform: translateY(-7px) rotate(-45deg); }
+
+	/* ── Mobile menu ── */
+	.mobile-menu {
+		display: none;
+		flex-direction: column;
+		background: var(--bg-card);
+		border-top: 1px solid var(--border);
+		padding: 0.5rem 0;
+	}
+
+	.mobile-menu a,
+	.mobile-menu__btn {
+		display: block;
+		padding: 0.75rem 1.5rem;
+		font-size: 0.9375rem;
+		font-weight: 500;
+		color: var(--text-2);
+		text-decoration: none;
+		background: none;
+		border: none;
+		cursor: pointer;
+		text-align: left;
+		width: 100%;
+		transition: color 0.15s, background 0.15s;
+	}
+
+	.mobile-menu a:hover,
+	.mobile-menu__btn:hover {
+		color: var(--accent);
+		background: var(--bg-subtle);
+	}
+
+	.mobile-menu__divider {
+		height: 1px;
+		background: var(--border-soft);
+		margin: 0.375rem 0;
+	}
+
+	.mobile-menu__jnc { color: var(--accent) !important; font-size: 0.875rem !important; }
+
+	/* ── Responsive ── */
+	@media (max-width: 768px) {
+		.site-nav__links { display: none; }
+		.site-nav__auth .jnc-link,
+		.site-nav__auth .btn--auth,
+		.site-nav__auth .user-menu { display: none; }
+		.hamburger { display: flex; }
+		.mobile-menu { display: flex; }
 	}
 </style>
