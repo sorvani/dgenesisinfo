@@ -55,7 +55,9 @@
 			{#if data.user}
 				<div class="user-menu">
 					<button class="user-menu__trigger" onclick={(e) => { e.stopPropagation(); userMenuOpen = !userMenuOpen; }}>
-						{data.user.githubUsername} ▾
+						{data.user.githubUsername}
+						{#if data.pendingCount > 0}<span class="pending-badge">{data.pendingCount}</span>{/if}
+						▾
 					</button>
 					{#if userMenuOpen}
 						<div class="user-menu__dropdown">
@@ -145,6 +147,22 @@
 	}
 
 	.user-menu__trigger:hover { border-color: var(--accent); color: var(--text); }
+
+	.pending-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 18px;
+		height: 18px;
+		padding: 0 4px;
+		border-radius: 9px;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.6875rem;
+		font-weight: 700;
+		line-height: 1;
+		margin: 0 0.2rem;
+	}
 
 	.user-menu__dropdown {
 		position: absolute;
