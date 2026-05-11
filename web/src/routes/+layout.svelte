@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { Sun, Moon, SunMoon } from 'lucide-svelte';
 	import type { LayoutData } from './$types';
+	import { toast } from '$lib/toast';
 
 	let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
 
@@ -116,6 +117,15 @@
 <main>
 	{@render children()}
 </main>
+
+{#if $toast}
+	<div class="toast-overlay">
+		<div class="toast">
+			<span class="toast-check">✓</span>
+			{$toast}
+		</div>
+	</div>
+{/if}
 
 <footer class="site-footer">
 	<div class="site-footer__inner">

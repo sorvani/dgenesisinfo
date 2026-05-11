@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData, ActionData } from './$types';
 	import { enhance } from '$app/forms';
+	import { showToast } from '$lib/toast';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -16,10 +17,9 @@
 	$effect(() => {
 		if (form?.success && !redirecting) {
 			redirecting = true;
-			setTimeout(() => {
-				if (window.history.length > 1) history.back();
-				else window.location.href = '/';
-			}, 2000);
+			showToast('Submission received — thank you!');
+			if (window.history.length > 1) history.back();
+			else window.location.href = '/';
 		}
 	});
 
@@ -406,15 +406,6 @@
 
 <svelte:head><title>Contribute — D-Genesis Info</title></svelte:head>
 
-{#if form?.success}
-	<div class="toast-overlay">
-		<div class="toast">
-			<span class="toast-check">✓</span>
-			Submission received — thank you!
-		</div>
-	</div>
-{/if}
-
 <div class="form-bar">
 	<div class="container form-bar__inner">
 		<div class="form-bar__title">
@@ -423,7 +414,29 @@
 		</div>
 		<div class="form-bar__actions">
 			{#if form?.error}<span class="form-bar__err">{form.error}</span>{/if}
-			<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
+			{#if operation !== 'delete'}
+				<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
+			{/if}
+			{#if entityId && operation !== 'delete'}
+				<form
+					method="POST"
+					action="?/submit"
+					use:enhance={() => async ({ update }) => { await update({ reset: false }); }}
+				>
+					<input type="hidden" name="entity_type"   value={entityType} />
+					<input type="hidden" name="operation"     value="delete" />
+					<input type="hidden" name="entity_id"     value={entityId} />
+					<input type="hidden" name="proposed_data" value={'{}'} />
+					<button
+						type="submit"
+						class="btn btn--danger"
+						onclick={(e) => { if (!confirm('Submit a deletion request for this record? An admin will review before it is removed.')) e.preventDefault(); }}
+					>Delete</button>
+				</form>
+			{/if}
+			{#if operation === 'delete'}
+				<button type="submit" form="contribute-form" class="btn btn--danger">Submit deletion</button>
+			{/if}
 			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
 		</div>
 	</div>
@@ -443,40 +456,16 @@
 		<input type="hidden" name="entity_id"   value={entityId ?? ''} />
 		<input type="hidden" name="proposed_data" value="" />
 
-		<!-- ── Control row ── -->
-		<div class="card ctrl-row">
-			<div class="field">
-				<label class="field-label" for="f-type">Type</label>
-				<select id="f-type" bind:value={entityType} disabled={!!entityId}>
-					<option value="character">Character / Explorer</option>
-					<option value="orb">Skill Orb</option>
-					<option value="dungeon">Dungeon</option>
-					<option value="monster">Monster / Creature</option>
-					<option value="timeline_event">Timeline Event</option>
-					<option value="character_stat">Character Stat Reading</option>
-					<option value="character_ranking">Character Ranking</option>
-					<option value="character_orb">Character Orb Acquisition</option>
-					<option value="orb_drop_rate">Orb Drop Rate</option>
-					<option value="monster_dungeon">Creature in Dungeon</option>
-				</select>
-			</div>
-
-			<div class="field">
-				<label class="field-label" for="f-op">Operation</label>
-				<select id="f-op" bind:value={operation}>
-					{#if !entityId}<option value="insert">New record</option>{/if}
-					<option value="update">Update existing</option>
-					<option value="delete">Delete record</option>
-				</select>
-			</div>
-
-			{#if operation !== 'insert' && entityId}
-				<div class="field field--sm">
-					<label class="field-label">Record ID</label>
-					<div class="readonly-id">#{entityId}</div>
-				</div>
-			{/if}
+		{#if operation === 'delete'}
+		<div class="card form-section delete-confirm">
+			<p class="delete-confirm__title">⚠ Confirm deletion</p>
+			<p class="delete-confirm__body">
+				You're about to submit a deletion request for record <code>#{entityId}</code>
+				({entityType.replace(/_/g, ' ')}). Click <strong>Submit deletion</strong> above
+				and an admin will review before the record is removed.
+			</p>
 		</div>
+		{/if}
 
 		{#if operation !== 'delete'}
 		<!-- ── Character / Explorer ── -->
@@ -936,15 +925,24 @@
 	:global([data-theme="light"]) .banner--success { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
 	:global([data-theme="light"]) .banner--error   { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-	.ctrl-row {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		margin-bottom: 1rem;
-		align-items: flex-end;
-	}
-
 	.form-section { margin-bottom: 1rem; }
+
+	.delete-confirm { border-color: #fca5a5; background: #fef2f2; }
+	:global([data-theme="dark"]) .delete-confirm { background: #2d0a0a; border-color: #991b1b; }
+	.delete-confirm__title {
+		font-size: 0.9375rem;
+		font-weight: 700;
+		color: #991b1b;
+		margin: 0 0 0.5rem;
+	}
+	.delete-confirm__body { font-size: 0.9rem; color: var(--text-2); margin: 0; line-height: 1.55; }
+	.delete-confirm__body code {
+		font-family: var(--font-mono);
+		font-size: 0.85em;
+		background: var(--bg-subtle);
+		padding: 0.1em 0.35em;
+		border-radius: 3px;
+	}
 
 	.field-grid {
 		display: grid;
@@ -1152,16 +1150,6 @@
 		color: var(--accent);
 	}
 
-	.readonly-id {
-		padding: 0.45rem 0.65rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		background: var(--bg-subtle);
-		color: var(--text-3);
-		font-family: var(--font-mono);
-		font-size: 0.9rem;
-	}
-
 	:global(.form-bar) {
 		position: sticky;
 		top: 52px;
@@ -1200,41 +1188,6 @@
 	}
 
 	:global(.form-bar__err) { font-size: 0.8125rem; color: #991b1b; }
-
-	:global(.toast-overlay) {
-		position: fixed;
-		inset: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 200;
-		pointer-events: none;
-	}
-
-	:global(.toast) {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		background: var(--bg-card);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-hover);
-		padding: 1rem 1.75rem;
-		font-size: 1.0625rem;
-		font-weight: 600;
-		color: var(--text);
-		animation: toast-in 0.2s ease;
-	}
-
-	:global(.toast-check) {
-		font-size: 1.25rem;
-		color: var(--accent);
-	}
-
-	@keyframes toast-in {
-		from { opacity: 0; transform: translateY(12px); }
-		to   { opacity: 1; transform: translateY(0); }
-	}
 
 	:global(.contribute-body) {
 		height: calc(100vh - 52px - 57px);
