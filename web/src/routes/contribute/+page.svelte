@@ -11,6 +11,12 @@
 	let operation  = $state(data.defaultOp);
 	let entityId   = $state<number | null>(data.defaultEntityId);
 
+	$effect(() => {
+		if (form?.success) {
+			setTimeout(() => history.back(), 3000);
+		}
+	});
+
 	// ── Character fields ──────────────────────────────────────────────────────
 	let c_firstName      = $state('');
 	let c_lastName       = $state('');
@@ -232,6 +238,15 @@
 
 <svelte:head><title>Contribute — D-Genesis Info</title></svelte:head>
 
+{#if form?.success}
+	<div class="toast-overlay">
+		<div class="toast">
+			<span class="toast-check">✓</span>
+			Submission received — thank you!
+		</div>
+	</div>
+{/if}
+
 <div class="form-bar">
 	<div class="container form-bar__inner">
 		<div class="form-bar__title">
@@ -239,7 +254,6 @@
 			<span class="form-bar__sub">Reviewed by an admin before being applied</span>
 		</div>
 		<div class="form-bar__actions">
-			{#if form?.success}<span class="form-bar__ok">Submitted ✓</span>{/if}
 			{#if form?.error}<span class="form-bar__err">{form.error}</span>{/if}
 			<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
 			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
@@ -857,8 +871,42 @@
 		flex-shrink: 0;
 	}
 
-	:global(.form-bar__ok)  { font-size: 0.8125rem; color: #065f46; }
 	:global(.form-bar__err) { font-size: 0.8125rem; color: #991b1b; }
+
+	:global(.toast-overlay) {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 200;
+		pointer-events: none;
+	}
+
+	:global(.toast) {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-hover);
+		padding: 1rem 1.75rem;
+		font-size: 1.0625rem;
+		font-weight: 600;
+		color: var(--text);
+		animation: toast-in 0.2s ease;
+	}
+
+	:global(.toast-check) {
+		font-size: 1.25rem;
+		color: var(--accent);
+	}
+
+	@keyframes toast-in {
+		from { opacity: 0; transform: translateY(12px); }
+		to   { opacity: 1; transform: translateY(0); }
+	}
 
 	:global(.contribute-body) {
 		height: calc(100vh - 52px - 57px);
