@@ -96,12 +96,13 @@
 	let co_dateNote     = $state('');
 
 	// ── Orb drop rate fields ──────────────────────────────────────────────────
-	let dr_orbId    = $state<number | null>(null);
-	let dr_creature = $state('');
-	let dr_dungeon  = $state('');
-	let dr_floor    = $state('');
-	let dr_favOut   = $state<number | null>(null);
-	let dr_total    = $state<number | null>(null);
+	let dr_orbId     = $state<number | null>(data.defaultOrbId);
+	let dr_monsterId = $state<number | null>(data.defaultMonsterId);
+	let dr_creature  = $state('');
+	let dr_dungeon   = $state('');
+	let dr_floor     = $state('');
+	let dr_favOut    = $state<number | null>(null);
+	let dr_total     = $state<number | null>(null);
 
 	// ── Monster ↔ dungeon fields ──────────────────────────────────────────────
 	let md_monsterId = $state<number | null>(data.defaultMonsterId);
@@ -202,6 +203,19 @@
 			cite_ch          = o.cite_chapter  ?? '';
 			cite_part        = o.cite_jnc_part ?? '';
 			cite_source_type = o.cite_source_type ?? null;
+		} else if (entityType === 'orb_drop_rate' && data.prefillRow) {
+			const r = data.prefillRow as Record<string, any>;
+			dr_orbId     = r.orb_id;
+			dr_monsterId = r.monster_id;
+			dr_creature  = r.creature ?? '';
+			dr_dungeon   = r.dungeon  ?? '';
+			dr_floor     = r.floor    ?? '';
+			dr_favOut    = r.favorable_outcomes;
+			dr_total     = r.total_events;
+			cite_vol         = r.cite_volume   ?? '';
+			cite_ch          = r.cite_chapter  ?? '';
+			cite_part        = r.cite_jnc_part ?? '';
+			cite_source_type = r.cite_source_type ?? null;
 		} else if (entityType === 'monster_dungeon' && data.prefillRow) {
 			const r = data.prefillRow as Record<string, any>;
 			md_monsterId = r.monster_id;
@@ -337,7 +351,8 @@
 		}, null, 2);
 
 		if (entityType === 'orb_drop_rate') return JSON.stringify({
-			orb_id: dr_orbId, creature: dr_creature || null, dungeon: dr_dungeon || null,
+			orb_id: dr_orbId, monster_id: dr_monsterId,
+			creature: dr_creature || null, dungeon: dr_dungeon || null,
 			floor: dr_floor || null, favorable_outcomes: dr_favOut, total_events: dr_total, citation: cite,
 		}, null, 2);
 
@@ -762,7 +777,14 @@
 					</select>
 				</div>
 				<div class="field">
-					<label class="field-label">Creature / Monster</label>
+					<label class="field-label">Creature</label>
+					<select bind:value={dr_monsterId}>
+						<option value={null}>— none —</option>
+						{#each data.monsters as m}<option value={m.id}>{m.name}</option>{/each}
+					</select>
+				</div>
+				<div class="field">
+					<label class="field-label">Creature label <span class="hint">free text — used only if no creature is selected above</span></label>
 					<input type="text" bind:value={dr_creature} />
 				</div>
 				<div class="field">

@@ -78,10 +78,16 @@
 		</div>
 	{/if}
 
-	{#if data.drops.length}
+	{#if data.drops.length || data.user}
 		<div class="data-section">
-			<p class="section-heading">Orb Drops</p>
-			<div class="card" style="padding: 0; overflow: hidden;">
+			<div class="section-head-row">
+				<p class="section-heading">Orb Drops</p>
+				{#if data.user}
+					<a href="/contribute?type=orb_drop_rate&op=insert&monster_id={m.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
+			</div>
+			{#if data.drops.length}
+			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
 				<table class="data-table">
 					<thead>
 						<tr>
@@ -91,6 +97,7 @@
 							<th>Probability</th>
 							<th>Making Cooldown</th>
 							<th>Citation</th>
+							{#if data.user}<th class="row-edit-col"></th>{/if}
 						</tr>
 					</thead>
 					<tbody>
@@ -114,11 +121,21 @@
 										<span class="badge badge--citation">{formatCitation(drop.citation)}</span>
 									{:else}—{/if}
 								</td>
+								{#if data.user}
+									<td class="row-edit-col">
+										<a href="/contribute?type=orb_drop_rate&op=update&id={drop.id}" class="row-edit" title="Edit">
+											<Pencil size={16} strokeWidth={2} />
+										</a>
+									</td>
+								{/if}
 							</tr>
 						{/each}
 					</tbody>
 				</table>
 			</div>
+			{:else}
+				<p class="empty-section">No orb drops recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 </div>

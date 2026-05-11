@@ -21,6 +21,8 @@ export const load: PageServerLoad = async ({ platform, url }) => {
 	const monsterId      = monsterIdParam ? parseInt(monsterIdParam) : null;
 	const dungeonIdParam = url.searchParams.get('dungeon_id');
 	const dungeonId      = dungeonIdParam ? parseInt(dungeonIdParam) : null;
+	const orbIdParam     = url.searchParams.get('orb_id');
+	const orbId          = orbIdParam ? parseInt(orbIdParam) : null;
 
 	// For update of character sub-records, load the specific row so the form can prefill.
 	// (getCharacters does not load per-character stats; rankings/orbs are loaded but
@@ -32,7 +34,8 @@ export const load: PageServerLoad = async ({ platform, url }) => {
 			entityType === 'character_stat'    ? 'character_stats'    :
 			entityType === 'character_orb'     ? 'character_orbs'     :
 			entityType === 'timeline_event'    ? 'timeline_events'    :
-			entityType === 'monster_dungeon'   ? 'monster_dungeons'   : null;
+			entityType === 'monster_dungeon'   ? 'monster_dungeons'   :
+			entityType === 'orb_drop_rate'     ? 'orb_drop_rates'     : null;
 		if (table) {
 			prefillRow = await db.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(entityId).first();
 		}
@@ -49,6 +52,7 @@ export const load: PageServerLoad = async ({ platform, url }) => {
 		defaultCharId:    charId,
 		defaultMonsterId: monsterId,
 		defaultDungeonId: dungeonId,
+		defaultOrbId:     orbId,
 		prefillRow,
 	};
 };

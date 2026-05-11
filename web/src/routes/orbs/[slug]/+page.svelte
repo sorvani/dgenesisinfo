@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import { getFullName, formatProbability, formatCooldown, formatCitation, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
+	import { Pencil } from 'lucide-svelte';
 	let { data }: { data: PageData } = $props();
 	const orb = $derived(data.orb);
 </script>
@@ -36,51 +37,68 @@
 		</div>
 	{/if}
 
-	{#if orb.drop_rates.length}
+	{#if orb.drop_rates.length || data.user}
 		<div class="data-section">
-			<p class="section-heading">Drop Rates</p>
-			<div class="card" style="padding: 0; overflow: hidden;">
-				<table class="data-table">
-					<thead>
-						<tr>
-							<th>Dropped By</th>
-							<th>Dungeon</th>
-							<th>Floor</th>
-							<th>Probability</th>
-							<th>Making Cooldown</th>
-							<th>Citation</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each orb.drop_rates as dr}
-							<tr>
-								<td>{dr.creature ?? '—'}</td>
-								<td>
-									{#if dr.dungeon_slug}
-										<a href="/dungeons/{dr.dungeon_slug}" class="entity-chip">{dr.dungeon}</a>
-									{:else if dr.dungeon}{dr.dungeon}{:else}—{/if}
-								</td>
-								<td>{#if dr.floor}{@html formatFloor(dr.floor)}{:else}—{/if}</td>
-								<td>
-									{#if dr.favorable_outcomes && dr.total_events}
-										<span class="accent-num">{formatProbability(dr.favorable_outcomes, dr.total_events)}</span>
-									{:else}
-										<span style="color: var(--text-3)">—</span>
-									{/if}
-								</td>
-								<td>{formatCooldown(dr.total_events) || '—'}</td>
-								<td>
-									{#if dr.citation.volume}
-										<span class="badge badge--citation">{formatCitation(dr.citation)}</span>
-									{:else}
-										<span style="color: var(--text-3)">—</span>
-									{/if}
-								</td>
-							</tr>
-						{/each}
-					</tbody>
-				</table>
+			<div class="section-head-row">
+				<p class="section-heading">Drop Rates</p>
+				{#if data.user}
+					<a href="/contribute?type=orb_drop_rate&op=insert&orb_id={orb.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
 			</div>
+			{#if orb.drop_rates.length}
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Dropped By</th>
+								<th>Dungeon</th>
+								<th>Floor</th>
+								<th>Probability</th>
+								<th>Making Cooldown</th>
+								<th>Citation</th>
+								{#if data.user}<th class="row-edit-col"></th>{/if}
+							</tr>
+						</thead>
+						<tbody>
+							{#each orb.drop_rates as dr}
+								<tr>
+									<td>{dr.creature ?? '—'}</td>
+									<td>
+										{#if dr.dungeon_slug}
+											<a href="/dungeons/{dr.dungeon_slug}" class="entity-chip">{dr.dungeon}</a>
+										{:else if dr.dungeon}{dr.dungeon}{:else}—{/if}
+									</td>
+									<td>{#if dr.floor}{@html formatFloor(dr.floor)}{:else}—{/if}</td>
+									<td>
+										{#if dr.favorable_outcomes && dr.total_events}
+											<span class="accent-num">{formatProbability(dr.favorable_outcomes, dr.total_events)}</span>
+										{:else}
+											<span style="color: var(--text-3)">—</span>
+										{/if}
+									</td>
+									<td>{formatCooldown(dr.total_events) || '—'}</td>
+									<td>
+										{#if dr.citation.volume}
+											<span class="badge badge--citation">{formatCitation(dr.citation)}</span>
+										{:else}
+											<span style="color: var(--text-3)">—</span>
+										{/if}
+									</td>
+									{#if data.user}
+										<td class="row-edit-col">
+											<a href="/contribute?type=orb_drop_rate&op=update&id={dr.id}" class="row-edit" title="Edit">
+												<Pencil size={16} strokeWidth={2} />
+											</a>
+										</td>
+									{/if}
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="empty-section">No drop rates recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 

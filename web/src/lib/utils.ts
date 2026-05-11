@@ -126,6 +126,7 @@ export interface Monster {
 }
 
 export interface MonsterDrop {
+	id:                 number;
 	orb_id:             number;
 	orb_slug:           string;
 	orb_name:           string;
