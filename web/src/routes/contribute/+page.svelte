@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData, ActionData } from './$types';
-	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -12,13 +12,12 @@
 	let operation  = $state(data.defaultOp);
 	let entityId   = $state<number | null>(data.defaultEntityId);
 
-	$effect(() => {
-		if (form?.success && browser) {
-			const t = setTimeout(() => {
+	onMount(() => {
+		if (form?.success) {
+			setTimeout(() => {
 				if (window.history.length > 1) history.back();
 				else window.location.href = '/';
 			}, 3000);
-			return () => clearTimeout(t);
 		}
 	});
 
