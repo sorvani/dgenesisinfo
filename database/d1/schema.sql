@@ -195,3 +195,24 @@ CREATE TABLE IF NOT EXISTS pending_submissions (
 
 CREATE INDEX IF NOT EXISTS ix_submissions_status       ON pending_submissions(status);
 CREATE INDEX IF NOT EXISTS ix_submissions_submitted_by ON pending_submissions(submitted_by);
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Monsters
+-- ─────────────────────────────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS monsters (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug         TEXT    NOT NULL UNIQUE,
+    name         TEXT    NOT NULL,
+    -- category: Humanoid | Beast | Undead | Demon | Aberration | Aquatic | Elemental | Ooze | Unknown
+    category     TEXT,
+    note         TEXT,
+    cite_volume  TEXT,
+    cite_chapter TEXT,
+    cite_jnc_part TEXT,
+    created_utc  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+    modified_utc TEXT
+);
+
+ALTER TABLE orb_drop_rates ADD COLUMN IF NOT EXISTS monster_id INTEGER REFERENCES monsters(id);
+CREATE INDEX IF NOT EXISTS ix_orb_drop_rates_monster ON orb_drop_rates(monster_id);
