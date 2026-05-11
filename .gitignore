@@ -4,18 +4,11 @@
 /web/worker-configuration.d.ts
 
 # Cloudflare
-.wrangler/
 web/.dev.vars*
 !web/.dev.vars.example
 
 # Generated ingest SQL — rebuild with: node database/ingest/generate-sql.mjs
 /database/ingest/ingest.sql
-
-# Leftover Next.js build artifacts
-.next/
-out/
-node_modules/
-*.tsbuildinfo
 
 # macOS
 .DS_Store
