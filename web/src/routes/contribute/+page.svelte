@@ -249,6 +249,11 @@
 		<input type="hidden" name="entity_id"   value={entityId ?? ''} />
 		<input type="hidden" name="proposed_data" value="" />
 
+		<div class="form-footer">
+			<button type="submit" class="btn btn--primary">Submit for review</button>
+			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
+		</div>
+
 		<!-- ── Control row ── -->
 		<div class="card ctrl-row">
 			<div class="field">
@@ -644,10 +649,6 @@
 		{/if}
 		{/if}
 
-		<div class="form-footer">
-			<button type="submit" class="btn btn--primary">Submit for review</button>
-			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
-		</div>
 	</form>
 </div>
 
@@ -822,11 +823,11 @@
 		justify-content: flex-end;
 		gap: 0.75rem;
 		position: sticky;
-		bottom: 0;
+		top: 52px;
 		background: var(--bg);
-		border-top: 1px solid var(--border-soft);
-		padding: 0.875rem 0;
-		margin-top: 1.5rem;
+		border-bottom: 1px solid var(--border-soft);
+		padding: 0.625rem 0;
+		margin-bottom: 1.25rem;
 		z-index: 10;
 	}
 </style>
