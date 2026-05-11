@@ -933,8 +933,8 @@
 		gap: 0.5rem;
 	}
 
-	.drops-row__drops { width: 5rem; }
-	.drops-row__total { width: 12rem; }
+	.drops-row__drops { width: 5rem !important;  flex: 0 0 auto; }
+	.drops-row__total { width: 14rem !important; flex: 0 0 auto; }
 	.drops-row__sep   { color: var(--text-3); font-size: 0.875rem; flex-shrink: 0; }
 
 	.field-label {
