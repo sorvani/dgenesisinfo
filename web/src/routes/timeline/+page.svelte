@@ -5,72 +5,60 @@
 
 	let { data }: { data: PageData } = $props();
 
-	let activeFilter = $state<string>('all');
-
-	const filtered = $derived(
-		activeFilter === 'all'
-			? data.events
-			: activeFilter === 'pre-history'
-				? data.events.filter(e => e.pre_history)
-				: data.events.filter(e => !e.pre_history && e.cite_volume === activeFilter)
-	);
-
 	// Group events by section
-	const grouped = $derived(() => {
-		const sections: { label: string; key: string; events: typeof data.events }[] = [];
-		const seen = new Set<string>();
+	const sections = $derived(() => {
+		const result: { key: string; label: string; events: typeof data.events }[] = [];
+		const map = new Map<string, typeof data.events>();
 
-		for (const ev of filtered) {
-			const key = ev.pre_history ? 'pre-history' : (ev.cite_volume ?? 'unknown');
-			const label = ev.pre_history ? 'Pre-History' : `Book ${ev.cite_volume}`;
-			if (!seen.has(key)) {
-				seen.add(key);
-				sections.push({ label, key, events: [] });
+		for (const ev of data.events) {
+			const key = ev.pre_history ? 'pre-history' : `vol-${ev.citation.volume ?? 'unknown'}`;
+			const label = ev.pre_history ? 'Pre-History' : `Book ${ev.citation.volume}`;
+			if (!map.has(key)) {
+				map.set(key, []);
+				result.push({ key, label, events: map.get(key)! });
 			}
-			sections.find(s => s.key === key)!.events.push(ev);
+			map.get(key)!.push(ev);
 		}
-		return sections;
+		return result;
 	});
+
+	function scrollTo(key: string) {
+		if (key === 'top') {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+			return;
+		}
+		document.getElementById(`section-${key}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
 </script>
 
 <svelte:head><title>Timeline — D-Genesis Info</title></svelte:head>
 
 <div class="container page">
 
-	<!-- Compact header + filter -->
 	<div class="timeline-header">
 		<div class="timeline-title-row">
 			<h1 class="page-title">Timeline</h1>
-			<span class="page-count"><em>{filtered.length} events</em></span>
+			<span class="page-count"><em>{data.events.length} events</em></span>
 		</div>
 
 		<div class="filter-row">
-			<button class="filter-btn" class:active={activeFilter === 'all'} onclick={() => activeFilter = 'all'}>
-				All
-			</button>
-			{#each data.sections as section}
-				<button
-					class="filter-btn"
-					class:active={activeFilter === section}
-					onclick={() => activeFilter = section}
-				>
-					{section === 'pre-history' ? 'Pre-History' : `Book ${section}`}
-				</button>
+			<button class="filter-btn" onclick={() => scrollTo('top')}>All</button>
+			<button class="filter-btn" onclick={() => scrollTo('pre-history')}>Pre-History</button>
+			{#each data.volumes as vol}
+				<button class="filter-btn" onclick={() => scrollTo(`vol-${vol}`)}>Book {vol}</button>
 			{/each}
 		</div>
 	</div>
 
-	<!-- Timeline -->
 	<div class="timeline">
-		{#each grouped() as section, si}
-			<!-- Section divider -->
-			<div class="section-divider">
+		{#each sections() as section, si}
+			<div id="section-{section.key}" class="section-divider">
 				<span class="section-label">{section.label}</span>
 			</div>
 
 			{#each section.events as ev, i}
-				{@const side = (si + i) % 2 === 0 ? 'right' : 'left'}
-				<div class="timeline-row" data-side={side}>
+				{@const right = (si + i) % 2 === 0}
+				<div class="timeline-row" class:right class:left={!right}>
 					<div class="timeline-spacer"></div>
 					<div class="timeline-dot-col">
 						<div class="timeline-dot"></div>
@@ -96,7 +84,6 @@
 </div>
 
 <style>
-	/* ── Header ── */
 	.timeline-header { margin-bottom: 2rem; }
 
 	.timeline-title-row {
@@ -108,7 +95,6 @@
 
 	.page-count { font-size: 0.875rem; color: var(--text-3); }
 
-	/* ── Filter pills ── */
 	.filter-row {
 		display: flex;
 		flex-wrap: wrap;
@@ -124,19 +110,10 @@
 		font-size: 0.8125rem;
 		font-weight: 500;
 		cursor: pointer;
-		transition: border-color 0.15s, background 0.15s, color 0.15s;
+		transition: border-color 0.15s, color 0.15s;
 	}
 
 	.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-	.filter-btn.active {
-		background: var(--accent);
-		border-color: var(--accent);
-		color: #fff;
-	}
-
-	/* ── Timeline structure ── */
-	.timeline { position: relative; }
 
 	/* Section divider */
 	.section-divider {
@@ -144,14 +121,11 @@
 		align-items: center;
 		gap: 1rem;
 		margin: 2rem 0 1.25rem;
+		scroll-margin-top: 70px; /* offset for sticky nav */
 	}
 
-	.section-divider::before,
-	.section-divider::after {
-		content: '';
-		flex: 1;
-		height: 1px;
-		background: var(--border);
+	.section-divider::before, .section-divider::after {
+		content: ''; flex: 1; height: 1px; background: var(--border);
 	}
 
 	.section-label {
@@ -166,24 +140,26 @@
 		white-space: nowrap;
 	}
 
-	/* Timeline rows — 3-column grid: spacer | dot | card */
+	/* Timeline rows */
 	.timeline-row {
 		display: grid;
 		grid-template-columns: 1fr 24px 1fr;
-		gap: 0 1rem;
+		column-gap: 1rem;
 		margin-bottom: 1.25rem;
 		align-items: start;
 	}
 
-	/* Right side: spacer | dot | card */
-	.timeline-row[data-side="right"] .timeline-spacer { order: 0; }
-	.timeline-row[data-side="right"] .timeline-dot-col { order: 1; }
-	.timeline-row[data-side="right"] .timeline-card-col { order: 2; }
+	.timeline-spacer { }
 
-	/* Left side: card | dot | spacer */
-	.timeline-row[data-side="left"] .timeline-spacer { order: 2; }
-	.timeline-row[data-side="left"] .timeline-dot-col { order: 1; }
-	.timeline-row[data-side="left"] .timeline-card-col { order: 0; text-align: right; }
+	/* Right: spacer | dot | card */
+	.right .timeline-spacer   { order: 0; }
+	.right .timeline-dot-col  { order: 1; }
+	.right .timeline-card-col { order: 2; }
+
+	/* Left: card | dot | spacer */
+	.left .timeline-spacer   { order: 2; }
+	.left .timeline-dot-col  { order: 1; }
+	.left .timeline-card-col { order: 0; }
 
 	.timeline-dot-col {
 		display: flex;
@@ -192,22 +168,17 @@
 		position: relative;
 	}
 
-	/* Vertical connecting line */
 	.timeline-dot-col::before {
 		content: '';
 		position: absolute;
-		top: 0;
-		bottom: -1.25rem;
-		left: 50%;
+		top: 0; bottom: -1.25rem; left: 50%;
 		width: 1px;
 		background: var(--border);
 		transform: translateX(-50%);
-		z-index: 0;
 	}
 
 	.timeline-dot {
-		width: 10px;
-		height: 10px;
+		width: 10px; height: 10px;
 		border-radius: 50%;
 		background: var(--accent);
 		border: 2px solid var(--bg);
@@ -216,11 +187,7 @@
 		z-index: 1;
 	}
 
-	/* Cards */
-	.timeline-card {
-		padding: 0.875rem 1rem;
-		text-align: left;
-	}
+	.timeline-card { padding: 0.875rem 1rem; }
 
 	.timeline-card__date {
 		font-size: 0.8125rem;
@@ -238,12 +205,8 @@
 	}
 
 	.timeline-card__event :global(p + p) { margin-top: 0.3rem; }
+	.timeline-card__citation { margin-top: 0.5rem; }
 
-	.timeline-card__citation {
-		margin-top: 0.5rem;
-	}
-
-	/* Markdown */
 	.md-content :global(code) {
 		font-family: var(--font-mono);
 		font-size: 0.8125rem;
@@ -252,14 +215,10 @@
 		border-radius: 3px;
 	}
 
-	/* Mobile: single column */
 	@media (max-width: 640px) {
-		.timeline-row {
-			grid-template-columns: 20px 1fr;
-		}
-
+		.timeline-row { grid-template-columns: 20px 1fr; }
 		.timeline-spacer { display: none; }
-		.timeline-row[data-side="left"] .timeline-dot-col { order: 0; }
-		.timeline-row[data-side="left"] .timeline-card-col { order: 1; text-align: left; }
+		.left .timeline-dot-col  { order: 0; }
+		.left .timeline-card-col { order: 1; }
 	}
 </style>

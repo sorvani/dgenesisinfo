@@ -4,12 +4,12 @@ import { getTimelineEvents } from '$lib/server/data';
 export const load: PageServerLoad = async ({ platform }) => {
 	const events = await getTimelineEvents(platform!.env.DB);
 
-	// Unique book sections in order
-	const sections = ['pre-history', ...new Set(
+	// Unique volumes in order (citation.volume, not cite_volume)
+	const volumes = [...new Set(
 		events
-			.filter(e => !e.pre_history && e.cite_volume)
-			.map(e => e.cite_volume!)
-	)].filter(Boolean);
+			.filter(e => !e.pre_history && e.citation.volume)
+			.map(e => e.citation.volume!)
+	)];
 
-	return { events, sections };
+	return { events, volumes };
 };
