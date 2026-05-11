@@ -1,8 +1,30 @@
 <script lang="ts">
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
 
 	let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
+
+	type Theme = 'auto' | 'light' | 'dark';
+	let theme = $state<Theme>('auto');
+
+	onMount(() => {
+		theme = (localStorage.getItem('theme') as Theme) || 'auto';
+	});
+
+	function cycleTheme() {
+		const next: Theme = theme === 'auto' ? 'light' : theme === 'light' ? 'dark' : 'auto';
+		theme = next;
+		localStorage.setItem('theme', next);
+		if (next === 'auto') {
+			document.documentElement.removeAttribute('data-theme');
+		} else {
+			document.documentElement.setAttribute('data-theme', next);
+		}
+	}
+
+	const themeLabel: Record<Theme, string> = { auto: 'Auto', light: 'Light', dark: 'Dark' };
+	const themeIcon:  Record<Theme, string> = { auto: '⬤◯', light: '☀︎', dark: '☽' };
 </script>
 
 <nav class="site-nav">
@@ -16,6 +38,10 @@
 			<a href="/dungeons">Dungeons</a>
 		</div>
 		<div class="site-nav__auth">
+			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
+				<span class="theme-icon">{themeIcon[theme]}</span>
+				<span class="theme-label">{themeLabel[theme]}</span>
+			</button>
 			{#if data.user}
 				{#if data.user.isAdmin}
 					<a href="/admin" class="btn btn--ghost" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Admin</a>
@@ -43,3 +69,28 @@
 		<a href="/credits">listed here</a>.
 	</div>
 </footer>
+
+<style>
+	.theme-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.3rem 0.625rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg-subtle);
+		color: var(--text-2);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: border-color 0.15s, color 0.15s;
+		line-height: 1;
+	}
+
+	.theme-btn:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	.theme-icon { font-size: 0.875rem; }
+</style>
