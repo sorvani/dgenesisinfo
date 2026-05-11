@@ -686,9 +686,9 @@
 			</div>
 			<p class="field-label mt">Derived Stats</p>
 			<div class="stat-grid">
-				<div class="field"><label class="field-label">HP</label><input type="number" step="0.01" bind:value={cs_hp} /></div>
-				<div class="field"><label class="field-label">MP</label><input type="number" step="0.01" bind:value={cs_mp} /></div>
-				<div class="field"><label class="field-label">SP</label><input type="number" step="0.01" bind:value={cs_sp} /></div>
+				<div class="field"><label class="field-label">HP</label><input type="number" step="any" bind:value={cs_hp} /></div>
+				<div class="field"><label class="field-label">MP</label><input type="number" step="any" bind:value={cs_mp} /></div>
+				<div class="field"><label class="field-label">SP</label><input type="number" step="any" bind:value={cs_sp} /></div>
 			</div>
 		</div>
 		{/if}
