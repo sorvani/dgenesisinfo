@@ -6,8 +6,10 @@
 <svelte:head><title>Skill Orbs — D-Genesis Info</title></svelte:head>
 
 <div class="container page">
-	<h1 class="page-title">Skill Orbs</h1>
-	<p class="page-subtitle">{data.orbs.length} orbs documented</p>
+	<div class="page-header">
+		<h1 class="page-title">Skill Orbs</h1>
+		<span class="page-count">{data.orbs.length} orbs</span>
+	</div>
 
 	<div class="card-grid">
 		{#each data.orbs as orb}
@@ -29,8 +31,7 @@
 <style>
 	.orb-card {
 		background: var(--bg-card);
-		border: 1px solid var(--border);
-		border-top: 3px solid var(--border);
+		border: 2px solid var(--border);
 		border-radius: var(--radius-lg);
 		padding: 1.25rem;
 		display: flex;
@@ -39,15 +40,27 @@
 		text-decoration: none;
 		color: inherit;
 		box-shadow: var(--shadow-card);
-		transition: border-color 0.15s, border-top-color 0.15s, box-shadow 0.15s, transform 0.15s;
+		transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s, background 0.15s;
 	}
 
 	.orb-card:hover {
-		border-top-color: var(--accent);
-		border-color: var(--border);
+		border-color: var(--accent);
+		background: var(--accent-bg);
 		box-shadow: var(--shadow-hover);
 		transform: translateY(-2px);
 		text-decoration: none;
+	}
+
+	.page-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.75rem;
+	}
+
+	.page-count {
+		font-size: 0.875rem;
+		color: var(--text-3);
 	}
 
 	.orb-card__name {
