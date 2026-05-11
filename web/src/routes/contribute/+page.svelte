@@ -33,9 +33,11 @@
 	let c_area           = $state<number | null>(null);
 	let c_note         = $state('');
 	let c_tags         = $state<string[]>([]);
-	let c_monikerInput = $state('');
-	let c_tagInput     = $state('');
-	let c_isExplorer   = $state(true);
+	let c_monikerInput   = $state('');
+	let c_monikerAdding  = $state(false);
+	let c_tagInput       = $state('');
+	let c_tagAdding      = $state(false);
+	let c_isExplorer     = $state(true);
 	let c_inWdarl     = $state(false);
 	let c_isPublic    = $state(true);
 
@@ -167,12 +169,14 @@
 		const v = c_monikerInput.trim();
 		if (v) c_monikers = [...c_monikers, v];
 		c_monikerInput = '';
+		c_monikerAdding = false;
 	}
 	function removeMoniker(i: number) { c_monikers = c_monikers.filter((_, idx) => idx !== i); }
 	function addTagChip() {
 		const v = c_tagInput.trim();
 		if (v) c_tags = [...c_tags, v];
 		c_tagInput = '';
+		c_tagAdding = false;
 	}
 	function removeTag(i: number) { c_tags = c_tags.filter((_, idx) => idx !== i); }
 
@@ -359,26 +363,36 @@
 			</div>
 
 			<div class="field mt">
-				<label class="field-label">Monikers</label>
-				<div class="chip-field">
+				<label class="field-label">Monikers
+					{#if !c_monikerAdding}<button type="button" class="array-add" onclick={() => c_monikerAdding = true}>+ Add</button>{/if}
+				</label>
+				<div class="chip-row">
 					{#each c_monikers as m, i}
 						<span class="chip">{m}<button type="button" class="chip-remove" onclick={() => removeMoniker(i)}>✕</button></span>
 					{/each}
-					<input class="chip-input" type="text" bind:value={c_monikerInput}
-						placeholder="Add moniker…"
-						onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addMonikerChip(); } }} />
+					{#if c_monikerAdding}
+						<input class="chip-input-inline" type="text" bind:value={c_monikerInput}
+							placeholder="moniker…" autofocus
+							onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addMonikerChip(); } if (e.key === 'Escape') { c_monikerInput = ''; c_monikerAdding = false; } }}
+							onblur={() => addMonikerChip()} />
+					{/if}
 				</div>
 			</div>
 
 			<div class="field mt">
-				<label class="field-label">Tags</label>
-				<div class="chip-field">
+				<label class="field-label">Tags
+					{#if !c_tagAdding}<button type="button" class="array-add" onclick={() => c_tagAdding = true}>+ Add</button>{/if}
+				</label>
+				<div class="chip-row">
 					{#each c_tags as t, i}
 						<span class="chip">{t}<button type="button" class="chip-remove" onclick={() => removeTag(i)}>✕</button></span>
 					{/each}
-					<input class="chip-input" type="text" bind:value={c_tagInput}
-						placeholder="Add tag…"
-						onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTagChip(); } }} />
+					{#if c_tagAdding}
+						<input class="chip-input-inline" type="text" bind:value={c_tagInput}
+							placeholder="tag…" autofocus
+							onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTagChip(); } if (e.key === 'Escape') { c_tagInput = ''; c_tagAdding = false; } }}
+							onblur={() => addTagChip()} />
+					{/if}
 				</div>
 			</div>
 
@@ -810,17 +824,12 @@
 	.toggle-label input:checked ~ .toggle-track { background: var(--accent); }
 	.toggle-label input:checked ~ .toggle-track::after { transform: translateX(16px); }
 
-	.chip-field {
+	.chip-row {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.375rem;
-		padding: 0.375rem 0.5rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		background: var(--bg);
-		min-height: 2.25rem;
-		cursor: text;
+		min-height: 1.5rem;
 	}
 
 	.chip {
@@ -851,16 +860,14 @@
 
 	.chip-remove:hover { color: #dc2626; }
 
-	.chip-input {
-		border: none !important;
-		background: transparent !important;
-		padding: 0.1rem 0.25rem !important;
-		font-size: 0.875rem !important;
-		min-width: 100px;
-		flex: 1;
-		outline: none !important;
-		box-shadow: none !important;
-		width: auto !important;
+	.chip-input-inline {
+		border: 1px solid var(--border) !important;
+		border-radius: var(--radius) !important;
+		background: var(--bg) !important;
+		padding: 0.2rem 0.5rem !important;
+		font-size: 0.8125rem !important;
+		width: 140px !important;
+		height: auto !important;
 	}
 
 	.readonly-id {
