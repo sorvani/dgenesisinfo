@@ -46,8 +46,14 @@ This project deploys manually via Wrangler (not connected to git auto-deploy).
 ```bash
 cd web
 npm run build
-npx wrangler pages deploy .svelte-kit/cloudflare --project-name dgenesisinfo --branch main
+npm run deploy
 ```
+
+`npm run deploy` loads `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` from
+`web/.dev.vars` via `dotenv-cli` and passes them through to `wrangler pages deploy`.
+This pins the deploy to the correct Cloudflare account regardless of which
+account `wrangler login` is currently authenticated as — important when working
+across multiple Cloudflare accounts on the same machine.
 
 ## Contributing
 
