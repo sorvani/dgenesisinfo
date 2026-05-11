@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { Sun, Moon, SunMoon } from 'lucide-svelte';
 	import type { LayoutData } from './$types';
 
 	let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
@@ -24,7 +25,6 @@
 	}
 
 	const themeLabel: Record<Theme, string> = { auto: 'Auto', light: 'Light', dark: 'Dark' };
-	const themeIcon:  Record<Theme, string> = { auto: '⬤◯', light: '☀︎', dark: '☽' };
 </script>
 
 <nav class="site-nav">
@@ -38,10 +38,6 @@
 			<a href="/dungeons">Dungeons</a>
 		</div>
 		<div class="site-nav__auth">
-			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
-				<span class="theme-icon">{themeIcon[theme]}</span>
-				<span class="theme-label">{themeLabel[theme]}</span>
-			</button>
 			{#if data.user}
 				{#if data.user.isAdmin}
 					<a href="/admin" class="btn btn--ghost" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Admin</a>
@@ -55,6 +51,15 @@
 			{:else}
 				<a href="/auth/login" class="btn btn--primary" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in with GitHub</a>
 			{/if}
+			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
+				{#if theme === 'light'}
+					<Sun size={16} />
+				{:else if theme === 'dark'}
+					<Moon size={16} />
+				{:else}
+					<SunMoon size={16} />
+				{/if}
+			</button>
 		</div>
 	</div>
 </nav>
@@ -74,23 +79,20 @@
 	.theme-btn {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.35rem;
-		padding: 0.3rem 0.625rem;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		background: var(--bg-subtle);
 		color: var(--text-2);
-		font-size: 0.8125rem;
-		font-weight: 500;
 		cursor: pointer;
 		transition: border-color 0.15s, color 0.15s;
-		line-height: 1;
+		flex-shrink: 0;
 	}
 
 	.theme-btn:hover {
 		border-color: var(--accent);
 		color: var(--accent);
 	}
-
-	.theme-icon { font-size: 0.875rem; }
 </style>
