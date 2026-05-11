@@ -11,14 +11,37 @@ export const load: PageServerLoad = async ({ platform, url }) => {
 		getMonsters(db),
 	]);
 
+	const entityType    = url.searchParams.get('type') ?? 'character';
+	const operation     = url.searchParams.get('op')   ?? 'insert';
+	const entityIdParam = url.searchParams.get('id');
+	const entityId      = entityIdParam ? parseInt(entityIdParam) : null;
+	const charIdParam   = url.searchParams.get('char_id');
+	const charId        = charIdParam ? parseInt(charIdParam) : null;
+
+	// For update of character sub-records, load the specific row so the form can prefill.
+	// (getCharacters does not load per-character stats; rankings/orbs are loaded but
+	// fetching by id is simpler than walking the list.)
+	let prefillRow: Record<string, unknown> | null = null;
+	if (operation === 'update' && entityId) {
+		const table =
+			entityType === 'character_ranking' ? 'character_rankings' :
+			entityType === 'character_stat'    ? 'character_stats'    :
+			entityType === 'character_orb'     ? 'character_orbs'     : null;
+		if (table) {
+			prefillRow = await db.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(entityId).first();
+		}
+	}
+
 	return {
 		characters,
 		orbs,
 		dungeons,
 		monsters,
-		defaultType:     url.searchParams.get('type')  ?? 'character',
-		defaultOp:       url.searchParams.get('op')    ?? 'insert',
-		defaultEntityId: url.searchParams.get('id')    ? parseInt(url.searchParams.get('id')!) : null,
+		defaultType:     entityType,
+		defaultOp:       operation,
+		defaultEntityId: entityId,
+		defaultCharId:   charId,
+		prefillRow,
 	};
 };
 

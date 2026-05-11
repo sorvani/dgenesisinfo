@@ -72,7 +72,7 @@
 	let t_event       = $state('');
 
 	// ── Character stat fields ─────────────────────────────────────────────────
-	let cs_charId      = $state<number | null>(null);
+	let cs_charId      = $state<number | null>(data.defaultCharId);
 	let cs_dateNoted   = $state('');
 	let cs_dateSeq     = $state(1);
 	let cs_scanType    = $state('Making');
@@ -84,13 +84,13 @@
 	let cs_total = $state<number|null>(null), cs_pts = $state<number|null>(null);
 
 	// ── Character ranking fields ──────────────────────────────────────────────
-	let cr_charId    = $state<number | null>(null);
+	let cr_charId    = $state<number | null>(data.defaultCharId);
 	let cr_rank      = $state<number | null>(null);
 	let cr_above     = $state<number | null>(null);
 	let cr_dateNoted = $state('');
 
 	// ── Character orb fields ──────────────────────────────────────────────────
-	let co_charId       = $state<number | null>(null);
+	let co_charId       = $state<number | null>(data.defaultCharId);
 	let co_orbId        = $state<number | null>(null);
 	let co_dateAcquired = $state('');
 	let co_dateNote     = $state('');
@@ -163,6 +163,40 @@
 			cite_ch          = m.citation?.chapter  ?? '';
 			cite_part        = m.citation?.jnc_part ?? '';
 			cite_source_type = m.citation?.source_type ?? null;
+		} else if (entityType === 'character_ranking' && data.prefillRow) {
+			const r = data.prefillRow as Record<string, any>;
+			cr_charId    = r.character_id;
+			cr_rank      = r.rank;
+			cr_above     = r.known_above_rank;
+			cr_dateNoted = r.date_noted ?? '';
+			cite_vol         = r.cite_volume   ?? '';
+			cite_ch          = r.cite_chapter  ?? '';
+			cite_part        = r.cite_jnc_part ?? '';
+			cite_source_type = r.cite_source_type ?? null;
+		} else if (entityType === 'character_stat' && data.prefillRow) {
+			const s = data.prefillRow as Record<string, any>;
+			cs_charId    = s.character_id;
+			cs_dateNoted = s.date_noted ?? '';
+			cs_dateSeq   = s.date_sequence ?? 1;
+			cs_scanType  = s.scan_type ?? 'Making';
+			cs_str = s.str; cs_vit = s.vit; cs_int = s.int; cs_agi = s.agi;
+			cs_dex = s.dex; cs_luc = s.luc;
+			cs_hp = s.hp; cs_mp = s.mp; cs_sp = s.sp;
+			cs_total = s.stat_total; cs_pts = s.points_from_avg;
+			cite_vol         = s.cite_volume   ?? '';
+			cite_ch          = s.cite_chapter  ?? '';
+			cite_part        = s.cite_jnc_part ?? '';
+			cite_source_type = s.cite_source_type ?? null;
+		} else if (entityType === 'character_orb' && data.prefillRow) {
+			const o = data.prefillRow as Record<string, any>;
+			co_charId       = o.character_id;
+			co_orbId        = o.orb_id;
+			co_dateAcquired = o.date_acquired ?? '';
+			co_dateNote     = o.date_note ?? '';
+			cite_vol         = o.cite_volume   ?? '';
+			cite_ch          = o.cite_chapter  ?? '';
+			cite_part        = o.cite_jnc_part ?? '';
+			cite_source_type = o.cite_source_type ?? null;
 		}
 	});
 

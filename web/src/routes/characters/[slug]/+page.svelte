@@ -124,128 +124,177 @@
 	{/if}
 
 	<!-- ── Rankings ── -->
-	{#if c.is_explorer && sortedRankings.length}
+	{#if c.is_explorer && (sortedRankings.length || data.user)}
 		<div class="data-section">
-			<p class="section-heading">Rankings</p>
-			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
-				<table class="data-table">
-					<thead>
-						<tr><th>Ranking</th><th>Date Noted</th><th>Citation</th></tr>
-					</thead>
-					<tbody>
-						{#each sortedRankings as r, i}
-							{#if i === 0 || rankingsOpen}
-								<tr>
-									<td class="rank-cell">
-										{#if r.rank}
-											#{r.rank.toLocaleString()}
-										{:else if r.known_above_rank}
-											<span class="rank-above">&gt; #{r.known_above_rank.toLocaleString()}</span>
-										{:else}
-											—
+			<div class="section-head-row">
+				<p class="section-heading">Rankings</p>
+				{#if data.user}
+					<a href="/contribute?type=character_ranking&op=insert&char_id={c.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
+			</div>
+			{#if sortedRankings.length}
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Ranking</th><th>Date Noted</th><th>Citation</th>
+								{#if data.user}<th class="row-edit-col"></th>{/if}
+							</tr>
+						</thead>
+						<tbody>
+							{#each sortedRankings as r, i}
+								{#if i === 0 || rankingsOpen}
+									<tr>
+										<td class="rank-cell">
+											{#if r.rank}
+												#{r.rank.toLocaleString()}
+											{:else if r.known_above_rank}
+												<span class="rank-above">&gt; #{r.known_above_rank.toLocaleString()}</span>
+											{:else}
+												—
+											{/if}
+										</td>
+										<td>{formatDate(r.date_noted)}</td>
+										<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
+										{#if data.user}
+											<td class="row-edit-col">
+												<a href="/contribute?type=character_ranking&op=update&id={r.id}" class="row-edit" title="Edit">✏</a>
+											</td>
 										{/if}
+									</tr>
+								{/if}
+							{/each}
+							{#if sortedRankings.length > 1}
+								<tr>
+									<td colspan={data.user ? 4 : 3}>
+										<button class="show-more-btn" onclick={() => rankingsOpen = !rankingsOpen}>
+											{rankingsOpen ? 'Show less' : `Show ${sortedRankings.length - 1} more`}
+										</button>
 									</td>
-									<td>{formatDate(r.date_noted)}</td>
-									<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
 								</tr>
 							{/if}
-						{/each}
-						{#if sortedRankings.length > 1}
-							<tr>
-								<td colspan="3">
-									<button class="show-more-btn" onclick={() => rankingsOpen = !rankingsOpen}>
-										{rankingsOpen ? 'Show less' : `Show ${sortedRankings.length - 1} more`}
-									</button>
-								</td>
-							</tr>
-						{/if}
-					</tbody>
-				</table>
-			</div>
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="empty-section">No rankings recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 
 	<!-- ── Stats ── -->
-	{#if c.is_explorer && sortedStats.length}
+	{#if c.is_explorer && (sortedStats.length || data.user)}
 		<div class="data-section">
-			<p class="section-heading">Stat Readings</p>
-			<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto; margin-top: 0.75rem;">
-				<table class="data-table stat-table">
-					<thead>
-						<tr>
-							<th>Date</th><th>Seq</th><th>Type</th>
-							<th>STR</th><th>VIT</th><th>INT</th><th>AGI</th><th>DEX</th><th>LUC</th>
-							<th>Total</th><th>HP</th><th>MP</th><th>SP</th><th>Citation</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each sortedStats as s, i}
-							{#if i === 0 || statsOpen}
+			<div class="section-head-row">
+				<p class="section-heading">Stat Readings</p>
+				{#if data.user}
+					<a href="/contribute?type=character_stat&op=insert&char_id={c.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
+			</div>
+			{#if sortedStats.length}
+				<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto; margin-top: 0.75rem;">
+					<table class="data-table stat-table">
+						<thead>
+							<tr>
+								<th>Date</th><th>Seq</th><th>Type</th>
+								<th>STR</th><th>VIT</th><th>INT</th><th>AGI</th><th>DEX</th><th>LUC</th>
+								<th>Total</th><th>HP</th><th>MP</th><th>SP</th><th>Citation</th>
+								{#if data.user}<th class="row-edit-col"></th>{/if}
+							</tr>
+						</thead>
+						<tbody>
+							{#each sortedStats as s, i}
+								{#if i === 0 || statsOpen}
+									<tr>
+										<td>{formatDate(s.date_noted)}</td>
+										<td class="seq-cell">{s.date_sequence}</td>
+										<td class="scan-type">{s.scan_type ?? '—'}</td>
+										<td class="stat-val">{s.str ?? '—'}</td>
+										<td class="stat-val">{s.vit ?? '—'}</td>
+										<td class="stat-val">{s.int ?? '—'}</td>
+										<td class="stat-val">{s.agi ?? '—'}</td>
+										<td class="stat-val">{s.dex ?? '—'}</td>
+										<td class="stat-val">{s.luc ?? '—'}</td>
+										<td class="stat-total">{s.stat_total ?? '—'}</td>
+										<td class="stat-val">{s.hp ?? '—'}</td>
+										<td class="stat-val">{s.mp ?? '—'}</td>
+										<td class="stat-val">{s.sp ?? '—'}</td>
+										<td>{#if s.citation.volume}<span class="badge badge--citation">{formatCitation(s.citation)}</span>{:else}—{/if}</td>
+										{#if data.user}
+											<td class="row-edit-col">
+												<a href="/contribute?type=character_stat&op=update&id={s.id}" class="row-edit" title="Edit">✏</a>
+											</td>
+										{/if}
+									</tr>
+								{/if}
+							{/each}
+							{#if sortedStats.length > 1}
 								<tr>
-									<td>{formatDate(s.date_noted)}</td>
-									<td class="seq-cell">{s.date_sequence}</td>
-									<td class="scan-type">{s.scan_type ?? '—'}</td>
-									<td class="stat-val">{s.str ?? '—'}</td>
-									<td class="stat-val">{s.vit ?? '—'}</td>
-									<td class="stat-val">{s.int ?? '—'}</td>
-									<td class="stat-val">{s.agi ?? '—'}</td>
-									<td class="stat-val">{s.dex ?? '—'}</td>
-									<td class="stat-val">{s.luc ?? '—'}</td>
-									<td class="stat-total">{s.stat_total ?? '—'}</td>
-									<td class="stat-val">{s.hp ?? '—'}</td>
-									<td class="stat-val">{s.mp ?? '—'}</td>
-									<td class="stat-val">{s.sp ?? '—'}</td>
-									<td>{#if s.citation.volume}<span class="badge badge--citation">{formatCitation(s.citation)}</span>{:else}—{/if}</td>
+									<td colspan={data.user ? 15 : 14}>
+										<button class="show-more-btn" onclick={() => statsOpen = !statsOpen}>
+											{statsOpen ? 'Show less' : `Show ${sortedStats.length - 1} more`}
+										</button>
+									</td>
 								</tr>
 							{/if}
-						{/each}
-						{#if sortedStats.length > 1}
-							<tr>
-								<td colspan="14">
-									<button class="show-more-btn" onclick={() => statsOpen = !statsOpen}>
-										{statsOpen ? 'Show less' : `Show ${sortedStats.length - 1} more`}
-									</button>
-								</td>
-							</tr>
-						{/if}
-					</tbody>
-				</table>
-			</div>
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="empty-section">No stat readings recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 
 	<!-- ── Orbs ── -->
-	{#if c.is_explorer && c.orbs_used.length}
+	{#if c.is_explorer && (c.orbs_used.length || data.user)}
 		<div class="data-section">
-			<p class="section-heading">Skill Orbs</p>
-			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
-				<table class="data-table">
-					<thead>
-						<tr><th>Orb</th><th>Date Acquired</th><th>Citation</th></tr>
-					</thead>
-					<tbody>
-						{#each c.orbs_used as ou, i}
-							{#if i === 0 || orbsOpen}
-								{@const orb = getOrb(ou.orb_id)}
+			<div class="section-head-row">
+				<p class="section-heading">Skill Orbs</p>
+				{#if data.user}
+					<a href="/contribute?type=character_orb&op=insert&char_id={c.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
+			</div>
+			{#if c.orbs_used.length}
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Orb</th><th>Date Acquired</th><th>Citation</th>
+								{#if data.user}<th class="row-edit-col"></th>{/if}
+							</tr>
+						</thead>
+						<tbody>
+							{#each c.orbs_used as ou, i}
+								{#if i === 0 || orbsOpen}
+									{@const orb = getOrb(ou.orb_id)}
+									<tr>
+										<td>{#if orb}<a href="/orbs/{orb.slug}">{orb.orb_name}</a>{:else}Unknown{/if}</td>
+										<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
+										<td>{#if ou.citation.volume}<span class="badge badge--citation">{formatCitation(ou.citation)}</span>{:else}—{/if}</td>
+										{#if data.user}
+											<td class="row-edit-col">
+												<a href="/contribute?type=character_orb&op=update&id={ou.id}" class="row-edit" title="Edit">✏</a>
+											</td>
+										{/if}
+									</tr>
+								{/if}
+							{/each}
+							{#if c.orbs_used.length > 1}
 								<tr>
-									<td>{#if orb}<a href="/orbs/{orb.slug}">{orb.orb_name}</a>{:else}Unknown{/if}</td>
-									<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
-									<td>{#if ou.citation.volume}<span class="badge badge--citation">{formatCitation(ou.citation)}</span>{:else}—{/if}</td>
+									<td colspan={data.user ? 4 : 3}>
+										<button class="show-more-btn" onclick={() => orbsOpen = !orbsOpen}>
+											{orbsOpen ? 'Show less' : `Show ${c.orbs_used.length - 1} more`}
+										</button>
+									</td>
 								</tr>
 							{/if}
-						{/each}
-						{#if c.orbs_used.length > 1}
-							<tr>
-								<td colspan="3">
-									<button class="show-more-btn" onclick={() => orbsOpen = !orbsOpen}>
-										{orbsOpen ? 'Show less' : `Show ${c.orbs_used.length - 1} more`}
-									</button>
-								</td>
-							</tr>
-						{/if}
-					</tbody>
-				</table>
-			</div>
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="empty-section">No skill orbs recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 
@@ -436,5 +485,51 @@
 		font-weight: 400;
 		color: var(--text-3);
 		font-size: 0.875rem;
+	}
+
+	/* ── Per-section heading row with inline Add button ── */
+	.section-head-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0;
+	}
+
+	.section-head-row .section-heading { margin-bottom: 0; }
+
+	.action-add--inline {
+		padding: 0.15rem 0.55rem;
+		font-size: 0.75rem;
+	}
+
+	/* ── Per-row edit icon ── */
+	.row-edit-col {
+		width: 1px;
+		white-space: nowrap;
+		text-align: right;
+	}
+
+	.row-edit {
+		display: inline-block;
+		padding: 0.15rem 0.4rem;
+		color: var(--text-3);
+		font-size: 0.9rem;
+		text-decoration: none;
+		border-radius: var(--radius);
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.row-edit:hover {
+		background: var(--bg-subtle);
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.empty-section {
+		font-size: 0.875rem;
+		color: var(--text-3);
+		font-style: italic;
+		margin-top: 0.75rem;
 	}
 </style>
