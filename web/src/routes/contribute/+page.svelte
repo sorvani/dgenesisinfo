@@ -259,7 +259,7 @@
 		<div class="card ctrl-row">
 			<div class="field">
 				<label class="field-label" for="f-type">Type</label>
-				<select id="f-type" bind:value={entityType}>
+				<select id="f-type" bind:value={entityType} disabled={!!entityId}>
 					<option value="character">Character / Explorer</option>
 					<option value="orb">Skill Orb</option>
 					<option value="dungeon">Dungeon</option>
