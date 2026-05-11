@@ -824,6 +824,16 @@
 	.toggle-label input:checked ~ .toggle-track { background: var(--accent); }
 	.toggle-label input:checked ~ .toggle-track::after { transform: translateX(16px); }
 
+	.array-add {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		color: var(--accent);
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
+
 	.chip-row {
 		display: flex;
 		flex-wrap: wrap;
