@@ -109,11 +109,30 @@ export async function getCharacters(db: D1Database): Promise<Character[]> {
 		db.prepare('SELECT * FROM character_orbs ORDER BY character_id'),
 	]);
 
-	const chars    = (charRes.results  as CharRow[]);
-	const rankings = (rankRes.results  as RankRow[]).map(toRanking);
-	const charOrbs = (orbRes.results   as CharOrbRow[]).map(toCharOrb);
+	const chars    = (charRes.results as CharRow[]);
+	const rankings = (rankRes.results as RankRow[]).map(toRanking);
+	const charOrbs = (orbRes.results  as CharOrbRow[]).map(toCharOrb);
 
 	return chars.map(c => assembleCharacter(c, rankings, [], charOrbs));
+}
+
+export async function getExplorers(db: D1Database): Promise<Character[]> {
+	const [charRes, rankRes, orbRes] = await db.batch([
+		db.prepare('SELECT * FROM characters WHERE is_explorer = 1'),
+		db.prepare('SELECT * FROM character_rankings ORDER BY character_id, cite_volume, cite_chapter, cite_jnc_part'),
+		db.prepare('SELECT * FROM character_orbs ORDER BY character_id'),
+	]);
+
+	const chars    = (charRes.results as CharRow[]);
+	const rankings = (rankRes.results as RankRow[]).map(toRanking);
+	const charOrbs = (orbRes.results  as CharOrbRow[]).map(toCharOrb);
+
+	return chars.map(c => assembleCharacter(c, rankings, [], charOrbs));
+}
+
+export async function getNonExplorers(db: D1Database): Promise<Character[]> {
+	const res = await db.prepare('SELECT * FROM characters WHERE is_explorer = 0 ORDER BY last_name, first_name').all<CharRow>();
+	return res.results.map(c => assembleCharacter(c, [], [], []));
 }
 
 export async function getCharacterBySlug(db: D1Database, slug: string): Promise<Character | null> {

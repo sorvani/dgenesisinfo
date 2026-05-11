@@ -1,21 +1,17 @@
 import type { PageServerLoad } from './$types';
+import { getExplorers } from '$lib/server/data';
+import { getRankSortValue, getHistoricalRankingAt, getAllUniqueRankingCitations } from '$lib/utils';
 
 export const load: PageServerLoad = async ({ platform }) => {
-	const db = platform!.env.DB;
+	const db        = platform!.env.DB;
+	const explorers = await getExplorers(db);
 
-	const [chars, orbs, timeline, stats] = await db.batch([
-		db.prepare('SELECT COUNT(*) AS n FROM characters'),
-		db.prepare('SELECT COUNT(*) AS n FROM orbs'),
-		db.prepare('SELECT COUNT(*) AS n FROM timeline_events'),
-		db.prepare('SELECT COUNT(*) AS n FROM character_stats'),
-	]);
+	// WDARL: only explorers with at least one known exact rank
+	const wdarl = explorers
+		.filter(c => c.rankings.some(r => r.rank !== null))
+		.sort((a, b) => getRankSortValue(a.rankings) - getRankSortValue(b.rankings));
 
-	return {
-		stats: {
-			characters: (chars.results[0]  as { n: number }).n,
-			orbs:       (orbs.results[0]   as { n: number }).n,
-			timeline:   (timeline.results[0] as { n: number }).n,
-			stats:      (stats.results[0]  as { n: number }).n,
-		},
-	};
+	const citations = getAllUniqueRankingCitations(wdarl);
+
+	return { wdarl, citations };
 };

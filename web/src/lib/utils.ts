@@ -53,6 +53,7 @@ export interface Character {
 	nationality:      string | null;
 	date_first_known: string | null;
 	is_public:        number;
+	is_explorer:      number;
 	in_wdarl:         number;
 	area:             number | null;
 	birthday:         string | null;

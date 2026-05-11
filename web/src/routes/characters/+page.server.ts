@@ -1,11 +1,7 @@
 import type { PageServerLoad } from './$types';
-import { getCharacters } from '$lib/server/data';
-import { getRankSortValue } from '$lib/utils';
+import { getNonExplorers } from '$lib/server/data';
 
 export const load: PageServerLoad = async ({ platform }) => {
-	const db = platform!.env.DB;
-	const characters = await getCharacters(db);
-	return {
-		characters: characters.sort((a, b) => getRankSortValue(a.rankings) - getRankSortValue(b.rankings)),
-	};
+	const characters = await getNonExplorers(platform!.env.DB);
+	return { characters };
 };
