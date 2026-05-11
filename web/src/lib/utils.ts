@@ -73,6 +73,8 @@ export interface OrbDropRate {
 	creature:           string | null;
 	dungeon:            string | null;
 	dungeon_slug:       string | null;
+	monster_name:       string | null;
+	monster_slug:       string | null;
 	floor:              string | null;
 	favorable_outcomes: number | null;
 	total_events:       number | null;
