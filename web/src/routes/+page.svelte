@@ -76,7 +76,7 @@
 						<td class="col-cc">{c.is_public ? (c.nationality ?? '') : ''}</td>
 						<td class="col-name">
 							{#if !c.is_public}
-								<span class="anon-star">✦</span>
+								<span class="anon-star">*</span>
 								<a href="/characters/{c.slug}" class="anon-name">({displayName(c)})</a>
 							{:else}
 								<a href="/characters/{c.slug}">{displayName(c)}</a>
@@ -198,8 +198,10 @@
 	/* Anonymous rows */
 	.anon-star {
 		color: var(--accent);
-		font-size: 0.9rem;
-		margin-right: 0.3rem;
+		font-size: 1.4rem;
+		font-weight: 900;
+		line-height: 1;
+		margin-right: 0.25rem;
 		vertical-align: middle;
 	}
 
