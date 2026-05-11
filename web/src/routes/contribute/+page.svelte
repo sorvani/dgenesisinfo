@@ -808,12 +808,13 @@
 					<label class="field-label">Floor</label>
 					<input type="text" placeholder="e.g. 2, B1, or 5–7" bind:value={dr_floor} />
 				</div>
-				<div class="field">
-					<label class="field-label">Drop rate <span class="hint">e.g. 1 per 1,000 kills</span></label>
+				<div class="field field--wide">
+					<label class="field-label">Drop rate <span class="hint">e.g. 1 per 280,000,000 kills</span></label>
 					<div class="drops-row">
-						<input type="number" placeholder="1" bind:value={dr_favOut} aria-label="Drops" />
+						<input type="number" class="drops-row__drops" placeholder="1" bind:value={dr_favOut} aria-label="Drops" />
 						<span class="drops-row__sep">per</span>
-						<input type="number" placeholder="1,000" bind:value={dr_total} aria-label="Per kills" />
+						<input type="number" class="drops-row__total" placeholder="280,000,000" bind:value={dr_total} aria-label="Per kills" />
+						<span class="drops-row__sep">kills</span>
 					</div>
 				</div>
 			</div>
@@ -932,8 +933,9 @@
 		gap: 0.5rem;
 	}
 
-	.drops-row input { width: 100%; }
-	.drops-row__sep { color: var(--text-3); font-size: 0.875rem; flex-shrink: 0; }
+	.drops-row__drops { width: 5rem; }
+	.drops-row__total { width: 12rem; }
+	.drops-row__sep   { color: var(--text-3); font-size: 0.875rem; flex-shrink: 0; }
 
 	.field-label {
 		font-size: 0.6875rem;
