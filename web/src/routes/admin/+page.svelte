@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData, ActionData } from './$types';
 	import type { Submission } from './+page.server';
 
-	let { data }: { data: PageData } = $props();
+	let { data, form }: { data: PageData; form: ActionData } = $props();
 
 	function diffFields(sub: Submission): { key: string; current: unknown; proposed: unknown; changed: boolean }[] {
 		const proposed = sub.proposed as Record<string, unknown>;
@@ -109,6 +109,10 @@
 					{:else}
 						<p class="no-changes">No fields changed.</p>
 					{/if}
+				{/if}
+
+				{#if form?.error && form?.submissionId === s.id}
+					<p class="apply-error">⚠ {form.error}</p>
 				{/if}
 
 				<div class="sub-actions">
@@ -294,4 +298,14 @@
 
 	.status-badge.approved { background: #d1fae5; color: #065f46; }
 	.status-badge.rejected { background: #fee2e2; color: #991b1b; }
+
+	.apply-error {
+		font-size: 0.875rem;
+		color: #991b1b;
+		background: #fee2e2;
+		border: 1px solid #fca5a5;
+		border-radius: var(--radius);
+		padding: 0.5rem 0.75rem;
+		margin-bottom: 0.75rem;
+	}
 </style>

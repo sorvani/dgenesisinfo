@@ -70,6 +70,27 @@ function flattenProposed(entityType: string, proposed: Record<string, unknown>):
 	return flat;
 }
 
+function slugify(s: string): string {
+	return (s ?? '')
+		.toLowerCase()
+		.trim()
+		.replace(/[^\w\s-]/g, '')
+		.replace(/[\s_]+/g, '-')
+		.replace(/-+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
+
+async function ensureUniqueSlug(db: D1Database, table: string, base: string): Promise<string> {
+	const seed = base || 'unnamed';
+	let slug = seed;
+	let n = 2;
+	while (await db.prepare(`SELECT 1 FROM ${table} WHERE slug = ?`).bind(slug).first()) {
+		slug = `${seed}-${n}`;
+		n++;
+	}
+	return slug;
+}
+
 async function applySubmission(db: D1Database, sub: RawSubmission): Promise<void> {
 	const table = TABLE_MAP[sub.entity_type];
 	if (!table) return;
@@ -94,6 +115,18 @@ async function applySubmission(db: D1Database, sub: RawSubmission): Promise<void
 	}
 
 	if (sub.operation === 'insert') {
+		// Slug is NOT NULL UNIQUE on these tables; generate one since the contribute
+		// form doesn't ask for it.
+		if (sub.entity_type === 'character') {
+			const fn = (proposed.first_name as string | null) ?? '';
+			const ln = (proposed.last_name  as string | null) ?? '';
+			flat.slug = await ensureUniqueSlug(db, table, slugify(`${fn} ${ln}`.trim()));
+		} else if (sub.entity_type === 'orb') {
+			flat.slug = await ensureUniqueSlug(db, table, slugify((proposed.orb_name as string) ?? ''));
+		} else if (sub.entity_type === 'dungeon' || sub.entity_type === 'monster') {
+			flat.slug = await ensureUniqueSlug(db, table, slugify((proposed.name as string) ?? ''));
+		}
+
 		const cols = Object.keys(flat);
 		if (!cols.length) return;
 		const sql = `INSERT INTO ${table} (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`;
@@ -310,7 +343,14 @@ export const actions: Actions = {
 		const sub = await db.prepare(`SELECT * FROM pending_submissions WHERE id = ? AND status = 'pending'`).bind(id).first<RawSubmission>();
 		if (!sub) return fail(404, { error: 'Submission not found or already reviewed' });
 
-		await applySubmission(db, sub);
+		try {
+			await applySubmission(db, sub);
+		} catch (e) {
+			return fail(500, {
+				submissionId: id,
+				error: `Apply failed: ${e instanceof Error ? e.message : String(e)}`,
+			});
+		}
 
 		await db.prepare(
 			`UPDATE pending_submissions SET status='approved', reviewed_by=?, reviewed_at=strftime('%Y-%m-%dT%H:%M:%SZ','now'), admin_note=?
