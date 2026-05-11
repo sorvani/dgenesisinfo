@@ -12,13 +12,14 @@
 	let entityId   = $state<number | null>(data.defaultEntityId);
 
 	// ── Character fields ──────────────────────────────────────────────────────
-	let c_firstName   = $state('');
-	let c_lastName    = $state('');
-	let c_monikers    = $state<string[]>([]);
-	let c_nationality = $state('');
-	let c_sex         = $state('');
-	let c_birthday    = $state('');
-	let c_area        = $state<number | null>(null);
+	let c_firstName      = $state('');
+	let c_lastName       = $state('');
+	let c_monikers       = $state<string[]>([]);
+	let c_nationality    = $state('');
+	let c_sex            = $state('');
+	let c_birthday       = $state('');
+	let c_dateFirstKnown = $state('');
+	let c_area           = $state<number | null>(null);
 	let c_note        = $state('');
 	let c_tags        = $state<string[]>([]);
 	let c_isExplorer  = $state(true);
@@ -100,10 +101,11 @@
 			c_firstName = c.first_name ?? '';
 			c_lastName  = c.last_name ?? '';
 			c_monikers  = [...(c.monikers ?? [])];
-			c_nationality = c.nationality ?? '';
-			c_sex       = c.sex ?? '';
-			c_birthday  = c.birthday ?? '';
-			c_area      = c.area;
+			c_nationality    = c.nationality ?? '';
+			c_sex            = c.sex ?? '';
+			c_birthday       = c.birthday ?? '';
+			c_dateFirstKnown = c.date_first_known ?? '';
+			c_area           = c.area;
 			c_note      = c.note ?? '';
 			c_tags      = [...(c.tags ?? [])];
 			c_isExplorer = c.is_explorer === 1;
@@ -147,7 +149,8 @@
 			first_name: c_firstName || null, last_name: c_lastName || null,
 			monikers: c_monikers.filter(Boolean),
 			nationality: c_nationality || null, sex: c_sex || null,
-			birthday: c_birthday || null, area: c_area,
+			birthday: c_birthday || null, date_first_known: c_dateFirstKnown || null,
+			area: c_area,
 			is_explorer: c_isExplorer ? 1 : 0, in_wdarl: c_inWdarl ? 1 : 0, is_public: c_isPublic ? 1 : 0,
 			note: c_note || null, tags: c_tags.filter(Boolean), citation: cite,
 		}, null, 2);
@@ -259,10 +262,10 @@
 				</select>
 			</div>
 
-			{#if operation !== 'insert'}
+			{#if operation !== 'insert' && entityId}
 				<div class="field field--sm">
-					<label class="field-label" for="f-id">Record ID</label>
-					<input id="f-id" type="number" bind:value={entityId} placeholder="ID" />
+					<label class="field-label">Record ID</label>
+					<div class="readonly-id">#{entityId}</div>
 				</div>
 			{/if}
 		</div>
@@ -296,6 +299,10 @@
 				<div class="field">
 					<label class="field-label">Birthday</label>
 					<input type="text" placeholder="e.g. August 10" bind:value={c_birthday} />
+				</div>
+				<div class="field">
+					<label class="field-label">First Known <span class="hint">YYYY-MM-DD</span></label>
+					<input type="date" bind:value={c_dateFirstKnown} />
 				</div>
 				<div class="field">
 					<label class="field-label">D-Card Area</label>
@@ -740,6 +747,16 @@
 	}
 
 	.array-remove:hover { color: #dc2626; border-color: #dc2626; }
+
+	.readonly-id {
+		padding: 0.45rem 0.65rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg-subtle);
+		color: var(--text-3);
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+	}
 
 	.form-footer {
 		display: flex;
