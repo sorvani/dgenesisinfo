@@ -137,6 +137,19 @@ export interface MonsterDrop {
 	citation:           Citation;
 }
 
+export interface MonsterDungeon {
+	id:           number;
+	monster_id:   number;
+	dungeon_id:   number;
+	floor:        string | null;
+	citation:     Citation;
+	// Denormalized join fields (populated when reading via slug-aware queries)
+	monster_name?: string;
+	monster_slug?: string;
+	dungeon_name?: string;
+	dungeon_slug?: string;
+}
+
 // ─── Citation helpers ─────────────────────────────────────────────────────────
 
 export function getCitationScore(citation: Citation | null): number {

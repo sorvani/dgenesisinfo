@@ -19,6 +19,7 @@ const TABLE_MAP: Record<string, string> = {
 	character_ranking: 'character_rankings',
 	character_orb:     'character_orbs',
 	orb_drop_rate:     'orb_drop_rates',
+	monster_dungeon:   'monster_dungeons',
 };
 
 const TABLES_WITH_MODIFIED = new Set(['characters', 'orbs', 'dungeons', 'monsters']);
@@ -33,6 +34,7 @@ const DIRECT_FIELDS: Record<string, string[]> = {
 	character_ranking: ['character_id', 'rank', 'known_above_rank', 'date_noted'],
 	character_orb:     ['character_id', 'orb_id', 'date_acquired', 'date_note'],
 	orb_drop_rate:     ['orb_id', 'creature', 'dungeon', 'floor', 'favorable_outcomes', 'total_events'],
+	monster_dungeon:   ['monster_id', 'dungeon_id', 'floor'],
 };
 
 function flattenProposed(entityType: string, proposed: Record<string, unknown>): Record<string, unknown> {
@@ -159,6 +161,14 @@ async function resolveEntityUrl(db: D1Database, type: string, entityId: number |
 		const row = await db.prepare('SELECT slug FROM orbs WHERE id = ?').bind(orbId).first<{ slug: string }>();
 		return row ? `/orbs/${row.slug}` : null;
 	}
+	if (type === 'monster_dungeon') {
+		const monsterId = (proposed.monster_id as number | null) ?? (
+			entityId ? (await db.prepare('SELECT monster_id FROM monster_dungeons WHERE id = ?').bind(entityId).first<{ monster_id: number }>())?.monster_id ?? null : null
+		);
+		if (!monsterId) return null;
+		const row = await db.prepare('SELECT slug FROM monsters WHERE id = ?').bind(monsterId).first<{ slug: string }>();
+		return row ? `/bestiary/${row.slug}` : null;
+	}
 
 	// Top-level entities with their own detail page — need entity_id and a slug column.
 	const prefix = ROUTE_PREFIX[type];
@@ -206,6 +216,19 @@ async function resolveEntityLabel(db: D1Database, type: string, entityId: number
 			if (!orbId) return null;
 			const row = await db.prepare('SELECT orb_name FROM orbs WHERE id = ?').bind(orbId).first<{ orb_name: string }>();
 			return row?.orb_name ?? null;
+		}
+		case 'monster_dungeon': {
+			const ids = (proposed.monster_id || proposed.dungeon_id) ? proposed : (
+				entityId ? await db.prepare('SELECT monster_id, dungeon_id FROM monster_dungeons WHERE id = ?').bind(entityId).first<{ monster_id: number; dungeon_id: number }>() : null
+			);
+			if (!ids) return null;
+			const [mRow, dRow] = await Promise.all([
+				ids.monster_id ? db.prepare('SELECT name FROM monsters WHERE id = ?').bind(ids.monster_id).first<{ name: string }>() : null,
+				ids.dungeon_id ? db.prepare('SELECT name FROM dungeons WHERE id = ?').bind(ids.dungeon_id).first<{ name: string }>() : null,
+			]);
+			const mName = mRow?.name ?? '?';
+			const dName = dRow?.name ?? '?';
+			return `${mName} in ${dName}`;
 		}
 		default:
 			return null;

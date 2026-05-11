@@ -50,6 +50,7 @@
 		if (entityType === 'character_stat')    return `stat - ${key}`;
 		if (entityType === 'character_orb')     return `orb - ${key}`;
 		if (entityType === 'orb_drop_rate')     return `drop rate - ${key}`;
+		if (entityType === 'monster_dungeon')   return `presence - ${key}`;
 		if (entityType === 'character' && key === 'citation') return `first known - ${key}`;
 		return key;
 	}

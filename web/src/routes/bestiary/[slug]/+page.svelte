@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import { formatCitation, formatProbability, formatCooldown } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
+	import { Pencil } from 'lucide-svelte';
 	let { data }: { data: PageData } = $props();
 	const m = $derived(data.monster);
 </script>
@@ -33,6 +34,47 @@
 			<div class="md-content note-content">
 				{@html renderMd(m.note)}
 			</div>
+		</div>
+	{/if}
+
+	{#if data.dungeons.length || data.user}
+		<div class="data-section">
+			<div class="section-head-row">
+				<p class="section-heading">Found In</p>
+				{#if data.user}
+					<a href="/contribute?type=monster_dungeon&op=insert&monster_id={m.id}" class="action-add action-add--inline">+ Add</a>
+				{/if}
+			</div>
+			{#if data.dungeons.length}
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>Dungeon</th><th>Floor</th><th>Citation</th>
+								{#if data.user}<th class="row-edit-col"></th>{/if}
+							</tr>
+						</thead>
+						<tbody>
+							{#each data.dungeons as loc}
+								<tr>
+									<td><a href="/dungeons/{loc.dungeon_slug}">{loc.dungeon_name}</a></td>
+									<td>{#if loc.floor}{@html loc.floor}{:else}—{/if}</td>
+									<td>{#if loc.citation.volume}<span class="badge badge--citation">{formatCitation(loc.citation)}</span>{:else}—{/if}</td>
+									{#if data.user}
+										<td class="row-edit-col">
+											<a href="/contribute?type=monster_dungeon&op=update&id={loc.id}" class="row-edit" title="Edit">
+												<Pencil size={16} strokeWidth={2} />
+											</a>
+										</td>
+									{/if}
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			{:else}
+				<p class="empty-section">No dungeons recorded yet.</p>
+			{/if}
 		</div>
 	{/if}
 
@@ -123,5 +165,36 @@
 		background: var(--bg-subtle);
 		padding: 0.1em 0.35em;
 		border-radius: 3px;
+	}
+
+	.section-head-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.action-add--inline { padding: 0.15rem 0.55rem; font-size: 0.75rem; }
+
+	.row-edit-col { width: 1px; white-space: nowrap; text-align: right; }
+
+	.row-edit {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem;
+		color: var(--text-3);
+		text-decoration: none;
+		border-radius: var(--radius);
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.row-edit:hover { background: var(--bg-subtle); color: var(--accent); text-decoration: none; }
+
+	.empty-section {
+		font-size: 0.875rem;
+		color: var(--text-3);
+		font-style: italic;
+		margin-top: 0.75rem;
 	}
 </style>

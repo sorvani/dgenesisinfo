@@ -1,6 +1,6 @@
 import type {
 	Character, CharacterRanking, CharacterStat, CharacterOrb,
-	Orb, OrbDropRate, TimelineEvent, Dungeon, Citation,
+	Orb, OrbDropRate, TimelineEvent, Dungeon, Citation, MonsterDungeon,
 } from '$lib/utils';
 
 // ─── Row types (flat D1 rows before reshaping) ────────────────────────────────
@@ -223,32 +223,71 @@ export async function getMonsters(db: D1Database): Promise<Monster[]> {
 	}));
 }
 
-export async function getMonsterBySlug(db: D1Database, slug: string): Promise<{ monster: Monster; drops: MonsterDrop[] } | null> {
+export async function getMonsterBySlug(db: D1Database, slug: string): Promise<{ monster: Monster; drops: MonsterDrop[]; dungeons: MonsterDungeon[] } | null> {
 	const row = await db.prepare(
 		`SELECT m.*, 0 AS drop_count FROM monsters m WHERE m.slug = ?`
 	).bind(slug).first<MonsterRow>();
 	if (!row) return null;
 
-	const dropRes = await db.prepare(
-		`SELECT odr.orb_id, o.slug AS orb_slug, o.orb_name, odr.dungeon, odr.floor,
-		        dn.slug AS dungeon_slug,
-		        odr.favorable_outcomes, odr.total_events,
-		        odr.cite_volume, odr.cite_chapter, odr.cite_jnc_part
-		 FROM orb_drop_rates odr
-		 JOIN orbs o ON o.id = odr.orb_id
-		 LEFT JOIN dungeons dn ON dn.id = odr.dungeon_id
-		 WHERE odr.monster_id = ?
-		 ORDER BY o.orb_name`
-	).bind(row.id).all<MonsterDropRow>();
+	const [dropRes, dungeonRes] = await db.batch([
+		db.prepare(
+			`SELECT odr.orb_id, o.slug AS orb_slug, o.orb_name, odr.dungeon, odr.floor,
+			        dn.slug AS dungeon_slug,
+			        odr.favorable_outcomes, odr.total_events,
+			        odr.cite_volume, odr.cite_chapter, odr.cite_jnc_part
+			 FROM orb_drop_rates odr
+			 JOIN orbs o ON o.id = odr.orb_id
+			 LEFT JOIN dungeons dn ON dn.id = odr.dungeon_id
+			 WHERE odr.monster_id = ?
+			 ORDER BY o.orb_name`
+		).bind(row.id),
+		db.prepare(
+			`SELECT md.id, md.monster_id, md.dungeon_id, md.floor,
+			        md.cite_volume, md.cite_chapter, md.cite_jnc_part, md.cite_source_type,
+			        d.name AS dungeon_name, d.slug AS dungeon_slug
+			 FROM monster_dungeons md
+			 JOIN dungeons d ON d.id = md.dungeon_id
+			 WHERE md.monster_id = ?
+			 ORDER BY d.name, md.floor`
+		).bind(row.id),
+	]);
 
-	const drops: MonsterDrop[] = dropRes.results.map(d => ({
+	const drops: MonsterDrop[] = (dropRes.results as MonsterDropRow[]).map(d => ({
 		orb_id: d.orb_id, orb_slug: d.orb_slug, orb_name: d.orb_name,
 		dungeon: d.dungeon, dungeon_slug: d.dungeon_slug ?? null, floor: d.floor,
 		favorable_outcomes: d.favorable_outcomes, total_events: d.total_events,
 		citation: cite(d),
 	}));
 
-	return { monster: { ...row, citation: cite(row) }, drops };
+	const dungeons: MonsterDungeon[] = (dungeonRes.results as Array<MonsterDungeonRow & { dungeon_name: string; dungeon_slug: string }>).map(r => ({
+		id: r.id, monster_id: r.monster_id, dungeon_id: r.dungeon_id, floor: r.floor,
+		citation: cite(r),
+		dungeon_name: r.dungeon_name, dungeon_slug: r.dungeon_slug,
+	}));
+
+	return { monster: { ...row, citation: cite(row) }, drops, dungeons };
+}
+
+interface MonsterDungeonRow {
+	id: number; monster_id: number; dungeon_id: number; floor: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
+}
+
+export async function getDungeonMonsters(db: D1Database, dungeonId: number): Promise<MonsterDungeon[]> {
+	const res = await db.prepare(
+		`SELECT md.id, md.monster_id, md.dungeon_id, md.floor,
+		        md.cite_volume, md.cite_chapter, md.cite_jnc_part, md.cite_source_type,
+		        m.name AS monster_name, m.slug AS monster_slug
+		 FROM monster_dungeons md
+		 JOIN monsters m ON m.id = md.monster_id
+		 WHERE md.dungeon_id = ?
+		 ORDER BY md.floor, m.name`
+	).bind(dungeonId).all<MonsterDungeonRow & { monster_name: string; monster_slug: string }>();
+	return res.results.map(r => ({
+		id: r.id, monster_id: r.monster_id, dungeon_id: r.dungeon_id, floor: r.floor,
+		citation: cite(r),
+		monster_name: r.monster_name, monster_slug: r.monster_slug,
+	}));
 }
 
 export async function getDungeons(db: D1Database): Promise<Dungeon[]> {

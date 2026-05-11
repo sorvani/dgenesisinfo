@@ -223,3 +223,19 @@ CREATE TABLE IF NOT EXISTS monsters (
 
 ALTER TABLE orb_drop_rates ADD COLUMN IF NOT EXISTS monster_id INTEGER REFERENCES monsters(id);
 CREATE INDEX IF NOT EXISTS ix_orb_drop_rates_monster ON orb_drop_rates(monster_id);
+
+-- Monster ↔ dungeon presence (with floor info). Independent of orb drops:
+-- a monster can be recorded as present in a dungeon even if no orb data exists.
+CREATE TABLE IF NOT EXISTS monster_dungeons (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    monster_id       INTEGER NOT NULL REFERENCES monsters(id) ON DELETE CASCADE,
+    dungeon_id       INTEGER NOT NULL REFERENCES dungeons(id) ON DELETE CASCADE,
+    floor            TEXT,
+    cite_volume      TEXT,
+    cite_chapter     TEXT,
+    cite_jnc_part    TEXT,
+    cite_source_type TEXT
+);
+
+CREATE INDEX IF NOT EXISTS ix_monster_dungeons_monster ON monster_dungeons(monster_id);
+CREATE INDEX IF NOT EXISTS ix_monster_dungeons_dungeon ON monster_dungeons(dungeon_id);

@@ -103,6 +103,11 @@
 	let dr_favOut   = $state<number | null>(null);
 	let dr_total    = $state<number | null>(null);
 
+	// ── Monster ↔ dungeon fields ──────────────────────────────────────────────
+	let md_monsterId = $state<number | null>(data.defaultMonsterId);
+	let md_dungeonId = $state<number | null>(data.defaultDungeonId);
+	let md_floor     = $state('');
+
 	// ── Shared citation ───────────────────────────────────────────────────────
 	let cite_vol         = $state('');
 	let cite_ch          = $state('');
@@ -197,6 +202,15 @@
 			cite_ch          = o.cite_chapter  ?? '';
 			cite_part        = o.cite_jnc_part ?? '';
 			cite_source_type = o.cite_source_type ?? null;
+		} else if (entityType === 'monster_dungeon' && data.prefillRow) {
+			const r = data.prefillRow as Record<string, any>;
+			md_monsterId = r.monster_id;
+			md_dungeonId = r.dungeon_id;
+			md_floor     = r.floor ?? '';
+			cite_vol         = r.cite_volume   ?? '';
+			cite_ch          = r.cite_chapter  ?? '';
+			cite_part        = r.cite_jnc_part ?? '';
+			cite_source_type = r.cite_source_type ?? null;
 		} else if (entityType === 'timeline_event' && data.prefillRow) {
 			const e = data.prefillRow as Record<string, any>;
 			if (e.date_utc) {
@@ -298,6 +312,11 @@
 			floor: dr_floor || null, favorable_outcomes: dr_favOut, total_events: dr_total, citation: cite,
 		}, null, 2);
 
+		if (entityType === 'monster_dungeon') return JSON.stringify({
+			monster_id: md_monsterId, dungeon_id: md_dungeonId,
+			floor: md_floor || null, citation: cite,
+		}, null, 2);
+
 		return '{}';
 	}
 
@@ -356,6 +375,7 @@
 					<option value="character_ranking">Character Ranking</option>
 					<option value="character_orb">Character Orb Acquisition</option>
 					<option value="orb_drop_rate">Orb Drop Rate</option>
+					<option value="monster_dungeon">Creature in Dungeon</option>
 				</select>
 			</div>
 
@@ -712,6 +732,32 @@
 				<div class="field field--sm">
 					<label class="field-label">Total Events</label>
 					<input type="number" bind:value={dr_total} />
+				</div>
+			</div>
+		</div>
+		{/if}
+
+		<!-- ── Monster ↔ Dungeon presence ── -->
+		{#if entityType === 'monster_dungeon'}
+		<div class="card form-section">
+			<div class="field-grid">
+				<div class="field">
+					<label class="field-label">Creature</label>
+					<select bind:value={md_monsterId}>
+						<option value={null}>— select —</option>
+						{#each data.monsters as m}<option value={m.id}>{m.name}</option>{/each}
+					</select>
+				</div>
+				<div class="field">
+					<label class="field-label">Dungeon</label>
+					<select bind:value={md_dungeonId}>
+						<option value={null}>— select —</option>
+						{#each data.dungeons as d}<option value={d.id}>{d.name}</option>{/each}
+					</select>
+				</div>
+				<div class="field field--sm">
+					<label class="field-label">Floor</label>
+					<input type="text" placeholder="e.g. 2&lt;sup&gt;nd&lt;/sup&gt; or 5–7" bind:value={md_floor} />
 				</div>
 			</div>
 		</div>
