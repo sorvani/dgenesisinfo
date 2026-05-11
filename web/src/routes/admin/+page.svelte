@@ -1,47 +1,276 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import type { Submission } from './+page.server';
+
 	let { data }: { data: PageData } = $props();
+
+	function diffFields(sub: Submission): { key: string; current: unknown; proposed: unknown; changed: boolean }[] {
+		const proposed = sub.proposed as Record<string, unknown>;
+		const current  = sub.current  as Record<string, unknown> | null;
+
+		if (sub.operation === 'insert') {
+			return Object.entries(proposed)
+				.filter(([, v]) => v !== null && v !== '' && !(Array.isArray(v) && v.length === 0))
+				.map(([key, val]) => ({ key, current: null, proposed: val, changed: true }));
+		}
+
+		if (sub.operation === 'update') {
+			return Object.entries(proposed)
+				.map(([key, val]) => ({
+					key,
+					current: current?.[key] ?? null,
+					proposed: val,
+					changed: JSON.stringify(current?.[key]) !== JSON.stringify(val),
+				}))
+				.filter(f => f.changed); // only show changed fields
+		}
+
+		return [];
+	}
+
+	function fmt(val: unknown): string {
+		if (val === null || val === undefined) return '—';
+		if (Array.isArray(val)) return val.length ? val.join(', ') : '—';
+		if (typeof val === 'object') return JSON.stringify(val);
+		return String(val);
+	}
+
+	function opLabel(op: string) {
+		return op === 'insert' ? 'New' : op === 'update' ? 'Edit' : 'Delete';
+	}
+
+	function opClass(op: string) {
+		return op === 'insert' ? 'op op--insert' : op === 'update' ? 'op op--update' : 'op op--delete';
+	}
 </script>
 
-<h1>Admin — Pending Submissions</h1>
+<svelte:head><title>Admin — D-Genesis Info</title></svelte:head>
 
-{#if data.pending.length === 0}
-	<p>No pending submissions.</p>
-{:else}
-{#each data.pending as s}
-	<div>
-		<p>
-			<strong>#{s.id}</strong> ·
-			{s.operation} {s.entity_type}
-			{s.entity_id != null ? `#${s.entity_id}` : '(new)'}
-			· by <strong>{s.github_username}</strong>
-			· {s.submitted_at}
-		</p>
-		<pre>{JSON.stringify(JSON.parse(s.proposed_data), null, 2)}</pre>
+<div class="container page">
+	<h1 class="page-title">Admin</h1>
 
-		<form method="POST" action="?/approve" style="display:inline">
-			<input type="hidden" name="id" value={s.id} />
-			<input name="admin_note" placeholder="Note (optional)" />
-			<button type="submit">Approve</button>
-		</form>
+	{#if data.pending.length === 0}
+		<p class="empty" style="margin-top: 2rem;">No pending submissions.</p>
+	{:else}
+		<p class="section-heading" style="margin-bottom: 1rem;">{data.pending.length} pending</p>
 
-		<form method="POST" action="?/reject" style="display:inline">
-			<input type="hidden" name="id" value={s.id} />
-			<input name="admin_note" placeholder="Reason" />
-			<button type="submit">Reject</button>
-		</form>
-	</div>
-	<hr />
-{/each}
-{/if}
+		{#each data.pending as s}
+			<div class="sub-card card">
+				<div class="sub-header">
+					<div class="sub-meta">
+						<span class={opClass(s.operation)}>{opLabel(s.operation)}</span>
+						<strong>{s.entity_type.replace(/_/g, ' ')}</strong>
+						{#if s.entity_id}<span class="sub-id">#{s.entity_id}</span>{/if}
+					</div>
+					<div class="sub-who">
+						<span class="sub-user">@{s.github_username}</span>
+						<span class="sub-date">{new Date(s.submitted_at).toLocaleDateString()}</span>
+					</div>
+				</div>
 
-<h2>Recently Reviewed</h2>
-{#each data.recent as s}
-	<p>
-		<strong>#{s.id}</strong> ·
-		{s.operation} {s.entity_type} ·
-		<span style="color:{s.status === 'approved' ? 'green' : 'red'}">{s.status}</span> ·
-		{s.reviewed_at}
-		{#if s.admin_note}· {s.admin_note}{/if}
-	</p>
-{/each}
+				{#if s.operation === 'delete'}
+					<p class="delete-warn">This will permanently delete record #{s.entity_id} from {s.entity_type}.</p>
+				{:else}
+					{@const fields = diffFields(s)}
+					{#if fields.length}
+						<table class="diff-table">
+							<thead>
+								<tr>
+									<th>Field</th>
+									{#if s.operation === 'update'}<th>Current</th>{/if}
+									<th>{s.operation === 'update' ? 'Proposed' : 'Value'}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{#each fields as f}
+									<tr class:changed={f.changed && s.operation === 'update'}>
+										<td class="diff-key">{f.key}</td>
+										{#if s.operation === 'update'}
+											<td class="diff-current">{fmt(f.current)}</td>
+										{/if}
+										<td class="diff-proposed">{fmt(f.proposed)}</td>
+									</tr>
+								{/each}
+							</tbody>
+						</table>
+					{:else}
+						<p class="no-changes">No fields changed.</p>
+					{/if}
+				{/if}
+
+				<div class="sub-actions">
+					<form method="POST" action="?/approve">
+						<input type="hidden" name="id" value={s.id} />
+						<input name="admin_note" placeholder="Note (optional)" class="action-note" />
+						<button type="submit" class="btn btn--primary" style="padding:0.35rem 0.875rem; font-size:0.875rem;">Approve</button>
+					</form>
+					<form method="POST" action="?/reject">
+						<input type="hidden" name="id" value={s.id} />
+						<input name="admin_note" placeholder="Reason" class="action-note" />
+						<button type="submit" class="btn btn--ghost" style="padding:0.35rem 0.875rem; font-size:0.875rem; color:#dc2626; border-color:#fca5a5;">Reject</button>
+					</form>
+				</div>
+			</div>
+		{/each}
+	{/if}
+
+	{#if data.recent.length}
+		<div class="data-section">
+			<p class="section-heading">Recently Reviewed</p>
+			<div class="card" style="padding: 0; overflow: hidden;">
+				<table class="data-table">
+					<thead>
+						<tr><th>Op</th><th>Type</th><th>By</th><th>Status</th><th>Reviewed</th><th>Note</th></tr>
+					</thead>
+					<tbody>
+						{#each data.recent as s}
+							<tr>
+								<td><span class={opClass(s.operation)}>{opLabel(s.operation)}</span></td>
+								<td>{s.entity_type.replace(/_/g, ' ')}</td>
+								<td>@{s.github_username}</td>
+								<td>
+									<span class="status-badge" class:approved={s.status === 'approved'} class:rejected={s.status === 'rejected'}>
+										{s.status}
+									</span>
+								</td>
+								<td style="color:var(--text-3); font-size:0.8125rem;">{s.reviewed_at ? new Date(s.reviewed_at).toLocaleDateString() : '—'}</td>
+								<td style="color:var(--text-3); font-size:0.8125rem;">{s.admin_note ?? ''}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	{/if}
+</div>
+
+<style>
+	.sub-card {
+		margin-bottom: 1.25rem;
+		padding: 1.25rem;
+	}
+
+	.sub-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.sub-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.9375rem;
+	}
+
+	.sub-id { color: var(--text-3); font-size: 0.8125rem; font-family: var(--font-mono); }
+
+	.sub-who {
+		display: flex;
+		gap: 0.75rem;
+		font-size: 0.8125rem;
+		color: var(--text-3);
+	}
+
+	.op {
+		font-size: 0.6875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		padding: 0.2em 0.5em;
+		border-radius: 3px;
+	}
+
+	.op--insert  { background: #d1fae5; color: #065f46; }
+	.op--update  { background: #dbeafe; color: #1e40af; }
+	.op--delete  { background: #fee2e2; color: #991b1b; }
+
+	.delete-warn {
+		font-size: 0.9375rem;
+		color: #dc2626;
+		padding: 0.75rem;
+		background: #fee2e2;
+		border-radius: var(--radius);
+		margin-bottom: 1rem;
+	}
+
+	.diff-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.875rem;
+		margin-bottom: 1rem;
+	}
+
+	.diff-table th {
+		text-align: left;
+		font-size: 0.6875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: var(--text-3);
+		padding: 0.5rem 0.75rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.diff-table td {
+		padding: 0.5rem 0.75rem;
+		border-bottom: 1px solid var(--border-soft);
+		vertical-align: top;
+	}
+
+	.diff-table tr:last-child td { border-bottom: none; }
+
+	.diff-key {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		color: var(--text-3);
+		white-space: nowrap;
+		width: 160px;
+	}
+
+	.diff-current { color: var(--text-3); }
+	.diff-proposed { color: var(--text); font-weight: 500; }
+
+	.changed .diff-proposed { color: var(--accent); }
+
+	.no-changes { font-size: 0.875rem; color: var(--text-3); margin-bottom: 1rem; }
+
+	.sub-actions {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 1rem;
+		margin-top: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.sub-actions form {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.action-note {
+		padding: 0.3rem 0.65rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		color: var(--text);
+		font-size: 0.8125rem;
+		width: 180px;
+	}
+
+	.status-badge {
+		font-size: 0.75rem;
+		font-weight: 600;
+		padding: 0.15em 0.5em;
+		border-radius: 3px;
+	}
+
+	.status-badge.approved { background: #d1fae5; color: #065f46; }
+	.status-badge.rejected { background: #fee2e2; color: #991b1b; }
+</style>
