@@ -25,7 +25,7 @@
 				<div class="explorer-card__identity">
 					<div class="explorer-card__name">{getFullName(c)}</div>
 					{#if c.monikers?.length}
-						<div class="explorer-card__moniker">"{c.monikers.join('" · "')}"</div>
+						<div class="explorer-card__moniker">{c.monikers.map(m => `"${m}"`).join(' · ')}</div>
 					{/if}
 				</div>
 

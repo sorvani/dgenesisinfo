@@ -108,10 +108,11 @@ function toDungeon(d: DungeonRow): Dungeon {
 }
 
 function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: CharacterStat[], orbs: CharacterOrb[]): Character {
+	const { moniker, tags, ...rest } = row;
 	return {
-		...row,
-		monikers:         JSON.parse(row.moniker ?? '[]'),
-		tags:             JSON.parse(row.tags ?? '[]'),
+		...rest,
+		monikers:         JSON.parse(moniker ?? '[]') as string[],
+		tags:             JSON.parse(tags ?? '[]') as string[],
 		cite_first_known: { volume: row.cite_first_known_volume, chapter: row.cite_first_known_chapter, jnc_part: row.cite_first_known_jnc_part },
 		rankings:  rankings.filter(r => r.character_id === row.id),
 		stats:     stats.filter(s => s.character_id === row.id),
