@@ -186,10 +186,17 @@ export function formatFloor(floor: string | null | undefined): string {
 	return trimmed;
 }
 
+function isSideStories(volume: string | null | undefined): boolean {
+	return (volume ?? '').trim().toLowerCase() === 'side stories';
+}
+
 export function formatCitation(citation: Citation | null): string {
 	if (!citation) return '';
 	const parts: string[] = [];
-	if (citation.volume)      parts.push(`Vol ${citation.volume}`);
+	if (citation.volume) {
+		// "Side Stories" reads as a label, not a numbered volume — show it as-is.
+		parts.push(isSideStories(citation.volume) ? citation.volume : `Vol ${citation.volume}`);
+	}
 	if (citation.chapter)     parts.push(`Ch ${citation.chapter}`);
 	if (citation.jnc_part)    parts.push(`Part ${citation.jnc_part}`);
 	if (citation.source_type) parts.push(citation.source_type === 'Light Novel' ? 'LN' : 'M');
@@ -197,14 +204,16 @@ export function formatCitation(citation: Citation | null): string {
 }
 
 // J-Novel Club reading link for a citation, when we have enough info to build one.
-// LN URL pattern: /read/d-genesis-volume-{volume}-part-{jnc_part}
-// Manga URL pattern: /read/d-genesis-three-years-after-the-dungeons-appeared-manga-volume-{volume}-chapter-{jnc_part}
+// LN URL pattern:        /read/d-genesis-volume-{volume}-part-{jnc_part}
+// LN side-stories:       /read/d-genesis-side-stories-part-{jnc_part}
+// Manga URL pattern:     /read/d-genesis-three-years-after-the-dungeons-appeared-manga-volume-{volume}-chapter-{jnc_part}
 // (Manga chapter and JNC part are the same number; jnc_part is the authoritative source.)
 export function getCitationUrl(c: Citation | null): string | null {
 	if (!c?.volume || !c.source_type) return null;
 	if (c.source_type === 'Light Novel') {
 		if (!c.jnc_part) return null;
-		return `https://j-novel.club/read/d-genesis-volume-${c.volume}-part-${c.jnc_part}`;
+		const volPath = isSideStories(c.volume) ? 'side-stories' : `volume-${c.volume}`;
+		return `https://j-novel.club/read/d-genesis-${volPath}-part-${c.jnc_part}`;
 	}
 	if (c.source_type === 'Manga') {
 		const ch = c.jnc_part || c.chapter;
