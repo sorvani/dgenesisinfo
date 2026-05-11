@@ -964,12 +964,18 @@
 	}
 
 	.confirm-dialog {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		background: var(--bg-card);
 		color: var(--text);
 		padding: 1.5rem 1.75rem;
 		max-width: 28rem;
+		width: calc(100% - 2rem);
 		box-shadow: var(--shadow-hover);
 	}
 	.confirm-dialog::backdrop {
