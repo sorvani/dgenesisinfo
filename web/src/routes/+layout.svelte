@@ -46,7 +46,7 @@
 			<a href="/dungeons">Dungeons</a>
 		</div>
 		<div class="site-nav__auth">
-			<a class="jnc-link" href="https://j-novel.club/series/d-genesis-three-years-after-the-dungeons-appeared" target="_blank" rel="noopener noreferrer">
+			<a class="jnc-link" href="https://j-novel.club/series?search=d-genesis" target="_blank" rel="noopener noreferrer">
 				Read @ J-Novel Club ↗
 			</a>
 
