@@ -69,7 +69,6 @@ CREATE INDEX IF NOT EXISTS ix_char_stats_character ON character_stats(character_
 CREATE TABLE IF NOT EXISTS orbs (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     slug          TEXT    NOT NULL UNIQUE,
-    orb_id        INTEGER NOT NULL UNIQUE,  -- canonical numeric ID from source material
     orb_name      TEXT    NOT NULL,
     known_effects TEXT,   -- HTML ok
     note          TEXT,

@@ -17,6 +17,18 @@ Entries are newest first.
 
 ---
 
+## 2026-05-11 — drop `orbs.orb_id` column
+
+Vestigial leftover from the old JSON site, where rows were tied together by
+that field. Once the data moved into D1 every relationship is keyed off
+`orbs.id` (the PK) so nothing was reading `orb_id` anymore — it was just
+blocking new orb submissions because of its `NOT NULL UNIQUE` constraint.
+
+SQLite refuses to drop UNIQUE columns directly, so the migration uses the
+standard table-rebuild pattern: create `orbs_new` without the column, copy
+the rows, drop the old table, rename the new one (with foreign keys
+deferred for the duration).
+
 ## 2026-05-11 — `monster_dungeons` table
 
 First-class monster ↔ dungeon presence with floor info. Until this point the

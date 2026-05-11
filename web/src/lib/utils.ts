@@ -82,7 +82,6 @@ export interface OrbDropRate {
 export interface Orb {
 	id:            number;
 	slug:          string;
-	orb_id:        number;
 	orb_name:      string;
 	known_effects: string | null;
 	note:          string | null;

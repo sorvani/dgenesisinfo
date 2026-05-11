@@ -35,7 +35,7 @@ interface CharOrbRow {
 }
 
 interface OrbRow {
-	id: number; slug: string; orb_id: number; orb_name: string;
+	id: number; slug: string; orb_name: string;
 	known_effects: string | null; note: string | null;
 }
 
