@@ -1,0 +1,14 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "dgenesisinfo",
+	"compatibility_date": "2026-05-10",
+	"compatibility_flags": ["nodejs_als"],
+	"pages_build_output_dir": ".svelte-kit/cloudflare",
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "dgenesisinfo",
+			"database_id": "4c97ac9b-d234-4c9d-848a-d4efeb6f92f6"
+		}
+	]
+}

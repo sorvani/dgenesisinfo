@@ -1,0 +1,2255 @@
+[
+  {
+    "slug": "keigo-yoshimura",
+    "first_name": "Keigo",
+    "last_name": "Yoshimura",
+    "nationality": "JP",
+    "date_first_known": "2018-09-27",
+    "public": false,
+    "area": 12,
+    "birthday": "August 10",
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 99726438,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "1"
+        }
+      },
+      {
+        "rank": 1,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2018-09-28",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 1200.03,
+        "hp": 23.8,
+        "mp": 23.8,
+        "str": 9,
+        "vit": 10,
+        "int": 13,
+        "agi": 8,
+        "dex": 11,
+        "luc": 9,
+        "stat_total": 60,
+        "points_from_average": 0,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-09-28",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 1199.03,
+        "hp": 24.8,
+        "mp": 23.8,
+        "str": 10,
+        "vit": 10,
+        "int": 13,
+        "agi": 8,
+        "dex": 11,
+        "luc": 9,
+        "stat_total": 61,
+        "points_from_average": 1,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-09-28",
+        "date_sequence": 3,
+        "scan_type": "Making",
+        "sp": 1173.03,
+        "hp": 36,
+        "mp": 33,
+        "str": 14,
+        "vit": 15,
+        "int": 18,
+        "agi": 10,
+        "dex": 16,
+        "luc": 14,
+        "stat_total": 87,
+        "points_from_average": 27,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-10-04",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 1173.03,
+        "hp": 36,
+        "mp": 33,
+        "str": 14,
+        "vit": 15,
+        "int": 18,
+        "agi": 10,
+        "dex": 16,
+        "luc": 14,
+        "stat_total": 87,
+        "points_from_average": 27,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-10-04",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 1173.05,
+        "hp": 36,
+        "mp": 33,
+        "str": 14,
+        "vit": 15,
+        "int": 18,
+        "agi": 10,
+        "dex": 16,
+        "luc": 14,
+        "stat_total": 87,
+        "points_from_average": 27,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-07",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 1178.307,
+        "hp": 36,
+        "mp": 33,
+        "str": 14,
+        "vit": 15,
+        "int": 18,
+        "agi": 10,
+        "dex": 16,
+        "luc": 14,
+        "stat_total": 87,
+        "points_from_average": 27,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-07",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 1176.307,
+        "hp": 38,
+        "mp": 33,
+        "str": 16,
+        "vit": 15,
+        "int": 18,
+        "agi": 10,
+        "dex": 16,
+        "luc": 14,
+        "stat_total": 89,
+        "points_from_average": 29,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 1118.856,
+        "hp": 61,
+        "mp": 52,
+        "str": 24,
+        "vit": 25,
+        "int": 28,
+        "agi": 20,
+        "dex": 26,
+        "luc": 24,
+        "stat_total": 147,
+        "points_from_average": 87,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 1085.856,
+        "hp": 75,
+        "mp": 57,
+        "str": 30,
+        "vit": 30,
+        "int": 30,
+        "agi": 30,
+        "dex": 30,
+        "luc": 30,
+        "stat_total": 180,
+        "points_from_average": 120,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 3,
+        "scan_type": "Making",
+        "sp": 715.856,
+        "hp": 235,
+        "mp": 171,
+        "str": 100,
+        "vit": 90,
+        "int": 90,
+        "agi": 90,
+        "dex": 90,
+        "luc": 90,
+        "stat_total": 550,
+        "points_from_average": 490,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 4,
+        "scan_type": "Making",
+        "sp": 715.856,
+        "hp": 235,
+        "mp": 171,
+        "str": 99,
+        "vit": 90,
+        "int": 90,
+        "agi": 90,
+        "dex": 90,
+        "luc": 90,
+        "stat_total": 549,
+        "points_from_average": 489,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 5,
+        "scan_type": "Making",
+        "sp": 665.856,
+        "hp": 250,
+        "mp": 190,
+        "str": 100,
+        "vit": 100,
+        "int": 100,
+        "agi": 100,
+        "dex": 100,
+        "luc": 100,
+        "stat_total": 600,
+        "points_from_average": 540,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-11-18",
+        "date_sequence": 6,
+        "scan_type": "Making",
+        "sp": 665.856,
+        "hp": 250,
+        "mp": 190,
+        "str": 30,
+        "vit": 30,
+        "int": 30,
+        "agi": 30,
+        "dex": 30,
+        "luc": 100,
+        "stat_total": 250,
+        "points_from_average": 190,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-10",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 674.029,
+        "hp": 250,
+        "mp": 190,
+        "str": 100,
+        "vit": 100,
+        "int": 100,
+        "agi": 100,
+        "dex": 100,
+        "luc": 100,
+        "stat_total": 600,
+        "points_from_average": 540,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-11",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 523.448,
+        "hp": 432,
+        "mp": 240,
+        "str": 200,
+        "vit": 100,
+        "int": 100,
+        "agi": 200,
+        "dex": 100,
+        "luc": 100,
+        "stat_total": 800,
+        "points_from_average": 740,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-05",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 45.12,
+        "mp": 32.4,
+        "str": 15,
+        "vit": 15,
+        "int": 14,
+        "agi": 16,
+        "dex": 15,
+        "luc": 15,
+        "stat_total": 90,
+        "points_from_average": 30,
+        "citation": null
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 1,
+        "date_acquired": "2018-09-27",
+        "date_note": "Acquired after dropping rebar in dungeon, mid-formation",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      },
+      {
+        "orb_id": 40,
+        "date_acquired": "2018-10-05",
+        "date_note": "First Orb from Making selection screen",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "5"
+        }
+      },
+      {
+        "orb_id": 34,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 41,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 20,
+        "date_acquired": "2018-11-24",
+        "date_note": "Used the Saturday of his dungeon not-date with Mitsurugi.",
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": "3"
+        }
+      },
+      {
+        "orb_id": 38,
+        "date_acquired": "2018-11-29",
+        "date_note": null,
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": "8"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "D-Powers"
+    ],
+    "monikers": [
+      "The Phantom"
+    ]
+  },
+  {
+    "slug": "azusa-miyoshi",
+    "first_name": "Azusa",
+    "last_name": "Miyoshi",
+    "nationality": "JP",
+    "date_first_known": "2018-09-28",
+    "public": false,
+    "area": 12,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 814,
+        "known_above_rank": null,
+        "date_noted": "2018-09-28",
+        "citation": {
+          "volume": "5",
+          "chapter": "6",
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2018-11-28",
+        "date_sequence": 1,
+        "scan_type": "Appraisal",
+        "sp": null,
+        "hp": 21.7,
+        "mp": 30.9,
+        "str": 8,
+        "vit": 9,
+        "int": 17,
+        "agi": 11,
+        "dex": 13,
+        "luc": 10,
+        "stat_total": 68,
+        "points_from_average": 8,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-10",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 2.863,
+        "hp": 21.7,
+        "mp": 32.5,
+        "str": 8,
+        "vit": 9,
+        "int": 18,
+        "agi": 11,
+        "dex": 13,
+        "luc": 10,
+        "stat_total": 69,
+        "points_from_average": 9,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-11",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 50.937,
+        "hp": 22.25,
+        "mp": 33.05,
+        "str": 8,
+        "vit": 9,
+        "int": 18,
+        "agi": 11,
+        "dex": 13,
+        "luc": 10,
+        "stat_total": 69,
+        "points_from_average": 9,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-11",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 19.937,
+        "hp": 23.6,
+        "mp": 69.6,
+        "str": 8,
+        "vit": 9,
+        "int": 40,
+        "agi": 20,
+        "dex": 13,
+        "luc": 10,
+        "stat_total": 100,
+        "points_from_average": 40,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-11",
+        "date_sequence": 3,
+        "scan_type": "Making",
+        "sp": 0.937,
+        "hp": 27,
+        "mp": 86.8,
+        "str": 10,
+        "vit": 10,
+        "int": 50,
+        "agi": 20,
+        "dex": 19,
+        "luc": 10,
+        "stat_total": 119,
+        "points_from_average": 59,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 33.936,
+        "hp": 28.7,
+        "mp": 91.1,
+        "str": 10,
+        "vit": 11,
+        "int": 52,
+        "agi": 22,
+        "dex": 23,
+        "luc": 10,
+        "stat_total": 128,
+        "points_from_average": 68,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 0.936,
+        "hp": 29.15,
+        "mp": 136.75,
+        "str": 10,
+        "vit": 11,
+        "int": 80,
+        "agi": 25,
+        "dex": 25,
+        "luc": 10,
+        "stat_total": 161,
+        "points_from_average": 101,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-16",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 15.411,
+        "hp": 29.15,
+        "mp": 136.75,
+        "str": 10,
+        "vit": 11,
+        "int": 80,
+        "agi": 25,
+        "dex": 25,
+        "luc": 10,
+        "stat_total": 161,
+        "points_from_average": 101,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-16",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 0.411,
+        "hp": 29.9,
+        "mp": 153.5,
+        "str": 10,
+        "vit": 11,
+        "int": 90,
+        "agi": 30,
+        "dex": 25,
+        "luc": 10,
+        "stat_total": 176,
+        "points_from_average": 116,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-03-08",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 32.471,
+        "hp": 29.9,
+        "mp": 153.5,
+        "str": 10,
+        "vit": 11,
+        "int": 90,
+        "agi": 30,
+        "dex": 25,
+        "luc": 10,
+        "stat_total": 176,
+        "points_from_average": 116,
+        "citation": {
+          "volume": "10",
+          "jnc_part": "5",
+          "chapter": "13"
+        }
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 33,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 34,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 41,
+        "date_acquired": "2018-11-12",
+        "date_note": "Used immediately after accepting the request to get the OLC orb.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "orb_id": 5,
+        "date_acquired": "2018-11-29",
+        "date_note": null,
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": "7"
+        }
+      },
+      {
+        "orb_id": 9,
+        "date_acquired": "2018-11-29",
+        "date_note": null,
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": "7"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "D-Powers"
+    ],
+    "monikers": [
+      "Wiseman"
+    ]
+  },
+  {
+    "slug": "haruka-mitsurugi",
+    "first_name": "Haruka",
+    "last_name": "Mitsurugi",
+    "nationality": "JP",
+    "date_first_known": "2018-09-30",
+    "public": false,
+    "area": 12,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 681,
+        "known_above_rank": null,
+        "date_noted": "2018-12-16",
+        "citation": {
+          "volume": "3",
+          "chapter": "4",
+          "jnc_part": "6"
+        }
+      },
+      {
+        "rank": 986,
+        "known_above_rank": null,
+        "date_noted": "2018-11-17",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2018-12-16",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 65.36,
+        "hp": 29,
+        "mp": 55.2,
+        "str": 10,
+        "vit": 12,
+        "int": 28,
+        "agi": 22,
+        "dex": 41,
+        "luc": 16,
+        "stat_total": 129,
+        "points_from_average": 69,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-16",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 0.36,
+        "hp": 48.5,
+        "mp": 71.9,
+        "str": 10,
+        "vit": 25,
+        "int": 34,
+        "agi": 35,
+        "dex": 70,
+        "luc": 20,
+        "stat_total": 194,
+        "points_from_average": 134,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "ryoko-saito",
+    "first_name": "Ryoko",
+    "last_name": "Saito",
+    "nationality": "JP",
+    "date_first_known": "2018-09-30",
+    "public": false,
+    "area": 12,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 368,
+        "known_above_rank": null,
+        "date_noted": "2019-01-15",
+        "citation": {
+          "volume": "5",
+          "chapter": "6",
+          "jnc_part": "9"
+        }
+      },
+      {
+        "rank": 1421,
+        "known_above_rank": null,
+        "date_noted": "2018-12-16",
+        "citation": {
+          "volume": "3",
+          "chapter": "4",
+          "jnc_part": "6"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2018-12-16",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 33.23,
+        "hp": 28.5,
+        "mp": 48.5,
+        "str": 10,
+        "vit": 12,
+        "int": 25,
+        "agi": 17,
+        "dex": 34,
+        "luc": 12,
+        "stat_total": 110,
+        "points_from_average": 50,
+        "citation": null
+      },
+      {
+        "date_noted": "2018-12-16",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 0.23,
+        "hp": 34.9,
+        "mp": 60.5,
+        "str": 10,
+        "vit": 16,
+        "int": 30,
+        "agi": 25,
+        "dex": 50,
+        "luc": 12,
+        "stat_total": 143,
+        "points_from_average": 83,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-08",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 0.23,
+        "hp": 34.9,
+        "mp": 60.5,
+        "str": 10,
+        "vit": 16,
+        "int": 30,
+        "agi": 25,
+        "dex": 50,
+        "luc": 12,
+        "stat_total": 143,
+        "points_from_average": 83,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-08",
+        "date_sequence": 2,
+        "scan_type": "Making",
+        "sp": 4.19,
+        "hp": 35,
+        "mp": 62.8,
+        "str": 10,
+        "vit": 16,
+        "int": 31,
+        "agi": 26,
+        "dex": 53,
+        "luc": 12,
+        "stat_total": 148,
+        "points_from_average": 88,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "Artemis"
+    ]
+  },
+  {
+    "slug": "miharu-naruse",
+    "first_name": "Miharu",
+    "last_name": "Naruse",
+    "nationality": "JP",
+    "date_first_known": "2018-09-27",
+    "public": false,
+    "area": 12,
+    "birthday": "April 3",
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 99726438,
+        "date_noted": "2018-09-25",
+        "citation": {
+          "volume": null,
+          "chapter": null,
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2018-12-17",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 23,
+        "mp": 27,
+        "str": 10,
+        "vit": 9,
+        "int": 15,
+        "agi": 9,
+        "dex": 13,
+        "luc": 11,
+        "stat_total": 67,
+        "points_from_average": 7,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "JDA"
+    ],
+    "monikers": [
+      "The Interpreter",
+      "Miss Mei"
+    ]
+  },
+  {
+    "slug": "cathy",
+    "first_name": "Cathy",
+    "last_name": null,
+    "nationality": "US",
+    "date_first_known": "2019-01-06",
+    "public": true,
+    "area": 1,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 48,
+        "known_above_rank": null,
+        "date_noted": "2019-01-03",
+        "citation": {
+          "volume": "5",
+          "chapter": "6",
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-05",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 87.9,
+        "mp": 66.7,
+        "str": 34,
+        "vit": 36,
+        "int": 35,
+        "agi": 35,
+        "dex": 36,
+        "luc": 12,
+        "stat_total": 188,
+        "points_from_average": 128,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-05",
+        "date_sequence": 2,
+        "scan_type": "Stat Measuring Device",
+        "sp": 123.6,
+        "hp": 88.2,
+        "mp": 67,
+        "str": 34,
+        "vit": 36,
+        "int": 35,
+        "agi": 38,
+        "dex": 36,
+        "luc": 12,
+        "stat_total": 191,
+        "points_from_average": 131,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-10",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": 60,
+        "hp": 126,
+        "mp": 74.8,
+        "str": 61,
+        "vit": 42,
+        "int": 38,
+        "agi": 62,
+        "dex": 39,
+        "luc": 12,
+        "stat_total": 254,
+        "points_from_average": 194,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "simon-gershwin",
+    "first_name": "Simon",
+    "last_name": "Gershwin",
+    "nationality": "US",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 1,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 3,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 113.8,
+        "mp": 82.8,
+        "str": 45,
+        "vit": 46,
+        "int": 43,
+        "agi": 44,
+        "dex": 48,
+        "luc": 13,
+        "stat_total": 239,
+        "points_from_average": 179,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 2,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 127.1,
+        "mp": 84.1,
+        "str": 57,
+        "vit": 46,
+        "int": 43,
+        "agi": 57,
+        "dex": 48,
+        "luc": 13,
+        "stat_total": 264,
+        "points_from_average": 204,
+        "citation": null
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-17",
+        "date_note": "Acquired in the second auction. WHile it was not state Simon used it. The party composition implies it was Simon after Mason.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ],
+    "monikers": []
+  },
+  {
+    "slug": "joshua-rich",
+    "first_name": "Joshua",
+    "last_name": "Rich",
+    "nationality": "US",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 1,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 7,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 97.4,
+        "mp": 76.8,
+        "str": 39,
+        "vit": 38,
+        "int": 38,
+        "agi": 52,
+        "dex": 54,
+        "luc": 13,
+        "stat_total": 234,
+        "points_from_average": 174,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 2,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 98.6,
+        "mp": 80.4,
+        "str": 39,
+        "vit": 38,
+        "int": 38,
+        "agi": 66,
+        "dex": 66,
+        "luc": 13,
+        "stat_total": 260,
+        "points_from_average": 200,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ],
+    "monikers": []
+  },
+  {
+    "slug": "mason-garcia",
+    "first_name": "Mason",
+    "last_name": "Garcia",
+    "nationality": "US",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 1,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 5,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 139.8,
+        "mp": 62.8,
+        "str": 55,
+        "vit": 58,
+        "int": 32,
+        "agi": 36,
+        "dex": 40,
+        "luc": 12,
+        "stat_total": 233,
+        "points_from_average": 173,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 2,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 170,
+        "mp": 62.8,
+        "str": 67,
+        "vit": 71,
+        "int": 32,
+        "agi": 36,
+        "dex": 40,
+        "luc": 12,
+        "stat_total": 258,
+        "points_from_average": 198,
+        "citation": null
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-10",
+        "date_note": "Acquired in the first auction",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "10"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ],
+    "monikers": []
+  },
+  {
+    "slug": "natalie-stewart",
+    "first_name": "Natalie",
+    "last_name": "Stewart",
+    "nationality": "US",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 8,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 91.4,
+        "mp": 104.4,
+        "str": 35,
+        "vit": 38,
+        "int": 58,
+        "agi": 32,
+        "dex": 42,
+        "luc": 13,
+        "stat_total": 218,
+        "points_from_average": 158,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 2,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 92.7,
+        "mp": 124.9,
+        "str": 35,
+        "vit": 38,
+        "int": 70,
+        "agi": 45,
+        "dex": 42,
+        "luc": 13,
+        "stat_total": 243,
+        "points_from_average": 183,
+        "citation": null
+      }
+    ],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [
+      "Team Simon"
+    ],
+    "monikers": [
+      "Roaring Flame",
+      "Guren"
+    ]
+  },
+  {
+    "slug": "komugi-rokujo",
+    "first_name": "Komugi",
+    "last_name": "Rokujo",
+    "nationality": "JP",
+    "date_first_known": "2019-01-12",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": null,
+        "date_noted": null,
+        "citation": {
+          "volume": null,
+          "chapter": null,
+          "jnc_part": null
+        }
+      },
+      {
+        "rank": 1772,
+        "known_above_rank": null,
+        "date_noted": "2019-01-24",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "10"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-12",
+        "date_sequence": 1,
+        "scan_type": "Stat Measuring Device",
+        "sp": null,
+        "hp": 21,
+        "mp": 27.4,
+        "str": 9,
+        "vit": 8,
+        "int": 15,
+        "agi": 8,
+        "dex": 13,
+        "luc": 41,
+        "stat_total": 94,
+        "points_from_average": 34,
+        "citation": null
+      },
+      {
+        "date_noted": "2019-01-24",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": null,
+        "hp": 27.2,
+        "mp": 90.4,
+        "str": 10,
+        "vit": 10,
+        "int": 52,
+        "agi": 32,
+        "dex": 20,
+        "luc": 41,
+        "stat_total": 165,
+        "points_from_average": 105,
+        "citation": null
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 9,
+        "date_acquired": "2019-01-24",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "12"
+        }
+      },
+      {
+        "orb_id": 22,
+        "date_acquired": "2019-01-25",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "14"
+        }
+      },
+      {
+        "orb_id": 25,
+        "date_acquired": "2019-01-25",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "14"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "asha-ahmed-jain",
+    "first_name": "Asha",
+    "last_name": "Ahmed Jain",
+    "nationality": "IN",
+    "date_first_known": "2018-11-16",
+    "public": false,
+    "area": 12,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 99728765,
+        "known_above_rank": null,
+        "date_noted": "2018-11-16",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": "34",
+        "date_acquired": "2018-11-16",
+        "date_note": null,
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": null
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "dmitri-nelnikov",
+    "first_name": "Dmitri",
+    "last_name": "Nelnikov",
+    "nationality": "RU",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 22,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 2,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "The Seeker"
+    ]
+  },
+  {
+    "slug": "junxi-huang",
+    "first_name": "Junxi",
+    "last_name": "Huang",
+    "nationality": "CN",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 14,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 4,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-17",
+        "date_note": "Acquired in the second auction. Used immediately in front of D-Powers.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "william",
+    "first_name": "William",
+    "last_name": null,
+    "nationality": "GB",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 26,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 6,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": 25,
+        "date_acquired": "2018-11-17",
+        "date_note": "Acquired in the second auction. Assumed he used it, but was not clearly stated.",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "lansom-malson",
+    "first_name": "Lansom",
+    "last_name": "Malson",
+    "nationality": "US",
+    "date_first_known": "2018-09-27",
+    "public": false,
+    "area": 2,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 9,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "King Salmon"
+    ]
+  },
+  {
+    "slug": "victor",
+    "first_name": "Victor",
+    "last_name": null,
+    "nationality": "FR",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 25,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 10,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "edgar",
+    "first_name": "Edgar",
+    "last_name": null,
+    "nationality": "DE",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 24,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 11,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "tobias",
+    "first_name": "Tobias",
+    "last_name": null,
+    "nationality": "GB",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 26,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 12,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "thierry",
+    "first_name": "Thierry",
+    "last_name": null,
+    "nationality": "FR",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 25,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 13,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "ettore",
+    "first_name": "Ettore",
+    "last_name": null,
+    "nationality": "IT",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 24,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 14,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "quentin",
+    "first_name": "Quentin",
+    "last_name": null,
+    "nationality": "FR",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 25,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 15,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "heinz",
+    "first_name": "Heinz",
+    "last_name": null,
+    "nationality": "DE",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 24,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 16,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "ella-alcott",
+    "first_name": "Ella",
+    "last_name": "Alcott",
+    "nationality": "AU",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 11,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 17,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "Witch of Campbell"
+    ]
+  },
+  {
+    "slug": "iori-kimitsu",
+    "first_name": "Iori",
+    "last_name": "Kimitsu",
+    "nationality": "JP",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 12,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 18,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": 42,
+        "date_acquired": "2015-08-30",
+        "date_note": "Date is an estimate, Iori was a college student on summer break. The exact quote is 'The summer of 2015 was comming to an end.'",
+        "citation": {
+          "volume": "1",
+          "chapter": "2",
+          "jnc_part": "11"
+        }
+      },
+      {
+        "orb_id": 34,
+        "date_acquired": "2015-01-19",
+        "date_note": "Given to by The Phantom'",
+        "citation": {
+          "volume": "6",
+          "chapter": "8",
+          "jnc_part": "15"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "gordon",
+    "first_name": "Gordon",
+    "last_name": null,
+    "nationality": "DE",
+    "date_first_known": "2018-09-27",
+    "public": true,
+    "area": 24,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 19,
+        "known_above_rank": null,
+        "date_noted": "2018-09-27",
+        "citation": {
+          "volume": "1",
+          "chapter": "1",
+          "jnc_part": "2"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "haruomi-nakajima",
+    "first_name": "Haruomi",
+    "last_name": "Nakajima",
+    "nationality": "JP",
+    "date_first_known": "2018-12-14",
+    "public": false,
+    "area": 12,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 99728765,
+        "date_noted": null,
+        "citation": {
+          "volume": null,
+          "chapter": null,
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "eri-mishiro",
+    "first_name": "Eri",
+    "last_name": "Mishiro",
+    "nationality": "JP",
+    "date_first_known": "2018-11-22",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 99726438,
+        "date_noted": "2018-11-22",
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": "2"
+        }
+      },
+      {
+        "rank": 0,
+        "known_above_rank": 361000,
+        "date_noted": "2019-01-24",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "10"
+        }
+      },
+      {
+        "rank": 1359,
+        "known_above_rank": null,
+        "date_noted": "2019-01-24",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "10"
+        }
+      }
+    ],
+    "stats": [
+      {
+        "date_noted": "2019-01-24",
+        "date_sequence": 1,
+        "scan_type": "Making",
+        "sp": 0,
+        "hp": 33.2,
+        "mp": 86,
+        "str": 14,
+        "vit": 12,
+        "int": 48,
+        "agi": 24,
+        "dex": 34,
+        "luc": 12,
+        "stat_total": 144,
+        "points_from_average": 84,
+        "citation": null
+      }
+    ],
+    "orbs_used": [
+      {
+        "orb_id": 13,
+        "date_acquired": "2019-01-24",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "12"
+        }
+      },
+      {
+        "orb_id": 22,
+        "date_acquired": "2019-01-25",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "14"
+        }
+      },
+      {
+        "orb_id": 25,
+        "date_acquired": "2019-01-25",
+        "date_note": "Given by D-Powers",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "14"
+        }
+      },
+      {
+        "orb_id": 41,
+        "date_acquired": "2019-01-25",
+        "date_note": "Given by D-Powers - possibly given to Rokujo",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "15"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "shota-mishiro",
+    "first_name": "Shota",
+    "last_name": "Mishiro",
+    "nationality": "JP",
+    "date_first_known": "2018-11-22",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 99726438,
+        "date_noted": "2018-11-22",
+        "citation": {
+          "volume": "2",
+          "chapter": "3",
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "mariann-therese-martin",
+    "first_name": "Mariann Therese",
+    "last_name": "Martin",
+    "nationality": "FR",
+    "date_first_known": "2018-11-21",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 99726438,
+        "date_noted": null,
+        "citation": {
+          "volume": "2",
+          "chapter": "Prologue",
+          "jnc_part": "1"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": 43,
+        "date_acquired": "2016-01-01",
+        "date_note": "Narration of David's thoughts stated he saw her using her ability two years ago",
+        "citation": {
+          "volume": "2",
+          "chapter": "Prologue",
+          "jnc_part": "1"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "Holy Woman"
+    ]
+  },
+  {
+    "slug": "silkie-subway",
+    "first_name": "Silkie",
+    "last_name": "Subway",
+    "nationality": "US",
+    "date_first_known": "2019-01-28",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": null,
+        "date_noted": "2019-01-28",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "15"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "serina-takeda",
+    "first_name": "Serina",
+    "last_name": "Takeda",
+    "nationality": "JP",
+    "date_first_known": "2019-01-26",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 95000,
+        "date_noted": "2019-01-26",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "15"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "masato-fuwa",
+    "first_name": "Masato",
+    "last_name": "Fuwa",
+    "nationality": "JP",
+    "date_first_known": "2019-01-26",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 95000,
+        "date_noted": "2019-01-26",
+        "citation": {
+          "volume": "7",
+          "chapter": "9",
+          "jnc_part": "15"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "dennis-takaoka",
+    "first_name": "Dennis",
+    "last_name": "Takaoka",
+    "nationality": "JP",
+    "date_first_known": "2019-02-23",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Male",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": 999,
+        "date_noted": null,
+        "citation": {
+          "volume": null,
+          "chapter": null,
+          "jnc_part": null
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": []
+  },
+  {
+    "slug": "mama",
+    "first_name": "Mama",
+    "last_name": null,
+    "nationality": "JP",
+    "date_first_known": "2019-02-06",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Female",
+    "note": null,
+    "rankings": [
+      {
+        "rank": 0,
+        "known_above_rank": null,
+        "date_noted": "2019-02-06",
+        "citation": {
+          "volume": "SS",
+          "chapter": "SS",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "stats": [],
+    "orbs_used": [
+      {
+        "orb_id": "34",
+        "date_acquired": "2019-02-06",
+        "date_note": "Orb was acquired sometime after Feb 5, 2019 according to the afterword.",
+        "citation": {
+          "volume": "SS",
+          "chapter": "SS",
+          "jnc_part": "13"
+        }
+      }
+    ],
+    "in_wdarl": true,
+    "tags": [],
+    "monikers": [
+      "Ai"
+    ]
+  },
+  {
+    "slug": "kakeru-furai",
+    "first_name": "Kakeru",
+    "last_name": "Furai",
+    "nationality": "JP",
+    "date_first_known": "2018-09-27",
+    "public": false,
+    "area": null,
+    "birthday": null,
+    "sex": "Male",
+    "note": "Works at the JDA.\nWas Miharu Naruse's original supervisor/boss.",
+    "in_wdarl": false,
+    "rankings": [],
+    "stats": [],
+    "orbs_used": [],
+    "citation": {
+      "volume": "1",
+      "chapter": "1",
+      "jnc_part": "2"
+    },
+    "tags": [
+      "JDA"
+    ],
+    "monikers": []
+  }
+]

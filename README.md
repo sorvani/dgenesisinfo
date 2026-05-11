@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# D-Genesis Info
 
-## Getting Started
+A fan-maintained reference database for *D-Genesis: Three Years after the Dungeons Appeared*.
+Tracks explorer rankings (WDARL), combat stats, skill orbs, dungeons, creatures, and the series timeline.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **[SvelteKit](https://kit.svelte.dev/)** — framework, deployed via `@sveltejs/adapter-cloudflare`
+- **[Cloudflare Pages](https://pages.cloudflare.com/)** — hosting
+- **[Cloudflare D1](https://developers.cloudflare.com/d1/)** — SQLite database
+- **GitHub OAuth** — contributor authentication
+
+## Repository layout
+
+```
+data/               Source JSON files (characters, orbs, timeline)
+database/
+  d1/               D1 schema and migration SQL files
+  ingest/           Script to generate SQL from JSON source data
+web/                SvelteKit application
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd web
+cp .dev.vars.example .dev.vars   # fill in credentials
+npm install
+npm run preview                   # wrangler pages dev with D1 bindings
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Database setup
 
-## Learn More
+```bash
+cd web
+npx wrangler d1 create dgenesisinfo
+npx wrangler d1 execute dgenesisinfo --remote --file=../database/d1/schema.sql
+node ../database/ingest/generate-sql.mjs
+npx wrangler d1 execute dgenesisinfo --remote --file=../database/ingest/ingest.sql
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Cloudflare Pages settings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+When connecting this repo for automatic deploys, set:
+- **Root directory:** `web`
+- **Build command:** `npm run build`
+- **Build output directory:** `.svelte-kit/cloudflare`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deployment
-
-This repository is **live-built and automatically deployed** on [Cloudflare Pages](https://pages.cloudflare.com/) after every commit to the `main` branch. 
-
-Any contributions merged into the JSON datasets will automatically trigger a new static site generation cycle, instantly rolling the new data out to the public website.
+Contributions are submitted via the site's Contribute form (login required).
+All submissions are reviewed by an admin before being applied.
