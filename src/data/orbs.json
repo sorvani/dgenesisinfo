@@ -5,7 +5,7 @@
     "orb_id": 1,
     "orb_name": "Making - メイキング",
     "known_effects": "Allows user to assign free SP to their stats. Can also assign free SP of part members, including grandchild parties.<br>Second affect allows user to select an orb every 100 kills. Orb choices are based on the creature killed as kill 100. It is not 100 of the same creature.",
-    "note": "The Romaji/English name of this orb was clearly shown in the original Japanese light novel and it was shown as Making. This is important as the katakana spelling is メイキング which could be romanized as Making, May King, or Mei King. All three versions have been commented on in story and all are phonetically correct to the katakana.",
+    "note": "The Romaji/English name of this orb was clearly shown in the original Japanese light novel and it was shown as Making. This is important as the katakana spelling is メイキング which could be romanized as Making, May King, or Mei King. All three versions have been commented on in story and all are phonetically correct to the katakana.<br><img src=\"/img/orbs/making-01.png\" alt=\"Making skill card\"><br><img src=\"/img/orbs/making-02.png\" alt=\"Making orb\">",
     "drop_rates": [
       {
         "creature": null,
