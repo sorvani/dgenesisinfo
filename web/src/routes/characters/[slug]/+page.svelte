@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { Pencil } from 'lucide-svelte';
 	import {
 		getFullName, getNationalityFlag, formatDate, formatRank,
 		getHistoricalRankingAt, formatCitation, getCitationScore
@@ -158,7 +159,7 @@
 										<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
-												<a href="/contribute?type=character_ranking&op=update&id={r.id}" class="row-edit" title="Edit">✏</a>
+												<a href="/contribute?type=character_ranking&op=update&id={r.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
 											</td>
 										{/if}
 									</tr>
@@ -222,7 +223,7 @@
 										<td>{#if s.citation.volume}<span class="badge badge--citation">{formatCitation(s.citation)}</span>{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
-												<a href="/contribute?type=character_stat&op=update&id={s.id}" class="row-edit" title="Edit">✏</a>
+												<a href="/contribute?type=character_stat&op=update&id={s.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
 											</td>
 										{/if}
 									</tr>
@@ -274,7 +275,7 @@
 										<td>{#if ou.citation.volume}<span class="badge badge--citation">{formatCitation(ou.citation)}</span>{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
-												<a href="/contribute?type=character_orb&op=update&id={ou.id}" class="row-edit" title="Edit">✏</a>
+												<a href="/contribute?type=character_orb&op=update&id={ou.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
 											</td>
 										{/if}
 									</tr>
@@ -511,10 +512,11 @@
 	}
 
 	.row-edit {
-		display: inline-block;
-		padding: 0.15rem 0.4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem;
 		color: var(--text-3);
-		font-size: 0.9rem;
 		text-decoration: none;
 		border-radius: var(--radius);
 		transition: background 0.15s, color 0.15s;
