@@ -742,9 +742,9 @@
 					<label class="field-label">Date Acquired</label>
 					<input type="date" bind:value={co_dateAcquired} />
 				</div>
-				<div class="field">
-					<label class="field-label">Date Note <span class="hint">if approximate</span></label>
-					<input type="text" placeholder="e.g. Early Nov 2018" bind:value={co_dateNote} />
+				<div class="field field--wide">
+					<label class="field-label">Date Note <span class="hint">if approximate or supplemental</span></label>
+					<input type="text" placeholder="e.g. Early Nov 2018, or 'Used immediately after acquisition'" bind:value={co_dateNote} />
 				</div>
 			</div>
 		</div>
@@ -892,6 +892,7 @@
 
 	.field { display: flex; flex-direction: column; gap: 0.3rem; }
 	.field--sm { max-width: 160px; }
+	.field--wide { grid-column: 1 / -1; }
 
 	.field-label {
 		font-size: 0.6875rem;
