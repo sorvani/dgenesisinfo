@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData, ActionData } from './$types';
+	import { browser } from '$app/environment';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -12,8 +13,12 @@
 	let entityId   = $state<number | null>(data.defaultEntityId);
 
 	$effect(() => {
-		if (form?.success) {
-			setTimeout(() => history.back(), 3000);
+		if (form?.success && browser) {
+			const t = setTimeout(() => {
+				if (window.history.length > 1) history.back();
+				else window.location.href = '/';
+			}, 3000);
+			return () => clearTimeout(t);
 		}
 	});
 
