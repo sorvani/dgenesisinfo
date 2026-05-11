@@ -13,11 +13,12 @@ Tracks explorer rankings (WDARL), combat stats, skill orbs, dungeons, creatures,
 ## Repository layout
 
 ```
-data/               Source JSON files (characters, orbs, timeline)
-database/
-  d1/               D1 schema and migration SQL files
-  ingest/           Script to generate SQL from JSON source data
+database/d1/        D1 schema + data snapshot
+  schema.sql        Canonical schema (run on a fresh DB)
+  snapshot.sql      Data-only dump of the live D1, refreshed via `npm run dump`
+  seed-admin.sql    Template for granting yourself admin after first login
 web/                SvelteKit application
+SchemaHistory.md    Log of schema changes over time
 ```
 
 ## Local development
@@ -43,21 +44,40 @@ Fill in `web/.dev.vars` with:
 
 ## Database setup
 
-D1 / Pages CLI commands also need `CLOUDFLARE_ACCOUNT_ID` and
-`CLOUDFLARE_API_TOKEN` in the shell environment — wrangler does not read
-`.dev.vars` for CLI invocations. Prefix with `npx dotenv -e .dev.vars --` to
-inject them from `web/.dev.vars`:
+D1 / Pages CLI commands need `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`
+in the shell environment — wrangler does not read `.dev.vars` for CLI
+invocations. Prefix with `npx dotenv -e .dev.vars --` to inject them from
+`web/.dev.vars`.
+
+**Bootstrapping a fresh DB** (e.g. forked the repo, want your own copy):
 
 ```bash
 cd web
 npx dotenv -e .dev.vars -- wrangler d1 create dgenesisinfo
+# put the returned database_id into web/wrangler.jsonc
 npx dotenv -e .dev.vars -- wrangler d1 execute dgenesisinfo --remote --file=../database/d1/schema.sql
-node ../database/ingest/generate-sql.mjs
-npx dotenv -e .dev.vars -- wrangler d1 execute dgenesisinfo --remote --file=../database/ingest/ingest.sql
+npx dotenv -e .dev.vars -- wrangler d1 execute dgenesisinfo --remote --file=../database/d1/snapshot.sql
 ```
 
-If you forked the repo for your own deployment, update `database_id` in
-`web/wrangler.jsonc` to the ID returned by `wrangler d1 create`.
+After your first login, edit `database/d1/seed-admin.sql` with your GitHub ID
+and run it to grant yourself admin:
+
+```bash
+npx dotenv -e .dev.vars -- wrangler d1 execute dgenesisinfo --remote --file=../database/d1/seed-admin.sql
+```
+
+**Refreshing the snapshot** (run periodically so anyone cloning the repo
+gets current data):
+
+```bash
+cd web
+npm run dump
+git add ../database/d1/snapshot.sql
+git commit -m "data: refresh snapshot"
+```
+
+See [SchemaHistory.md](SchemaHistory.md) for the record of schema changes
+over time.
 
 ## Deploying changes
 

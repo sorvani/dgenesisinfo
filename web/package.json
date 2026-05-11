@@ -11,7 +11,8 @@
 		"check": "wrangler types --check && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"gen": "wrangler types",
-		"deploy": "dotenv -e .dev.vars -- wrangler pages deploy .svelte-kit/cloudflare --project-name dgenesisinfo --branch main"
+		"deploy": "dotenv -e .dev.vars -- wrangler pages deploy .svelte-kit/cloudflare --project-name dgenesisinfo --branch main",
+		"dump": "dotenv -e .dev.vars -- wrangler d1 export dgenesisinfo --remote --no-schema --output=../database/d1/snapshot.sql"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
