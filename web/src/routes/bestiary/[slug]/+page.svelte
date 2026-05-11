@@ -52,7 +52,11 @@
 						{#each data.drops as drop}
 							<tr>
 								<td><a href="/orbs/{drop.orb_slug}">{drop.orb_name}</a></td>
-								<td>{drop.dungeon ?? '—'}</td>
+								<td>
+									{#if drop.dungeon_slug}
+										<a href="/dungeons/{drop.dungeon_slug}" class="entity-chip">{drop.dungeon}</a>
+									{:else if drop.dungeon}{drop.dungeon}{:else}—{/if}
+								</td>
 								<td>{#if drop.floor}{@html drop.floor}{:else}—{/if}</td>
 								<td>
 									{#if drop.favorable_outcomes && drop.total_events}

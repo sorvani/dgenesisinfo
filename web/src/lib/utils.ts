@@ -71,6 +71,7 @@ export interface OrbDropRate {
 	orb_id:             number;
 	creature:           string | null;
 	dungeon:            string | null;
+	dungeon_slug:       string | null;
 	floor:              string | null;
 	favorable_outcomes: number | null;
 	total_events:       number | null;
@@ -128,6 +129,7 @@ export interface MonsterDrop {
 	orb_slug:           string;
 	orb_name:           string;
 	dungeon:            string | null;
+	dungeon_slug:       string | null;
 	floor:              string | null;
 	favorable_outcomes: number | null;
 	total_events:       number | null;

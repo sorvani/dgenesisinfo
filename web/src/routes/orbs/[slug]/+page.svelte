@@ -50,7 +50,11 @@
 						{#each orb.drop_rates as dr}
 							<tr>
 								<td>{dr.creature ?? '—'}</td>
-								<td>{dr.dungeon ?? '—'}</td>
+								<td>
+									{#if dr.dungeon_slug}
+										<a href="/dungeons/{dr.dungeon_slug}" class="entity-chip">{dr.dungeon}</a>
+									{:else if dr.dungeon}{dr.dungeon}{:else}—{/if}
+								</td>
 								<td>{#if dr.floor}{@html dr.floor}{:else}—{/if}</td>
 								<td>
 									{#if dr.favorable_outcomes && dr.total_events}

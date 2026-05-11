@@ -40,6 +40,7 @@ interface OrbRow {
 
 interface DropRateRow {
 	id: number; orb_id: number; creature: string | null; dungeon: string | null;
+	dungeon_slug: string | null;
 	floor: string | null; favorable_outcomes: number | null; total_events: number | null;
 	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
 }
@@ -64,7 +65,8 @@ interface MonsterRow {
 }
 
 interface MonsterDropRow {
-	orb_id: number; orb_slug: string; orb_name: string; dungeon: string | null; floor: string | null;
+	orb_id: number; orb_slug: string; orb_name: string;
+	dungeon: string | null; dungeon_slug: string | null; floor: string | null;
 	favorable_outcomes: number | null; total_events: number | null;
 	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
 }
@@ -93,7 +95,7 @@ function toCharOrb(o: CharOrbRow): CharacterOrb {
 }
 
 function toDropRate(d: DropRateRow): OrbDropRate {
-	return { id: d.id, orb_id: d.orb_id, creature: d.creature, dungeon: d.dungeon, floor: d.floor, favorable_outcomes: d.favorable_outcomes, total_events: d.total_events, citation: cite(d) };
+	return { id: d.id, orb_id: d.orb_id, creature: d.creature, dungeon: d.dungeon, dungeon_slug: d.dungeon_slug ?? null, floor: d.floor, favorable_outcomes: d.favorable_outcomes, total_events: d.total_events, citation: cite(d) };
 }
 
 function toTimeline(t: TimelineRow): TimelineEvent {
@@ -173,7 +175,7 @@ export async function getCharacterBySlug(db: D1Database, slug: string): Promise<
 export async function getOrbs(db: D1Database): Promise<Orb[]> {
 	const [orbRes, rateRes] = await db.batch([
 		db.prepare('SELECT * FROM orbs'),
-		db.prepare('SELECT * FROM orb_drop_rates ORDER BY orb_id'),
+		db.prepare('SELECT odr.*, d.slug AS dungeon_slug FROM orb_drop_rates odr LEFT JOIN dungeons d ON d.id = odr.dungeon_id ORDER BY odr.orb_id'),
 	]);
 
 	const orbs  = orbRes.results  as OrbRow[];
@@ -192,7 +194,7 @@ export async function getOrbBySlug(db: D1Database, slug: string): Promise<Orb | 
 	const row = await db.prepare('SELECT * FROM orbs WHERE slug = ?').bind(slug).first<OrbRow>();
 	if (!row) return null;
 
-	const rateRes = await db.prepare('SELECT * FROM orb_drop_rates WHERE orb_id = ?').bind(row.id).all<DropRateRow>();
+	const rateRes = await db.prepare('SELECT odr.*, d.slug AS dungeon_slug FROM orb_drop_rates odr LEFT JOIN dungeons d ON d.id = odr.dungeon_id WHERE odr.orb_id = ?').bind(row.id).all<DropRateRow>();
 	return { ...row, drop_rates: rateRes.results.map(toDropRate) };
 }
 
@@ -226,17 +228,19 @@ export async function getMonsterBySlug(db: D1Database, slug: string): Promise<{ 
 
 	const dropRes = await db.prepare(
 		`SELECT odr.orb_id, o.slug AS orb_slug, o.orb_name, odr.dungeon, odr.floor,
+		        dn.slug AS dungeon_slug,
 		        odr.favorable_outcomes, odr.total_events,
 		        odr.cite_volume, odr.cite_chapter, odr.cite_jnc_part
 		 FROM orb_drop_rates odr
 		 JOIN orbs o ON o.id = odr.orb_id
+		 LEFT JOIN dungeons dn ON dn.id = odr.dungeon_id
 		 WHERE odr.monster_id = ?
 		 ORDER BY o.orb_name`
 	).bind(row.id).all<MonsterDropRow>();
 
 	const drops: MonsterDrop[] = dropRes.results.map(d => ({
 		orb_id: d.orb_id, orb_slug: d.orb_slug, orb_name: d.orb_name,
-		dungeon: d.dungeon, floor: d.floor,
+		dungeon: d.dungeon, dungeon_slug: d.dungeon_slug ?? null, floor: d.floor,
 		favorable_outcomes: d.favorable_outcomes, total_events: d.total_events,
 		citation: cite(d),
 	}));
