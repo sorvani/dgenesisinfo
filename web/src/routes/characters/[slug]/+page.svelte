@@ -17,9 +17,9 @@
 	const latestRanking      = $derived(getHistoricalRankingAt(c.rankings));
 	const firstKnownCitation = $derived(c.cite_first_known?.volume ? c.cite_first_known : null);
 
-	let rankingsOpen = $state(true);
-	let statsOpen    = $state(true);
-	let orbsOpen     = $state(true);
+	let rankingsOpen = $state(false);
+	let statsOpen    = $state(false);
+	let orbsOpen     = $state(false);
 
 	// Most recent first — rankings use citation score as the sort key
 	const sortedRankings = $derived(
