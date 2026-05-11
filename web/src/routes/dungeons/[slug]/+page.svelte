@@ -14,10 +14,10 @@
 	<h1 class="page-title">{d.name}</h1>
 
 	<div class="meta-chips">
-		{#if d.area != null}
+		{#if d.area_label || d.area != null}
 			<div class="meta-chip meta-chip--accent">
 				<span class="meta-chip__label">Area</span>
-				<span class="meta-chip__value">{d.area}</span>
+				<span class="meta-chip__value">{d.area_label ?? d.area}</span>
 			</div>
 		{/if}
 		{#if d.country}

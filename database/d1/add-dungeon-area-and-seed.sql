@@ -12,3 +12,5 @@ INSERT OR IGNORE INTO dungeons (slug, name, area, country, region, is_active, ci
     ('unknown-australia',     'Unknown (Australia)',       NULL, 'AU', NULL,               1, NULL, NULL, NULL),
     ('unknown-france',        'Unknown (France)',          NULL, 'FR', NULL,               1, NULL, NULL, NULL),
     ('unknown-okinawa',       'Unknown (Okinawa)',         NULL, 'JP', 'Okinawa',          1, NULL, NULL, NULL);
+
+ALTER TABLE dungeons ADD COLUMN IF NOT EXISTS area_label TEXT;

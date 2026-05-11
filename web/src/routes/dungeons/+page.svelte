@@ -16,8 +16,8 @@
 		{#each data.dungeons as d}
 			<a href="/dungeons/{d.slug}" class="dungeon-card">
 				<div class="dungeon-card__top">
-					{#if d.area != null}
-						<span class="dungeon-card__area">Area {d.area}</span>
+					{#if d.area_label || d.area != null}
+						<span class="dungeon-card__area">Area {d.area_label ?? d.area}</span>
 					{/if}
 					{#if d.country}
 						<span class="dungeon-card__nat">{getNationalityFlag(d.country)} {d.country}</span>

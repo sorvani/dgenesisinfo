@@ -51,7 +51,8 @@ interface TimelineRow {
 }
 
 interface DungeonRow {
-	id: number; slug: string; name: string; area: number | null; country: string | null; region: string | null;
+	id: number; slug: string; name: string; area: number | null; area_label: string | null;
+	country: string | null; region: string | null;
 	discovered_date: string | null; floors: number | null; is_active: number; note: string | null;
 	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
 }
@@ -100,7 +101,7 @@ function toTimeline(t: TimelineRow): TimelineEvent {
 }
 
 function toDungeon(d: DungeonRow): Dungeon {
-	return { id: d.id, slug: d.slug, name: d.name, area: d.area, country: d.country, region: d.region, discovered_date: d.discovered_date, floors: d.floors, is_active: d.is_active, note: d.note, citation: cite(d) };
+	return { id: d.id, slug: d.slug, name: d.name, area: d.area, area_label: d.area_label, country: d.country, region: d.region, discovered_date: d.discovered_date, floors: d.floors, is_active: d.is_active, note: d.note, citation: cite(d) };
 }
 
 function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: CharacterStat[], orbs: CharacterOrb[]): Character {

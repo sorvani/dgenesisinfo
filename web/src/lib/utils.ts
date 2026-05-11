@@ -103,6 +103,7 @@ export interface Dungeon {
 	slug:            string;
 	name:            string;
 	area:            number | null;
+	area_label:      string | null;
 	country:         string | null;
 	region:          string | null;
 	discovered_date: string | null;
