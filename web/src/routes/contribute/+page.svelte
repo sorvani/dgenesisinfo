@@ -112,6 +112,10 @@
 			c_isExplorer = c.is_explorer === 1;
 			c_inWdarl   = c.in_wdarl === 1;
 			c_isPublic  = c.is_public === 1;
+			cite_vol         = c.cite_first_known?.volume   ?? '';
+			cite_ch          = c.cite_first_known?.chapter  ?? '';
+			cite_part        = c.cite_first_known?.jnc_part ?? '';
+			cite_source_type = c.cite_first_known?.source_type ?? null;
 		} else if (entityType === 'orb') {
 			const o = data.orbs.find(o => o.id === entityId);
 			if (!o) return;
@@ -129,12 +133,20 @@
 			d_floors    = d.floors;
 			d_isActive  = d.is_active === 1;
 			d_note      = d.note ?? '';
+			cite_vol         = d.citation?.volume   ?? '';
+			cite_ch          = d.citation?.chapter  ?? '';
+			cite_part        = d.citation?.jnc_part ?? '';
+			cite_source_type = d.citation?.source_type ?? null;
 		} else if (entityType === 'monster') {
 			const m = data.monsters.find(m => m.id === entityId);
 			if (!m) return;
 			m_name     = m.name;
 			m_category = m.category ?? 'Unknown';
 			m_note     = m.note ?? '';
+			cite_vol         = m.citation?.volume   ?? '';
+			cite_ch          = m.citation?.chapter  ?? '';
+			cite_part        = m.citation?.jnc_part ?? '';
+			cite_source_type = m.citation?.source_type ?? null;
 		}
 	});
 
