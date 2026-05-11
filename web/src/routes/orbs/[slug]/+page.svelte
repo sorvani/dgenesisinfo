@@ -41,7 +41,7 @@
 	{#if orb.drop_rates.length || data.user}
 		<div class="data-section">
 			<div class="section-head-row">
-				<p class="section-heading">Drop Rates</p>
+				<p class="section-heading">Dropped By</p>
 				{#if data.user}
 					<a href="/contribute?type=orb_drop_rate&op=insert&orb_id={orb.id}" class="action-add action-add--inline">+ Add</a>
 				{/if}
@@ -186,5 +186,36 @@
 		border-color: var(--accent);
 		color: var(--accent);
 		text-decoration: none;
+	}
+
+	.section-head-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.action-add--inline { padding: 0.15rem 0.55rem; font-size: 0.75rem; }
+
+	.row-edit-col { width: 1px; white-space: nowrap; text-align: right; }
+
+	.row-edit {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25rem;
+		color: var(--text-3);
+		text-decoration: none;
+		border-radius: var(--radius);
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.row-edit:hover { background: var(--bg-subtle); color: var(--accent); text-decoration: none; }
+
+	.empty-section {
+		font-size: 0.875rem;
+		color: var(--text-3);
+		font-style: italic;
+		margin-top: 0.75rem;
 	}
 </style>
