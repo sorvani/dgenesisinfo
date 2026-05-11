@@ -8,7 +8,8 @@ import type {
 interface CharRow {
 	id: number; slug: string; first_name: string | null; last_name: string | null;
 	moniker: string | null; nationality: string | null; date_first_known: string | null;
-	is_public: number; in_wdarl: number; area: number | null;
+	cite_first_known_volume: string | null; cite_first_known_chapter: string | null; cite_first_known_jnc_part: string | null;
+	is_public: number; is_explorer: number; in_wdarl: number; area: number | null;
 	birthday: string | null; sex: string | null; note: string | null; tags: string | null;
 }
 
@@ -93,9 +94,10 @@ function toDungeon(d: DungeonRow): Dungeon {
 function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: CharacterStat[], orbs: CharacterOrb[]): Character {
 	return {
 		...row,
-		tags:     JSON.parse(row.tags ?? '[]'),
-		rankings: rankings.filter(r => r.character_id === row.id),
-		stats:    stats.filter(s => s.character_id === row.id),
+		tags:             JSON.parse(row.tags ?? '[]'),
+		cite_first_known: { volume: row.cite_first_known_volume, chapter: row.cite_first_known_chapter, jnc_part: row.cite_first_known_jnc_part },
+		rankings:  rankings.filter(r => r.character_id === row.id),
+		stats:     stats.filter(s => s.character_id === row.id),
 		orbs_used: orbs.filter(o => o.character_id === row.id),
 	};
 }

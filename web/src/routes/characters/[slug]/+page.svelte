@@ -15,11 +15,7 @@
 	}
 
 	const latestRanking      = $derived(getHistoricalRankingAt(c.rankings));
-	const firstKnownCitation = $derived(
-		c.rankings.length
-			? [...c.rankings].sort((a, b) => getCitationScore(a.citation) - getCitationScore(b.citation))[0].citation
-			: null
-	);
+	const firstKnownCitation = $derived(c.cite_first_known?.volume ? c.cite_first_known : null);
 
 	// Most recent first — rankings use citation score as the sort key
 	const sortedRankings = $derived(
@@ -96,10 +92,12 @@
 		{#if c.date_first_known}
 			<div class="meta-chip">
 				<span class="meta-chip__label">First Known</span>
-				<span class="meta-chip__value">{formatDate(c.date_first_known)}</span>
-				{#if firstKnownCitation?.volume}
-					<span class="badge badge--citation" style="margin-top: 0.2rem; align-self: flex-start;">{formatCitation(firstKnownCitation)}</span>
-				{/if}
+				<div class="meta-chip__value-row">
+					<span class="meta-chip__value">{formatDate(c.date_first_known)}</span>
+					{#if firstKnownCitation?.volume}
+						<span class="badge badge--citation">{formatCitation(firstKnownCitation)}</span>
+					{/if}
+				</div>
 			</div>
 		{/if}
 	</div>
@@ -341,6 +339,13 @@
 	.meta-chip--accent .meta-chip__value {
 		color: var(--accent);
 		font-family: var(--font-mono);
+	}
+
+	.meta-chip__value-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		white-space: nowrap;
 	}
 
 	/* ── Collapsible sections ── */

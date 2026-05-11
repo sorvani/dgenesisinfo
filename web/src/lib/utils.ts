@@ -52,6 +52,7 @@ export interface Character {
 	moniker:          string | null;
 	nationality:      string | null;
 	date_first_known: string | null;
+	cite_first_known: Citation;
 	is_public:        number;
 	is_explorer:      number;
 	in_wdarl:         number;
