@@ -98,7 +98,7 @@ a:hover { color: var(--accent-dark); text-decoration: underline; }
 }
 
 .page {
-	padding: 2.5rem 0 4rem;
+	padding: 2.5rem 0 1.5rem;
 }
 
 /* ── Nav ─────────────────────────────────────────────────────────────────────── */
