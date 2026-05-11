@@ -14,7 +14,12 @@
 		return orbs.find(o => o.id === orbId) ?? null;
 	}
 
-	const latestRanking = $derived(getHistoricalRankingAt(c.rankings));
+	const latestRanking      = $derived(getHistoricalRankingAt(c.rankings));
+	const firstKnownCitation = $derived(
+		c.rankings.length
+			? [...c.rankings].sort((a, b) => getCitationScore(a.citation) - getCitationScore(b.citation))[0].citation
+			: null
+	);
 
 	// Most recent first — rankings use citation score as the sort key
 	const sortedRankings = $derived(
@@ -40,38 +45,64 @@
 	</a>
 
 	<!-- ── Hero header ── -->
-	<div class="char-hero">
-		{#if c.is_explorer && latestRanking}
-			<div class="char-hero__rank">{formatRank(latestRanking)}</div>
+	<div class="char-hero__name-row">
+		<h1 class="char-name">{getFullName(c)}</h1>
+		{#if c.in_wdarl && !c.is_public}
+			<span class="anon-badge">✦ Anonymous on WDARL</span>
 		{/if}
-
-		<div class="char-hero__body">
-			<div class="char-hero__name-row">
-				<h1 class="char-name">{getFullName(c)}</h1>
-				{#if c.in_wdarl && !c.is_public}
-					<span class="anon-badge">Anonymous on WDARL</span>
-				{/if}
-			</div>
-			{#if c.moniker}
-				<p class="char-moniker">"{c.moniker}"</p>
-			{/if}
-		</div>
 	</div>
-
-	<!-- Meta row -->
-	<div class="char-meta">
-		{#if c.sex}<span>{c.sex}</span>{/if}
-		{#if c.nationality}<span>{getNationalityFlag(c.nationality)} {c.nationality}</span>{/if}
-		{#if c.birthday}<span>{c.birthday}</span>{/if}
-		{#if c.date_first_known}<span>First known {formatDate(c.date_first_known)}</span>{/if}
-		{#if c.area}<span>Area {c.area}</span>{/if}
-	</div>
+	{#if c.moniker}
+		<p class="char-moniker">"{c.moniker}"</p>
+	{/if}
 
 	{#if c.tags?.length}
 		<div class="char-tags">
 			{#each c.tags as tag}<span class="tag">{tag}</span>{/each}
 		</div>
 	{/if}
+
+	<!-- Metadata chips -->
+	<div class="meta-chips">
+		{#if c.is_explorer && latestRanking}
+			<div class="meta-chip meta-chip--accent">
+				<span class="meta-chip__label">Rank</span>
+				<span class="meta-chip__value">{formatRank(latestRanking)}</span>
+			</div>
+		{/if}
+		{#if c.sex}
+			<div class="meta-chip">
+				<span class="meta-chip__label">Sex</span>
+				<span class="meta-chip__value">{c.sex === 'Male' ? '♂' : c.sex === 'Female' ? '♀' : c.sex}</span>
+			</div>
+		{/if}
+		{#if c.nationality}
+			<div class="meta-chip">
+				<span class="meta-chip__label">Nationality</span>
+				<span class="meta-chip__value">{getNationalityFlag(c.nationality)} {c.nationality}</span>
+			</div>
+		{/if}
+		{#if c.area}
+			<div class="meta-chip">
+				<span class="meta-chip__label">Area</span>
+				<span class="meta-chip__value">{c.area}</span>
+			</div>
+		{/if}
+		{#if c.birthday}
+			<div class="meta-chip">
+				<span class="meta-chip__label">Birthday</span>
+				<span class="meta-chip__value">🎂 {c.birthday}</span>
+			</div>
+		{/if}
+		{#if c.date_first_known}
+			<div class="meta-chip">
+				<span class="meta-chip__label">First Known</span>
+				<span class="meta-chip__value">{formatDate(c.date_first_known)}</span>
+				{#if firstKnownCitation?.volume}
+					<span class="badge badge--citation" style="margin-top: 0.2rem; align-self: flex-start;">{formatCitation(firstKnownCitation)}</span>
+				{/if}
+			</div>
+		{/if}
+	</div>
 
 	<!-- ── Note ── -->
 	{#if c.note}
@@ -215,31 +246,12 @@
 
 <style>
 	/* ── Hero ── */
-	.char-hero {
-		display: flex;
-		align-items: flex-start;
-		gap: 1.25rem;
-		margin-bottom: 1rem;
-	}
-
-	.char-hero__rank {
-		font-family: var(--font-mono);
-		font-size: 3.5rem;
-		font-weight: 900;
-		color: var(--accent);
-		line-height: 1;
-		letter-spacing: -0.04em;
-		flex-shrink: 0;
-		padding-top: 0.1em;
-	}
-
-	.char-hero__body { flex: 1; }
-
 	.char-hero__name-row {
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
 		flex-wrap: wrap;
+		margin-bottom: 0.25rem;
 	}
 
 	.char-name {
@@ -254,7 +266,7 @@
 		font-weight: 700;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		padding: 0.25em 0.6em;
+		padding: 0.3em 0.75em;
 		border-radius: 999px;
 		background: #fee2e2;
 		color: #b91c1c;
@@ -266,31 +278,15 @@
 		font-size: 1.0625rem;
 		color: var(--text-3);
 		font-style: italic;
-		margin-top: 0.25rem;
+		margin-bottom: 0.5rem;
 	}
 
-	/* ── Meta row ── */
-	.char-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 0;
-		margin-bottom: 0.75rem;
-		font-size: 0.9375rem;
-		color: var(--text-2);
-	}
-
-	.char-meta span + span::before {
-		content: ' · ';
-		color: var(--text-3);
-		margin: 0 0.4rem;
-	}
-
-	/* ── Tags ── */
+	/* ── Tags (near name) ── */
 	.char-tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.375rem;
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
 	}
 
 	.tag {
@@ -300,6 +296,51 @@
 		border: 1px solid var(--border);
 		border-radius: 999px;
 		color: var(--text-3);
+	}
+
+	/* ── Metadata chips ── */
+	.meta-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.meta-chip {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		padding: 0.4rem 0.75rem;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+	}
+
+	.meta-chip--accent {
+		background: var(--accent-bg);
+		border-color: #f0c090;
+	}
+
+	.meta-chip__label {
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--text-3);
+	}
+
+	.meta-chip--accent .meta-chip__label { color: var(--accent-dark); }
+
+	.meta-chip__value {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: var(--text);
+		line-height: 1.2;
+	}
+
+	.meta-chip--accent .meta-chip__value {
+		color: var(--accent);
+		font-family: var(--font-mono);
 	}
 
 	/* ── Collapsible sections ── */
