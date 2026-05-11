@@ -19,7 +19,7 @@
 			setTimeout(() => {
 				if (window.history.length > 1) history.back();
 				else window.location.href = '/';
-			}, 3000);
+			}, 2000);
 		}
 	});
 
