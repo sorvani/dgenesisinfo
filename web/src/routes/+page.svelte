@@ -198,7 +198,7 @@
 	/* Anonymous rows */
 	.anon-star {
 		color: var(--accent);
-		font-size: 0.625rem;
+		font-size: 0.9rem;
 		margin-right: 0.3rem;
 		vertical-align: middle;
 	}
