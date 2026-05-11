@@ -66,6 +66,30 @@
 			</div>
 		</div>
 	{/if}
+
+	{#if data.beasts.length}
+		<div class="data-section">
+			<p class="section-heading">Creatures Found Here</p>
+			<div class="chip-group">
+				{#each data.beasts as b}
+					<a href="/bestiary/{b.slug}" class="entity-chip">{b.name}</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
+
+	{#if data.orbs.length}
+		<div class="data-section">
+			<p class="section-heading">Orbs Found Here</p>
+			<div class="chip-group">
+				{#each data.orbs as o}
+					<a href="/orbs/{o.slug}" class="entity-chip">
+						{o.orb_name}{#if o.floor}<span class="chip-floor">{@html o.floor}</span>{/if}
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -116,6 +140,18 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
+	}
+
+	.chip-group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.chip-floor {
+		font-size: 0.75rem;
+		color: var(--text-3);
+		margin-left: 0.35rem;
 	}
 
 	.inactive-note {
