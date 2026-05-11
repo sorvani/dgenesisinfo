@@ -7,7 +7,8 @@
 	let { data, children }: { data: LayoutData; children: import('svelte').Snippet } = $props();
 
 	type Theme = 'auto' | 'light' | 'dark';
-	let theme = $state<Theme>('auto');
+	let theme      = $state<Theme>('auto');
+	let userMenuOpen = $state(false);
 
 	onMount(() => {
 		theme = (localStorage.getItem('theme') as Theme) || 'auto';
@@ -24,8 +25,14 @@
 		}
 	}
 
+	function closeMenu(e: MouseEvent) {
+		if (!(e.target as Element).closest('.user-menu')) userMenuOpen = false;
+	}
+
 	const themeLabel: Record<Theme, string> = { auto: 'Auto', light: 'Light', dark: 'Dark' };
 </script>
+
+<svelte:window onclick={closeMenu} />
 
 <nav class="site-nav">
 	<div class="site-nav__inner">
@@ -38,27 +45,35 @@
 			<a href="/dungeons">Dungeons</a>
 		</div>
 		<div class="site-nav__auth">
+			<a class="jnc-link" href="https://j-novel.club/series/d-genesis-three-years-after-the-dungeons-appeared" target="_blank" rel="noopener noreferrer">
+				Read @ J-Novel Club ↗
+			</a>
+
 			{#if data.user}
-				{#if data.user.isAdmin}
-					<a href="/admin" class="btn btn--ghost" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Admin</a>
-				{/if}
-				<a href="/contribute" class="btn btn--ghost" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Contribute</a>
-				<form method="POST" action="/auth/logout">
-					<button type="submit" class="btn btn--ghost" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">
-						{data.user.githubUsername} · Log out
+				<div class="user-menu">
+					<button class="user-menu__trigger" onclick={(e) => { e.stopPropagation(); userMenuOpen = !userMenuOpen; }}>
+						{data.user.githubUsername} ▾
 					</button>
-				</form>
+					{#if userMenuOpen}
+						<div class="user-menu__dropdown">
+							{#if data.user.isAdmin}
+								<a href="/admin" class="user-menu__item" onclick={() => userMenuOpen = false}>Admin</a>
+								<div class="user-menu__divider"></div>
+							{/if}
+							<form method="POST" action="/auth/logout">
+								<button type="submit" class="user-menu__item user-menu__item--btn">Log out</button>
+							</form>
+						</div>
+					{/if}
+				</div>
 			{:else}
-				<a href="/auth/login" class="btn btn--primary" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in with GitHub</a>
+				<a href="/auth/login" class="btn btn--primary" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in</a>
 			{/if}
+
 			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
-				{#if theme === 'light'}
-					<Sun size={16} />
-				{:else if theme === 'dark'}
-					<Moon size={16} />
-				{:else}
-					<SunMoon size={16} />
-				{/if}
+				{#if theme === 'light'}<Sun size={16} />
+				{:else if theme === 'dark'}<Moon size={16} />
+				{:else}<SunMoon size={16} />{/if}
 			</button>
 		</div>
 	</div>
@@ -76,6 +91,69 @@
 </footer>
 
 <style>
+	.jnc-link {
+		font-size: 0.8125rem;
+		color: var(--accent);
+		text-decoration: none;
+		white-space: nowrap;
+		opacity: 0.85;
+	}
+
+	.jnc-link:hover { opacity: 1; text-decoration: none; }
+
+	/* User menu */
+	.user-menu { position: relative; }
+
+	.user-menu__trigger {
+		padding: 0.3rem 0.75rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--text-2);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		cursor: pointer;
+		white-space: nowrap;
+		transition: border-color 0.15s, color 0.15s;
+	}
+
+	.user-menu__trigger:hover { border-color: var(--accent); color: var(--text); }
+
+	.user-menu__dropdown {
+		position: absolute;
+		top: calc(100% + 0.375rem);
+		right: 0;
+		min-width: 140px;
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-hover);
+		z-index: 200;
+		overflow: hidden;
+	}
+
+	.user-menu__item {
+		display: block;
+		width: 100%;
+		padding: 0.6rem 1rem;
+		font-size: 0.875rem;
+		color: var(--text);
+		text-decoration: none;
+		text-align: left;
+		background: none;
+		border: none;
+		cursor: pointer;
+		transition: background 0.1s;
+	}
+
+	.user-menu__item:hover { background: var(--bg-subtle); text-decoration: none; }
+
+	.user-menu__divider {
+		height: 1px;
+		background: var(--border-soft);
+		margin: 0;
+	}
+
 	.theme-btn {
 		display: inline-flex;
 		align-items: center;
