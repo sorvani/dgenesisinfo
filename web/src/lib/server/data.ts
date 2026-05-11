@@ -9,7 +9,7 @@ interface CharRow {
 	id: number; slug: string; first_name: string | null; last_name: string | null;
 	moniker: string | null; /* stored as JSON array */
 	nationality: string | null; date_first_known: string | null;
-	cite_first_known_volume: string | null; cite_first_known_chapter: string | null; cite_first_known_jnc_part: string | null;
+	cite_first_known_volume: string | null; cite_first_known_chapter: string | null; cite_first_known_jnc_part: string | null; cite_first_known_source_type: string | null;
 	is_public: number; is_explorer: number; in_wdarl: number; area: number | null;
 	birthday: string | null; sex: string | null; note: string | null; tags: string | null;
 }
@@ -17,7 +17,7 @@ interface CharRow {
 interface RankRow {
 	id: number; character_id: number; rank: number | null; known_above_rank: number | null;
 	date_noted: string | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface StatRow {
@@ -25,13 +25,13 @@ interface StatRow {
 	scan_type: string | null; hp: number | null; mp: number | null; sp: number | null;
 	str: number | null; vit: number | null; int: number | null; agi: number | null;
 	dex: number | null; luc: number | null; stat_total: number | null; points_from_avg: number | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface CharOrbRow {
 	id: number; character_id: number; orb_id: number;
 	date_acquired: string | null; date_note: string | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface OrbRow {
@@ -43,25 +43,25 @@ interface DropRateRow {
 	id: number; orb_id: number; creature: string | null; dungeon: string | null;
 	dungeon_slug: string | null;
 	floor: string | null; favorable_outcomes: number | null; total_events: number | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface TimelineRow {
 	id: number; date_utc: string; date_label: string | null; display_time: number;
 	timezone: string | null; pre_history: number; event: string;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface DungeonRow {
 	id: number; slug: string; name: string; area: number | null; area_label: string | null;
 	country: string | null; region: string | null;
 	discovered_date: string | null; floors: number | null; is_active: number; note: string | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 interface MonsterRow {
 	id: number; slug: string; name: string; category: string | null; note: string | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 	drop_count: number;
 }
 
@@ -69,13 +69,13 @@ interface MonsterDropRow {
 	orb_id: number; orb_slug: string; orb_name: string;
 	dungeon: string | null; dungeon_slug: string | null; floor: string | null;
 	favorable_outcomes: number | null; total_events: number | null;
-	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null;
 }
 
 // ─── Reshape helpers ──────────────────────────────────────────────────────────
 
-function cite(row: { cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null }): Citation {
-	return { volume: row.cite_volume, chapter: row.cite_chapter, jnc_part: row.cite_jnc_part };
+function cite(row: { cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null; cite_source_type: string | null }): Citation {
+	return { volume: row.cite_volume, chapter: row.cite_chapter, jnc_part: row.cite_jnc_part, source_type: row.cite_source_type };
 }
 
 function toRanking(r: RankRow): CharacterRanking {
@@ -113,7 +113,7 @@ function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: Ch
 		...rest,
 		monikers:         JSON.parse(moniker ?? '[]') as string[],
 		tags:             JSON.parse(tags ?? '[]') as string[],
-		cite_first_known: { volume: row.cite_first_known_volume, chapter: row.cite_first_known_chapter, jnc_part: row.cite_first_known_jnc_part },
+		cite_first_known: { volume: row.cite_first_known_volume, chapter: row.cite_first_known_chapter, jnc_part: row.cite_first_known_jnc_part, source_type: row.cite_first_known_source_type },
 		rankings:  rankings.filter(r => r.character_id === row.id),
 		stats:     stats.filter(s => s.character_id === row.id),
 		orbs_used: orbs.filter(o => o.character_id === row.id),

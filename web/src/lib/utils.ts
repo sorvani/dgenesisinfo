@@ -1,9 +1,10 @@
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface Citation {
-	volume:    string | null;
-	chapter:   string | null;
-	jnc_part:  string | null;
+	volume:      string | null;
+	chapter:     string | null;
+	jnc_part:    string | null;
+	source_type: string | null;  // 'Light Novel' | 'Manga' | null
 }
 
 export interface CharacterRanking {

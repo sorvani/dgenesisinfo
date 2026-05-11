@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS character_rankings (
     date_noted       TEXT,        -- YYYY-MM-DD
     cite_volume      TEXT,
     cite_chapter     TEXT,
-    cite_jnc_part    TEXT
+    cite_jnc_part    TEXT,
+    cite_source_type TEXT   -- 'Light Novel' | 'Manga' | NULL
 );
 
 CREATE INDEX IF NOT EXISTS ix_char_rankings_character ON character_rankings(character_id);
@@ -55,7 +56,8 @@ CREATE TABLE IF NOT EXISTS character_stats (
     points_from_avg INTEGER,
     cite_volume     TEXT,
     cite_chapter    TEXT,
-    cite_jnc_part   TEXT
+    cite_jnc_part   TEXT,
+    cite_source_type TEXT
 );
 
 CREATE INDEX IF NOT EXISTS ix_char_stats_character ON character_stats(character_id);
@@ -85,7 +87,8 @@ CREATE TABLE IF NOT EXISTS orb_drop_rates (
     total_events       REAL,
     cite_volume        TEXT,
     cite_chapter       TEXT,
-    cite_jnc_part      TEXT
+    cite_jnc_part      TEXT,
+    cite_source_type   TEXT
 );
 
 CREATE INDEX IF NOT EXISTS ix_orb_drop_rates_orb ON orb_drop_rates(orb_id);
@@ -99,7 +102,8 @@ CREATE TABLE IF NOT EXISTS character_orbs (
     date_note    TEXT,
     cite_volume  TEXT,
     cite_chapter TEXT,
-    cite_jnc_part TEXT
+    cite_jnc_part TEXT,
+    cite_source_type TEXT
 );
 
 CREATE INDEX IF NOT EXISTS ix_char_orbs_character ON character_orbs(character_id);
@@ -119,7 +123,8 @@ CREATE TABLE IF NOT EXISTS timeline_events (
     event        TEXT    NOT NULL,  -- HTML ok
     cite_volume  TEXT,
     cite_chapter TEXT,
-    cite_jnc_part TEXT
+    cite_jnc_part TEXT,
+    cite_source_type TEXT
 );
 
 -- ─────────────────────────────────────────────────────────────────────────────
@@ -139,6 +144,7 @@ CREATE TABLE IF NOT EXISTS dungeons (
     cite_volume      TEXT,
     cite_chapter     TEXT,
     cite_jnc_part    TEXT,
+    cite_source_type TEXT,
     created_utc      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
     modified_utc     TEXT
 );
@@ -210,6 +216,7 @@ CREATE TABLE IF NOT EXISTS monsters (
     cite_volume  TEXT,
     cite_chapter TEXT,
     cite_jnc_part TEXT,
+    cite_source_type TEXT,
     created_utc  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
     modified_utc TEXT
 );

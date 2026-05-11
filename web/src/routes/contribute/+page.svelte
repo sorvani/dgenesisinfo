@@ -88,9 +88,10 @@
 	let dr_total    = $state<number | null>(null);
 
 	// ── Shared citation ───────────────────────────────────────────────────────
-	let cite_vol  = $state('');
-	let cite_ch   = $state('');
-	let cite_part = $state('');
+	let cite_vol         = $state('');
+	let cite_ch          = $state('');
+	let cite_part        = $state('');
+	let cite_source_type = $state<string | null>(null);
 
 	// Pre-fill from server data when editing
 	$effect(() => {
@@ -143,7 +144,7 @@
 	function removeTag(i: number) { c_tags = c_tags.filter((_, idx) => idx !== i); }
 
 	function buildProposedData(): string {
-		const cite = { volume: cite_vol || null, chapter: cite_ch || null, jnc_part: cite_part || null };
+		const cite = { volume: cite_vol || null, chapter: cite_ch || null, jnc_part: cite_part || null, source_type: cite_source_type || null };
 
 		if (entityType === 'character') return JSON.stringify({
 			first_name: c_firstName || null, last_name: c_lastName || null,
@@ -617,6 +618,14 @@
 				<div class="field field--sm">
 					<label class="field-label">JNC Part</label>
 					<input type="text" placeholder="e.g. 2" bind:value={cite_part} />
+				</div>
+				<div class="field field--sm">
+					<label class="field-label">Source Type</label>
+					<select bind:value={cite_source_type}>
+						<option value={null}>—</option>
+						<option value="Light Novel">Light Novel</option>
+						<option value="Manga">Manga</option>
+					</select>
 				</div>
 			</div>
 		</div>

@@ -70,7 +70,7 @@
 					{/if}
 				</div>
 			{:else}
-				<a href="/auth/login" class="btn btn--primary btn--auth" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in</a>
+				<a href="/auth/login" class="btn btn--primary btn--auth" style="padding: 0.3rem 0.75rem; font-size: 0.8125rem;">Log in with GitHub</a>
 			{/if}
 
 			<button class="theme-btn" onclick={cycleTheme} title="Theme: {themeLabel[theme]}">
@@ -100,7 +100,7 @@
 					<button type="submit" class="mobile-menu__btn">Log out ({data.user.githubUsername})</button>
 				</form>
 			{:else}
-				<a href="/auth/login" onclick={() => mobileMenuOpen = false}>Log in</a>
+				<a href="/auth/login" onclick={() => mobileMenuOpen = false}>Log in with GitHub</a>
 			{/if}
 		</div>
 	{/if}
