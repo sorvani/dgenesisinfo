@@ -341,9 +341,9 @@
 			</div>
 
 			<div class="check-row mt">
-				<label class="check-label"><input type="checkbox" bind:checked={c_isExplorer} /> Is Explorer</label>
-				<label class="check-label"><input type="checkbox" bind:checked={c_inWdarl} /> In WDARL</label>
-				<label class="check-label"><input type="checkbox" bind:checked={c_isPublic} /> Public on WDARL</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={c_isExplorer} /><span class="toggle-track"></span> Is Explorer</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={c_inWdarl} /><span class="toggle-track"></span> In WDARL</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={c_isPublic} /><span class="toggle-track"></span> Public on WDARL</label>
 			</div>
 		</div>
 		{/if}
@@ -400,7 +400,7 @@
 				<textarea rows="4" bind:value={d_note}></textarea>
 			</div>
 			<div class="check-row mt">
-				<label class="check-label"><input type="checkbox" bind:checked={d_isActive} /> Active dungeon</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={d_isActive} /><span class="toggle-track"></span> Active dungeon</label>
 			</div>
 		</div>
 		{/if}
@@ -455,8 +455,8 @@
 				<textarea rows="4" bind:value={t_event}></textarea>
 			</div>
 			<div class="check-row mt">
-				<label class="check-label"><input type="checkbox" bind:checked={t_displayTime} /> Show time in display</label>
-				<label class="check-label"><input type="checkbox" bind:checked={t_preHistory} /> Pre-History event</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={t_displayTime} /><span class="toggle-track"></span> Show time in display</label>
+				<label class="toggle-label"><input type="checkbox" bind:checked={t_preHistory} /><span class="toggle-track"></span> Pre-History event</label>
 			</div>
 		</div>
 		{/if}
@@ -728,14 +728,42 @@
 		gap: 1.25rem;
 	}
 
-	.check-label {
+	.toggle-label {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.5rem;
 		font-size: 0.875rem;
 		color: var(--text-2);
 		cursor: pointer;
+		user-select: none;
 	}
+
+	.toggle-label input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+	.toggle-track {
+		position: relative;
+		width: 36px;
+		height: 20px;
+		background: var(--border);
+		border-radius: 10px;
+		flex-shrink: 0;
+		transition: background 0.2s;
+	}
+
+	.toggle-track::after {
+		content: '';
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: #fff;
+		transition: transform 0.2s;
+	}
+
+	.toggle-label input:checked ~ .toggle-track { background: var(--accent); }
+	.toggle-label input:checked ~ .toggle-track::after { transform: translateX(16px); }
 
 	.array-add {
 		font-size: 0.6875rem;
