@@ -1,19 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { getFullName, formatProbability, formatCooldown, formatCitation } from '$lib/utils';
+	import { renderMd } from '$lib/markdown';
 	let { data }: { data: PageData } = $props();
 	const orb = $derived(data.orb);
-
-	interface Part { block: boolean; content: string; }
-
-	function formatEffects(html: string | null): Part[] {
-		if (!html) return [];
-		const blockTags = /^<(div|figure|table|ul|ol|img)/i;
-		return html.split(/<br\s*\/?>/gi)
-			.map(s => s.trim())
-			.filter(Boolean)
-			.map(s => ({ block: blockTags.test(s), content: s }));
-	}
 </script>
 
 <svelte:head><title>{orb.orb_name} — D-Genesis Info</title></svelte:head>
@@ -26,14 +16,8 @@
 	{#if orb.known_effects}
 		<div class="data-section">
 			<p class="section-heading">Known Effects</p>
-			<div class="card">
-				{#each formatEffects(orb.known_effects) as part}
-					{#if part.block}
-						{@html part.content}
-					{:else}
-						<p class="rich-text">{@html part.content}</p>
-					{/if}
-				{/each}
+			<div class="card md-content">
+				{@html renderMd(orb.known_effects)}
 			</div>
 		</div>
 	{/if}
@@ -41,14 +25,8 @@
 	{#if orb.note}
 		<div class="data-section">
 			<p class="section-heading">Notes</p>
-			<div class="notes-body">
-				{#each formatEffects(orb.note) as part}
-					{#if part.block}
-						{@html part.content}
-					{:else}
-						<p class="note-line">{@html part.content}</p>
-					{/if}
-				{/each}
+			<div class="md-content note-content">
+				{@html renderMd(orb.note)}
 			</div>
 		</div>
 	{/if}
@@ -102,9 +80,7 @@
 			<p class="section-heading">Known Users</p>
 			<div class="users-grid">
 				{#each data.users as c}
-					<a href="/characters/{c.slug}" class="user-chip">
-						{getFullName(c)}
-					</a>
+					<a href="/characters/{c.slug}" class="user-chip">{getFullName(c)}</a>
 				{/each}
 			</div>
 		</div>
@@ -112,46 +88,46 @@
 </div>
 
 <style>
-	.notes-body {
-		display: flex;
-		flex-direction: column;
-		gap: 0.375rem;
+	/* Markdown-rendered content */
+	.md-content :global(p) {
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		color: var(--text-2);
+		margin: 0;
 	}
 
-	.note-line {
-		font-size: 0.875rem;
-		color: var(--text-3);
-		line-height: 1.6;
-	}
+	.md-content :global(p + p) { margin-top: 0.6rem; }
 
-	.note-line :global(code) {
+	.md-content :global(code) {
 		font-family: var(--font-mono);
 		font-size: 0.8125rem;
 		background: var(--bg-subtle);
 		padding: 0.1em 0.35em;
 		border-radius: 3px;
-		color: var(--text-2);
+		color: var(--text);
 	}
 
-	.card .rich-text + .rich-text {
-		margin-top: 0.5rem;
-	}
-
-	/* Image rows embedded in notes/effects */
-	:global(.note-images) {
-		display: flex;
-		gap: 1rem;
-		align-items: flex-end;
-		margin-top: 0.75rem;
-		flex-wrap: wrap;
-	}
-
-	:global(.note-images img) {
+	.md-content :global(img) {
 		height: 140px;
 		width: auto;
 		border-radius: var(--radius);
 		border: 1px solid var(--border);
+		display: inline-block;
+		margin-top: 0.75rem;
+		margin-right: 0.75rem;
 	}
+
+	.md-content :global(ul), .md-content :global(ol) {
+		padding-left: 1.25rem;
+		font-size: 0.9375rem;
+		color: var(--text-2);
+	}
+
+	.md-content :global(li + li) { margin-top: 0.25rem; }
+
+	/* Notes: muted, no card box */
+	.note-content :global(p) { color: var(--text-3); font-size: 0.875rem; }
+	.note-content :global(code) { color: var(--text-2); }
 
 	.users-grid {
 		display: flex;
