@@ -42,6 +42,17 @@
 	function opClass(op: string) {
 		return op === 'insert' ? 'op op--insert' : op === 'update' ? 'op op--update' : 'op op--delete';
 	}
+
+	// Prefix field keys with entity context so a generic name like "citation"
+	// makes its purpose obvious in the diff.
+	function displayKey(entityType: string, key: string): string {
+		if (entityType === 'character_ranking') return `ranking - ${key}`;
+		if (entityType === 'character_stat')    return `stat - ${key}`;
+		if (entityType === 'character_orb')     return `orb - ${key}`;
+		if (entityType === 'orb_drop_rate')     return `drop rate - ${key}`;
+		if (entityType === 'character' && key === 'citation') return `first known - ${key}`;
+		return key;
+	}
 </script>
 
 <svelte:head><title>Admin — D-Genesis Info</title></svelte:head>
@@ -85,7 +96,7 @@
 							<tbody>
 								{#each fields as f}
 									<tr class:changed={f.changed && s.operation === 'update'}>
-										<td class="diff-key">{f.key}</td>
+										<td class="diff-key">{displayKey(s.entity_type, f.key)}</td>
 										{#if s.operation === 'update'}
 											<td class="diff-current">{fmt(f.current)}</td>
 										{/if}
