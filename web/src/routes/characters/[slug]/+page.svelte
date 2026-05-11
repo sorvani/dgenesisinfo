@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import {
 		getFullName, getNationalityFlag, formatDate, formatRank,
-		getHistoricalRankingAt, formatCitation, formatProbability, formatCooldown
+		getHistoricalRankingAt, formatCitation, getCitationScore
 	} from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 
@@ -10,84 +10,68 @@
 	const c    = $derived(data.character);
 	const orbs = $derived(data.orbs);
 
-	// Look up orb details by DB id
 	function getOrb(orbId: number) {
 		return orbs.find(o => o.id === orbId) ?? null;
 	}
 
 	const latestRanking = $derived(getHistoricalRankingAt(c.rankings));
+
+	// Most recent first — rankings use citation score as the sort key
+	const sortedRankings = $derived(
+		[...c.rankings].sort((a, b) => getCitationScore(b.citation) - getCitationScore(a.citation))
+	);
+
+	// Most recent first — stats use date then sequence
+	const sortedStats = $derived(
+		[...c.stats].sort((a, b) => {
+			const da = a.date_noted ?? '', db = b.date_noted ?? '';
+			if (db !== da) return db.localeCompare(da);
+			return (b.date_sequence ?? 1) - (a.date_sequence ?? 1);
+		})
+	);
 </script>
 
 <svelte:head><title>{getFullName(c)} — D-Genesis Info</title></svelte:head>
 
 <div class="container page">
 
-	<!-- Back link -->
 	<a href={c.is_explorer ? '/explorers' : '/characters'} class="back-link">
 		← {c.is_explorer ? 'Explorers' : 'Characters'}
 	</a>
 
-	<!-- ── Header ── -->
-	<div class="char-header">
-		<div class="char-header__title-row">
-			<h1 class="page-title">{getFullName(c)}</h1>
-			{#if c.in_wdarl && !c.is_public}
-				<span class="badge badge--anon">Anonymous on WDARL</span>
-			{/if}
-		</div>
-		{#if c.moniker}
-			<p class="char-moniker">"{c.moniker}"</p>
+	<!-- ── Hero header ── -->
+	<div class="char-hero">
+		{#if c.is_explorer && latestRanking}
+			<div class="char-hero__rank">{formatRank(latestRanking)}</div>
 		{/if}
 
-		<!-- Key facts row -->
-		<div class="char-facts">
-			{#if c.is_explorer && latestRanking}
-				<div class="fact">
-					<span class="fact__label">Rank</span>
-					<span class="fact__value accent">{formatRank(latestRanking)}</span>
-				</div>
-			{/if}
-			{#if c.sex}
-				<div class="fact">
-					<span class="fact__label">Sex</span>
-					<span class="fact__value">{c.sex}</span>
-				</div>
-			{/if}
-			{#if c.nationality}
-				<div class="fact">
-					<span class="fact__label">Nationality</span>
-					<span class="fact__value">{getNationalityFlag(c.nationality)} {c.nationality}</span>
-				</div>
-			{/if}
-			{#if c.birthday}
-				<div class="fact">
-					<span class="fact__label">Birthday</span>
-					<span class="fact__value">{c.birthday}</span>
-				</div>
-			{/if}
-			{#if c.date_first_known}
-				<div class="fact">
-					<span class="fact__label">First Known</span>
-					<span class="fact__value">{formatDate(c.date_first_known)}</span>
-				</div>
-			{/if}
-			{#if c.area}
-				<div class="fact">
-					<span class="fact__label">D-Card Area</span>
-					<span class="fact__value">{c.area}</span>
-				</div>
-			{/if}
-		</div>
-
-		<!-- Tags -->
-		{#if c.tags?.length}
-			<div class="char-tags">
-				{#each c.tags as tag}
-					<span class="tag">{tag}</span>
-				{/each}
+		<div class="char-hero__body">
+			<div class="char-hero__name-row">
+				<h1 class="char-name">{getFullName(c)}</h1>
+				{#if c.in_wdarl && !c.is_public}
+					<span class="anon-badge">Anonymous on WDARL</span>
+				{/if}
 			</div>
-		{/if}
+			{#if c.moniker}
+				<p class="char-moniker">"{c.moniker}"</p>
+			{/if}
+		</div>
 	</div>
+
+	<!-- Meta row -->
+	<div class="char-meta">
+		{#if c.sex}<span>{c.sex}</span>{/if}
+		{#if c.nationality}<span>{getNationalityFlag(c.nationality)} {c.nationality}</span>{/if}
+		{#if c.birthday}<span>{c.birthday}</span>{/if}
+		{#if c.date_first_known}<span>First known {formatDate(c.date_first_known)}</span>{/if}
+		{#if c.area}<span>Area {c.area}</span>{/if}
+	</div>
+
+	{#if c.tags?.length}
+		<div class="char-tags">
+			{#each c.tags as tag}<span class="tag">{tag}</span>{/each}
+		</div>
+	{/if}
 
 	<!-- ── Note ── -->
 	{#if c.note}
@@ -99,197 +83,209 @@
 		</div>
 	{/if}
 
-	<!-- ── Rankings (explorer only) ── -->
-	{#if c.is_explorer && c.rankings.length}
+	<!-- ── Rankings ── -->
+	{#if c.is_explorer && sortedRankings.length}
 		<div class="data-section">
-			<p class="section-heading">Rankings</p>
-			<div class="card" style="padding: 0; overflow: hidden;">
-				<table class="data-table">
-					<thead>
-						<tr>
-							<th>Rank</th>
-							<th>Known Above</th>
-							<th>Date Noted</th>
-							<th>Citation</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each c.rankings as r}
+			<details open>
+				<summary class="section-heading collapsible">Rankings</summary>
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
 							<tr>
-								<td class="rank-cell">{r.rank ? '#' + r.rank.toLocaleString() : '—'}</td>
-								<td>{r.known_above_rank ? r.known_above_rank.toLocaleString() : '—'}</td>
-								<td>{formatDate(r.date_noted)}</td>
-								<td>
-									{#if r.citation.volume}
-										<span class="badge badge--citation">{formatCitation(r.citation)}</span>
-									{:else}—{/if}
-								</td>
+								<th>Rank</th>
+								<th>Known Above</th>
+								<th>Date Noted</th>
+								<th>Citation</th>
 							</tr>
-						{/each}
-					</tbody>
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							{#each sortedRankings as r}
+								<tr>
+									<td class="rank-cell">{r.rank ? '#' + r.rank.toLocaleString() : '—'}</td>
+									<td>{r.known_above_rank ? r.known_above_rank.toLocaleString() : '—'}</td>
+									<td>{formatDate(r.date_noted)}</td>
+									<td>
+										{#if r.citation.volume}
+											<span class="badge badge--citation">{formatCitation(r.citation)}</span>
+										{:else}—{/if}
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</details>
 		</div>
 	{/if}
 
-	<!-- ── Stat readings (explorer only) ── -->
-	{#if c.is_explorer && c.stats.length}
+	<!-- ── Stats ── -->
+	{#if c.is_explorer && sortedStats.length}
 		<div class="data-section">
-			<p class="section-heading">Stat Readings</p>
-			<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto;">
-				<table class="data-table stat-table">
-					<thead>
-						<tr>
-							<th>Date</th>
-							<th>Type</th>
-							<th>HP</th>
-							<th>MP</th>
-							<th>SP</th>
-							<th>STR</th>
-							<th>VIT</th>
-							<th>INT</th>
-							<th>AGI</th>
-							<th>DEX</th>
-							<th>LUC</th>
-							<th>Total</th>
-							<th>Citation</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each c.stats as s}
+			<details open>
+				<summary class="section-heading collapsible">Stat Readings</summary>
+				<div class="card" style="padding: 0; overflow: hidden; overflow-x: auto; margin-top: 0.75rem;">
+					<table class="data-table stat-table">
+						<thead>
 							<tr>
-								<td>{formatDate(s.date_noted)}</td>
-								<td class="scan-type">{s.scan_type ?? '—'}</td>
-								<td>{s.hp ?? '—'}</td>
-								<td>{s.mp ?? '—'}</td>
-								<td>{s.sp ?? '—'}</td>
-								<td class="stat-val">{s.str ?? '—'}</td>
-								<td class="stat-val">{s.vit ?? '—'}</td>
-								<td class="stat-val">{s.int ?? '—'}</td>
-								<td class="stat-val">{s.agi ?? '—'}</td>
-								<td class="stat-val">{s.dex ?? '—'}</td>
-								<td class="stat-val">{s.luc ?? '—'}</td>
-								<td class="stat-total">{s.stat_total ?? '—'}</td>
-								<td>
-									{#if s.citation.volume}
-										<span class="badge badge--citation">{formatCitation(s.citation)}</span>
-									{:else}—{/if}
-								</td>
+								<th>Date</th>
+								<th>Seq</th>
+								<th>Type</th>
+								<th>STR</th>
+								<th>VIT</th>
+								<th>INT</th>
+								<th>AGI</th>
+								<th>DEX</th>
+								<th>LUC</th>
+								<th>Total</th>
+								<th>HP</th>
+								<th>MP</th>
+								<th>SP</th>
+								<th>Citation</th>
 							</tr>
-						{/each}
-					</tbody>
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							{#each sortedStats as s}
+								<tr>
+									<td>{formatDate(s.date_noted)}</td>
+									<td class="seq-cell">{s.date_sequence}</td>
+									<td class="scan-type">{s.scan_type ?? '—'}</td>
+									<td class="stat-val">{s.str ?? '—'}</td>
+									<td class="stat-val">{s.vit ?? '—'}</td>
+									<td class="stat-val">{s.int ?? '—'}</td>
+									<td class="stat-val">{s.agi ?? '—'}</td>
+									<td class="stat-val">{s.dex ?? '—'}</td>
+									<td class="stat-val">{s.luc ?? '—'}</td>
+									<td class="stat-total">{s.stat_total ?? '—'}</td>
+									<td class="stat-val">{s.hp ?? '—'}</td>
+									<td class="stat-val">{s.mp ?? '—'}</td>
+									<td class="stat-val">{s.sp ?? '—'}</td>
+									<td>
+										{#if s.citation.volume}
+											<span class="badge badge--citation">{formatCitation(s.citation)}</span>
+										{:else}—{/if}
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</details>
 		</div>
 	{/if}
 
-	<!-- ── Orbs used (explorer only) ── -->
+	<!-- ── Orbs ── -->
 	{#if c.is_explorer && c.orbs_used.length}
 		<div class="data-section">
-			<p class="section-heading">Skill Orbs</p>
-			<div class="card" style="padding: 0; overflow: hidden;">
-				<table class="data-table">
-					<thead>
-						<tr>
-							<th>Orb</th>
-							<th>Date Acquired</th>
-							<th>Citation</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each c.orbs_used as ou}
-							{@const orb = getOrb(ou.orb_id)}
+			<details open>
+				<summary class="section-heading collapsible">Skill Orbs</summary>
+				<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
+					<table class="data-table">
+						<thead>
 							<tr>
-								<td>
-									{#if orb}
-										<a href="/orbs/{orb.slug}">{orb.orb_name}</a>
-									{:else}
-										Unknown
-									{/if}
-								</td>
-								<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
-								<td>
-									{#if ou.citation.volume}
-										<span class="badge badge--citation">{formatCitation(ou.citation)}</span>
-									{:else}—{/if}
-								</td>
+								<th>Orb</th>
+								<th>Date Acquired</th>
+								<th>Citation</th>
 							</tr>
-						{/each}
-					</tbody>
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							{#each c.orbs_used as ou}
+								{@const orb = getOrb(ou.orb_id)}
+								<tr>
+									<td>
+										{#if orb}
+											<a href="/orbs/{orb.slug}">{orb.orb_name}</a>
+										{:else}Unknown{/if}
+									</td>
+									<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
+									<td>
+										{#if ou.citation.volume}
+											<span class="badge badge--citation">{formatCitation(ou.citation)}</span>
+										{:else}—{/if}
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</details>
 		</div>
 	{/if}
 
 </div>
 
 <style>
-	/* ── Header ── */
-	.char-header {
-		margin-bottom: 0.5rem;
+	/* ── Hero ── */
+	.char-hero {
+		display: flex;
+		align-items: flex-start;
+		gap: 1.25rem;
+		margin-bottom: 1rem;
 	}
 
-	.char-header__title-row {
+	.char-hero__rank {
+		font-family: var(--font-mono);
+		font-size: 3.5rem;
+		font-weight: 900;
+		color: var(--accent);
+		line-height: 1;
+		letter-spacing: -0.04em;
+		flex-shrink: 0;
+		padding-top: 0.1em;
+	}
+
+	.char-hero__body { flex: 1; }
+
+	.char-hero__name-row {
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
 		flex-wrap: wrap;
-		margin-bottom: 0.25rem;
 	}
 
-	.char-moniker {
-		font-size: 1rem;
-		color: var(--text-3);
-		font-style: italic;
-		margin-bottom: 1rem;
+	.char-name {
+		font-size: 2.5rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
 	}
 
-	.badge--anon {
+	.anon-badge {
 		font-size: 0.6875rem;
 		font-weight: 700;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		padding: 0.25em 0.6em;
 		border-radius: 999px;
-		background: #fee;
-		color: #c44;
-		border: 1px solid #fcc;
+		background: #fee2e2;
+		color: #b91c1c;
+		border: 1px solid #fca5a5;
+		white-space: nowrap;
 	}
 
-	/* Facts row */
-	.char-facts {
+	.char-moniker {
+		font-size: 1.0625rem;
+		color: var(--text-3);
+		font-style: italic;
+		margin-top: 0.25rem;
+	}
+
+	/* ── Meta row ── */
+	.char-meta {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem 2rem;
-		margin-bottom: 1rem;
-	}
-
-	.fact {
-		display: flex;
-		flex-direction: column;
-		gap: 0.125rem;
-	}
-
-	.fact__label {
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--text-3);
-	}
-
-	.fact__value {
+		gap: 0.25rem 0;
+		margin-bottom: 0.75rem;
 		font-size: 0.9375rem;
-		color: var(--text);
+		color: var(--text-2);
 	}
 
-	.fact__value.accent {
-		color: var(--accent);
-		font-family: var(--font-mono);
-		font-weight: 700;
+	.char-meta span + span::before {
+		content: ' · ';
+		color: var(--text-3);
+		margin: 0 0.4rem;
 	}
 
-	/* Tags */
+	/* ── Tags ── */
 	.char-tags {
 		display: flex;
 		flex-wrap: wrap;
@@ -306,7 +302,32 @@
 		color: var(--text-3);
 	}
 
-	/* Note */
+	/* ── Collapsible sections ── */
+	details { border: none; }
+
+	summary.collapsible {
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		user-select: none;
+	}
+
+	summary.collapsible::after {
+		content: '▾';
+		font-size: 0.75rem;
+		color: var(--text-3);
+		transition: transform 0.15s;
+	}
+
+	details:not([open]) summary.collapsible::after {
+		transform: rotate(-90deg);
+	}
+
+	summary::-webkit-details-marker { display: none; }
+
+	/* ── Note ── */
 	.note-content :global(p) {
 		font-size: 0.9375rem;
 		color: var(--text-2);
@@ -315,8 +336,24 @@
 
 	.note-content :global(p + p) { margin-top: 0.5rem; }
 
-	/* Stat table */
-	.stat-table th, .stat-table td { padding: 0.6rem 0.75rem; }
+	/* ── Markdown ── */
+	.md-content :global(code) {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		background: var(--bg-subtle);
+		padding: 0.1em 0.35em;
+		border-radius: 3px;
+	}
+
+	/* ── Stat table ── */
+	.stat-table th, .stat-table td { padding: 0.55rem 0.75rem; }
+
+	.seq-cell {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--text-3);
+		text-align: center;
+	}
 
 	.scan-type { font-size: 0.8125rem; color: var(--text-3); }
 
@@ -338,20 +375,5 @@
 		font-family: var(--font-mono);
 		font-weight: 700;
 		color: var(--accent);
-	}
-
-	/* Markdown content */
-	.md-content :global(p) {
-		font-size: 0.9375rem;
-		line-height: 1.7;
-		color: var(--text-2);
-	}
-
-	.md-content :global(code) {
-		font-family: var(--font-mono);
-		font-size: 0.8125rem;
-		background: var(--bg-subtle);
-		padding: 0.1em 0.35em;
-		border-radius: 3px;
 	}
 </style>
