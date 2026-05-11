@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Pencil } from 'lucide-svelte';
+	import { Pencil, Mars, Venus } from 'lucide-svelte';
 	import {
-		getFullName, getNationalityFlag, formatDate, formatRank,
+		getFullName, formatDate, formatRank,
 		getHistoricalRankingAt, formatCitation, getCitationScore
 	} from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
+	import Flag from '$lib/Flag.svelte';
 
 	let { data }: { data: PageData } = $props();
 	const c    = $derived(data.character);
@@ -80,13 +81,21 @@
 		{#if c.sex}
 			<div class="meta-chip">
 				<span class="meta-chip__label">Sex</span>
-				<span class="meta-chip__value">{c.sex === 'Male' ? '♂' : c.sex === 'Female' ? '♀' : c.sex}</span>
+				<span class="meta-chip__value sex-value">
+					{#if c.sex === 'Male'}
+						<Mars size={18} strokeWidth={2.25} aria-label="Male" />
+					{:else if c.sex === 'Female'}
+						<Venus size={18} strokeWidth={2.25} aria-label="Female" />
+					{:else}
+						{c.sex}
+					{/if}
+				</span>
 			</div>
 		{/if}
 		{#if c.nationality}
 			<div class="meta-chip">
 				<span class="meta-chip__label">Nationality</span>
-				<span class="meta-chip__value">{getNationalityFlag(c.nationality)} {c.nationality}</span>
+				<span class="meta-chip__value"><Flag code={c.nationality} /> {c.nationality}</span>
 			</div>
 		{/if}
 		{#if c.area}

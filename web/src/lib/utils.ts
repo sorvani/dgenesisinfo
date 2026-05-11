@@ -203,12 +203,6 @@ export function getFullName(c: Pick<Character, 'first_name' | 'last_name'>): str
 	return `${c.first_name ?? ''} ${c.last_name ?? ''}`.trim() || 'Unknown';
 }
 
-export function getNationalityFlag(code: string | null): string {
-	if (!code || code.length !== 2) return '';
-	const upper = code.toUpperCase();
-	return String.fromCodePoint(...upper.split('').map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
-}
-
 export function formatDate(dateStr: string | null): string {
 	if (!dateStr) return '—';
 	try {

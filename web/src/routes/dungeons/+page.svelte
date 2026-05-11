@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getNationalityFlag } from '$lib/utils';
+	import Flag from '$lib/Flag.svelte';
 	let { data }: { data: PageData } = $props();
 </script>
 
@@ -25,7 +25,7 @@
 						<span class="dungeon-card__area">Area {d.area_label ?? d.area}</span>
 					{/if}
 					{#if d.country}
-						<span class="dungeon-card__nat">{getNationalityFlag(d.country)} {d.country}</span>
+						<span class="dungeon-card__nat"><Flag code={d.country} /> {d.country}</span>
 					{/if}
 				</div>
 				<div class="dungeon-card__identity">

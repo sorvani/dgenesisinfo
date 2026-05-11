@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getFullName, getNationalityFlag } from '$lib/utils';
+	import { getFullName } from '$lib/utils';
+	import Flag from '$lib/Flag.svelte';
 	let { data }: { data: PageData } = $props();
 </script>
 
@@ -24,7 +25,7 @@
 			{#each data.characters as c}
 				<a href="/characters/{c.slug}" class="char-card">
 					<div class="char-card__name">
-						{getNationalityFlag(c.nationality)} {getFullName(c)}
+						<Flag code={c.nationality} /> {getFullName(c)}
 					</div>
 					{#if c.note}
 						<p class="char-card__note">{c.note.replace(/[#*`_~]/g, '').substring(0, 80)}…</p>

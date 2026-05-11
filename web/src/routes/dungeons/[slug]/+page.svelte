@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { formatDate, formatCitation, getNationalityFlag } from '$lib/utils';
+	import { formatDate, formatCitation } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
+	import Flag from '$lib/Flag.svelte';
 	let { data }: { data: PageData } = $props();
 	const d = $derived(data.dungeon);
 </script>
@@ -28,7 +29,7 @@
 		{#if d.country}
 			<div class="meta-chip">
 				<span class="meta-chip__label">Country</span>
-				<span class="meta-chip__value">{getNationalityFlag(d.country)} {d.country}</span>
+				<span class="meta-chip__value"><Flag code={d.country} /> {d.country}</span>
 			</div>
 		{/if}
 		{#if d.region}

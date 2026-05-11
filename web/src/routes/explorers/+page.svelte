@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getFullName, getNationalityFlag, formatRank, getHistoricalRankingAt, formatDate } from '$lib/utils';
+	import { getFullName, formatRank, getHistoricalRankingAt, formatDate } from '$lib/utils';
+	import Flag from '$lib/Flag.svelte';
 	let { data }: { data: PageData } = $props();
 </script>
 
@@ -24,7 +25,7 @@
 
 				<div class="explorer-card__top">
 					<span class="explorer-card__rank">{ranking ? formatRank(ranking) : 'Unranked'}</span>
-					<span class="explorer-card__nat">{getNationalityFlag(c.nationality)} {c.nationality ?? ''}</span>
+					<span class="explorer-card__nat"><Flag code={c.nationality} /> {c.nationality ?? ''}</span>
 				</div>
 
 				<div class="explorer-card__identity">

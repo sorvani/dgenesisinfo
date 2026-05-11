@@ -26,6 +26,7 @@
 		"wrangler": "^4.81.0"
 	},
 	"dependencies": {
+		"country-flag-icons": "^1.6.17",
 		"lucide-svelte": "^1.0.1",
 		"marked": "^18.0.3"
 	}
