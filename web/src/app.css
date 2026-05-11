@@ -76,15 +76,10 @@ body {
 	color: var(--text);
 	line-height: 1.6;
 	-webkit-font-smoothing: antialiased;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
 }
 
 main {
-	flex: 1;
-	overflow-y: auto;
+	min-height: calc(100dvh - 52px - 37px);
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -340,7 +335,10 @@ h3 { font-size: 1rem; font-weight: 600; }
 /* ── Footer ──────────────────────────────────────────────────────────────────── */
 .site-footer {
 	border-top: 1px solid var(--border);
-	margin-top: 4rem;
+	position: sticky;
+	bottom: 0;
+	background: var(--bg);
+	z-index: 10;
 }
 
 .site-footer__inner {
