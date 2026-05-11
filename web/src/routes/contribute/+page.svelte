@@ -232,6 +232,13 @@
 
 <svelte:head><title>Contribute — D-Genesis Info</title></svelte:head>
 
+<div class="form-bar">
+	<div class="container form-bar__inner">
+		<button type="submit" form="contribute-form" class="btn btn--primary">Submit for review</button>
+		<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
+	</div>
+</div>
+
 <div class="container page">
 	<h1 class="page-title">Submit a Contribution</h1>
 	<p class="page-subtitle">All submissions are reviewed by an admin before being applied.</p>
@@ -243,16 +250,11 @@
 		<div class="banner banner--error">{form.error}</div>
 	{/if}
 
-	<form bind:this={formEl} method="POST" action="?/submit" onsubmit={handleSubmit}>
+	<form id="contribute-form" bind:this={formEl} method="POST" action="?/submit" onsubmit={handleSubmit}>
 		<input type="hidden" name="entity_type" value={entityType} />
 		<input type="hidden" name="operation"   value={operation} />
 		<input type="hidden" name="entity_id"   value={entityId ?? ''} />
 		<input type="hidden" name="proposed_data" value="" />
-
-		<div class="form-footer">
-			<button type="submit" class="btn btn--primary">Submit for review</button>
-			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
-		</div>
 
 		<!-- ── Control row ── -->
 		<div class="card ctrl-row">
@@ -818,16 +820,18 @@
 		font-size: 0.9rem;
 	}
 
-	.form-footer {
-		display: flex;
-		justify-content: flex-end;
-		gap: 0.75rem;
+	:global(.form-bar) {
 		position: sticky;
 		top: 52px;
+		z-index: 50;
 		background: var(--bg);
 		border-bottom: 1px solid var(--border-soft);
 		padding: 0.625rem 0;
-		margin-bottom: 1.25rem;
-		z-index: 10;
+	}
+
+	:global(.form-bar__inner) {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.75rem;
 	}
 </style>
