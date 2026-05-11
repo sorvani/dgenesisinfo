@@ -150,9 +150,10 @@ export function getCitationScore(citation: Citation | null): number {
 export function formatCitation(citation: Citation | null): string {
 	if (!citation) return '';
 	const parts: string[] = [];
-	if (citation.volume)   parts.push(`Vol ${citation.volume}`);
-	if (citation.chapter)  parts.push(`Ch ${citation.chapter}`);
-	if (citation.jnc_part) parts.push(`Part ${citation.jnc_part}`);
+	if (citation.volume)      parts.push(`Vol ${citation.volume}`);
+	if (citation.chapter)     parts.push(`Ch ${citation.chapter}`);
+	if (citation.jnc_part)    parts.push(`Part ${citation.jnc_part}`);
+	if (citation.source_type) parts.push(citation.source_type === 'Light Novel' ? 'LN' : 'M');
 	return parts.join(' · ');
 }
 

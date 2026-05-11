@@ -646,6 +646,7 @@
 
 		<div class="form-footer">
 			<button type="submit" class="btn btn--primary">Submit for review</button>
+			<button type="button" class="btn btn--ghost" onclick={() => history.back()}>Cancel</button>
 		</div>
 	</form>
 </div>
@@ -819,6 +820,13 @@
 	.form-footer {
 		display: flex;
 		justify-content: flex-end;
+		gap: 0.75rem;
+		position: sticky;
+		bottom: 0;
+		background: var(--bg);
+		border-top: 1px solid var(--border-soft);
+		padding: 0.875rem 0;
 		margin-top: 1.5rem;
+		z-index: 10;
 	}
 </style>
