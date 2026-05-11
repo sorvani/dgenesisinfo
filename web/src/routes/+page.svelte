@@ -70,16 +70,16 @@
 				{#each displayed as c}
 					{@const score = selectedCitation ? getCitationScore(selectedCitation) : null}
 					{@const ranking = getHistoricalRankingAt(c.rankings, score)}
-					<tr class:anon={!c.is_public}>
+					<tr class:anon={!c.is_public} onclick={() => window.location.href = `/characters/${c.slug}`} style="cursor:pointer">
 						<td class="col-rank">{ranking?.rank?.toLocaleString()}</td>
 						<td class="col-area">{c.area ?? '—'}</td>
 						<td class="col-cc">{c.is_public ? (c.nationality ?? '') : ''}</td>
 						<td class="col-name">
 							{#if !c.is_public}
 								<span class="anon-star">*</span>
-								<a href="/characters/{c.slug}" class="anon-name">({displayName(c)})</a>
+								<span class="anon-name">({displayName(c)})</span>
 							{:else}
-								<a href="/characters/{c.slug}">{displayName(c)}</a>
+								{displayName(c)}
 							{/if}
 						</td>
 					</tr>
