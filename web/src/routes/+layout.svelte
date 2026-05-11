@@ -10,7 +10,6 @@
 		<a href="/" class="site-nav__brand"><span>D-Genesis</span> Info</a>
 		<div class="site-nav__links">
 			<a href="/characters">Explorers</a>
-			<a href="/wdarl">WDARL</a>
 			<a href="/orbs">Orbs</a>
 			<a href="/timeline">Timeline</a>
 			<a href="/dungeons">Dungeons</a>
