@@ -197,6 +197,27 @@
 			cite_ch          = o.cite_chapter  ?? '';
 			cite_part        = o.cite_jnc_part ?? '';
 			cite_source_type = o.cite_source_type ?? null;
+		} else if (entityType === 'timeline_event' && data.prefillRow) {
+			const e = data.prefillRow as Record<string, any>;
+			if (e.date_utc) {
+				// stored as ISO UTC; the form's submit logic interprets the date+time inputs
+				// as local time, so the inverse here is to read local components from the Date.
+				const d = new Date(e.date_utc);
+				const pad = (n: number) => n.toString().padStart(2, '0');
+				t_dateLocal = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+				if (e.display_time) {
+					t_time = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+				}
+			}
+			t_timezone    = e.timezone ?? 'JST';
+			t_dateLabel   = e.date_label ?? '';
+			t_displayTime = e.display_time === 1;
+			t_preHistory  = e.pre_history  === 1;
+			t_event       = e.event ?? '';
+			cite_vol         = e.cite_volume   ?? '';
+			cite_ch          = e.cite_chapter  ?? '';
+			cite_part        = e.cite_jnc_part ?? '';
+			cite_source_type = e.cite_source_type ?? null;
 		}
 	});
 

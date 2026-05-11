@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import { getTimelineEventDate, formatCitation } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
+	import { Pencil, Trash2 } from 'lucide-svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -38,7 +39,12 @@
 	<div class="timeline-header">
 		<div class="timeline-title-row">
 			<h1 class="page-title">Timeline</h1>
-			<span class="page-count"><em>{data.events.length} events</em></span>
+			<div class="timeline-title-right">
+				<span class="page-count"><em>{data.events.length} events</em></span>
+				{#if data.user}
+					<a href="/contribute?type=timeline_event&op=insert" class="action-add">+ Add Event</a>
+				{/if}
+			</div>
 		</div>
 
 		<div class="filter-row">
@@ -65,6 +71,16 @@
 					</div>
 					<div class="timeline-card-col">
 						<div class="timeline-card card">
+							{#if data.user}
+								<div class="timeline-card__actions">
+									<a href="/contribute?type=timeline_event&op=update&id={ev.id}" class="timeline-action" title="Edit">
+										<Pencil size={14} strokeWidth={2} />
+									</a>
+									<a href="/contribute?type=timeline_event&op=delete&id={ev.id}" class="timeline-action timeline-action--danger" title="Delete">
+										<Trash2 size={14} strokeWidth={2} />
+									</a>
+								</div>
+							{/if}
 							<div class="timeline-card__date">{getTimelineEventDate(ev)}</div>
 							<div class="timeline-card__event md-content">
 								{@html renderMd(ev.event)}
@@ -187,7 +203,45 @@
 		z-index: 1;
 	}
 
-	.timeline-card { padding: 0.875rem 1rem; }
+	.timeline-card {
+		padding: 0.875rem 1rem;
+		position: relative;
+	}
+
+	.timeline-title-right {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.timeline-card__actions {
+		position: absolute;
+		top: 0.4rem;
+		right: 0.4rem;
+		display: flex;
+		gap: 0.15rem;
+	}
+
+	.timeline-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.2rem;
+		color: var(--text-3);
+		text-decoration: none;
+		border-radius: var(--radius);
+		transition: background 0.15s, color 0.15s;
+	}
+
+	.timeline-action:hover {
+		background: var(--bg-subtle);
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.timeline-action--danger:hover {
+		color: #dc2626;
+	}
 
 	.timeline-card__date {
 		font-size: 0.8125rem;

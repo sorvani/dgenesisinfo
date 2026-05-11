@@ -26,7 +26,8 @@ export const load: PageServerLoad = async ({ platform, url }) => {
 		const table =
 			entityType === 'character_ranking' ? 'character_rankings' :
 			entityType === 'character_stat'    ? 'character_stats'    :
-			entityType === 'character_orb'     ? 'character_orbs'     : null;
+			entityType === 'character_orb'     ? 'character_orbs'     :
+			entityType === 'timeline_event'    ? 'timeline_events'    : null;
 		if (table) {
 			prefillRow = await db.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(entityId).first();
 		}
