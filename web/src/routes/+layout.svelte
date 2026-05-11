@@ -36,7 +36,7 @@
 
 <nav class="site-nav">
 	<div class="site-nav__inner">
-		<a href="/" class="site-nav__brand"><span>D-Genesis</span> Info</a>
+		<a href="/" class="site-nav__brand"><span>D-Genesis</span> Stats</a>
 		<div class="site-nav__links">
 			<a href="/explorers">Explorers</a>
 			<a href="/characters">Characters</a>
