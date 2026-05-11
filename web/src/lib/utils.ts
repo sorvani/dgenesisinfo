@@ -49,7 +49,7 @@ export interface Character {
 	slug:             string;
 	first_name:       string | null;
 	last_name:        string | null;
-	moniker:          string | null;
+	monikers:         string[];
 	nationality:      string | null;
 	date_first_known: string | null;
 	cite_first_known: Citation;

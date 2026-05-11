@@ -51,8 +51,12 @@
 			<span class="anon-badge">✦ Anonymous on WDARL</span>
 		{/if}
 	</div>
-	{#if c.moniker}
-		<p class="char-moniker">"{c.moniker}"</p>
+	{#if c.monikers?.length}
+		<div class="char-monikers">
+			{#each c.monikers as m}
+				<span class="moniker-chip">"{m}"</span>
+			{/each}
+		</div>
 	{/if}
 
 	{#if c.tags?.length}
@@ -267,11 +271,21 @@
 		white-space: nowrap;
 	}
 
-	.char-moniker {
-		font-size: 1.0625rem;
+	.char-monikers {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.375rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.moniker-chip {
+		font-size: 0.9375rem;
 		color: var(--text-3);
 		font-style: italic;
-		margin-bottom: 0.5rem;
+		padding: 0.2em 0.6em;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: 999px;
 	}
 
 	/* ── Tags (near name) ── */

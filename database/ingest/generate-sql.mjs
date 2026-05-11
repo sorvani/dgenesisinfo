@@ -75,7 +75,7 @@ lines.push('');
 for (const char of characters) {
 	lines.push(
 		`INSERT INTO characters (slug, first_name, last_name, moniker, nationality, date_first_known, is_public, in_wdarl, area, birthday, sex, note, tags) VALUES (` +
-		`${q(char.slug)}, ${q(char.first_name)}, ${q(char.last_name)}, ${q(char.moniker)}, ` +
+		`${q(char.slug)}, ${q(char.first_name)}, ${q(char.last_name)}, ${q(JSON.stringify(char.monikers ?? []))}, ` +
 		`${q(char.nationality)}, ${q(char.date_first_known)}, ` +
 		`${qb(char.public)}, ${qb(char.in_wdarl)}, ${qi(char.area)}, ` +
 		`${q(char.birthday)}, ${q(char.sex)}, ${q(char.note)}, ` +

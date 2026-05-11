@@ -7,7 +7,8 @@ import type {
 
 interface CharRow {
 	id: number; slug: string; first_name: string | null; last_name: string | null;
-	moniker: string | null; nationality: string | null; date_first_known: string | null;
+	moniker: string | null; /* stored as JSON array */
+	nationality: string | null; date_first_known: string | null;
 	cite_first_known_volume: string | null; cite_first_known_chapter: string | null; cite_first_known_jnc_part: string | null;
 	is_public: number; is_explorer: number; in_wdarl: number; area: number | null;
 	birthday: string | null; sex: string | null; note: string | null; tags: string | null;
@@ -109,6 +110,7 @@ function toDungeon(d: DungeonRow): Dungeon {
 function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: CharacterStat[], orbs: CharacterOrb[]): Character {
 	return {
 		...row,
+		monikers:         JSON.parse(row.moniker ?? '[]'),
 		tags:             JSON.parse(row.tags ?? '[]'),
 		cite_first_known: { volume: row.cite_first_known_volume, chapter: row.cite_first_known_chapter, jnc_part: row.cite_first_known_jnc_part },
 		rankings:  rankings.filter(r => r.character_id === row.id),
