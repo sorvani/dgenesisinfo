@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData, ActionData } from './$types';
-	import { onMount } from 'svelte';
+	import { enhance } from '$app/forms';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -12,8 +12,10 @@
 	let operation  = $state(data.defaultOp);
 	let entityId   = $state<number | null>(data.defaultEntityId);
 
-	onMount(() => {
-		if (form?.success) {
+	let redirecting = false;
+	$effect(() => {
+		if (form?.success && !redirecting) {
+			redirecting = true;
 			setTimeout(() => {
 				if (window.history.length > 1) history.back();
 				else window.location.href = '/';
@@ -244,14 +246,6 @@
 		return '{}';
 	}
 
-	let formEl: HTMLFormElement;
-
-	function handleSubmit(e: SubmitEvent) {
-		e.preventDefault();
-		const hidden = formEl.querySelector<HTMLInputElement>('[name="proposed_data"]')!;
-		hidden.value = buildProposedData();
-		formEl.submit();
-	}
 </script>
 
 <svelte:head><title>Contribute — D-Genesis Info</title></svelte:head>
@@ -281,7 +275,13 @@
 
 <div class="contribute-body">
 	<div class="container">
-	<form id="contribute-form" bind:this={formEl} method="POST" action="?/submit" onsubmit={handleSubmit}>
+	<form id="contribute-form" method="POST" action="?/submit"
+		use:enhance={({ formData }) => {
+			formData.set('proposed_data', buildProposedData());
+			return async ({ update }) => {
+				await update({ reset: false });
+			};
+		}}>
 		<input type="hidden" name="entity_type" value={entityType} />
 		<input type="hidden" name="operation"   value={operation} />
 		<input type="hidden" name="entity_id"   value={entityId ?? ''} />
