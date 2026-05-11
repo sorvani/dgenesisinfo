@@ -105,6 +105,10 @@
 			{:else}
 				<a href="/auth/login" onclick={() => mobileMenuOpen = false}>Log in with GitHub</a>
 			{/if}
+			<div class="mobile-menu__divider"></div>
+			<button class="mobile-menu__btn mobile-menu__theme" onclick={cycleTheme}>
+				{#if theme === 'light'}<Sun size={15} /> Light mode{:else if theme === 'dark'}<Moon size={15} /> Dark mode{:else}<SunMoon size={15} /> Auto mode{/if}
+			</button>
 		</div>
 	{/if}
 </nav>
@@ -222,7 +226,7 @@
 
 	/* ── Hamburger ── */
 	.hamburger { position: relative; }
-	.hamburger-badge { position: absolute; top: 2px; right: 2px; margin: 0; }
+	.hamburger-badge { position: absolute; top: -6px; right: -6px; margin: 0; }
 
 	.hamburger {
 		display: none;
@@ -303,13 +307,15 @@
 	}
 
 	.mobile-menu__jnc { color: var(--accent) !important; font-size: 0.875rem !important; }
+	.mobile-menu__theme { display: flex; align-items: center; gap: 0.5rem; color: var(--text-3) !important; font-size: 0.875rem !important; }
 
 	/* ── Responsive ── */
 	@media (max-width: 768px) {
 		.site-nav__links { display: none; }
 		.site-nav__auth .jnc-link,
 		.site-nav__auth .btn--auth,
-		.site-nav__auth .user-menu { display: none; }
+		.site-nav__auth .user-menu,
+		.site-nav__auth .theme-btn { display: none; }
 		.hamburger { display: flex; }
 		.mobile-menu { display: flex; }
 	}

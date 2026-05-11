@@ -648,6 +648,15 @@
 	.banner--success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 	.banner--error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
 
+	@media (prefers-color-scheme: dark) {
+		.banner--success { background: #052e1a; color: #6ee7b7; border-color: #065f46; }
+		.banner--error   { background: #2d0a0a; color: #fca5a5; border-color: #991b1b; }
+	}
+	:global([data-theme="dark"]) .banner--success { background: #052e1a; color: #6ee7b7; border-color: #065f46; }
+	:global([data-theme="dark"]) .banner--error   { background: #2d0a0a; color: #fca5a5; border-color: #991b1b; }
+	:global([data-theme="light"]) .banner--success { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+	:global([data-theme="light"]) .banner--error   { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+
 	.ctrl-row {
 		display: flex;
 		flex-wrap: wrap;
