@@ -50,7 +50,7 @@
 					{/if}
 					<div class="explorer-card__counts">
 						{#if c.orbs_used?.length}<span>{c.orbs_used.length} orb{c.orbs_used.length !== 1 ? 's' : ''}</span>{/if}
-						{#if c.rankings?.length}<span>{c.rankings.length} rank entry{c.rankings.length !== 1 ? 'ies' : 'y'}</span>{/if}
+						{#if c.rankings?.length}<span>{c.rankings.length} rank {c.rankings.length !== 1 ? 'entries' : 'entry'}</span>{/if}
 					</div>
 				</div>
 
