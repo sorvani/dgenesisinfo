@@ -10,15 +10,27 @@ Tracks explorer rankings (WDARL), combat stats, skill orbs, dungeons, creatures,
 - **[Cloudflare D1](https://developers.cloudflare.com/d1/)** — SQLite database
 - **GitHub OAuth** — contributor authentication
 
+## Features
+
+- **Explorers** — searchable list with WDARL rankings, monikers, tags, nationality. Detail pages include rank history, stat readings (STR/VIT/INT/AGI/DEX/LUC + derived HP/MP/SP), and skill orb acquisitions, each with source citations.
+- **Characters** — non-explorer named characters with notes, monikers, and tags.
+- **Skill orbs** — known effects and per-creature / per-dungeon / per-floor drop rates with probability and Making cooldown.
+- **Bestiary** — creatures by category (Humanoid, Beast, Undead, Demon, Aberration, Aquatic, Elemental, Ooze, Unknown), with the dungeons they appear in and the orbs they drop.
+- **Dungeons** — area number, country, region, known floors, creatures found there, orbs found there.
+- **Timeline** — events grouped by volume / pre-history, with citations and a side-anchored layout.
+- **Filtering** — list pages support text search; explorers/characters also support tag chips that filter the list and round-trip via shareable URL params (`?q=`, `?tag=`).
+- **Contributions** — every entity (and its sub-records: rankings, stats, orb acquisitions, monster-in-dungeon presence, timeline events, etc.) can be added, edited, or proposed for deletion via an inline Contribute form. Submissions land in a pending queue and are reviewed by an admin before being applied to the live data.
+- **Citations everywhere** — Light Novel vs. Manga source, volume / chapter / J-Novel Club part, distinguishable in the admin diff so reviewers know exactly what is being changed.
+
 ## Repository layout
 
 ```
-database/d1/        D1 schema + data snapshot
-  schema.sql        Canonical schema (run on a fresh DB)
-  snapshot.sql      Data-only dump of the live D1, refreshed via `npm run dump`
-  seed-admin.sql    Template for granting yourself admin after first login
-web/                SvelteKit application
-SchemaHistory.md    Log of schema changes over time
+database/d1/          D1 schema + data snapshot
+  schema.sql          Canonical schema (run on a fresh DB)
+  snapshot.sql        Data-only dump of the live D1, refreshed via `npm run dump`
+  seed-admin.sql      Template for granting yourself admin after first login
+  SchemaHistory.md    Log of schema changes over time
+web/                  SvelteKit application
 ```
 
 ## Local development
@@ -76,8 +88,8 @@ git add ../database/d1/snapshot.sql
 git commit -m "data: refresh snapshot"
 ```
 
-See [SchemaHistory.md](SchemaHistory.md) for the record of schema changes
-over time.
+See [database/d1/SchemaHistory.md](database/d1/SchemaHistory.md) for the
+record of schema changes over time.
 
 ## Deploying changes
 

@@ -1,15 +1,15 @@
 # Schema History
 
 A running record of changes to the D1 schema. The current canonical schema
-lives in [`database/d1/schema.sql`](database/d1/schema.sql); this file documents
-what changed and why over time.
+lives in [`schema.sql`](schema.sql); this file documents what changed and why
+over time.
 
 When making a schema change:
-1. Update `database/d1/schema.sql` so fresh installs include the change.
+1. Update `schema.sql` so fresh installs include the change.
 2. Apply the change to the live D1 (either by running the relevant SQL
    directly or by re-running `schema.sql` if the statements use
    `IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS`).
-3. Refresh `database/d1/snapshot.sql` with `npm run dump` so anyone cloning
+3. Refresh `snapshot.sql` with `npm run dump` (from `web/`) so anyone cloning
    the repo gets the new shape plus current data.
 4. Add an entry below describing the change.
 
