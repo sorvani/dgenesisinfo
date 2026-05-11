@@ -102,6 +102,7 @@ export interface Dungeon {
 	id:              number;
 	slug:            string;
 	name:            string;
+	area:            number | null;
 	country:         string | null;
 	region:          string | null;
 	discovered_date: string | null;
@@ -109,6 +110,27 @@ export interface Dungeon {
 	is_active:       number;
 	note:            string | null;
 	citation:        Citation;
+}
+
+export interface Monster {
+	id:         number;
+	slug:       string;
+	name:       string;
+	category:   string | null;
+	note:       string | null;
+	citation:   Citation;
+	drop_count: number;
+}
+
+export interface MonsterDrop {
+	orb_id:             number;
+	orb_slug:           string;
+	orb_name:           string;
+	dungeon:            string | null;
+	floor:              string | null;
+	favorable_outcomes: number | null;
+	total_events:       number | null;
+	citation:           Citation;
 }
 
 // ─── Citation helpers ─────────────────────────────────────────────────────────

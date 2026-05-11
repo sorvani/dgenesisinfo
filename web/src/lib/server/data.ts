@@ -51,8 +51,20 @@ interface TimelineRow {
 }
 
 interface DungeonRow {
-	id: number; slug: string; name: string; country: string | null; region: string | null;
+	id: number; slug: string; name: string; area: number | null; country: string | null; region: string | null;
 	discovered_date: string | null; floors: number | null; is_active: number; note: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+}
+
+interface MonsterRow {
+	id: number; slug: string; name: string; category: string | null; note: string | null;
+	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
+	drop_count: number;
+}
+
+interface MonsterDropRow {
+	orb_id: number; orb_slug: string; orb_name: string; dungeon: string | null; floor: string | null;
+	favorable_outcomes: number | null; total_events: number | null;
 	cite_volume: string | null; cite_chapter: string | null; cite_jnc_part: string | null;
 }
 
@@ -88,7 +100,7 @@ function toTimeline(t: TimelineRow): TimelineEvent {
 }
 
 function toDungeon(d: DungeonRow): Dungeon {
-	return { id: d.id, slug: d.slug, name: d.name, country: d.country, region: d.region, discovered_date: d.discovered_date, floors: d.floors, is_active: d.is_active, note: d.note, citation: cite(d) };
+	return { id: d.id, slug: d.slug, name: d.name, area: d.area, country: d.country, region: d.region, discovered_date: d.discovered_date, floors: d.floors, is_active: d.is_active, note: d.note, citation: cite(d) };
 }
 
 function assembleCharacter(row: CharRow, rankings: CharacterRanking[], stats: CharacterStat[], orbs: CharacterOrb[]): Character {
@@ -191,6 +203,45 @@ export async function getTimelineEvents(db: D1Database): Promise<TimelineEvent[]
 }
 
 // ─── Dungeons ─────────────────────────────────────────────────────────────────
+
+export async function getMonsters(db: D1Database): Promise<Monster[]> {
+	const res = await db.prepare(
+		`SELECT m.*, COUNT(d.id) AS drop_count
+		 FROM monsters m
+		 LEFT JOIN orb_drop_rates d ON d.monster_id = m.id
+		 GROUP BY m.id ORDER BY m.name`
+	).all<MonsterRow>();
+	return res.results.map(m => ({
+		id: m.id, slug: m.slug, name: m.name, category: m.category,
+		note: m.note, citation: cite(m), drop_count: m.drop_count,
+	}));
+}
+
+export async function getMonsterBySlug(db: D1Database, slug: string): Promise<{ monster: Monster; drops: MonsterDrop[] } | null> {
+	const row = await db.prepare(
+		`SELECT m.*, 0 AS drop_count FROM monsters m WHERE m.slug = ?`
+	).bind(slug).first<MonsterRow>();
+	if (!row) return null;
+
+	const dropRes = await db.prepare(
+		`SELECT odr.orb_id, o.slug AS orb_slug, o.orb_name, odr.dungeon, odr.floor,
+		        odr.favorable_outcomes, odr.total_events,
+		        odr.cite_volume, odr.cite_chapter, odr.cite_jnc_part
+		 FROM orb_drop_rates odr
+		 JOIN orbs o ON o.id = odr.orb_id
+		 WHERE odr.monster_id = ?
+		 ORDER BY o.orb_name`
+	).bind(row.id).all<MonsterDropRow>();
+
+	const drops: MonsterDrop[] = dropRes.results.map(d => ({
+		orb_id: d.orb_id, orb_slug: d.orb_slug, orb_name: d.orb_name,
+		dungeon: d.dungeon, floor: d.floor,
+		favorable_outcomes: d.favorable_outcomes, total_events: d.total_events,
+		citation: cite(d),
+	}));
+
+	return { monster: { ...row, citation: cite(row) }, drops };
+}
 
 export async function getDungeons(db: D1Database): Promise<Dungeon[]> {
 	const res = await db.prepare('SELECT * FROM dungeons ORDER BY name').all<DungeonRow>();

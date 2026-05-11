@@ -42,6 +42,7 @@
 			<a href="/characters">Characters</a>
 			<a href="/orbs">Orbs</a>
 			<a href="/timeline">Timeline</a>
+			<a href="/bestiary">Bestiary</a>
 			<a href="/dungeons">Dungeons</a>
 		</div>
 		<div class="site-nav__auth">
