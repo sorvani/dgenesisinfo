@@ -13,6 +13,7 @@
 		if (!q) return true;
 		if (m.name.toLowerCase().includes(q)) return true;
 		if (m.category?.toLowerCase().includes(q)) return true;
+		if (m.dungeons.some(d => d.name.toLowerCase().includes(q))) return true;
 		return false;
 	}));
 
@@ -40,7 +41,7 @@
 
 	<FilterBar
 		bind:query
-		placeholder="Filter creatures by name or category…"
+		placeholder="Filter creatures by name, category, or dungeon…"
 		resultCount={filtered.length}
 		totalCount={data.monsters.length}
 	/>
@@ -48,13 +49,20 @@
 	<div class="card-grid">
 		{#each filtered as m}
 			<a href="/bestiary/{m.slug}" class="monster-card">
+				<div class="monster-card__name">{m.name}</div>
 				<div class="monster-card__top">
 					<span class="monster-card__category">{m.category ?? 'Unknown'}</span>
 					{#if m.drop_count > 0}
 						<span class="monster-card__drops">{m.drop_count} orb{m.drop_count !== 1 ? 's' : ''}</span>
 					{/if}
 				</div>
-				<div class="monster-card__name">{m.name}</div>
+				{#if m.dungeons.length}
+					<div class="monster-card__dungeons">
+						{#each m.dungeons as d}
+							<span class="dungeon-chip">{d.name}</span>
+						{/each}
+					</div>
+				{/if}
 			</a>
 		{/each}
 	</div>
@@ -91,10 +99,18 @@
 		text-decoration: none;
 	}
 
+	.monster-card__name {
+		font-weight: 700;
+		font-size: 0.9375rem;
+		color: var(--text);
+	}
+
 	.monster-card__top {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 0.5rem;
 	}
 
 	.monster-card__category {
@@ -111,11 +127,19 @@
 		font-family: var(--font-mono);
 	}
 
-	.monster-card__name {
-		font-weight: 700;
-		font-size: 0.9375rem;
-		color: var(--text);
-		border-top: 1px solid var(--border-soft);
-		padding-top: 0.5rem;
+	.monster-card__dungeons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+		margin-top: auto;
+	}
+
+	.dungeon-chip {
+		font-size: 0.6875rem;
+		padding: 0.15em 0.5em;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-3);
 	}
 </style>

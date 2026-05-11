@@ -51,18 +51,18 @@
 	<div class="card-grid">
 		{#each filtered as d}
 			<a href="/dungeons/{d.slug}" class="dungeon-card">
+				<div class="dungeon-card__identity">
+					<div class="dungeon-card__name">{d.name}</div>
+					{#if d.region}
+						<div class="dungeon-card__region">{d.region}</div>
+					{/if}
+				</div>
 				<div class="dungeon-card__top">
 					{#if d.area_label || d.area != null}
 						<span class="dungeon-card__area">Area {d.area_label ?? d.area}</span>
 					{/if}
 					{#if d.country}
 						<span class="dungeon-card__nat"><Flag code={d.country} /> {d.country}</span>
-					{/if}
-				</div>
-				<div class="dungeon-card__identity">
-					<div class="dungeon-card__name">{d.name}</div>
-					{#if d.region}
-						<div class="dungeon-card__region">{d.region}</div>
 					{/if}
 				</div>
 				{#if d.floors != null}
@@ -108,6 +108,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 0.5rem;
 	}
 
 	.dungeon-card__area {
@@ -122,10 +124,7 @@
 		color: var(--text-3);
 	}
 
-	.dungeon-card__identity {
-		border-top: 1px solid var(--border-soft);
-		padding-top: 0.5rem;
-	}
+	.dungeon-card__identity { }
 
 	.dungeon-card__name {
 		font-weight: 700;

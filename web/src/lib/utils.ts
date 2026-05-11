@@ -123,6 +123,7 @@ export interface Monster {
 	note:       string | null;
 	citation:   Citation;
 	drop_count: number;
+	dungeons:   { id: number; name: string; slug: string }[];
 }
 
 export interface MonsterDrop {

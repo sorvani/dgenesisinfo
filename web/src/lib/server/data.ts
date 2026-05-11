@@ -211,15 +211,31 @@ export async function getTimelineEvents(db: D1Database): Promise<TimelineEvent[]
 // ─── Dungeons ─────────────────────────────────────────────────────────────────
 
 export async function getMonsters(db: D1Database): Promise<Monster[]> {
-	const res = await db.prepare(
-		`SELECT m.*, COUNT(d.id) AS drop_count
-		 FROM monsters m
-		 LEFT JOIN orb_drop_rates d ON d.monster_id = m.id
-		 GROUP BY m.id ORDER BY m.name`
-	).all<MonsterRow>();
-	return res.results.map(m => ({
+	const [mRes, dRes] = await db.batch([
+		db.prepare(
+			`SELECT m.*, COUNT(d.id) AS drop_count
+			 FROM monsters m
+			 LEFT JOIN orb_drop_rates d ON d.monster_id = m.id
+			 GROUP BY m.id ORDER BY m.name`
+		),
+		db.prepare(
+			`SELECT DISTINCT md.monster_id, d.id AS dungeon_id, d.name AS dungeon_name, d.slug AS dungeon_slug
+			 FROM monster_dungeons md
+			 JOIN dungeons d ON d.id = md.dungeon_id
+			 ORDER BY d.name`
+		),
+	]);
+
+	const dungeonsByMonster = new Map<number, { id: number; name: string; slug: string }[]>();
+	for (const r of dRes.results as Array<{ monster_id: number; dungeon_id: number; dungeon_name: string; dungeon_slug: string }>) {
+		if (!dungeonsByMonster.has(r.monster_id)) dungeonsByMonster.set(r.monster_id, []);
+		dungeonsByMonster.get(r.monster_id)!.push({ id: r.dungeon_id, name: r.dungeon_name, slug: r.dungeon_slug });
+	}
+
+	return (mRes.results as MonsterRow[]).map(m => ({
 		id: m.id, slug: m.slug, name: m.name, category: m.category,
 		note: m.note, citation: cite(m), drop_count: m.drop_count,
+		dungeons: dungeonsByMonster.get(m.id) ?? [],
 	}));
 }
 

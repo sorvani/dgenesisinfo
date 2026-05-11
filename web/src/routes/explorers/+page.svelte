@@ -64,16 +64,16 @@
 			{@const ranking = getHistoricalRankingAt(c.rankings)}
 			<a href="/characters/{c.slug}" class="explorer-card">
 
-				<div class="explorer-card__top">
-					<span class="explorer-card__rank">{ranking ? formatRank(ranking) : 'Unranked'}</span>
-					<span class="explorer-card__nat"><Flag code={c.nationality} /> {c.nationality ?? ''}</span>
-				</div>
-
 				<div class="explorer-card__identity">
 					<div class="explorer-card__name">{getFullName(c)}</div>
 					{#if c.monikers?.length}
 						<div class="explorer-card__moniker">{c.monikers.map(m => `"${m}"`).join(' · ')}</div>
 					{/if}
+				</div>
+
+				<div class="explorer-card__top">
+					<span class="explorer-card__rank">{ranking ? formatRank(ranking) : 'Unranked'}</span>
+					<span class="explorer-card__nat"><Flag code={c.nationality} /> {c.nationality ?? ''}</span>
 				</div>
 
 				<div class="explorer-card__meta">
@@ -145,6 +145,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		border-top: 1px solid var(--border-soft);
+		padding-top: 0.5rem;
 	}
 
 	.explorer-card__rank {
@@ -160,10 +162,7 @@
 	}
 
 	/* Name + moniker */
-	.explorer-card__identity {
-		border-top: 1px solid var(--border-soft);
-		padding-top: 0.5rem;
-	}
+	.explorer-card__identity { }
 
 	.explorer-card__name {
 		font-weight: 700;
