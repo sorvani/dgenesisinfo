@@ -1,6 +1,28 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import FilterBar from '$lib/FilterBar.svelte';
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
+
 	let { data }: { data: PageData } = $props();
+
+	let query = $state(page.url.searchParams.get('q') ?? '');
+
+	const filtered = $derived(data.monsters.filter(m => {
+		const q = query.trim().toLowerCase();
+		if (!q) return true;
+		if (m.name.toLowerCase().includes(q)) return true;
+		if (m.category?.toLowerCase().includes(q)) return true;
+		return false;
+	}));
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const url = new URL(window.location.href);
+		url.searchParams.delete('q');
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		replaceState(url, {});
+	});
 </script>
 
 <svelte:head><title>Bestiary — D-Genesis Info</title></svelte:head>
@@ -16,8 +38,15 @@
 		</div>
 	</div>
 
+	<FilterBar
+		bind:query
+		placeholder="Filter creatures by name or category…"
+		resultCount={filtered.length}
+		totalCount={data.monsters.length}
+	/>
+
 	<div class="card-grid">
-		{#each data.monsters as m}
+		{#each filtered as m}
 			<a href="/bestiary/{m.slug}" class="monster-card">
 				<div class="monster-card__top">
 					<span class="monster-card__category">{m.category ?? 'Unknown'}</span>

@@ -66,7 +66,9 @@
 
 	{#if c.tags?.length}
 		<div class="char-tags">
-			{#each c.tags as tag}<span class="tag">{tag}</span>{/each}
+			{#each c.tags as tag}
+				<a href="{c.is_explorer ? '/explorers' : '/characters'}?tag={encodeURIComponent(tag)}" class="tag tag--link">{tag}</a>
+			{/each}
 		</div>
 	{/if}
 
@@ -372,6 +374,15 @@
 		border: 1px solid var(--border);
 		border-radius: 999px;
 		color: var(--text-3);
+		text-decoration: none;
+		transition: background 0.15s, border-color 0.15s, color 0.15s;
+	}
+
+	.tag--link:hover {
+		background: var(--accent-bg);
+		border-color: var(--accent);
+		color: var(--accent);
+		text-decoration: none;
 	}
 
 	/* ── Metadata chips ── */

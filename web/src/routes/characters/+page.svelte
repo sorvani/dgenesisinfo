@@ -2,7 +2,34 @@
 	import type { PageData } from './$types';
 	import { getFullName } from '$lib/utils';
 	import Flag from '$lib/Flag.svelte';
+	import FilterBar from '$lib/FilterBar.svelte';
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
+
 	let { data }: { data: PageData } = $props();
+
+	let query      = $state(page.url.searchParams.get('q') ?? '');
+	let activeTags = $state<string[]>(page.url.searchParams.getAll('tag'));
+
+	const filtered = $derived(data.characters.filter(c => {
+		if (activeTags.length && !activeTags.every(t => c.tags?.includes(t))) return false;
+		const q = query.trim().toLowerCase();
+		if (!q) return true;
+		if (getFullName(c).toLowerCase().includes(q)) return true;
+		if (c.monikers?.some(m => m.toLowerCase().includes(q))) return true;
+		if (c.tags?.some(t => t.toLowerCase().includes(q)))     return true;
+		return false;
+	}));
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const url = new URL(window.location.href);
+		url.searchParams.delete('q');
+		url.searchParams.delete('tag');
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		for (const t of activeTags) url.searchParams.append('tag', t);
+		replaceState(url, {});
+	});
 </script>
 
 <svelte:head><title>Characters — D-Genesis Info</title></svelte:head>
@@ -18,11 +45,19 @@
 		</div>
 	</div>
 
+	<FilterBar
+		bind:query
+		bind:tags={activeTags}
+		placeholder="Filter by name, tag, or moniker…"
+		resultCount={filtered.length}
+		totalCount={data.characters.length}
+	/>
+
 	{#if data.characters.length === 0}
 		<p class="empty">No non-explorer characters recorded yet.</p>
 	{:else}
 		<div class="card-grid">
-			{#each data.characters as c}
+			{#each filtered as c}
 				<a href="/characters/{c.slug}" class="char-card">
 					<div class="char-card__name">
 						<Flag code={c.nationality} /> {getFullName(c)}

@@ -2,7 +2,40 @@
 	import type { PageData } from './$types';
 	import { getFullName, formatRank, getHistoricalRankingAt, formatDate } from '$lib/utils';
 	import Flag from '$lib/Flag.svelte';
+	import FilterBar from '$lib/FilterBar.svelte';
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
+
 	let { data }: { data: PageData } = $props();
+
+	let query      = $state(page.url.searchParams.get('q') ?? '');
+	let activeTags = $state<string[]>(page.url.searchParams.getAll('tag'));
+
+	const filtered = $derived(data.explorers.filter(c => {
+		if (activeTags.length && !activeTags.every(t => c.tags?.includes(t))) return false;
+		const q = query.trim().toLowerCase();
+		if (!q) return true;
+		if (getFullName(c).toLowerCase().includes(q)) return true;
+		if (c.monikers?.some(m => m.toLowerCase().includes(q))) return true;
+		if (c.tags?.some(t => t.toLowerCase().includes(q)))     return true;
+		return false;
+	}));
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const url = new URL(window.location.href);
+		url.searchParams.delete('q');
+		url.searchParams.delete('tag');
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		for (const t of activeTags) url.searchParams.append('tag', t);
+		replaceState(url, {});
+	});
+
+	function addTag(t: string, e: MouseEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (!activeTags.includes(t)) activeTags = [...activeTags, t];
+	}
 </script>
 
 <svelte:head><title>Explorers — D-Genesis Info</title></svelte:head>
@@ -18,8 +51,16 @@
 		</div>
 	</div>
 
+	<FilterBar
+		bind:query
+		bind:tags={activeTags}
+		placeholder="Filter by name, tag, or moniker…"
+		resultCount={filtered.length}
+		totalCount={data.explorers.length}
+	/>
+
 	<div class="card-grid">
-		{#each data.explorers as c}
+		{#each filtered as c}
 			{@const ranking = getHistoricalRankingAt(c.rankings)}
 			<a href="/characters/{c.slug}" class="explorer-card">
 
@@ -45,7 +86,13 @@
 					{#if c.tags?.length}
 						<div class="explorer-card__tags">
 							{#each c.tags as tag}
-								<span class="tag">{tag}</span>
+								<span
+									class="tag tag--clickable"
+									role="button"
+									tabindex="0"
+									onclick={(e) => addTag(tag, e)}
+									onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') addTag(tag, e); }}
+								>{tag}</span>
 							{/each}
 						</div>
 					{/if}
@@ -165,6 +212,17 @@
 		border: 1px solid var(--border);
 		border-radius: 999px;
 		color: var(--text-3);
+	}
+
+	.tag--clickable {
+		cursor: pointer;
+		transition: background 0.15s, border-color 0.15s, color 0.15s;
+	}
+
+	.tag--clickable:hover {
+		background: var(--accent-bg);
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 
 	.explorer-card__counts {

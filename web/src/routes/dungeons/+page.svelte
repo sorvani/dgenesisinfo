@@ -1,7 +1,31 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import Flag from '$lib/Flag.svelte';
+	import FilterBar from '$lib/FilterBar.svelte';
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
+
 	let { data }: { data: PageData } = $props();
+
+	let query = $state(page.url.searchParams.get('q') ?? '');
+
+	const filtered = $derived(data.dungeons.filter(d => {
+		const q = query.trim().toLowerCase();
+		if (!q) return true;
+		if (d.name.toLowerCase().includes(q)) return true;
+		if (d.region?.toLowerCase().includes(q)) return true;
+		if (d.country?.toLowerCase().includes(q)) return true;
+		if (d.area_label?.toLowerCase().includes(q)) return true;
+		return false;
+	}));
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const url = new URL(window.location.href);
+		url.searchParams.delete('q');
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		replaceState(url, {});
+	});
 </script>
 
 <svelte:head><title>Dungeons — D-Genesis Info</title></svelte:head>
@@ -17,8 +41,15 @@
 		</div>
 	</div>
 
+	<FilterBar
+		bind:query
+		placeholder="Filter dungeons by name, region, or country…"
+		resultCount={filtered.length}
+		totalCount={data.dungeons.length}
+	/>
+
 	<div class="card-grid">
-		{#each data.dungeons as d}
+		{#each filtered as d}
 			<a href="/dungeons/{d.slug}" class="dungeon-card">
 				<div class="dungeon-card__top">
 					{#if d.area_label || d.area != null}

@@ -1,6 +1,28 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import FilterBar from '$lib/FilterBar.svelte';
+	import { page } from '$app/state';
+	import { replaceState } from '$app/navigation';
+
 	let { data }: { data: PageData } = $props();
+
+	let query = $state(page.url.searchParams.get('q') ?? '');
+
+	const filtered = $derived(data.orbs.filter(o => {
+		const q = query.trim().toLowerCase();
+		if (!q) return true;
+		if (o.orb_name.toLowerCase().includes(q)) return true;
+		if (o.known_effects?.toLowerCase().includes(q)) return true;
+		return false;
+	}));
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+		const url = new URL(window.location.href);
+		url.searchParams.delete('q');
+		if (query.trim()) url.searchParams.set('q', query.trim());
+		replaceState(url, {});
+	});
 </script>
 
 <svelte:head><title>Skill Orbs — D-Genesis Info</title></svelte:head>
@@ -16,8 +38,15 @@
 		</div>
 	</div>
 
+	<FilterBar
+		bind:query
+		placeholder="Filter orbs by name or effect…"
+		resultCount={filtered.length}
+		totalCount={data.orbs.length}
+	/>
+
 	<div class="card-grid">
-		{#each data.orbs as orb}
+		{#each filtered as orb}
 			<a href="/orbs/{orb.slug}" class="orb-card">
 				<div class="orb-card__name">{orb.orb_name}</div>
 				{#if orb.known_effects}
