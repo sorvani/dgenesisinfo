@@ -105,7 +105,6 @@
 	.home-sub {
 		font-size: 0.875rem;
 		color: var(--text-3);
-		max-width: 520px;
 	}
 
 	/* ── WDARL card ── */
