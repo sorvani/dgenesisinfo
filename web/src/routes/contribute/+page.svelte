@@ -350,11 +350,19 @@
 			date_acquired: co_dateAcquired || null, date_note: co_dateNote || null, citation: cite,
 		}, null, 2);
 
-		if (entityType === 'orb_drop_rate') return JSON.stringify({
-			orb_id: dr_orbId, monster_id: dr_monsterId,
-			creature: dr_creature || null, dungeon: dr_dungeon || null,
-			floor: dr_floor || null, favorable_outcomes: dr_favOut, total_events: dr_total, citation: cite,
-		}, null, 2);
+		if (entityType === 'orb_drop_rate') {
+			// Keep the legacy free-text 'creature' in sync with the selected monster's
+			// name so the admin diff doesn't look like data loss when a monster is picked.
+			const monsterName = dr_monsterId
+				? (data.monsters.find(m => m.id === dr_monsterId)?.name ?? null)
+				: null;
+			return JSON.stringify({
+				orb_id: dr_orbId, monster_id: dr_monsterId,
+				creature: monsterName ?? (dr_creature || null),
+				dungeon: dr_dungeon || null,
+				floor: dr_floor || null, favorable_outcomes: dr_favOut, total_events: dr_total, citation: cite,
+			}, null, 2);
+		}
 
 		if (entityType === 'monster_dungeon') return JSON.stringify({
 			monster_id: md_monsterId, dungeon_id: md_dungeonId,
@@ -783,10 +791,12 @@
 						{#each data.monsters as m}<option value={m.id}>{m.name}</option>{/each}
 					</select>
 				</div>
-				<div class="field">
-					<label class="field-label">Creature label <span class="hint">free text — used only if no creature is selected above</span></label>
-					<input type="text" bind:value={dr_creature} />
-				</div>
+				{#if !dr_monsterId}
+					<div class="field field--wide">
+						<label class="field-label">Creature label</label>
+						<input type="text" placeholder="Free-text fallback — only needed when the creature isn't in the dropdown above" bind:value={dr_creature} />
+					</div>
+				{/if}
 				<div class="field">
 					<label class="field-label">Dungeon</label>
 					<select bind:value={dr_dungeon}>
@@ -799,11 +809,11 @@
 					<input type="text" placeholder="e.g. 2, B1, or 5–7" bind:value={dr_floor} />
 				</div>
 				<div class="field field--sm">
-					<label class="field-label">Favorable Outcomes</label>
+					<label class="field-label">Drops <span class="hint">e.g. 1</span></label>
 					<input type="number" bind:value={dr_favOut} />
 				</div>
 				<div class="field field--sm">
-					<label class="field-label">Total Events</label>
+					<label class="field-label">Per kills <span class="hint">e.g. 1,000</span></label>
 					<input type="number" bind:value={dr_total} />
 				</div>
 			</div>

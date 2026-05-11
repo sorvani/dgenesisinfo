@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getFullName, formatProbability, formatCooldown, formatCitation, formatFloor } from '$lib/utils';
+	import { getFullName, formatProbability, formatCooldown, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil } from 'lucide-svelte';
+	import Citation from '$lib/Citation.svelte';
 	let { data }: { data: PageData } = $props();
 	const orb = $derived(data.orb);
 </script>
@@ -79,7 +80,7 @@
 									<td>{formatCooldown(dr.total_events) || '—'}</td>
 									<td>
 										{#if dr.citation.volume}
-											<span class="badge badge--citation">{formatCitation(dr.citation)}</span>
+											<Citation citation={dr.citation} />
 										{:else}
 											<span style="color: var(--text-3)">—</span>
 										{/if}

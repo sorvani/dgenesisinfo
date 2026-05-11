@@ -296,6 +296,15 @@ h3 { font-size: 1rem; font-weight: 600; }
 	background: var(--accent-bg);
 	color: var(--accent-dark);
 	border: 1px solid #f0d0b0;
+	text-decoration: none;
+	transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+a.badge--citation:hover {
+	background: var(--accent);
+	color: #fff;
+	border-color: var(--accent);
+	text-decoration: none;
 }
 
 .badge--id {

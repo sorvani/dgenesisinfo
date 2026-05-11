@@ -187,6 +187,15 @@ async function resolveEntityUrl(db: D1Database, type: string, entityId: number |
 		return row ? `/characters/${row.slug}` : null;
 	}
 	if (type === 'orb_drop_rate') {
+		// Drop rates route to the creature's bestiary page (preferred), falling
+		// back to the orb if no monster is linked yet.
+		const monsterId = (proposed.monster_id as number | null) ?? (
+			entityId ? (await db.prepare('SELECT monster_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ monster_id: number | null }>())?.monster_id ?? null : null
+		);
+		if (monsterId) {
+			const row = await db.prepare('SELECT slug FROM monsters WHERE id = ?').bind(monsterId).first<{ slug: string }>();
+			if (row) return `/bestiary/${row.slug}`;
+		}
 		const orbId = (proposed.orb_id as number | null) ?? (
 			entityId ? (await db.prepare('SELECT orb_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ orb_id: number }>())?.orb_id ?? null : null
 		);
@@ -243,12 +252,16 @@ async function resolveEntityLabel(db: D1Database, type: string, entityId: number
 			return row ? [row.first_name, row.last_name].filter(Boolean).join(' ') || null : null;
 		}
 		case 'orb_drop_rate': {
-			const orbId = (proposed.orb_id as number | null) ?? (
-				entityId ? (await db.prepare('SELECT orb_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ orb_id: number }>())?.orb_id ?? null : null
+			// Drop rates conceptually belong to the creature — label by monster name.
+			const monsterId = (proposed.monster_id as number | null) ?? (
+				entityId ? (await db.prepare('SELECT monster_id FROM orb_drop_rates WHERE id = ?').bind(entityId).first<{ monster_id: number | null }>())?.monster_id ?? null : null
 			);
-			if (!orbId) return null;
-			const row = await db.prepare('SELECT orb_name FROM orbs WHERE id = ?').bind(orbId).first<{ orb_name: string }>();
-			return row?.orb_name ?? null;
+			if (monsterId) {
+				const row = await db.prepare('SELECT name FROM monsters WHERE id = ?').bind(monsterId).first<{ name: string }>();
+				if (row?.name) return row.name;
+			}
+			// Fall back to whatever free-text creature label the submission carries.
+			return (proposed.creature as string) || null;
 		}
 		case 'monster_dungeon': {
 			const ids = (proposed.monster_id || proposed.dungeon_id) ? proposed : (

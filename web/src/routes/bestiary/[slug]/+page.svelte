@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { formatCitation, formatProbability, formatCooldown, formatFloor } from '$lib/utils';
+	import { formatProbability, formatCooldown, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil } from 'lucide-svelte';
+	import Citation from '$lib/Citation.svelte';
 	let { data }: { data: PageData } = $props();
 	const m = $derived(data.monster);
 </script>
@@ -24,7 +25,7 @@
 
 	{#if m.citation.volume}
 		<p class="first-cite">
-			First cited: <span class="badge badge--citation">{formatCitation(m.citation)}</span>
+			First cited: <Citation citation={m.citation} />
 		</p>
 	{/if}
 
@@ -59,7 +60,7 @@
 								<tr>
 									<td><a href="/dungeons/{loc.dungeon_slug}">{loc.dungeon_name}</a></td>
 									<td>{#if loc.floor}{@html formatFloor(loc.floor)}{:else}—{/if}</td>
-									<td>{#if loc.citation.volume}<span class="badge badge--citation">{formatCitation(loc.citation)}</span>{:else}—{/if}</td>
+									<td>{#if loc.citation.volume}<Citation citation={loc.citation} />{:else}—{/if}</td>
 									{#if data.user}
 										<td class="row-edit-col">
 											<a href="/contribute?type=monster_dungeon&op=update&id={loc.id}" class="row-edit" title="Edit">
@@ -118,7 +119,7 @@
 								<td>{formatCooldown(drop.total_events) || '—'}</td>
 								<td>
 									{#if drop.citation.volume}
-										<span class="badge badge--citation">{formatCitation(drop.citation)}</span>
+										<Citation citation={drop.citation} />
 									{:else}—{/if}
 								</td>
 								{#if data.user}

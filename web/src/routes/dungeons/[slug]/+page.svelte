@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { formatDate, formatCitation, formatFloor } from '$lib/utils';
+	import { formatDate, formatFloor } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil } from 'lucide-svelte';
 	import Flag from '$lib/Flag.svelte';
+	import Citation from '$lib/Citation.svelte';
 	let { data }: { data: PageData } = $props();
 	const d = $derived(data.dungeon);
 </script>
@@ -55,7 +56,7 @@
 			<div class="meta-chip">
 				<span class="meta-chip__label">First Citation</span>
 				<div class="meta-chip__value-row">
-					<span class="badge badge--citation">{formatCitation(d.citation)}</span>
+					<Citation citation={d.citation} />
 				</div>
 			</div>
 		{/if}
@@ -96,7 +97,7 @@
 								<tr>
 									<td><a href="/bestiary/{c.monster_slug}">{c.monster_name}</a></td>
 									<td>{#if c.floor}{@html formatFloor(c.floor)}{:else}—{/if}</td>
-									<td>{#if c.citation.volume}<span class="badge badge--citation">{formatCitation(c.citation)}</span>{:else}—{/if}</td>
+									<td>{#if c.citation.volume}<Citation citation={c.citation} />{:else}—{/if}</td>
 									{#if data.user}
 										<td class="row-edit-col">
 											<a href="/contribute?type=monster_dungeon&op=update&id={c.id}" class="row-edit" title="Edit">

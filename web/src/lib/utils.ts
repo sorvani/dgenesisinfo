@@ -194,6 +194,24 @@ export function formatCitation(citation: Citation | null): string {
 	return parts.join(' · ');
 }
 
+// J-Novel Club reading link for a citation, when we have enough info to build one.
+// LN URL pattern: /read/d-genesis-volume-{volume}-part-{jnc_part}
+// Manga URL pattern: /read/d-genesis-three-years-after-the-dungeons-appeared-manga-volume-{volume}-chapter-{jnc_part}
+// (Manga chapter and JNC part are the same number; jnc_part is the authoritative source.)
+export function getCitationUrl(c: Citation | null): string | null {
+	if (!c?.volume || !c.source_type) return null;
+	if (c.source_type === 'Light Novel') {
+		if (!c.jnc_part) return null;
+		return `https://j-novel.club/read/d-genesis-volume-${c.volume}-part-${c.jnc_part}`;
+	}
+	if (c.source_type === 'Manga') {
+		const ch = c.jnc_part || c.chapter;
+		if (!ch) return null;
+		return `https://j-novel.club/read/d-genesis-three-years-after-the-dungeons-appeared-manga-volume-${c.volume}-chapter-${ch}`;
+	}
+	return null;
+}
+
 // ─── Ranking helpers ──────────────────────────────────────────────────────────
 
 export function getHistoricalRankingAt(

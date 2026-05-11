@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getTimelineEventDate, formatCitation } from '$lib/utils';
+	import { getTimelineEventDate } from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import { Pencil, Trash2 } from 'lucide-svelte';
+	import Citation from '$lib/Citation.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -87,7 +88,7 @@
 							</div>
 							{#if ev.citation.volume}
 								<div class="timeline-card__citation">
-									<span class="badge badge--citation">{formatCitation(ev.citation)}</span>
+									<Citation citation={ev.citation} />
 								</div>
 							{/if}
 						</div>

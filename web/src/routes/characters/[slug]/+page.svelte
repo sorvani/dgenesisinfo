@@ -3,10 +3,11 @@
 	import { Pencil, Mars, Venus } from 'lucide-svelte';
 	import {
 		getFullName, formatDate, formatRank,
-		getHistoricalRankingAt, formatCitation, getCitationScore
+		getHistoricalRankingAt, getCitationScore
 	} from '$lib/utils';
 	import { renderMd } from '$lib/markdown';
 	import Flag from '$lib/Flag.svelte';
+	import Citation from '$lib/Citation.svelte';
 
 	let { data }: { data: PageData } = $props();
 	const c    = $derived(data.character);
@@ -118,7 +119,7 @@
 				<div class="meta-chip__value-row">
 					<span class="meta-chip__value">{formatDate(c.date_first_known)}</span>
 					{#if firstKnownCitation?.volume}
-						<span class="badge badge--citation">{formatCitation(firstKnownCitation)}</span>
+						<Citation citation={firstKnownCitation} />
 					{/if}
 				</div>
 			</div>
@@ -167,7 +168,7 @@
 											{/if}
 										</td>
 										<td>{formatDate(r.date_noted)}</td>
-										<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
+										<td>{#if r.citation.volume}<Citation citation={r.citation} />{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
 												<a href="/contribute?type=character_ranking&op=update&id={r.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
@@ -231,7 +232,7 @@
 										<td class="stat-val">{s.hp ?? '—'}</td>
 										<td class="stat-val">{s.mp ?? '—'}</td>
 										<td class="stat-val">{s.sp ?? '—'}</td>
-										<td>{#if s.citation.volume}<span class="badge badge--citation">{formatCitation(s.citation)}</span>{:else}—{/if}</td>
+										<td>{#if s.citation.volume}<Citation citation={s.citation} />{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
 												<a href="/contribute?type=character_stat&op=update&id={s.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
@@ -283,7 +284,7 @@
 									<tr>
 										<td>{#if orb}<a href="/orbs/{orb.slug}">{orb.orb_name}</a>{:else}Unknown{/if}</td>
 										<td>{ou.date_acquired ? formatDate(ou.date_acquired) : (ou.date_note ?? '—')}</td>
-										<td>{#if ou.citation.volume}<span class="badge badge--citation">{formatCitation(ou.citation)}</span>{:else}—{/if}</td>
+										<td>{#if ou.citation.volume}<Citation citation={ou.citation} />{:else}—{/if}</td>
 										{#if data.user}
 											<td class="row-edit-col">
 												<a href="/contribute?type=character_orb&op=update&id={ou.id}" class="row-edit" title="Edit"><Pencil size={16} strokeWidth={2} /></a>
