@@ -9,27 +9,139 @@ interface RawSubmission {
 	github_username: string;
 }
 
+const TABLE_MAP: Record<string, string> = {
+	character:         'characters',
+	orb:               'orbs',
+	dungeon:           'dungeons',
+	monster:           'monsters',
+	timeline_event:    'timeline_events',
+	character_stat:    'character_stats',
+	character_ranking: 'character_rankings',
+	character_orb:     'character_orbs',
+	orb_drop_rate:     'orb_drop_rates',
+};
+
+const TABLES_WITH_MODIFIED = new Set(['characters', 'orbs', 'dungeons', 'monsters']);
+
+const DIRECT_FIELDS: Record<string, string[]> = {
+	character:         ['first_name', 'last_name', 'nationality', 'sex', 'birthday', 'date_first_known', 'area', 'is_explorer', 'in_wdarl', 'is_public', 'note'],
+	orb:               ['orb_name', 'known_effects', 'note'],
+	dungeon:           ['name', 'area', 'area_label', 'country', 'region', 'floors', 'is_active', 'note'],
+	monster:           ['name', 'category', 'note'],
+	timeline_event:    ['date_utc', 'date_label', 'display_time', 'timezone', 'pre_history', 'event'],
+	character_stat:    ['character_id', 'date_noted', 'date_sequence', 'scan_type', 'hp', 'mp', 'sp', 'str', 'vit', 'int', 'agi', 'dex', 'luc', 'stat_total', 'points_from_avg'],
+	character_ranking: ['character_id', 'rank', 'known_above_rank', 'date_noted'],
+	character_orb:     ['character_id', 'orb_id', 'date_acquired', 'date_note'],
+	orb_drop_rate:     ['orb_id', 'creature', 'dungeon', 'floor', 'favorable_outcomes', 'total_events'],
+};
+
+function flattenProposed(entityType: string, proposed: Record<string, unknown>): Record<string, unknown> {
+	const flat: Record<string, unknown> = {};
+
+	// Direct scalar fields
+	for (const field of (DIRECT_FIELDS[entityType] ?? [])) {
+		if (field in proposed) flat[field] = proposed[field];
+	}
+
+	// Character: monikers and tags stored as JSON arrays
+	if (entityType === 'character') {
+		if ('monikers' in proposed) flat.moniker = JSON.stringify(proposed.monikers ?? []);
+		if ('tags' in proposed)     flat.tags     = JSON.stringify(proposed.tags ?? []);
+	}
+
+	// Citation fields
+	if (proposed.citation) {
+		const c = proposed.citation as Record<string, unknown>;
+		if (entityType === 'character') {
+			flat.cite_first_known_volume      = c.volume;
+			flat.cite_first_known_chapter     = c.chapter;
+			flat.cite_first_known_jnc_part    = c.jnc_part;
+			flat.cite_first_known_source_type = c.source_type;
+		} else {
+			flat.cite_volume      = c.volume;
+			flat.cite_chapter     = c.chapter;
+			flat.cite_jnc_part    = c.jnc_part;
+			flat.cite_source_type = c.source_type;
+		}
+	}
+
+	return flat;
+}
+
+async function applySubmission(db: D1Database, sub: RawSubmission): Promise<void> {
+	const table = TABLE_MAP[sub.entity_type];
+	if (!table) return;
+
+	if (sub.operation === 'delete') {
+		if (!sub.entity_id) return;
+		await db.prepare(`DELETE FROM ${table} WHERE id = ?`).bind(sub.entity_id).run();
+		return;
+	}
+
+	const proposed = JSON.parse(sub.proposed_data) as Record<string, unknown>;
+	const flat = flattenProposed(sub.entity_type, proposed);
+
+	if (sub.operation === 'update') {
+		if (!sub.entity_id) return;
+		if (TABLES_WITH_MODIFIED.has(table)) flat.modified_utc = new Date().toISOString().replace('T', 'T').split('.')[0] + 'Z';
+		const cols = Object.keys(flat);
+		if (!cols.length) return;
+		const sql = `UPDATE ${table} SET ${cols.map(c => `${c} = ?`).join(', ')} WHERE id = ?`;
+		await db.prepare(sql).bind(...Object.values(flat), sub.entity_id).run();
+		return;
+	}
+
+	if (sub.operation === 'insert') {
+		const cols = Object.keys(flat);
+		if (!cols.length) return;
+		const sql = `INSERT INTO ${table} (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`;
+		await db.prepare(sql).bind(...Object.values(flat)).run();
+		return;
+	}
+}
+
+// Reshape a raw DB row into the same structure as proposed_data so diffs are meaningful
+function normalizeCurrentForDiff(entityType: string, row: Record<string, unknown>): Record<string, unknown> {
+	const out: Record<string, unknown> = {};
+
+	// Copy direct fields
+	for (const field of (DIRECT_FIELDS[entityType] ?? [])) {
+		if (field in row) out[field] = row[field];
+	}
+
+	// Character: monikers stored as JSON string under 'moniker', tags as JSON string
+	if (entityType === 'character') {
+		out.monikers = JSON.parse((row.moniker as string) || '[]');
+		out.tags = JSON.parse((row.tags as string) || '[]');
+		out.citation = {
+			volume:      row.cite_first_known_volume      ?? null,
+			chapter:     row.cite_first_known_chapter     ?? null,
+			jnc_part:    row.cite_first_known_jnc_part    ?? null,
+			source_type: row.cite_first_known_source_type ?? null,
+		};
+	} else {
+		// All other entity types with standard cite_ columns
+		if ('cite_volume' in row) {
+			out.citation = {
+				volume:      row.cite_volume      ?? null,
+				chapter:     row.cite_chapter     ?? null,
+				jnc_part:    row.cite_jnc_part    ?? null,
+				source_type: row.cite_source_type ?? null,
+			};
+		}
+	}
+
+	return out;
+}
+
 // Fetch current state of an entity so we can diff it
 async function resolveCurrentEntity(db: D1Database, type: string, id: number | null): Promise<Record<string, unknown> | null> {
 	if (!id) return null;
-
-	const tableMap: Record<string, string> = {
-		character:         'characters',
-		orb:               'orbs',
-		dungeon:           'dungeons',
-		monster:           'monsters',
-		timeline_event:    'timeline_events',
-		character_stat:    'character_stats',
-		character_ranking: 'character_rankings',
-		character_orb:     'character_orbs',
-		orb_drop_rate:     'orb_drop_rates',
-	};
-
-	const table = tableMap[type];
+	const table = TABLE_MAP[type];
 	if (!table) return null;
-
 	const row = await db.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(id).first<Record<string, unknown>>();
-	return row ?? null;
+	if (!row) return null;
+	return normalizeCurrentForDiff(type, row);
 }
 
 export interface Submission {
@@ -58,7 +170,6 @@ export const load: PageServerLoad = async ({ platform }) => {
 		),
 	]);
 
-	// Resolve current entity data for each pending submission
 	const pending: Submission[] = await Promise.all(
 		(pendingRes.results as RawSubmission[]).map(async s => ({
 			...s,
@@ -78,19 +189,26 @@ export const load: PageServerLoad = async ({ platform }) => {
 
 export const actions: Actions = {
 	approve: async ({ platform, locals, request }) => {
-		const db = platform!.env.DB;
+		const db   = platform!.env.DB;
 		const form = await request.formData();
 		const id   = parseInt(form.get('id')?.toString() ?? '');
 		const note = form.get('admin_note')?.toString() ?? null;
 		if (!id) return fail(400, { error: 'Missing ID' });
+
+		const sub = await db.prepare(`SELECT * FROM pending_submissions WHERE id = ? AND status = 'pending'`).bind(id).first<RawSubmission>();
+		if (!sub) return fail(404, { error: 'Submission not found or already reviewed' });
+
+		await applySubmission(db, sub);
+
 		await db.prepare(
 			`UPDATE pending_submissions SET status='approved', reviewed_by=?, reviewed_at=strftime('%Y-%m-%dT%H:%M:%SZ','now'), admin_note=?
-			 WHERE id=? AND status='pending'`
+			 WHERE id=?`
 		).bind(locals.user!.id, note, id).run();
+
 		return { success: true };
 	},
 	reject: async ({ platform, locals, request }) => {
-		const db = platform!.env.DB;
+		const db   = platform!.env.DB;
 		const form = await request.formData();
 		const id   = parseInt(form.get('id')?.toString() ?? '');
 		const note = form.get('admin_note')?.toString() ?? null;
