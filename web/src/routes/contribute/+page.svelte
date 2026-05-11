@@ -31,9 +31,11 @@
 	let c_birthday       = $state('');
 	let c_dateFirstKnown = $state('');
 	let c_area           = $state<number | null>(null);
-	let c_note        = $state('');
-	let c_tags        = $state<string[]>([]);
-	let c_isExplorer  = $state(true);
+	let c_note         = $state('');
+	let c_tags         = $state<string[]>([]);
+	let c_monikerInput = $state('');
+	let c_tagInput     = $state('');
+	let c_isExplorer   = $state(true);
 	let c_inWdarl     = $state(false);
 	let c_isPublic    = $state(true);
 
@@ -161,9 +163,17 @@
 		}
 	});
 
-	function addMoniker() { c_monikers = [...c_monikers, '']; }
+	function addMonikerChip() {
+		const v = c_monikerInput.trim();
+		if (v) c_monikers = [...c_monikers, v];
+		c_monikerInput = '';
+	}
 	function removeMoniker(i: number) { c_monikers = c_monikers.filter((_, idx) => idx !== i); }
-	function addTag() { c_tags = [...c_tags, '']; }
+	function addTagChip() {
+		const v = c_tagInput.trim();
+		if (v) c_tags = [...c_tags, v];
+		c_tagInput = '';
+	}
 	function removeTag(i: number) { c_tags = c_tags.filter((_, idx) => idx !== i); }
 
 	function buildProposedData(): string {
@@ -349,27 +359,27 @@
 			</div>
 
 			<div class="field mt">
-				<label class="field-label">Monikers
-					<button type="button" class="array-add" onclick={addMoniker}>+ Add</button>
-				</label>
-				{#each c_monikers as _, i}
-					<div class="array-row">
-						<input type="text" bind:value={c_monikers[i]} placeholder='e.g. "The Phantom"' />
-						<button type="button" class="array-remove" onclick={() => removeMoniker(i)}>✕</button>
-					</div>
-				{/each}
+				<label class="field-label">Monikers</label>
+				<div class="chip-field">
+					{#each c_monikers as m, i}
+						<span class="chip">{m}<button type="button" class="chip-remove" onclick={() => removeMoniker(i)}>✕</button></span>
+					{/each}
+					<input class="chip-input" type="text" bind:value={c_monikerInput}
+						placeholder="Add moniker…"
+						onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addMonikerChip(); } }} />
+				</div>
 			</div>
 
 			<div class="field mt">
-				<label class="field-label">Tags
-					<button type="button" class="array-add" onclick={addTag}>+ Add</button>
-				</label>
-				{#each c_tags as _, i}
-					<div class="array-row">
-						<input type="text" bind:value={c_tags[i]} placeholder="e.g. D-Powers" />
-						<button type="button" class="array-remove" onclick={() => removeTag(i)}>✕</button>
-					</div>
-				{/each}
+				<label class="field-label">Tags</label>
+				<div class="chip-field">
+					{#each c_tags as t, i}
+						<span class="chip">{t}<button type="button" class="chip-remove" onclick={() => removeTag(i)}>✕</button></span>
+					{/each}
+					<input class="chip-input" type="text" bind:value={c_tagInput}
+						placeholder="Add tag…"
+						onkeydown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTagChip(); } }} />
+				</div>
 			</div>
 
 			<div class="field mt">
@@ -800,34 +810,58 @@
 	.toggle-label input:checked ~ .toggle-track { background: var(--accent); }
 	.toggle-label input:checked ~ .toggle-track::after { transform: translateX(16px); }
 
-	.array-add {
-		font-size: 0.6875rem;
-		font-weight: 600;
-		color: var(--accent);
+	.chip-field {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.375rem 0.5rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		min-height: 2.25rem;
+		cursor: text;
+	}
+
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		padding: 0.15rem 0.45rem 0.15rem 0.6rem;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		font-size: 0.8rem;
+		color: var(--text-2);
+		white-space: nowrap;
+		line-height: 1.4;
+	}
+
+	.chip-remove {
 		background: none;
 		border: none;
 		cursor: pointer;
-		padding: 0;
-	}
-
-	.array-row {
-		display: flex;
-		gap: 0.5rem;
-		margin-top: 0.375rem;
-	}
-
-	.array-remove {
-		flex-shrink: 0;
-		padding: 0.35rem 0.5rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		background: none;
 		color: var(--text-3);
-		cursor: pointer;
-		font-size: 0.75rem;
+		font-size: 0.625rem;
+		padding: 0;
+		line-height: 1;
+		display: inline-flex;
+		align-items: center;
 	}
 
-	.array-remove:hover { color: #dc2626; border-color: #dc2626; }
+	.chip-remove:hover { color: #dc2626; }
+
+	.chip-input {
+		border: none !important;
+		background: transparent !important;
+		padding: 0.1rem 0.25rem !important;
+		font-size: 0.875rem !important;
+		min-width: 100px;
+		flex: 1;
+		outline: none !important;
+		box-shadow: none !important;
+		width: auto !important;
+	}
 
 	.readonly-id {
 		padding: 0.45rem 0.65rem;

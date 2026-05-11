@@ -130,14 +130,21 @@
 			<div class="card" style="padding: 0; overflow: hidden; margin-top: 0.75rem;">
 				<table class="data-table">
 					<thead>
-						<tr><th>Rank</th><th>Known Above</th><th>Date Noted</th><th>Citation</th></tr>
+						<tr><th>Ranking</th><th>Date Noted</th><th>Citation</th></tr>
 					</thead>
 					<tbody>
 						{#each sortedRankings as r, i}
 							{#if i === 0 || rankingsOpen}
 								<tr>
-									<td class="rank-cell">{r.rank ? '#' + r.rank.toLocaleString() : '—'}</td>
-									<td>{r.known_above_rank ? r.known_above_rank.toLocaleString() : '—'}</td>
+									<td class="rank-cell">
+										{#if r.rank}
+											#{r.rank.toLocaleString()}
+										{:else if r.known_above_rank}
+											<span class="rank-above">&gt; #{r.known_above_rank.toLocaleString()}</span>
+										{:else}
+											—
+										{/if}
+									</td>
 									<td>{formatDate(r.date_noted)}</td>
 									<td>{#if r.citation.volume}<span class="badge badge--citation">{formatCitation(r.citation)}</span>{:else}—{/if}</td>
 								</tr>
@@ -145,7 +152,7 @@
 						{/each}
 						{#if sortedRankings.length > 1}
 							<tr>
-								<td colspan="4">
+								<td colspan="3">
 									<button class="show-more-btn" onclick={() => rankingsOpen = !rankingsOpen}>
 										{rankingsOpen ? 'Show less' : `Show ${sortedRankings.length - 1} more`}
 									</button>
@@ -423,5 +430,11 @@
 		font-family: var(--font-mono);
 		font-weight: 700;
 		color: var(--accent);
+	}
+
+	.rank-above {
+		font-weight: 400;
+		color: var(--text-3);
+		font-size: 0.875rem;
 	}
 </style>
