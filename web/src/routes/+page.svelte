@@ -45,8 +45,7 @@
 					<span class="wdarl-label">WDARL</span>
 					<span class="wdarl-full">World Dungeon Association Ranking List</span>
 				</div>
-				<div class="wdarl-sub">Simultaneously Translated Chat</div>
-			</div>
+				</div>
 			<select class="citation-select" onchange={(e) => {
 				const idx = parseInt((e.target as HTMLSelectElement).value);
 				selectedCitation = idx >= 0 ? data.citations[idx] : null;
@@ -113,6 +112,7 @@
 	.wdarl-card {
 		padding: 0;
 		overflow: hidden;
+		max-width: 680px;
 	}
 
 	.wdarl-header {
@@ -142,12 +142,6 @@
 		font-size: 0.875rem;
 		color: var(--text-2);
 		font-weight: 500;
-	}
-
-	.wdarl-sub {
-		font-size: 0.75rem;
-		color: var(--text-3);
-		margin-top: 0.1rem;
 	}
 
 	.citation-select {
