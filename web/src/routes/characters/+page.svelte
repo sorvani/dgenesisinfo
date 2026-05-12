@@ -77,15 +77,15 @@
 						{/if}
 					</div>
 
-					{#if c.note}
-						<p class="char-card__note">{c.note.replace(/[#*`_~]/g, '').substring(0, 80)}…</p>
-					{/if}
-
 					{#if c.date_first_known || c.birthday}
 						<div class="char-card__meta">
 							{#if c.date_first_known}<div>Introduced: {formatDate(c.date_first_known)}</div>{/if}
 							{#if c.birthday}<div>Birthday: {c.birthday}</div>{/if}
 						</div>
+					{/if}
+
+					{#if c.note}
+						<p class="char-card__note">{c.note.replace(/[#*`_~]/g, '').substring(0, 80)}…</p>
 					{/if}
 
 					{#if c.tags?.length}
