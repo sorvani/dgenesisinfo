@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { X } from 'lucide-svelte';
+	import { X, ChevronUp, ChevronDown } from 'lucide-svelte';
+
+	type SortOption = { value: string; label: string };
 
 	let {
 		query = $bindable(''),
@@ -7,13 +9,23 @@
 		placeholder = 'Filter by name, tag, or moniker…',
 		resultCount,
 		totalCount,
+		sortBy = $bindable<string>(''),
+		sortDir = $bindable<'asc' | 'desc'>('asc'),
+		sortOptions = [] as SortOption[],
 	}: {
 		query?: string;
 		tags?: string[];
 		placeholder?: string;
 		resultCount?: number;
 		totalCount?: number;
+		sortBy?: string;
+		sortDir?: 'asc' | 'desc';
+		sortOptions?: SortOption[];
 	} = $props();
+
+	function toggleDir() {
+		sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+	}
 
 	function removeTag(t: string) {
 		tags = tags.filter(x => x !== t);
@@ -49,8 +61,31 @@
 		<button type="button" class="filter-clear" onclick={clearAll}>Clear all</button>
 	{/if}
 
-	{#if hasActive && resultCount !== undefined && totalCount !== undefined}
-		<span class="filter-count">{resultCount} of {totalCount}</span>
+	{#if (hasActive && resultCount !== undefined && totalCount !== undefined) || sortOptions.length}
+		<div class="filter-bar__right">
+			{#if hasActive && resultCount !== undefined && totalCount !== undefined}
+				<span class="filter-count">{resultCount} of {totalCount}</span>
+			{/if}
+			{#if sortOptions.length}
+				<div class="sort-control">
+					<label for="sort-by" class="sort-label">Sort by:</label>
+					<select id="sort-by" class="sort-select" bind:value={sortBy}>
+						{#each sortOptions as opt (opt.value)}
+							<option value={opt.value}>{opt.label}</option>
+						{/each}
+					</select>
+					<button
+						type="button"
+						class="sort-dir"
+						onclick={toggleDir}
+						aria-label={sortDir === 'asc' ? 'Sort ascending — click for descending' : 'Sort descending — click for ascending'}
+						title={sortDir === 'asc' ? 'Ascending' : 'Descending'}
+					>
+						{#if sortDir === 'asc'}<ChevronUp size={16} strokeWidth={2.5} />{:else}<ChevronDown size={16} strokeWidth={2.5} />{/if}
+					</button>
+				</div>
+			{/if}
+		</div>
 	{/if}
 </div>
 
@@ -134,9 +169,63 @@
 
 	.filter-clear:hover { color: var(--accent); }
 
+	.filter-bar__right {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-left: auto;
+		flex-wrap: wrap;
+	}
+
 	.filter-count {
 		font-size: 0.8125rem;
 		color: var(--text-3);
-		margin-left: auto;
+	}
+
+	.sort-control {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.sort-label {
+		font-size: 0.8125rem;
+		color: var(--text-3);
+	}
+
+	.sort-select {
+		padding: 0.35rem 0.5rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		color: var(--text);
+		font-size: 0.8125rem;
+		font-family: var(--font-sans);
+		cursor: pointer;
+	}
+
+	.sort-select:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+
+	.sort-dir {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		padding: 0;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		color: var(--text-2);
+		cursor: pointer;
+		transition: border-color 0.15s, color 0.15s;
+	}
+
+	.sort-dir:hover {
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 </style>

@@ -7,10 +7,20 @@
 	import { page } from '$app/state';
 	import { replaceState } from '$app/navigation';
 
+	type SortKey = 'firstName' | 'lastName';
+	type SortDir = 'asc' | 'desc';
+
 	let { data }: { data: PageData } = $props();
 
 	let query      = $state(page.url.searchParams.get('q') ?? '');
 	let activeTags = $state<string[]>(page.url.searchParams.getAll('tag'));
+	let sortBy     = $state<SortKey>((page.url.searchParams.get('sort') as SortKey) || 'firstName');
+	let sortDir    = $state<SortDir>((page.url.searchParams.get('dir') as SortDir) || 'asc');
+
+	const sortOptions = [
+		{ value: 'firstName', label: 'First Name' },
+		{ value: 'lastName',  label: 'Last Name' },
+	];
 
 	const filtered = $derived(data.characters.filter(c => {
 		if (activeTags.length && !activeTags.every(t => c.tags?.includes(t))) return false;
@@ -22,13 +32,29 @@
 		return false;
 	}));
 
+	const sorted = $derived([...filtered].sort((a, b) => {
+		let cmp = 0;
+		if (sortBy === 'firstName') {
+			cmp = (a.first_name ?? '').localeCompare(b.first_name ?? '');
+			if (cmp === 0) cmp = (a.last_name ?? '').localeCompare(b.last_name ?? '');
+		} else {
+			cmp = (a.last_name ?? '').localeCompare(b.last_name ?? '');
+			if (cmp === 0) cmp = (a.first_name ?? '').localeCompare(b.first_name ?? '');
+		}
+		return sortDir === 'asc' ? cmp : -cmp;
+	}));
+
 	$effect(() => {
 		if (typeof window === 'undefined') return;
 		const url = new URL(window.location.href);
 		url.searchParams.delete('q');
 		url.searchParams.delete('tag');
+		url.searchParams.delete('sort');
+		url.searchParams.delete('dir');
 		if (query.trim()) url.searchParams.set('q', query.trim());
 		for (const t of activeTags) url.searchParams.append('tag', t);
+		if (sortBy !== 'firstName') url.searchParams.set('sort', sortBy);
+		if (sortDir !== 'asc')      url.searchParams.set('dir', sortDir);
 		replaceState(url, {});
 	});
 
@@ -55,6 +81,9 @@
 	<FilterBar
 		bind:query
 		bind:tags={activeTags}
+		bind:sortBy
+		bind:sortDir
+		{sortOptions}
 		placeholder="Filter by name, tag, or moniker…"
 		resultCount={filtered.length}
 		totalCount={data.characters.length}
@@ -64,7 +93,7 @@
 		<p class="empty">No non-explorer characters recorded yet.</p>
 	{:else}
 		<div class="card-grid">
-			{#each filtered as c}
+			{#each sorted as c}
 				<a href="/characters/{c.slug}" class="char-card">
 					<div class="char-card__identity">
 						<div class="char-card__name">
