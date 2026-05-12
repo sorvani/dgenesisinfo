@@ -65,14 +65,14 @@
 								<tr>
 									<td>
 										{#if dr.monster_slug && dr.monster_name}
-											<a href="/bestiary/{dr.monster_slug}" class="entity-chip">{dr.monster_name}</a>
+											<a href="/bestiary/{dr.monster_slug}">{dr.monster_name}</a>
 										{:else if dr.creature}
 											{dr.creature}
 										{:else}—{/if}
 									</td>
 									<td>
 										{#if dr.dungeon_slug}
-											<a href="/dungeons/{dr.dungeon_slug}" class="entity-chip">{dr.dungeon}</a>
+											<a href="/dungeons/{dr.dungeon_slug}">{dr.dungeon}</a>
 										{:else if dr.dungeon}{dr.dungeon}{:else}—{/if}
 									</td>
 									<td>{#if dr.floor}{@html formatFloor(dr.floor)}{:else}—{/if}</td>

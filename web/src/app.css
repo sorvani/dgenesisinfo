@@ -482,26 +482,6 @@ a.badge--citation:hover {
 
 .action-edit:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
-/* ── Entity chip link (dungeon, explorer, orb inline links) ──────────────────── */
-.entity-chip {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.2em 0.6em;
-	background: var(--bg-card);
-	border: 1px solid var(--border);
-	border-radius: 999px;
-	font-size: 0.875rem;
-	color: var(--text);
-	text-decoration: none;
-	transition: border-color 0.15s, color 0.15s;
-}
-
-.entity-chip:hover {
-	border-color: var(--accent);
-	color: var(--accent);
-	text-decoration: none;
-}
-
 /* ── Empty state ─────────────────────────────────────────────────────────────── */
 .empty {
 	text-align: center;

@@ -58,9 +58,7 @@
 				</div>
 				{#if m.dungeons.length}
 					<div class="monster-card__dungeons">
-						{#each m.dungeons as d}
-							<span class="dungeon-chip">{d.name}</span>
-						{/each}
+						{m.dungeons.map(d => d.name).join(' · ')}
 					</div>
 				{/if}
 			</a>
@@ -128,18 +126,8 @@
 	}
 
 	.monster-card__dungeons {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.3rem;
-		margin-top: auto;
-	}
-
-	.dungeon-chip {
-		font-size: 0.6875rem;
-		padding: 0.15em 0.5em;
-		background: var(--bg-subtle);
-		border: 1px solid var(--border);
-		border-radius: 999px;
+		font-size: 0.75rem;
 		color: var(--text-3);
+		margin-top: auto;
 	}
 </style>

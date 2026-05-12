@@ -121,7 +121,7 @@
 			<p class="section-heading">Orbs Found Here</p>
 			<div class="chip-group">
 				{#each data.orbs as o}
-					<a href="/orbs/{o.slug}" class="entity-chip">
+					<a href="/orbs/{o.slug}">
 						{o.orb_name}{#if o.floor}<span class="chip-floor">{@html formatFloor(o.floor)}</span>{/if}
 					</a>
 				{/each}
