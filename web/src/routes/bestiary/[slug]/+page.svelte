@@ -58,7 +58,7 @@
 						<tbody>
 							{#each data.dungeons as loc}
 								<tr>
-									<td><a href="/dungeons/{loc.dungeon_slug}">{loc.dungeon_name}</a></td>
+									<td><a href="/dungeons/{loc.dungeon_slug}" class="entity-chip">{loc.dungeon_name}</a></td>
 									<td>{#if loc.floor}{@html formatFloor(loc.floor)}{:else}—{/if}</td>
 									<td>{#if loc.citation.volume}<Citation citation={loc.citation} />{:else}—{/if}</td>
 									{#if data.user}
