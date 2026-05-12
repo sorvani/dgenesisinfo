@@ -84,7 +84,7 @@
 		</div>
 
 		<button class="hamburger" aria-label="Menu" onclick={(e) => { e.stopPropagation(); mobileMenuOpen = !mobileMenuOpen; }}>
-			<span class:open={mobileMenuOpen}></span>
+			<span class="hamburger__bars" class:open={mobileMenuOpen}></span>
 			{#if data.pendingCount > 0 && !mobileMenuOpen}<span class="pending-badge hamburger-badge">{data.pendingCount}</span>{/if}
 		</button>
 	</div>
@@ -100,6 +100,12 @@
 			<div class="mobile-menu__divider"></div>
 			<a class="mobile-menu__jnc" href="https://j-novel.club/series?search=d-genesis" target="_blank" rel="noopener noreferrer" onclick={() => mobileMenuOpen = false}>Read @ J-Novel Club ↗</a>
 			{#if data.user}
+				{#if data.user.isAdmin}
+					<a href="/admin" onclick={() => mobileMenuOpen = false}>
+						Admin
+						{#if data.pendingCount > 0}<span class="pending-badge">{data.pendingCount}</span>{/if}
+					</a>
+				{/if}
 				<form method="POST" action="/auth/logout">
 					<button type="submit" class="mobile-menu__btn">Log out ({data.user.githubUsername})</button>
 				</form>
@@ -253,9 +259,9 @@
 		flex-shrink: 0;
 	}
 
-	.hamburger span,
-	.hamburger span::before,
-	.hamburger span::after {
+	.hamburger__bars,
+	.hamburger__bars::before,
+	.hamburger__bars::after {
 		display: block;
 		width: 22px;
 		height: 2px;
@@ -265,19 +271,19 @@
 		position: relative;
 	}
 
-	.hamburger span::before,
-	.hamburger span::after {
+	.hamburger__bars::before,
+	.hamburger__bars::after {
 		content: '';
 		position: absolute;
 		left: 0;
 	}
 
-	.hamburger span::before { top: -7px; }
-	.hamburger span::after  { top: 7px; }
+	.hamburger__bars::before { top: -7px; }
+	.hamburger__bars::after  { top: 7px; }
 
-	.hamburger span.open { background: transparent; }
-	.hamburger span.open::before { transform: translateY(7px) rotate(45deg); }
-	.hamburger span.open::after  { transform: translateY(-7px) rotate(-45deg); }
+	.hamburger__bars.open { background: transparent; }
+	.hamburger__bars.open::before { transform: translateY(7px) rotate(45deg); }
+	.hamburger__bars.open::after  { transform: translateY(-7px) rotate(-45deg); }
 
 	/* ── Mobile menu ── */
 	.mobile-menu {
