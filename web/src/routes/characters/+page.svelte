@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { getFullName, formatDate } from '$lib/utils';
+	import { Mars, Venus } from 'lucide-svelte';
 	import Flag from '$lib/Flag.svelte';
 	import FilterBar from '$lib/FilterBar.svelte';
 	import { page } from '$app/state';
@@ -67,6 +68,8 @@
 				<a href="/characters/{c.slug}" class="char-card">
 					<div class="char-card__identity">
 						<div class="char-card__name">
+							{#if c.sex === 'Male'}<Mars size={14} strokeWidth={2.25} aria-label="Male" />
+							{:else if c.sex === 'Female'}<Venus size={14} strokeWidth={2.25} aria-label="Female" />{/if}
 							<Flag code={c.nationality} /> {getFullName(c)}
 						</div>
 						{#if c.monikers?.length}
@@ -78,10 +81,10 @@
 						<p class="char-card__note">{c.note.replace(/[#*`_~]/g, '').substring(0, 80)}…</p>
 					{/if}
 
-					{#if c.sex || c.date_first_known}
+					{#if c.date_first_known || c.birthday}
 						<div class="char-card__meta">
-							{#if c.sex}<span>{c.sex}</span>{/if}
-							{#if c.date_first_known}<span>First known {formatDate(c.date_first_known)}</span>{/if}
+							{#if c.date_first_known}<div>Introduced: {formatDate(c.date_first_known)}</div>{/if}
+							{#if c.birthday}<div>Birthday: {c.birthday}</div>{/if}
 						</div>
 					{/if}
 
@@ -145,6 +148,10 @@
 		font-weight: 700;
 		font-size: 0.9375rem;
 		line-height: 1.3;
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+		flex-wrap: wrap;
 	}
 
 	.char-card__moniker {
@@ -162,8 +169,8 @@
 
 	.char-card__meta {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 0.75rem;
+		flex-direction: column;
+		gap: 0.2rem;
 		font-size: 0.8rem;
 		color: var(--text-2);
 		border-top: 1px solid var(--border-soft);

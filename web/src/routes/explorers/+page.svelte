@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { getFullName, formatRank, getHistoricalRankingAt, formatDate } from '$lib/utils';
+	import { Mars, Venus } from 'lucide-svelte';
 	import Flag from '$lib/Flag.svelte';
 	import FilterBar from '$lib/FilterBar.svelte';
 	import { page } from '$app/state';
@@ -73,14 +74,19 @@
 
 				<div class="explorer-card__top">
 					<span class="explorer-card__rank">{ranking ? formatRank(ranking) : 'Unranked'}</span>
-					<span class="explorer-card__nat"><Flag code={c.nationality} /> {c.nationality ?? ''}</span>
+					<span class="explorer-card__nat">
+						{#if c.sex === 'Male'}<Mars size={14} strokeWidth={2.25} aria-label="Male" />
+						{:else if c.sex === 'Female'}<Venus size={14} strokeWidth={2.25} aria-label="Female" />{/if}
+						<Flag code={c.nationality} /> {c.nationality ?? ''}
+					</span>
 				</div>
 
-				<div class="explorer-card__meta">
-					{#if c.sex}<span>{c.sex}</span>{/if}
-					{#if c.birthday}<span>{c.birthday}</span>{/if}
-					{#if c.date_first_known}<span>First known {formatDate(c.date_first_known)}</span>{/if}
-				</div>
+				{#if c.date_first_known || c.birthday}
+					<div class="explorer-card__meta">
+						{#if c.date_first_known}<div>Introduced: {formatDate(c.date_first_known)}</div>{/if}
+						{#if c.birthday}<div>Birthday: {c.birthday}</div>{/if}
+					</div>
+				{/if}
 
 				<div class="explorer-card__footer">
 					{#if c.tags?.length}
@@ -159,6 +165,9 @@
 	.explorer-card__nat {
 		font-size: 0.8125rem;
 		color: var(--text-3);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
 	}
 
 	/* Name + moniker */
@@ -181,8 +190,8 @@
 	/* Metadata row */
 	.explorer-card__meta {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem 0.75rem;
+		flex-direction: column;
+		gap: 0.2rem;
 		font-size: 0.8rem;
 		color: var(--text-2);
 	}
