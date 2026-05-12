@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { getFullName } from '$lib/utils';
+	import { getFullName, formatDate } from '$lib/utils';
 	import Flag from '$lib/Flag.svelte';
 	import FilterBar from '$lib/FilterBar.svelte';
 	import { page } from '$app/state';
@@ -30,6 +30,12 @@
 		for (const t of activeTags) url.searchParams.append('tag', t);
 		replaceState(url, {});
 	});
+
+	function addTag(t: string, e: MouseEvent | KeyboardEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (!activeTags.includes(t)) activeTags = [...activeTags, t];
+	}
 </script>
 
 <svelte:head><title>Characters — D-Genesis Info</title></svelte:head>
@@ -59,11 +65,38 @@
 		<div class="card-grid">
 			{#each filtered as c}
 				<a href="/characters/{c.slug}" class="char-card">
-					<div class="char-card__name">
-						<Flag code={c.nationality} /> {getFullName(c)}
+					<div class="char-card__identity">
+						<div class="char-card__name">
+							<Flag code={c.nationality} /> {getFullName(c)}
+						</div>
+						{#if c.monikers?.length}
+							<div class="char-card__moniker">{c.monikers.map(m => `"${m}"`).join(' · ')}</div>
+						{/if}
 					</div>
+
 					{#if c.note}
 						<p class="char-card__note">{c.note.replace(/[#*`_~]/g, '').substring(0, 80)}…</p>
+					{/if}
+
+					{#if c.sex || c.date_first_known}
+						<div class="char-card__meta">
+							{#if c.sex}<span>{c.sex}</span>{/if}
+							{#if c.date_first_known}<span>First known {formatDate(c.date_first_known)}</span>{/if}
+						</div>
+					{/if}
+
+					{#if c.tags?.length}
+						<div class="char-card__tags">
+							{#each c.tags as tag}
+								<span
+									class="tag tag--clickable"
+									role="button"
+									tabindex="0"
+									onclick={(e) => addTag(tag, e)}
+									onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') addTag(tag, e); }}
+								>{tag}</span>
+							{/each}
+						</div>
 					{/if}
 				</a>
 			{/each}
@@ -106,14 +139,61 @@
 		text-decoration: none;
 	}
 
+	.char-card__identity { }
+
 	.char-card__name {
 		font-weight: 700;
 		font-size: 0.9375rem;
+		line-height: 1.3;
+	}
+
+	.char-card__moniker {
+		font-size: 0.8125rem;
+		color: var(--text-3);
+		font-style: italic;
+		margin-top: 0.125rem;
 	}
 
 	.char-card__note {
 		font-size: 0.8125rem;
 		color: var(--text-3);
 		line-height: 1.5;
+	}
+
+	.char-card__meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.75rem;
+		font-size: 0.8rem;
+		color: var(--text-2);
+		border-top: 1px solid var(--border-soft);
+		padding-top: 0.5rem;
+	}
+
+	.char-card__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin-top: auto;
+	}
+
+	.tag {
+		font-size: 0.6875rem;
+		padding: 0.15em 0.5em;
+		background: var(--bg-subtle);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--text-3);
+	}
+
+	.tag--clickable {
+		cursor: pointer;
+		transition: background 0.15s, border-color 0.15s, color 0.15s;
+	}
+
+	.tag--clickable:hover {
+		background: var(--accent-bg);
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 </style>

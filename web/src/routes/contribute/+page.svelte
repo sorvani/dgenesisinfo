@@ -505,8 +505,8 @@
 					<input type="text" placeholder="e.g. August 10" bind:value={c_birthday} />
 				</div>
 				<div class="field">
-					<label class="field-label">First Known <span class="hint">YYYY-MM-DD</span></label>
-					<input type="date" bind:value={c_dateFirstKnown} />
+					<label class="field-label">First Known <span class="hint">YYYY-MM-DD or free-form</span></label>
+					<input type="text" placeholder="e.g. 2018-09-25, or 'End of September 2018'" bind:value={c_dateFirstKnown} />
 				</div>
 				<div class="field">
 					<label class="field-label">D-Card Area</label>
