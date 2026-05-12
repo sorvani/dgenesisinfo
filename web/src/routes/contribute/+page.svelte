@@ -109,7 +109,7 @@
 	let dr_orbId     = $state<number | null>(data.defaultOrbId);
 	let dr_monsterId = $state<number | null>(data.defaultMonsterId);
 	let dr_creature  = $state('');
-	let dr_dungeon   = $state('');
+	let dr_dungeonId = $state<number | null>(null);
 	let dr_floor     = $state('');
 	let dr_favOut    = $state<number | null>(null);
 	let dr_total     = $state<number | null>(null);
@@ -218,7 +218,7 @@
 			dr_orbId     = r.orb_id;
 			dr_monsterId = r.monster_id;
 			dr_creature  = r.creature ?? '';
-			dr_dungeon   = r.dungeon  ?? '';
+			dr_dungeonId = r.dungeon_id ?? (r.dungeon ? (data.dungeons.find(d => d.name === r.dungeon)?.id ?? null) : null);
 			dr_floor     = r.floor    ?? '';
 			dr_favOut    = r.favorable_outcomes;
 			dr_total     = r.total_events;
@@ -391,15 +391,20 @@
 		}, null, 2);
 
 		if (entityType === 'orb_drop_rate') {
-			// Keep the legacy free-text 'creature' in sync with the selected monster's
-			// name so the admin diff doesn't look like data loss when a monster is picked.
+			// Keep the legacy free-text 'creature' / 'dungeon' columns in sync with the
+			// selected entities' names so the admin diff doesn't look like data loss and
+			// older readers that haven't moved to the FK columns still resolve.
 			const monsterName = dr_monsterId
 				? (data.monsters.find(m => m.id === dr_monsterId)?.name ?? null)
+				: null;
+			const dungeonName = dr_dungeonId
+				? (data.dungeons.find(d => d.id === dr_dungeonId)?.name ?? null)
 				: null;
 			return JSON.stringify({
 				orb_id: dr_orbId, monster_id: dr_monsterId,
 				creature: monsterName ?? (dr_creature || null),
-				dungeon: dr_dungeon || null,
+				dungeon_id: dr_dungeonId,
+				dungeon: dungeonName,
 				floor: dr_floor || null, favorable_outcomes: dr_favOut, total_events: dr_total, citation: cite,
 			}, null, 2);
 		}
@@ -831,9 +836,9 @@
 				{/if}
 				<div class="field">
 					<label class="field-label">Dungeon</label>
-					<select bind:value={dr_dungeon}>
-						<option value="">— unknown —</option>
-						{#each data.dungeons as d}<option value={d.name}>{d.name}</option>{/each}
+					<select bind:value={dr_dungeonId}>
+						<option value={null}>— unknown —</option>
+						{#each data.dungeons as d}<option value={d.id}>{d.name}</option>{/each}
 					</select>
 				</div>
 				<div class="field field--sm">

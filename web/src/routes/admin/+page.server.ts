@@ -33,7 +33,7 @@ const DIRECT_FIELDS: Record<string, string[]> = {
 	character_stat:    ['character_id', 'date_noted', 'date_sequence', 'scan_type', 'hp', 'mp', 'sp', 'str', 'vit', 'int', 'agi', 'dex', 'luc', 'stat_total', 'points_from_avg'],
 	character_ranking: ['character_id', 'rank', 'known_above_rank', 'date_noted'],
 	character_orb:     ['character_id', 'orb_id', 'date_acquired', 'date_note'],
-	orb_drop_rate:     ['orb_id', 'monster_id', 'creature', 'dungeon', 'floor', 'favorable_outcomes', 'total_events'],
+	orb_drop_rate:     ['orb_id', 'monster_id', 'creature', 'dungeon_id', 'dungeon', 'floor', 'favorable_outcomes', 'total_events'],
 	monster_dungeon:   ['monster_id', 'dungeon_id', 'floor'],
 };
 

@@ -17,6 +17,21 @@ Entries are newest first.
 
 ---
 
+## 2026-05-11 — document `orb_drop_rates.dungeon_id` and backfill missing FKs
+
+The `dungeon_id` FK column was already present on the live `orb_drop_rates`
+table (added at some point alongside `monster_id`) but never made it into
+`schema.sql`. Added the `ALTER TABLE ... ADD COLUMN IF NOT EXISTS dungeon_id`
+and matching index so a fresh bootstrap matches production.
+
+Companion fix in the app: the contribute form's Dungeon `<select>` for orb
+drops was binding to a `string` and using `value={d.name}`, so it only ever
+wrote the legacy `dungeon` text column and left `dungeon_id` NULL. Three
+existing rows (all Chameleon @ Yoyogi: Camouflage / Invisibility / Tongue
+Shot, IDs 7, 21, 45) were backfilled by name match.
+
+---
+
 ## 2026-05-11 — drop `orbs.orb_id` column
 
 Vestigial leftover from the old JSON site, where rows were tied together by
