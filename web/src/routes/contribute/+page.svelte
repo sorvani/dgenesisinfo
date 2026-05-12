@@ -2,6 +2,7 @@
 	import type { PageData, ActionData } from './$types';
 	import { enhance } from '$app/forms';
 	import { showToast } from '$lib/toast';
+	import { tryNormalizeDate } from '$lib/utils';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -339,7 +340,7 @@
 			first_name: c_firstName || null, last_name: c_lastName || null,
 			monikers: c_monikers.filter(Boolean),
 			nationality: c_nationality || null, sex: c_sex || null,
-			birthday: c_birthday || null, date_first_known: c_dateFirstKnown || null,
+			birthday: c_birthday || null, date_first_known: tryNormalizeDate(c_dateFirstKnown) || null,
 			area: c_area,
 			is_explorer: c_isExplorer ? 1 : 0, in_wdarl: c_inWdarl ? 1 : 0, is_public: c_isPublic ? 1 : 0,
 			note: c_note || null, tags: c_tags.filter(Boolean), citation: cite,
@@ -505,8 +506,13 @@
 					<input type="text" placeholder="e.g. August 10" bind:value={c_birthday} />
 				</div>
 				<div class="field">
-					<label class="field-label">First Known <span class="hint">YYYY-MM-DD or free-form</span></label>
-					<input type="text" placeholder="e.g. 2018-09-25, or 'End of September 2018'" bind:value={c_dateFirstKnown} />
+					<label class="field-label">First Known <span class="hint">date or free-form</span></label>
+					<input
+						type="text"
+						placeholder="e.g. 2018-09-25, or 'End of September 2018'"
+						bind:value={c_dateFirstKnown}
+						onblur={() => c_dateFirstKnown = tryNormalizeDate(c_dateFirstKnown)}
+					/>
 				</div>
 				<div class="field">
 					<label class="field-label">D-Card Area</label>

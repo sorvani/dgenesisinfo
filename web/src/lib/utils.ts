@@ -274,7 +274,34 @@ export function formatDate(dateStr: string | null): string {
 	if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
 	const d = new Date(dateStr + 'T00:00:00');
 	if (isNaN(d.getTime())) return dateStr;
-	return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+	return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// If the input looks like a full calendar date (day + month + year) in a
+// recognizable format, normalize to YYYY-MM-DD. Otherwise return the input
+// unchanged so free-form values like "End of September 2018" survive.
+// "September 2018" is intentionally NOT normalized — Date.parse would treat it
+// as Sept 1, but the user clearly meant the whole month, not the 1st.
+export function tryNormalizeDate(input: string | null | undefined): string {
+	const s = (input ?? '').trim();
+	if (!s) return '';
+	if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+
+	const looksLikeFullDate =
+		/^\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}$/.test(s) ||          // 9/25/2018, 09-25-2018, 09.25.2018
+		/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(s) ||                       // 2018/9/25
+		/^[A-Za-z]+\.?\s+\d{1,2},?\s+\d{4}$/.test(s) ||              // September 25, 2018 / Sept 25 2018
+		/^\d{1,2}\s+[A-Za-z]+\.?,?\s+\d{4}$/.test(s);                // 25 September 2018
+
+	if (!looksLikeFullDate) return s;
+
+	const d = new Date(s);
+	if (isNaN(d.getTime())) return s;
+
+	const yyyy = d.getFullYear();
+	const mm = String(d.getMonth() + 1).padStart(2, '0');
+	const dd = String(d.getDate()).padStart(2, '0');
+	return `${yyyy}-${mm}-${dd}`;
 }
 
 export function formatProbability(favorable: number | null, total: number | null): string {
