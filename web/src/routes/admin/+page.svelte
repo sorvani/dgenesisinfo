@@ -137,7 +137,7 @@
 			<div class="card" style="padding: 0; overflow: hidden;">
 				<table class="data-table">
 					<thead>
-						<tr><th>Op</th><th>Type</th><th>Entity</th><th>By</th><th>Status</th><th>Reviewed</th><th>Note</th></tr>
+						<tr><th>Op</th><th>Type</th><th>Entity</th><th>By</th><th>Status</th><th>Reviewer</th><th>Reviewed</th><th>Note</th></tr>
 					</thead>
 					<tbody>
 						{#each data.recent as s}
@@ -157,6 +157,7 @@
 										{s.status}
 									</span>
 								</td>
+								<td>{s.reviewer_username ? `@${s.reviewer_username}` : '—'}</td>
 								<td style="color:var(--text-3); font-size:0.8125rem;">{s.reviewed_at ? new Date(s.reviewed_at).toLocaleDateString() : '—'}</td>
 								<td style="color:var(--text-3); font-size:0.8125rem;">{s.admin_note ?? ''}</td>
 							</tr>

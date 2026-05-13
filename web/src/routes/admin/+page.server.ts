@@ -7,6 +7,7 @@ interface RawSubmission {
 	proposed_data: string; status: string;
 	reviewed_by: number | null; reviewed_at: string | null; admin_note: string | null;
 	github_username: string;
+	reviewer_username: string | null;
 }
 
 const TABLE_MAP: Record<string, string> = {
@@ -301,6 +302,7 @@ export interface Submission {
 	status: string;
 	reviewed_by: number | null; reviewed_at: string | null; admin_note: string | null;
 	github_username: string;
+	reviewer_username: string | null;
 }
 
 export const load: PageServerLoad = async ({ platform }) => {
@@ -308,13 +310,14 @@ export const load: PageServerLoad = async ({ platform }) => {
 
 	const [pendingRes, recentRes] = await db.batch([
 		db.prepare(
-			`SELECT s.*, u.github_username FROM pending_submissions s
+			`SELECT s.*, u.github_username, NULL AS reviewer_username FROM pending_submissions s
 			 JOIN users u ON u.id = s.submitted_by
 			 WHERE s.status = 'pending' ORDER BY s.submitted_at ASC`
 		),
 		db.prepare(
-			`SELECT s.*, u.github_username FROM pending_submissions s
+			`SELECT s.*, u.github_username, r.github_username AS reviewer_username FROM pending_submissions s
 			 JOIN users u ON u.id = s.submitted_by
+			 LEFT JOIN users r ON r.id = s.reviewed_by
 			 WHERE s.status != 'pending' ORDER BY s.reviewed_at DESC LIMIT 20`
 		),
 	]);
